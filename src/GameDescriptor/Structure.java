@@ -8,6 +8,9 @@ package GameDescriptor;
 //	<Small>2</Small>
 //</Blindes>
 
+import Exceptions.BlindesException;
+import Exceptions.StructureException;
+
 import static GameDescriptor.Blindes.validateBlindes;
 
 public class Structure {
@@ -57,16 +60,15 @@ public class Structure {
                 '}';
     }
 
-    public static boolean validateStructure(Structure s)
-    {
+    public static boolean validateStructure(Structure s) throws BlindesException, StructureException {
         if (s.getHandsCount()<0 )
-            throw new IllegalArgumentException("HandsCount <"+s.getHandsCount()+"> cannot be negative");
+            throw new StructureException(StructureException.NEGATIVE_HANDSCOUNT);
 
         if (s.getBuy()<0)
-            throw new IllegalArgumentException("Buy <"+s.getBuy()+"> cannot be negative");
+            throw new StructureException(StructureException.NEGATIVE_BUY);
 
         if (!validateBlindes(s.getBlindes()))
-            throw new IllegalArgumentException("Illega Blindes ("+s.getBlindes().toString()+")");
+            throw new BlindesException(BlindesException.ILLEGAL_BLINDES);
 
         return true;
     }

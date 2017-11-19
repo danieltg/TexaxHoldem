@@ -1,5 +1,7 @@
 package GameDescriptor;
 
+import Exceptions.BlindesException;
+
 public class Blindes {
 
     private boolean fixed;
@@ -49,22 +51,21 @@ public class Blindes {
                 '}';
     }
 
-    public static boolean validateBlindes(Blindes b)
-    {
+    public static boolean validateBlindes(Blindes b) throws BlindesException {
         if (b.getSmall()<0 )
-            throw new IllegalArgumentException("Small <"+b.getSmall()+"> cannot be negative");
+            throw new BlindesException(BlindesException.NEGATIVE_SMALL);
 
         if (b.getBig()<0)
-            throw new IllegalArgumentException("Big <"+b.getBig()+"> cannot be negative");
+            throw new BlindesException(BlindesException.NEGATIVE_BIG);
 
         if(b.getAdditions()<0)
-            throw new IllegalArgumentException("Additions <"+b.getAdditions()+"> cannot be negative");
+            throw new BlindesException(BlindesException.NEGATIVE_ADDITIONS);
 
         if(b.getMaxTotalRounds()<0)
-            throw new IllegalArgumentException("Max Total Rounds <"+b.getMaxTotalRounds()+"> cannot be negative");
+            throw new BlindesException(BlindesException.NEGATIVE_MAX_TOTAL_ROUNDS);
 
         if(b.getSmall()>=b.getBig())
-            throw new IllegalArgumentException("Big <"+b.getBig()+"> cannot be smaller then Small <"+b.getSmall()+">");
+            throw new BlindesException(BlindesException.SMALL_BIGGER_THEN_SMALL);
 
         return true;
     }

@@ -1,4 +1,7 @@
 
+import Exceptions.BlindesException;
+import Exceptions.GameTypeException;
+import Exceptions.StructureException;
 import GameDescriptor.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -49,14 +52,15 @@ public class ReadXMLFile {
                 GameType type=getGameType(gameDescriptor);
 
                 //Get to the Structure node
-                Node structure = getNode(Tags.STRUCTURE, gameDescriptor.getChildNodes());
+                Node structureNode = getNode(Tags.STRUCTURE, gameDescriptor.getChildNodes());
 
-                Structure s=getGameStructure(structure);
-                System.out.println(s.toString());
+                Structure structure=getGameStructure(structureNode);
+                GameDescriptor descriptor=new GameDescriptor(type,structure);
+                System.out.println(descriptor.toString());
             }
-            catch (IllegalArgumentException e)
+            catch (Exception e)
             {
-                System.out.println("Invalid Game Descriptor file- "+e.getMessage()+".");
+                System.out.println("Invalid Game Descriptor file: "+e.getMessage()+".");
             }
         }
         catch (Exception e) {
@@ -64,13 +68,17 @@ public class ReadXMLFile {
         }
     }
 
-
-    public static Structure getGameStructure(Node structureNode)
-    {
+    public static Structure getGameStructure(Node structureNode) throws BlindesException, StructureException {
         NodeList nodes = structureNode.getChildNodes();
 
+        if(!isNumeric(getNodeValue(Tags.HANDS_COUNT,nodes)))
+            throw new StructureException(StructureException.HANDSCOUNT_NOT_A_NUMBER);
+
+        if (!isNumeric(getNodeValue(Tags.BUY, nodes)))
+            throw new StructureException(StructureException.BUY_NOT_A_NUMBER);
+
         int handsCount=Integer.parseInt(getNodeValue(Tags.HANDS_COUNT,nodes));
-        int buy=Integer.parseInt(getNodeValue(Tags.BUY,nodes));
+        int buy = Integer.parseInt(getNodeValue(Tags.BUY, nodes));
 
         Node blindesNode = getNode(Tags.BLINDES, structureNode.getChildNodes());
         Blindes blinde=getBlindes(blindesNode);
@@ -79,35 +87,45 @@ public class ReadXMLFile {
         return structure;
     }
 
-    public static Blindes getBlindes(Node blindes)
-    {
+    public static Blindes getBlindes(Node blindes) throws BlindesException {
         int additions=0;
         int maxTotalRounds=0;
 
         NodeList nodes = blindes.getChildNodes();
 
-        int big=Integer.parseInt(getNodeValue(Tags.BIG,nodes));
-        int small=Integer.parseInt(getNodeValue(Tags.SMALL,nodes));
+        if(!isNumeric(getNodeValue(Tags.BIG,nodes)))
+            throw new BlindesException(BlindesException.BIG_NOT_A_NUMBER);
+
+        if(!isNumeric(getNodeValue(Tags.SMALL,nodes)))
+            throw new BlindesException(BlindesException.SMALL_NOT_A_NUMBER);
 
         boolean fixed=Boolean.parseBoolean(getNodeAttr(Tags.BLINDES_FIXED, blindes));
         if (!fixed)
         {
+            if(!isNumeric(getNodeAttr(Tags.BLINDES_ADDITIONS, blindes)))
+                throw new BlindesException(BlindesException.ADDITIONS_NOT_A_NUMBER);
+
+            if(!isNumeric(getNodeAttr(Tags.BLINDES_MAX_TOTAL_ROUNDS, blindes)))
+                throw new BlindesException(BlindesException.NEGATIVE_MAX_TOTAL_NOT_A_NUMBER);
+
             additions=Integer.parseInt(getNodeAttr(Tags.BLINDES_ADDITIONS, blindes));
             maxTotalRounds=Integer.parseInt(getNodeAttr(Tags.BLINDES_MAX_TOTAL_ROUNDS, blindes));
         }
 
+        int big=Integer.parseInt(getNodeValue(Tags.BIG,nodes));
+        int small=Integer.parseInt(getNodeValue(Tags.SMALL,nodes));
+
         return new Blindes(big,small,fixed,additions,maxTotalRounds);
     }
 
-    public static GameType getGameType(Node gameDescriptor)
-    {
+    public static GameType getGameType(Node gameDescriptor) throws GameTypeException {
         NodeList nodes= gameDescriptor.getChildNodes();
         try
         {
             return GameType.valueOf(getNodeValue(Tags.GAME_TYPE,nodes));
         }
         catch (IllegalArgumentException e ) {
-            throw new IllegalArgumentException("Invalid value for GameType:"+getNodeValue(Tags.GAME_TYPE,nodes));
+            throw new GameTypeException(GameTypeException.INVALID_VALUE);
         }
     }
 
@@ -174,5 +192,9 @@ public class ReadXMLFile {
         }
 
         return "";
+    }
+
+    public static boolean isNumeric(String s) {
+        return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }
 }
