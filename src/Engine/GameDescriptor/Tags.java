@@ -1,4 +1,4 @@
-package GameDescriptor;
+package Engine.GameDescriptor;
 
 public final class Tags {
 

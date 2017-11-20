@@ -1,4 +1,4 @@
-package Exceptions;
+package Engine.Exceptions;
 
 public class StructureException extends Exception{
 

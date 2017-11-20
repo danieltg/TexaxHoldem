@@ -1,6 +1,4 @@
-package Exceptions;
-
-import GameDescriptor.GameType;
+package Engine.Exceptions;
 
 public class GameTypeException extends Exception{
 

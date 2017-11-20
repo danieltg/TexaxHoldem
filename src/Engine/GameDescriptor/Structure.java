@@ -1,4 +1,4 @@
-package GameDescriptor;
+package Engine.GameDescriptor;
 
 
 //<HandsCount>10</HandsCount>
@@ -8,10 +8,10 @@ package GameDescriptor;
 //	<Small>2</Small>
 //</Blindes>
 
-import Exceptions.BlindesException;
-import Exceptions.StructureException;
+import Engine.Exceptions.BlindesException;
+import Engine.Exceptions.StructureException;
 
-import static GameDescriptor.Blindes.validateBlindes;
+import static Engine.GameDescriptor.Blindes.validateBlindes;
 
 public class Structure {
 

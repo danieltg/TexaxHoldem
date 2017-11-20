@@ -1,74 +1,61 @@
+package Engine.GameDescriptor;
 
-import Exceptions.BlindesException;
-import Exceptions.GameTypeException;
-import Exceptions.StructureException;
-import GameDescriptor.*;
+import Engine.Exceptions.BlindesException;
+import Engine.Exceptions.GameTypeException;
+import Engine.Exceptions.StructureException;
+import Engine.GameDescriptor.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
 
-import GameDescriptor.Structure;
+import Engine.GameDescriptor.Structure;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.w3c.dom.NamedNodeMap;
+import org.xml.sax.SAXException;
 
-import static GameDescriptor.Structure.validateStructure;
+import static Engine.GameDescriptor.Structure.validateStructure;
 
-public class ReadXMLFile {
-
-
-    public static void main(String argv[]) {
-
-        //Scanner scanner = new Scanner(System.in);
-        //System.out.print("Enter a file name: ");
-        //System.out.flush();
-        //String filename = scanner.nextLine();
-        readFile("/Users/danielt/Desktop/Other/ex1/ex1-basic.xml");
-        //File file = new File(filename);
+public class ReadGameDescriptorFile {
 
 
+    public static GameDescriptor readFile(String filePath) throws IOException, ParserConfigurationException, SAXException, GameTypeException, BlindesException, StructureException {
+        File fXMLFile = new File(filePath);
+
+        if (!getFileExtension(fXMLFile).equals("xml"))
+        {
+            throw new FileNotFoundException("Invalid file extension");
+        }
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+
+        Document doc = builder.parse(fXMLFile);
+
+        //doc.getDocumentElement().normalize();
+
+        // Get the document's root XML node
+        NodeList root = doc.getChildNodes();
+
+        // Navigate down the hierarchy to get to the Engine.GameDescriptor node
+        Node gameDescriptor = getNode(Tags.GAME_DESCRIPTOR, root);
+
+        GameType type=getGameType(gameDescriptor);
+
+        //Get to the Structure node
+        Node structureNode = getNode(Tags.STRUCTURE, gameDescriptor.getChildNodes());
+
+        Structure structure=getGameStructure(structureNode);
+        return new GameDescriptor(type,structure);
     }
 
-    public static void readFile(String filePath)
-    {
-        try{
-            File fXmlFile = new File(filePath);
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(fXmlFile);
-
-            doc.getDocumentElement().normalize();
-
-            // Get the document's root XML node
-            NodeList root = doc.getChildNodes();
-
-            // Navigate down the hierarchy to get to the GameDescriptor node
-            Node gameDescriptor = getNode(Tags.GAME_DESCRIPTOR, root);
-
-            try{
-
-                GameType type=getGameType(gameDescriptor);
-
-                //Get to the Structure node
-                Node structureNode = getNode(Tags.STRUCTURE, gameDescriptor.getChildNodes());
-
-                Structure structure=getGameStructure(structureNode);
-                GameDescriptor descriptor=new GameDescriptor(type,structure);
-                System.out.println(descriptor.toString());
-            }
-            catch (Exception e)
-            {
-                System.out.println("Invalid Game Descriptor file: "+e.getMessage()+".");
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static Structure getGameStructure(Node structureNode) throws BlindesException, StructureException {
+    private static Structure getGameStructure(Node structureNode) throws BlindesException, StructureException {
         NodeList nodes = structureNode.getChildNodes();
 
         if(!isNumeric(getNodeValue(Tags.HANDS_COUNT,nodes)))
@@ -87,7 +74,7 @@ public class ReadXMLFile {
         return structure;
     }
 
-    public static Blindes getBlindes(Node blindes) throws BlindesException {
+    private static Blindes getBlindes(Node blindes) throws BlindesException {
         int additions=0;
         int maxTotalRounds=0;
 
@@ -118,7 +105,7 @@ public class ReadXMLFile {
         return new Blindes(big,small,fixed,additions,maxTotalRounds);
     }
 
-    public static GameType getGameType(Node gameDescriptor) throws GameTypeException {
+    private static GameType getGameType(Node gameDescriptor) throws GameTypeException {
         NodeList nodes= gameDescriptor.getChildNodes();
         try
         {
@@ -129,7 +116,7 @@ public class ReadXMLFile {
         }
     }
 
-    public static Node getNode(String tagName, NodeList nodes) {
+    private static Node getNode(String tagName, NodeList nodes) {
         for ( int x = 0; x < nodes.getLength(); x++ ) {
             Node node = nodes.item(x);
             if (node.getNodeName().equalsIgnoreCase(tagName)) {
@@ -140,7 +127,7 @@ public class ReadXMLFile {
         return null;
     }
 
-    public static String getNodeValue( Node node ) {
+    private static String getNodeValue( Node node ) {
         NodeList childNodes = node.getChildNodes();
         for (int x = 0; x < childNodes.getLength(); x++ ) {
             Node data = childNodes.item(x);
@@ -150,7 +137,7 @@ public class ReadXMLFile {
         return "";
     }
 
-    public static String getNodeValue(String tagName, NodeList nodes ) {
+    private static String getNodeValue(String tagName, NodeList nodes ) {
         for ( int x = 0; x < nodes.getLength(); x++ ) {
             Node node = nodes.item(x);
             if (node.getNodeName().equalsIgnoreCase(tagName)) {
@@ -165,7 +152,7 @@ public class ReadXMLFile {
         return "";
     }
 
-    public static String getNodeAttr(String attrName, Node node ) {
+    private static String getNodeAttr(String attrName, Node node ) {
         NamedNodeMap attrs = node.getAttributes();
         for (int y = 0; y < attrs.getLength(); y++ ) {
             Node attr = attrs.item(y);
@@ -176,7 +163,7 @@ public class ReadXMLFile {
         return "";
     }
 
-    public static String getNodeAttr(String tagName, String attrName, NodeList nodes ) {
+    private static String getNodeAttr(String tagName, String attrName, NodeList nodes ) {
         for ( int x = 0; x < nodes.getLength(); x++ ) {
             Node node = nodes.item(x);
             if (node.getNodeName().equalsIgnoreCase(tagName)) {
@@ -194,7 +181,15 @@ public class ReadXMLFile {
         return "";
     }
 
-    public static boolean isNumeric(String s) {
+    private static boolean isNumeric(String s) {
         return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }
+
+    private static String getFileExtension(File file) {
+        String fileName = file.getName();
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return (fileName.substring(fileName.lastIndexOf(".")+1)).toLowerCase();
+        else return "";
+    }
+
 }

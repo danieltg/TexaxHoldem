@@ -1,6 +1,6 @@
-package GameDescriptor;
+package Engine.GameDescriptor;
 
-import Exceptions.BlindesException;
+import Engine.Exceptions.BlindesException;
 
 public class Blindes {
 
