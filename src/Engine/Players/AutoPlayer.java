@@ -1,3 +1,4 @@
+package Engine.Players;
 
 public class AutoPlayer extends Player {
 

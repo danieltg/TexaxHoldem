@@ -1,4 +1,6 @@
+package Engine.Players;
 
+import Engine.DeckOfCards.Card;
 
 public abstract class Player {
     enum PlayerTypeSign{H,C};
@@ -7,7 +9,7 @@ public abstract class Player {
     private PlayerStateSign PlayerState=PlayerStateSign.NoState;
     private boolean isActive=true;
     private int cheeps=0;
-    private Cards[] playerCards=new Cards[2];
+    private Card[] playerCards;
 
     private int handsWon=0;
 

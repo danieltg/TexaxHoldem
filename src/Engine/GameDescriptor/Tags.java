@@ -16,7 +16,7 @@ public final class Tags {
     public static final String SMALL = "Small";
 
     public static final String PLAYERS = "Players";
-    public static final String PLAYER = "Player";
+    public static final String PLAYER = "Engine.Players.Player";
     public static final String NAME = "Name";
     public static final String TYPE = "Type";
     public static final String DYNAMICPLAYERS="DynamicPlayers";

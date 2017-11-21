@@ -1,3 +1,4 @@
+package Engine.Players;
 
 public class HumanPlayer extends Player {
     private int numOfBuys=0;
