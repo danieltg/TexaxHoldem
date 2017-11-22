@@ -9,6 +9,8 @@ public class StructureException extends Exception{
     public static final String NEGATIVE_HANDSCOUNT = "HandsCount cannot be negative"+CANNOT_CREATE;
     public static final String NEGATIVE_BUY = "Buy cannot be negative"+CANNOT_CREATE;
 
+    public static final String INVALID_HANDSCOUNT = "Invalid HandsCount"+CANNOT_CREATE;
+
     public static final String ILLEGAL_STRUCTURE="Illegal Structure";
 
 

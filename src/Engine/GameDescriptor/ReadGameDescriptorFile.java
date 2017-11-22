@@ -52,6 +52,22 @@ public class ReadGameDescriptorFile {
         Node structureNode = getNode(Tags.STRUCTURE, gameDescriptor.getChildNodes());
 
         Structure structure=getGameStructure(structureNode);
+        int numberOfPlayer=0;
+
+        switch (type){
+            case Basic:
+                numberOfPlayer=4;
+                break;
+            //TODO: we should change it
+            case MultiPlayer:
+            case DynamicMultiPlayer:
+                numberOfPlayer=6;
+                break;
+        }
+
+        if ((structure.getHandsCount()<numberOfPlayer)||(structure.getHandsCount()%numberOfPlayer)!=0)
+            throw new StructureException(StructureException.INVALID_HANDSCOUNT);
+
         return new GameDescriptor(type,structure);
     }
 
