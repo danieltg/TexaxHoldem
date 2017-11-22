@@ -1,18 +1,18 @@
 package Engine.DeckOfCards;
 
 public enum Suit {
-    CLUB('C'),
-    DIAMOND('D'),
-    HEART('H'),
-    SPADE('S');
+    CLUB("C"),
+    DIAMOND("D"),
+    HEART("H"),
+    SPADE("S");
 
-    private char suitChar;
+    private String suitChar;
 
-    Suit(char suit) {
+    Suit(String suit) {
         this.suitChar = suit;
     }
 
-    public char getSuitChar() {
+    public String getSuit() {
         return this.suitChar;
     }
 

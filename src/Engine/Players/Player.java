@@ -3,21 +3,28 @@ package Engine.Players;
 import Engine.DeckOfCards.Card;
 
 public abstract class Player {
-    enum PlayerTypeSign{H,C};
-    enum PlayerStateSign{D,S,B,NoState};
-    private  PlayerTypeSign playerType=PlayerTypeSign.C;
-    private PlayerStateSign PlayerState=PlayerStateSign.NoState;
-    private boolean isActive=true;
-    private int cheeps=0;
+    private PlayerType type;
+    private PlayerState state;
+
+    private int id;
+    private String name;
+    private boolean isActive;
+
+    private int chips=0;
+    private int numbersOfBuy=0;
+
     private Card[] playerCards;
 
     private int handsWon=0;
 
     public Player(){};
 
-    public void play() {
+    abstract void play();
 
+    public void buy(int amount)
+    {
+        chips+=amount;
+        numbersOfBuy++;
     }
-
 
 }

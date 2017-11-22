@@ -3,12 +3,11 @@ package Engine.GameDescriptor;
 import Engine.Exceptions.BlindesException;
 import Engine.Exceptions.GameTypeException;
 import Engine.Exceptions.StructureException;
-import Engine.GameDescriptor.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 
-import Engine.GameDescriptor.Structure;
+import Engine.Utils.EngineUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
@@ -28,7 +27,7 @@ public class ReadGameDescriptorFile {
     public static GameDescriptor readFile(String filePath) throws IOException, ParserConfigurationException, SAXException, GameTypeException, BlindesException, StructureException {
         File fXMLFile = new File(filePath);
 
-        if (!getFileExtension(fXMLFile).equals("xml"))
+        if (!EngineUtils.getFileExtension(fXMLFile).equals("xml"))
         {
             throw new FileNotFoundException("Invalid file extension");
         }
@@ -74,10 +73,10 @@ public class ReadGameDescriptorFile {
     private static Structure getGameStructure(Node structureNode) throws BlindesException, StructureException {
         NodeList nodes = structureNode.getChildNodes();
 
-        if(!isNumeric(getNodeValue(Tags.HANDS_COUNT,nodes)))
+        if(!EngineUtils.isNumeric(getNodeValue(Tags.HANDS_COUNT,nodes)))
             throw new StructureException(StructureException.HANDSCOUNT_NOT_A_NUMBER);
 
-        if (!isNumeric(getNodeValue(Tags.BUY, nodes)))
+        if (!EngineUtils.isNumeric(getNodeValue(Tags.BUY, nodes)))
             throw new StructureException(StructureException.BUY_NOT_A_NUMBER);
 
         int handsCount=Integer.parseInt(getNodeValue(Tags.HANDS_COUNT,nodes));
@@ -96,19 +95,19 @@ public class ReadGameDescriptorFile {
 
         NodeList nodes = blindes.getChildNodes();
 
-        if(!isNumeric(getNodeValue(Tags.BIG,nodes)))
+        if(!EngineUtils.isNumeric(getNodeValue(Tags.BIG,nodes)))
             throw new BlindesException(BlindesException.BIG_NOT_A_NUMBER);
 
-        if(!isNumeric(getNodeValue(Tags.SMALL,nodes)))
+        if(!EngineUtils.isNumeric(getNodeValue(Tags.SMALL,nodes)))
             throw new BlindesException(BlindesException.SMALL_NOT_A_NUMBER);
 
         boolean fixed=Boolean.parseBoolean(getNodeAttr(Tags.BLINDES_FIXED, blindes));
         if (!fixed)
         {
-            if(!isNumeric(getNodeAttr(Tags.BLINDES_ADDITIONS, blindes)))
+            if(!EngineUtils.isNumeric(getNodeAttr(Tags.BLINDES_ADDITIONS, blindes)))
                 throw new BlindesException(BlindesException.ADDITIONS_NOT_A_NUMBER);
 
-            if(!isNumeric(getNodeAttr(Tags.BLINDES_MAX_TOTAL_ROUNDS, blindes)))
+            if(!EngineUtils.isNumeric(getNodeAttr(Tags.BLINDES_MAX_TOTAL_ROUNDS, blindes)))
                 throw new BlindesException(BlindesException.NEGATIVE_MAX_TOTAL_NOT_A_NUMBER);
 
             additions=Integer.parseInt(getNodeAttr(Tags.BLINDES_ADDITIONS, blindes));
@@ -197,15 +196,5 @@ public class ReadGameDescriptorFile {
         return "";
     }
 
-    private static boolean isNumeric(String s) {
-        return s != null && s.matches("[-+]?\\d*\\.?\\d+");
-    }
-
-    private static String getFileExtension(File file) {
-        String fileName = file.getName();
-        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            return (fileName.substring(fileName.lastIndexOf(".")+1)).toLowerCase();
-        else return "";
-    }
 
 }
