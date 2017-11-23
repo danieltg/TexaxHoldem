@@ -4,17 +4,25 @@ import Engine.DeckOfCards.Card;
 import Engine.DeckOfCards.Deck;
 import Engine.GameDescriptor.GameDescriptor;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
+<<<<<<< HEAD
 import UI.Boards.GameStateBoard;
 import UI.Menus.MainMenu;
+=======
+import UI.Menues.MainMenu;
+import UI.Menues.Menu;
+>>>>>>> parent of 4315f68... Add some print method
 
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+<<<<<<< HEAD
         GameStateBoard board=new GameStateBoard();
         board.print();
         System.out.println("");
+=======
+>>>>>>> parent of 4315f68... Add some print method
         MainMenu texasMainMenu=new MainMenu();
         texasMainMenu.print();
         Scanner menuScanner=new Scanner(System.in);
@@ -23,7 +31,12 @@ public class Main {
         int choice = Integer.parseInt(menuScanner.nextLine());
         texasMainMenu.setSelectedOption(choice);
 
+<<<<<<< HEAD
         try {
+=======
+
+
+>>>>>>> parent of 4315f68... Add some print method
             Deck cards= new Deck();
             cards.shuffle();
             System.out.print("[");
