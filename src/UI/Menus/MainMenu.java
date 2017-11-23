@@ -1,4 +1,4 @@
-package UI.Menues;
+package UI.Menus;
 
 public class MainMenu extends Menu {
     @Override

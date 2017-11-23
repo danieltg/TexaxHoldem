@@ -4,20 +4,26 @@ import Engine.DeckOfCards.Card;
 import Engine.DeckOfCards.Deck;
 import Engine.GameDescriptor.GameDescriptor;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
-import UI.Menues.MainMenu;
-import UI.Menues.Menu;
+import UI.Boards.GameStateBoard;
+import UI.Menus.MainMenu;
 
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+        GameStateBoard board=new GameStateBoard();
+        board.print();
+        System.out.println("");
         MainMenu texasMainMenu=new MainMenu();
         texasMainMenu.print();
+        Scanner menuScanner=new Scanner(System.in);
+        System.out.flush();
+        System.out.print("My choice is:");
+        int choice = Integer.parseInt(menuScanner.nextLine());
+        texasMainMenu.setSelectedOption(choice);
+
         try {
-
-
-
             Deck cards= new Deck();
             cards.shuffle();
             System.out.print("[");

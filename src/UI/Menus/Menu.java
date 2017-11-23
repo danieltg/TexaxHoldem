@@ -1,4 +1,4 @@
-package UI.Menues;
+package UI.Menus;
 
 public abstract class Menu {
 
