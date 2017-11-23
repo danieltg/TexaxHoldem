@@ -4,14 +4,19 @@ import Engine.DeckOfCards.Card;
 import Engine.DeckOfCards.Deck;
 import Engine.GameDescriptor.GameDescriptor;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
+import UI.Menues.MainMenu;
+import UI.Menues.Menu;
 
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-
+        MainMenu texasMainMenu=new MainMenu();
+        texasMainMenu.print();
         try {
+
+
 
             Deck cards= new Deck();
             cards.shuffle();
