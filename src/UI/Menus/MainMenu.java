@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class MainMenu extends Menu {
     @Override
-    public void Print() {
+    public int Print() {
         System.out.println("Hi, Please enter one option:");
         System.out.println("1. Load game configurtaion file.");
         System.out.println("2. Start game.");
@@ -16,13 +16,15 @@ public class MainMenu extends Menu {
         System.out.println("7. Save game to file.");
         System.out.println("8. Load game from file.");
 
-        GetOptionFromUser();
+      int option=GetOptionFromUser();
+      return option;
     }
 
-    private void GetOptionFromUser() {
+    private int GetOptionFromUser() {
+        int choise=0;
         System.out.print("My choise is:");
         Scanner scanner=new Scanner(System.in);
-        int choise = Integer.parseInt(scanner.next());
-        selectedOption=choise;
+        choise = Integer.parseInt(scanner.next());
+        return choise;
     }
 }
