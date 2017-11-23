@@ -17,10 +17,12 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        UIManager uiManager=new UIManager();
+        uiManager.run();
 
-        MainMenu mainMenu=new MainMenu();
-        mainMenu.Print();
-        //check of GameState
+
+
+        //check of GameState- need to move from main
         List<Player> players = new ArrayList<Player>();
         players.add(new HumanPlayer());
         players.get(0).setChips(100);
@@ -33,7 +35,7 @@ public class Main {
         GameStateBoard board=new GameStateBoard();
         board.print(players);
 
-
+        //shuffle cards - need to move from main
         try {
 
             Deck cards= new Deck();
