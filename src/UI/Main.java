@@ -18,6 +18,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        MainMenu mainMenu=new MainMenu();
+        mainMenu.Print();
         //check of GameState
         List<Player> players = new ArrayList<Player>();
         players.add(new HumanPlayer());
@@ -30,7 +32,7 @@ public class Main {
         players.get(3).setChips(200);
         GameStateBoard board=new GameStateBoard();
         board.print(players);
-        
+
 
         try {
 

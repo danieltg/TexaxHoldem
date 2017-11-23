@@ -6,6 +6,12 @@ import Engine.Players.Player;
 public class GameManager {
     private GameDescriptor gameDescriptor;
 
+
+    public void getUserChoise(int userChoise)
+    {
+
+    }
+
     public void buy(Player player, int amount)
     {
         player.buy(amount);
