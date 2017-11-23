@@ -7,13 +7,13 @@ public enum PlayerState {
     BIG("B"),
     NONE("");
 
-    private String state;
+    private String stateChar;
 
     PlayerState(String state) {
-        this.state = state;
+        this.stateChar = state;
     }
 
     public String getState() {
-        return this.state;
+        return this.stateChar;
     }
 }
