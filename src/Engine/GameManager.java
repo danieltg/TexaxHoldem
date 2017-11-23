@@ -1,7 +1,6 @@
 package Engine;
 
 import Engine.GameDescriptor.GameDescriptor;
-import Engine.Players.Player;
 
 public class GameManager {
     private GameDescriptor gameDescriptor;
