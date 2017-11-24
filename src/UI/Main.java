@@ -17,9 +17,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        UIManager uiManager=new UIManager();
+        UIManager uiManager = new UIManager();
         uiManager.run();
-
 
 
         //check of GameState- need to move from main
@@ -32,35 +31,21 @@ public class Main {
         players.get(2).setChips(400);
         players.add(new ComputerPlayer());
         players.get(3).setChips(200);
-        GameStateBoard board=new GameStateBoard();
+        GameStateBoard board = new GameStateBoard();
         board.print(players);
 
         //shuffle cards - need to move from main
-        try {
 
-            Deck cards= new Deck();
-            cards.shuffle();
-            System.out.print("[");
-            for (int i=0; i<10; i++)
-            {
-                Card c=cards.drawCard();
-                System.out.print(" "+c);
-            }
-            System.out.println(" ]");
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter a file name:");
-            System.out.flush();
-            String filename = scanner.nextLine();
-
-            GameDescriptor gameDescriptor= ReadGameDescriptorFile.readFile(filename);
-            System.out.println(gameDescriptor.toString());
-
-        } catch (Exception e) {
-            System.out.println("Invalid Game Descriptor file: "+e.getMessage()+".");
+        Deck cards = new Deck();
+        cards.shuffle();
+        System.out.print("[");
+        for (int i = 0; i < 10; i++) {
+            Card c = cards.drawCard();
+            System.out.print(" " + c);
         }
+        System.out.println(" ]");
+
+
     }
-
-
-
 }

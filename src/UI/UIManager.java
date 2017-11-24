@@ -1,36 +1,92 @@
 package UI;
 
+import Engine.GameDescriptor.GameDescriptor;
+import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
 import UI.Menus.MainMenu;
 
-public class UIManager {
-    final int MAX_OPTION=8;
-    final int MIN_OPTION=1;
-    MainMenu mainMenu=new MainMenu();
-    GameManager gameManager=new GameManager();
-    int selectedMainOption;
+import java.util.Scanner;
 
-    public void run()
-    {
-       selectedMainOption= mainMenu.Print();
-       while(!isValidOption(selectedMainOption))
-       {
-           System.out.println("This number is not exist on menu ,try again!");
-           selectedMainOption= mainMenu.Print();
-       }
-       runOption(selectedMainOption);
-        
+public class UIManager {
+    private final static int MAX_OPTION = 8;
+    private final static int MIN_OPTION = 1;
+
+    private boolean gameEnded;
+
+    MainMenu mainMenu;
+    GameManager gameManager;
+
+
+    public UIManager() {
+        this.gameEnded = false;
+        this.gameManager = new GameManager();
+        this.mainMenu = new MainMenu();
     }
 
+    private void ReadSettingsXML() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter a file name:");
+            System.out.flush();
+            String filename = scanner.nextLine();
+
+            GameDescriptor gameDescriptor = ReadGameDescriptorFile.readFile(filename);
+            System.out.println(gameDescriptor.toString());
+
+        } catch (Exception e) {
+            System.out.println("Invalid Game Descriptor file: " + e.getMessage() + ".");
+        }
+    }
+
+    public void run() {
+        int selectedMainOption = mainMenu.Print();
+
+        while (!gameEnded) {
+
+            if (isValidOption(selectedMainOption)) {
+                runOption(selectedMainOption);
+            } else {
+                System.out.println("This number is not exist on menu ,try again!");
+                selectedMainOption = mainMenu.Print();
+            }
+        }
+    }
     private void runOption(int selectedMainOption) {
         switch (selectedMainOption) {
-            case 1:
-            case 2:
-            case 3:
+            case 1: ReadSettingsXML();
+            case 2: StartGame();
+            case 3: ShowGameState();
+            case 4: RunOneHand();
+            case 5: GetStatistics();
+            case 6: LeaveTheGame();
+            case 7: SaveGame();
+            case 8: LoadGame();
 
 
 
         }
+    }
+
+    private void LoadGame() {
+    }
+
+
+    private void SaveGame() {
+    }
+
+    private void LeaveTheGame() {
+    }
+
+    private void GetStatistics() {
+    }
+
+    private void RunOneHand() {
+    }
+
+    private void ShowGameState() {
+    }
+
+    private void StartGame() {
     }
 
     private boolean isValidOption(int selectedMainOption) {
