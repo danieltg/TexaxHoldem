@@ -6,6 +6,10 @@ import Engine.Players.Player;
 public class GameManager {
     private GameDescriptor gameDescriptor;
 
+    public GameManager(GameDescriptor descriptor) {
+        gameDescriptor= descriptor;
+    }
+
     public void buy(Player player, int amount)
     {
         player.buy(amount);

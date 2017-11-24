@@ -19,7 +19,6 @@ public class UIManager {
 
     public UIManager() {
         this.gameEnded = false;
-        this.gameManager = new GameManager();
         this.mainMenu = new MainMenu();
     }
 
@@ -31,6 +30,7 @@ public class UIManager {
             String filename = scanner.nextLine();
 
             GameDescriptor gameDescriptor = ReadGameDescriptorFile.readFile(filename);
+            gameManager=new GameManager(gameDescriptor);
             System.out.println(gameDescriptor.toString());
 
         } catch (Exception e) {
