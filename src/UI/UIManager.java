@@ -88,7 +88,7 @@ public class UIManager {
                 try {
                     ReadSettingsXML();
                 } catch (GameStateException e) {
-                    e.getMessage();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case 2:
@@ -98,7 +98,16 @@ public class UIManager {
                    System.out.println(e.getMessage());
                 }
                 break;
-            case 3: ShowGameState();
+            case 3:
+            {
+                try {
+                    ShowGameState();
+                } catch (GameStateException e) {
+                    System.out.println(e.getMessage());
+                }
+
+            }
+
                 break;
             case 4: RunOneHand();break;
             case 5: GetStatistics();break;
@@ -127,11 +136,37 @@ public class UIManager {
     private void RunOneHand() {
     }
 
-    private void ShowGameState() {
+    private void ShowGameState() throws GameStateException {
+        if(!(gameManager.GetStateOfGame() ==CurrGameState.NotInitialized)&&!(gameManager.GetStateOfGame()==CurrGameState.Ended)) {
+            //TODO:need to delete the check Playersarray and send the real plaeyrs array from engine
+            List<Player> players = new ArrayList<Player>();
+            players.add(new HumanPlayer());
+            players.get(0).setChips(100);
+            players.add(new ComputerPlayer());
+            players.get(1).setChips(600);
+            players.add(new HumanPlayer());
+            players.get(2).setChips(400);
+            players.add(new ComputerPlayer());
+            players.get(3).setChips(200);
+            board.print(players);
+        }
+        else throw new GameStateException(GameStateException.INVALID_VALUE+": can't show state game before loading of configuration file");
     }
 
     private void StartGame() throws GameStateException {
         gameManager.StartGame();
+        //TODO:need to delete the check Playersarray and send the real plaeyrs array from engine
+        List<Player> players = new ArrayList<Player>();
+        players.add(new HumanPlayer());
+        players.get(0).setChips(100);
+        players.add(new ComputerPlayer());
+        players.get(1).setChips(600);
+        players.add(new HumanPlayer());
+        players.get(2).setChips(400);
+        players.add(new ComputerPlayer());
+        players.get(3).setChips(200);
+        board.print(players);
+
     }
 
 

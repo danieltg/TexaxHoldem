@@ -39,7 +39,8 @@ public class GameManager {
             throw new GameStateException(GameStateException.INVALID_VALUE + ":Can't start game in this state of game");
         else {
             stateOfGame = CurrGameState.Started;
-            //TODO: here the game starts
+            //TODO: here we need to initialize the game (update players)
+
         }
     }
 
