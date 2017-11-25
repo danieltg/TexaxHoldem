@@ -1,5 +1,7 @@
 package Engine;
 
+import Engine.Exceptions.GameStateException;
+import Engine.Exceptions.GameTypeException;
 import Engine.GameDescriptor.GameDescriptor;
 import Engine.Players.Player;
 
@@ -30,5 +32,18 @@ public class GameManager {
 
     public GameDescriptor GetGameDescriptor() {
         return gameDescriptor;
+    }
+
+    public void StartGame() throws GameStateException {
+        if (stateOfGame != CurrGameState.Initialized)
+            throw new GameStateException(GameStateException.INVALID_VALUE + ":Can't start game in this state of game");
+        else {
+            stateOfGame = CurrGameState.Started;
+            //TODO: here the game starts
+        }
+    }
+
+    public void setStateOfGame(CurrGameState stateOfGame) {
+        this.stateOfGame = stateOfGame;
     }
 }

@@ -1,6 +1,7 @@
 package UI;
 
 import Engine.CurrGameState;
+import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.GameDescriptor;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
@@ -30,7 +31,7 @@ public class UIManager {
         this.mainMenu = new MainMenu();
     }
 
-    private void ReadSettingsXML() {
+    private void ReadSettingsXML() throws GameStateException {
 
         if (gameManager.GetStateOfGame() == CurrGameState.NotInitialized||gameManager.GetStateOfGame()==CurrGameState.Ended) {
             try {
@@ -54,6 +55,7 @@ public class UIManager {
                 players.add(new ComputerPlayer());
                 players.get(3).setChips(200);
                 board.print(players);
+                gameManager.setStateOfGame(CurrGameState.Initialized);
 
 
             } catch (Exception e) {
@@ -61,7 +63,7 @@ public class UIManager {
             }
         }
         else{
-            System.out.println("cant LoadXml ");
+            throw new GameStateException(GameStateException.INVALID_VALUE +": can't Load game configurtaion file in this state of game ");
         }
     }
 
@@ -82,14 +84,27 @@ public class UIManager {
     }
     private void runOption(int selectedMainOption) {
         switch (selectedMainOption) {
-            case 1: ReadSettingsXML();
-            case 2: StartGame();
+            case 1:
+                try {
+                    ReadSettingsXML();
+                } catch (GameStateException e) {
+                    e.getMessage();
+                }
+                break;
+            case 2:
+                try {
+                    StartGame();
+                } catch (GameStateException e) {
+                   System.out.println(e.getMessage());
+                }
+                break;
             case 3: ShowGameState();
-            case 4: RunOneHand();
-            case 5: GetStatistics();
-            case 6: LeaveTheGame();
-            case 7: SaveGame();
-            case 8: LoadGame();
+                break;
+            case 4: RunOneHand();break;
+            case 5: GetStatistics();break;
+            case 6: LeaveTheGame();break;
+            case 7: SaveGame();break;
+            case 8: LoadGame();break;
 
 
 
@@ -115,7 +130,8 @@ public class UIManager {
     private void ShowGameState() {
     }
 
-    private void StartGame() {
+    private void StartGame() throws GameStateException {
+        gameManager.StartGame();
     }
 
 
