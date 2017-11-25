@@ -5,7 +5,6 @@ public enum CurrGameState {
     Initialized,
     Started,
     RunningHand,
-    ShowsStatistics,
-    StoppedByUser
+    Ended
 
 }

@@ -11,6 +11,10 @@ public class GameDescriptor {
         this.structure = structure;
     }
 
+    public GameDescriptor() {
+
+    }
+
     @Override
     public String toString() {
         return "GameDescriptor:\n" +
