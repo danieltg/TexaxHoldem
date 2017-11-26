@@ -3,7 +3,7 @@ package Engine.Exceptions;
 public class GameStateException extends Exception {
 
 
-    public static final String INVALID_VALUE = "Invalid value for Menu";
+    public static final String INVALID_VALUE = "Invalid selection ";
 
     public GameStateException(String message)
     {

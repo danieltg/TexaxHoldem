@@ -4,9 +4,7 @@ public abstract class Menu {
 
    protected int selectedOption;
 
-   abstract int Print ();
-
-
+   abstract void Print ();
     public int getSelectedOption() {
         return selectedOption;
     }

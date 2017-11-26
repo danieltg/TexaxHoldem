@@ -2,21 +2,11 @@ package UI;
 
 import Engine.DeckOfCards.Card;
 import Engine.DeckOfCards.Deck;
-import Engine.GameDescriptor.GameDescriptor;
-import Engine.GameDescriptor.ReadGameDescriptorFile;
-import Engine.Players.*;
-import UI.Boards.GameStateBoard;
-import UI.Menus.MainMenu;
 
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         UIManager uiManager = new UIManager();
         uiManager.run();
 

@@ -15,10 +15,9 @@ import com.sun.xml.internal.bind.v2.TODO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class UIManager {
-    private final static int MAX_OPTION = 8;
-    private final static int MIN_OPTION = 1;
 
     private boolean gameEnded;
 
@@ -31,7 +30,7 @@ public class UIManager {
         this.mainMenu = new MainMenu();
     }
 
-    private void ReadSettingsXML() throws GameStateException {
+    private void ReadSettingsXML() throws Exception {
 
         if (gameManager.GetStateOfGame() == CurrGameState.NotInitialized||gameManager.GetStateOfGame()==CurrGameState.Ended) {
             try {
@@ -41,9 +40,7 @@ public class UIManager {
                 String filename = scanner.nextLine();
                 gameManager.setGameDescriptor(ReadGameDescriptorFile.readFile(filename));
 
-                //just for check- need to delete
-               System.out.println(gameManager.GetGameDescriptor().toString());
-
+/*
                 //TODO:need to delete the check Playersarray and send the real plaeyrs array from engine
                 List<Player> players = new ArrayList<Player>();
                 players.add(new HumanPlayer());
@@ -54,40 +51,47 @@ public class UIManager {
                 players.get(2).setChips(400);
                 players.add(new ComputerPlayer());
                 players.get(3).setChips(200);
-                board.print(players);
+                board.print(players);*/
                 gameManager.setStateOfGame(CurrGameState.Initialized);
 
 
             } catch (Exception e) {
-                System.out.println("Invalid Game Descriptor file: " + e.getMessage() + ".");
+                throw new Exception("Invalid Game Descriptor file: " + e.getMessage() + ".");
             }
         }
         else{
-            throw new GameStateException(GameStateException.INVALID_VALUE +": can't Load game configurtaion file in this state of game ");
+            throw new GameStateException(GameStateException.INVALID_VALUE +": Configuration file already loaded.");
         }
     }
 
 
-    public void run() {
-        int selectedMainOption = mainMenu.Print();
+    public void run() throws InterruptedException {
+        int selectedMainOption=6;
+        boolean shouldContinue=true;
 
-        while (!gameEnded) {
-
-            if (isValidOption(selectedMainOption)) {
+        while (shouldContinue || !gameEnded) {
+            try {
+                mainMenu.Print();
+                selectedMainOption = mainMenu.GetOptionFromUser();
+                shouldContinue=false;
+                //we have a correct input
                 runOption(selectedMainOption);
-                selectedMainOption = mainMenu.Print();
-            } else {
-                System.out.println("This number is not exist on menu ,try again!");
-                selectedMainOption = mainMenu.Print();
+
+            } catch (NumberFormatException ne) {
+                System.out.println("***Your input is not a valid option , please try again.");
+                TimeUnit.MILLISECONDS.sleep(500);
             }
+
         }
+
     }
     private void runOption(int selectedMainOption) {
         switch (selectedMainOption) {
             case 1:
                 try {
                     ReadSettingsXML();
-                } catch (GameStateException e) {
+                    System.out.println("Configuration file loaded successfully");
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
                 break;
@@ -169,12 +173,4 @@ public class UIManager {
 
     }
 
-
-    //TODo: add excptions.
-    private boolean isValidOption(int selectedMainOption) {
-        if(selectedMainOption>=MIN_OPTION&&selectedMainOption<MAX_OPTION)
-            return true;
-        else return false;
-
-    }
 }
