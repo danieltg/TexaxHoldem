@@ -10,7 +10,6 @@ import Engine.Players.HumanPlayer;
 import Engine.Players.Player;
 import UI.Boards.GameStateBoard;
 import UI.Menus.MainMenu;
-import com.sun.xml.internal.bind.v2.TODO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +20,9 @@ public class UIManager {
 
     private boolean gameEnded;
 
-    MainMenu mainMenu;
-    GameManager gameManager=new GameManager();
-    GameStateBoard board = new GameStateBoard();
+    private MainMenu mainMenu;
+    private GameManager gameManager= new GameManager();
+    private GameStateBoard board;
 
     public UIManager() {
         this.gameEnded = false;
@@ -39,19 +38,6 @@ public class UIManager {
                 System.out.flush();
                 String filename = scanner.nextLine();
                 gameManager.setGameDescriptor(ReadGameDescriptorFile.readFile(filename));
-
-/*
-                //TODO:need to delete the check Playersarray and send the real plaeyrs array from engine
-                List<Player> players = new ArrayList<Player>();
-                players.add(new HumanPlayer());
-                players.get(0).setChips(100);
-                players.add(new ComputerPlayer());
-                players.get(1).setChips(600);
-                players.add(new HumanPlayer());
-                players.get(2).setChips(400);
-                players.add(new ComputerPlayer());
-                players.get(3).setChips(200);
-                board.print(players);*/
                 gameManager.setStateOfGame(CurrGameState.Initialized);
 
 
@@ -72,7 +58,7 @@ public class UIManager {
         while (shouldContinue || !gameEnded) {
             try {
                 mainMenu.Print();
-                selectedMainOption = mainMenu.GetOptionFromUser();
+                selectedMainOption = mainMenu.getOptionFromUser();
                 shouldContinue=false;
                 //we have a correct input
                 runOption(selectedMainOption);
@@ -105,7 +91,7 @@ public class UIManager {
             case 3:
             {
                 try {
-                    ShowGameState();
+                    showGameState();
                 } catch (GameStateException e) {
                     System.out.println(e.getMessage());
                 }
@@ -132,44 +118,26 @@ public class UIManager {
     }
 
     private void LeaveTheGame() {
+        System.out.println("Thanks for using Texas Hold'em.");
+        System.exit(0);
     }
 
     private void GetStatistics() {
     }
 
     private void RunOneHand() {
+        gameManager.runHand();
     }
 
-    private void ShowGameState() throws GameStateException {
-        if(!(gameManager.GetStateOfGame() ==CurrGameState.NotInitialized)&&!(gameManager.GetStateOfGame()==CurrGameState.Ended)) {
-            //TODO:need to delete the check Playersarray and send the real plaeyrs array from engine
-            List<Player> players = new ArrayList<Player>();
-            players.add(new HumanPlayer());
-            players.get(0).setChips(100);
-            players.add(new ComputerPlayer());
-            players.get(1).setChips(600);
-            players.add(new HumanPlayer());
-            players.get(2).setChips(400);
-            players.add(new ComputerPlayer());
-            players.get(3).setChips(200);
-            board.print(players);
-        }
-        else throw new GameStateException(GameStateException.INVALID_VALUE+": can't show state game before loading of configuration file");
+    private void showGameState() throws GameStateException {
+        if(gameManager.GetStateOfGame() ==CurrGameState.Started)
+            gameManager.printGameState();
+        else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }
 
     private void StartGame() throws GameStateException {
-        gameManager.StartGame();
-        //TODO:need to delete the check Playersarray and send the real plaeyrs array from engine
-        List<Player> players = new ArrayList<Player>();
-        players.add(new HumanPlayer());
-        players.get(0).setChips(100);
-        players.add(new ComputerPlayer());
-        players.get(1).setChips(600);
-        players.add(new HumanPlayer());
-        players.get(2).setChips(400);
-        players.add(new ComputerPlayer());
-        players.get(3).setChips(200);
-        board.print(players);
+
+        gameManager.startGame();
 
     }
 

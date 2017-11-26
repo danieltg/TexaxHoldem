@@ -2,11 +2,10 @@ package Engine.Players;
 
 public class ComputerPlayer extends Player {
 
-    public ComputerPlayer()
+    public ComputerPlayer(int id)
     {
-        super();
+        super(id);
         setType(PlayerType.Computer);
-        setState(PlayerState.DEALER);
     }
 
     @Override

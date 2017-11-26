@@ -8,10 +8,18 @@ import java.util.Scanner;
 
 public class GameStateBoard {
 
-  public void print ( List<Player> players)
+  public static void print ( List<Player> players)
   {
-      printTwoPlayers(players.subList(0,2));
-      printTwoPlayers(players.subList(2,4));
+      List<Player> tmp = new ArrayList<Player>();
+      tmp.add(players.get(0));
+      tmp.add(players.get(3));
+
+      printTwoPlayers(tmp);
+
+      tmp.clear();
+      tmp.add(players.get(1));
+      tmp.add(players.get(2));
+      printTwoPlayers(tmp);
   }
     private static void printTwoPlayers(List<Player> players)
     {

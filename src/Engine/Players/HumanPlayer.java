@@ -2,11 +2,10 @@ package Engine.Players;
 
 public class HumanPlayer extends Player {
 
-    public HumanPlayer()
+    public HumanPlayer(int id)
     {
-        super();
+        super(id);
         setType(PlayerType.Human);
-        setState(PlayerState.BIG);
 
     }
     @Override

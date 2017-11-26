@@ -5,14 +5,20 @@ public class GameDescriptor {
     private GameType type;
     private Structure structure;
 
+    public final static int NUM_OF_HUMAN_PLAYERS= 1;
+    public final static int NUM_OF_COMPUTER_PLAYERS= 3;
 
     public GameDescriptor(GameType type, Structure structure) {
         this.type = type;
         this.structure = structure;
     }
 
-    public GameDescriptor() {
+    public GameType getType() {
+        return type;
+    }
 
+    public Structure getStructure() {
+        return structure;
     }
 
     @Override

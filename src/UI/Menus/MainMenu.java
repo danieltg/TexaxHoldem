@@ -13,7 +13,7 @@ public class MainMenu extends Menu {
     public void Print() {
 
         System.out.println("=======================================");
-        System.out.println("|   Texas hold'em MENU                |");
+        System.out.println("|   Texas Hold'em MENU                |");
         System.out.println("=======================================");
         System.out.println("| Please Make a selection:            |");
         System.out.println("|   1. Load game configuration file   |");
@@ -27,7 +27,7 @@ public class MainMenu extends Menu {
         System.out.println("=======================================");
     }
 
-    public int GetOptionFromUser() {
+    public int getOptionFromUser() {
 
         int choise=0;
         System.out.print("Please enter your choice: ");

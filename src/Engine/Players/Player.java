@@ -20,11 +20,12 @@ public abstract class Player {
     private Card[] playerCards;
     private int handsWon;
 
-    public Player(){
+    public Player(int id){
         this.chips=0;
         this.numbersOfBuy=0;
         this.handsWon=0;
         this.state=PlayerState.NONE;
+        this.id=id;
     };
 
     abstract void play();
@@ -39,6 +40,10 @@ public abstract class Player {
     {
         chips+=amount;
         numbersOfBuy++;
+    }
+
+    public PlayerState getState() {
+        return state;
     }
 
     public List<String> listOfDetails()
