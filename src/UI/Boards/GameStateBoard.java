@@ -49,7 +49,7 @@ public class GameStateBoard {
                     System.out.print(" ");
 
                 System.out.print("|");
-                System.out.print("       ");
+                System.out.print("    ");
             }
             System.out.println();
 
@@ -68,7 +68,7 @@ public class GameStateBoard {
                 System.out.print("-");
             }
             System.out.print("+");
-            System.out.print("       ");
+            System.out.print("    ");
         }
         System.out.println();
     }

@@ -1,6 +1,7 @@
 package Engine.Players;
 
 import Engine.DeckOfCards.Card;
+import Engine.GameManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,15 +47,13 @@ public abstract class Player {
         return state;
     }
 
-    public List<String> listOfDetails()
-    {
+    public List<String> listOfDetails() {
         List<String> list = new ArrayList<String>();
         list.add("Type: "+this.type.getType());
-        list.add("State: "+this.state.getState());
+        list.add("State: "+this.state.getStateWithVal());
         list.add("Chips: "+this.chips);
         list.add("Buys: "+this.numbersOfBuy);
-        list.add("Hands won: "+this.handsWon);
-
+        list.add("Hands won: "+this.handsWon+"/"+ GameManager.handNumber);
         return list;
     }
 }

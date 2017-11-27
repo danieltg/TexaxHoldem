@@ -2,17 +2,13 @@ package UI;
 
 import Engine.CurrGameState;
 import Engine.Exceptions.GameStateException;
-import Engine.GameDescriptor.GameDescriptor;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
-import Engine.Players.ComputerPlayer;
-import Engine.Players.HumanPlayer;
-import Engine.Players.Player;
+
 import UI.Boards.GameStateBoard;
 import UI.Menus.MainMenu;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -31,15 +27,16 @@ public class UIManager {
 
     private void ReadSettingsXML() throws Exception {
 
-        if (gameManager.GetStateOfGame() == CurrGameState.NotInitialized||gameManager.GetStateOfGame()==CurrGameState.Ended) {
+        if (gameManager.GetStateOfGame() !=CurrGameState.Started && gameManager.GetStateOfGame()!=CurrGameState.RunningHand) {
             try {
                 Scanner scanner = new Scanner(System.in);
                 System.out.print("Enter a file name:");
                 System.out.flush();
                 String filename = scanner.nextLine();
                 gameManager.setGameDescriptor(ReadGameDescriptorFile.readFile(filename));
-                gameManager.setStateOfGame(CurrGameState.Initialized);
-
+                gameManager.setTable();
+                System.out.println("Configuration file loaded successfully...");
+                gameManager.printGameState();
 
             } catch (Exception e) {
                 throw new Exception("Invalid Game Descriptor file: " + e.getMessage() + ".");
@@ -73,41 +70,68 @@ public class UIManager {
     }
     private void runOption(int selectedMainOption) {
         switch (selectedMainOption) {
-            case 1:
-                try {
+            case 1: {
+                try
+                {
                     ReadSettingsXML();
-                    System.out.println("Configuration file loaded successfully");
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
                 }
+                catch (Exception e) {
+                    System.out.println(e.getMessage()); }
                 break;
-            case 2:
-                try {
-                    StartGame();
-                } catch (GameStateException e) {
-                   System.out.println(e.getMessage());
-                }
-                break;
-            case 3:
-            {
-                try {
-                    showGameState();
-                } catch (GameStateException e) {
-                    System.out.println(e.getMessage());
-                }
 
             }
-
+            case 2: {
+                try
+                {
+                    startGame();
+                }
+                catch (GameStateException e) { System.out.println(e.getMessage()); }
                 break;
-            case 4: RunOneHand();break;
-            case 5: GetStatistics();break;
-            case 6: LeaveTheGame();break;
-            case 7: SaveGame();break;
-            case 8: LoadGame();break;
+            }
+            case 3:
+            {
+                try { showGameState(); }
+                catch (GameStateException e) { System.out.println(e.getMessage()); }
+                break;
+            }
 
+            case 4: RunOneHand();break;
+            case 5: {
+                try { getStatistics(); }
+                catch (GameStateException e) { System.out.println(e.getMessage()); }
+                break;
+            }
+            case 6:{
+                try { buy();
+                }
+                catch (GameStateException e) {System.out.println(e.getMessage());
+                }
+                break;
+            }
+            case 7: {
+                leaveTheCurrentGame();
+                break;
+            }
+            case 8: SaveGame();break;
+            case 9: LoadGame();break;
+            case 10: {
+                exitGame();
+                break;
+            }
 
 
         }
+    }
+
+    private void exitGame() {
+        System.out.println("Thanks for using Texas Hold'em.");
+        System.exit(0);
+    }
+
+    private void buy() throws GameStateException {
+        if(gameManager.GetStateOfGame() ==CurrGameState.Started)
+            gameManager.buy();
+        else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }
 
     private void LoadGame() {
@@ -117,12 +141,15 @@ public class UIManager {
     private void SaveGame() {
     }
 
-    private void LeaveTheGame() {
-        System.out.println("Thanks for using Texas Hold'em.");
-        System.exit(0);
+    private void leaveTheCurrentGame() {
+        System.out.println("Alright, you leaved the game... You can either start a new one or exit the game");
+        gameManager.resetGame();
     }
 
-    private void GetStatistics() {
+    private void getStatistics() throws GameStateException {
+        if(gameManager.GetStateOfGame() ==CurrGameState.Started)
+            gameManager.getStatistics();
+        else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }
 
     private void RunOneHand() {
@@ -135,10 +162,10 @@ public class UIManager {
         else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }
 
-    private void StartGame() throws GameStateException {
+    private void startGame() throws GameStateException {
 
         gameManager.startGame();
-
+        System.out.println("Game started successfully...");
     }
 
 }

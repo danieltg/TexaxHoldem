@@ -12,18 +12,28 @@ import Engine.Players.PlayerState;
 import UI.Boards.GameStateBoard;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import static Engine.GameDescriptor.GameDescriptor.NUM_OF_COMPUTER_PLAYERS;
 import static Engine.GameDescriptor.GameDescriptor.NUM_OF_HUMAN_PLAYERS;
 
 public class GameManager {
-    private GameDescriptor gameDescriptor;
+
+    private int numberOfPlayers=NUM_OF_COMPUTER_PLAYERS+NUM_OF_HUMAN_PLAYERS;
+    private static GameDescriptor gameDescriptor;
     private CurrGameState stateOfGame;
     private Deck deck;
     private List<Card> cards= new ArrayList<Card>();
     private List<Player> players= new ArrayList<Player>();
-    private int handNumber;
+    private int dealerIndex;
+    private int maxPot;
+    private Date startTime;
+    private int indexActivePlayer;
+
+    public static int handNumber;
 
     public  GameManager(){
         stateOfGame=CurrGameState.NotInitialized;
@@ -34,17 +44,16 @@ public class GameManager {
         this.stateOfGame=CurrGameState.Initialized;
     }
 
-
     public CurrGameState GetStateOfGame()
     {
         return stateOfGame;
     }
 
-    public void buy(Player player, int amount)
+    public void buy()
     {
-        player.buy(amount);
-        //TODO: add the amount here also...
-        //should it be int? or double
+        int numToBuy=gameDescriptor.getStructure().getBuy();
+        players.get(indexActivePlayer).buy(numToBuy);
+        maxPot+=numToBuy;
     }
 
     public GameDescriptor getGameDescriptor() {
@@ -52,16 +61,27 @@ public class GameManager {
     }
 
     public void startGame() throws GameStateException {
-        if (stateOfGame != CurrGameState.Initialized)
-            throw new GameStateException(GameStateException.INVALID_VALUE + ":Can't start game in this state of game");
-        else {
-            handNumber=0;
-            stateOfGame = CurrGameState.Started;
-            deck=new Deck();
-            setPlayers();
-            setRoles();
-            printGameState();
+        switch (stateOfGame)
+        {
+            case Started:
+                throw new GameStateException(GameStateException.INVALID_VALUE + ": The game has already started");
+
+            case NotInitialized:
+                throw new GameStateException(GameStateException.INVALID_VALUE + ": Game failed to start, you must have configuration file loaded");
+
+            case Ended:
+            case Initialized:
+            {
+                startTime= new Date();
+                stateOfGame = CurrGameState.Started;
+                deck=new Deck();
+                //TODO: remove it!! 0== HUMAN_PLAYER
+                indexActivePlayer=0;
+                break;
+            }
+
         }
+
     }
 
 
@@ -69,10 +89,10 @@ public class GameManager {
     {
         GameStateBoard.print(players);
     }
-    private void setRoles() {
 
-        int numberOfPlayers=NUM_OF_COMPUTER_PLAYERS+NUM_OF_HUMAN_PLAYERS;
-        int d=handNumber%numberOfPlayers;
+    private void setRoles(int index) {
+
+        int d=index%numberOfPlayers;
         int s= (d+1)%numberOfPlayers;
         int b=(s+1)%numberOfPlayers;
         int n=(b+1)%numberOfPlayers;
@@ -82,27 +102,69 @@ public class GameManager {
         players.get(b).setState(PlayerState.BIG);
         players.get(n).setState(PlayerState.NONE);
 
+        dealerIndex=d;
+
     }
 
     public void setStateOfGame(CurrGameState stateOfGame) {
         this.stateOfGame = stateOfGame;
     }
 
-    private void setPlayers()
-    {
+    private void setPlayers() {
+
         if (gameDescriptor.getType()== GameType.Basic)
         {
-            for (int i=0; i<NUM_OF_HUMAN_PLAYERS; i++)
-                players.add(new HumanPlayer(i));
 
-            for (int i=NUM_OF_HUMAN_PLAYERS; i<NUM_OF_COMPUTER_PLAYERS+NUM_OF_HUMAN_PLAYERS; i++)
+            players.clear();
+
+            for (int i=0; i<NUM_OF_HUMAN_PLAYERS; i++) {
+                players.add(new HumanPlayer(i));
+                indexActivePlayer=i;
+                buy();
+            }
+
+            for (int i=NUM_OF_HUMAN_PLAYERS; i<numberOfPlayers; i++) {
                 players.add(new ComputerPlayer(i));
+                indexActivePlayer=i;
+                buy();
+            }
        }
+
     }
 
     public void runHand() {
         handNumber++;
-        setRoles();
+        setRoles(dealerIndex+1);
         printGameState();
     }
+
+    public void getStatistics() {
+
+        long totalTime= (new Date()).getTime()-startTime.getTime();
+        long minutes=TimeUnit.MILLISECONDS.toMinutes(totalTime);
+        long seconds=TimeUnit.MILLISECONDS.toSeconds(totalTime)- TimeUnit.MINUTES.toSeconds(minutes);
+
+        System.out.println("Time: "+ minutes+ ":"+ seconds);
+        System.out.println("Hands: "+handNumber+ "/"+this.getGameDescriptor().getStructure().getHandsCount());
+        System.out.println("Max pot: "+maxPot);
+        printGameState();
+
+    }
+
+    public void setTable()
+    {
+        int randomNumber= new Random().nextInt(numberOfPlayers);
+        maxPot=0;
+        handNumber=0;
+        setPlayers();
+        setRoles(randomNumber);
+    }
+    public static int getBig(){ return gameDescriptor.getStructure().getBlindes().getBig();}
+    public static int getSmall(){ return gameDescriptor.getStructure().getBlindes().getSmall();}
+
+    public void resetGame() {
+        this.stateOfGame=CurrGameState.Initialized;
+        setTable();
+    }
 }
+
