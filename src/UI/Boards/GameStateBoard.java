@@ -8,33 +8,63 @@ import java.util.Scanner;
 
 public class GameStateBoard {
 
-  public static void print ( List<Player> players)
-  {
-      List<Player> tmp = new ArrayList<Player>();
-      tmp.add(players.get(0));
-      tmp.add(players.get(3));
-
-      printTwoPlayers(tmp);
-
-      tmp.clear();
-      tmp.add(players.get(1));
-      tmp.add(players.get(2));
-      printTwoPlayers(tmp);
-  }
-    private static void printTwoPlayers(List<Player> players)
+    public static void printHandState(List<Player> players,String str)
     {
-        Scanner in=new Scanner(System.in);
+        int maxLength=getMaxLength(players);
+
+        List<Player> tmp = new ArrayList<Player>();
+        tmp.add(players.get(0));
+        tmp.add(players.get(3));
+
+        printTwoPlayersForHand(tmp,maxLength);
+
+        System.out.println();
+        System.out.println("   "+str);
+        System.out.println();
+
+        tmp.clear();
+        tmp.add(players.get(1));
+        tmp.add(players.get(2));
+        printTwoPlayersForHand(tmp,maxLength);
+
+    }
+
+
+    public static int getMaxLength(List<Player> players)
+    {
+
         int maxLength=0;
 
         List<String> list = new ArrayList<String>();
         for(Player p:players )
-            list.addAll(p.listOfDetails());
+            list.addAll(p.listOfDetailesForHand());
 
-        String s="";
+
         for (String st:list) {
             if (maxLength<st.length())
                 maxLength=st.length();
         }
+
+        return maxLength;
+    }
+  public static void print ( List<Player> players)
+  {
+      int maxLength=getMaxLength(players);
+
+      List<Player> tmp = new ArrayList<Player>();
+      tmp.add(players.get(0));
+      tmp.add(players.get(3));
+
+      printTwoPlayers(tmp,maxLength);
+
+      tmp.clear();
+      tmp.add(players.get(1));
+      tmp.add(players.get(2));
+      printTwoPlayers(tmp,maxLength);
+  }
+    private static void printTwoPlayers(List<Player> players, int maxLength)
+    {
+        String s="";
         printBorder(maxLength,players.size());
 
         for(int i=0;i<5; i++)
@@ -42,9 +72,16 @@ public class GameStateBoard {
             for (int j=0; j<players.size(); j++)
             {
                 System.out.print("| ");
-                s=players.get(j).listOfDetails().get(i);
-                System.out.print(s);
+                try{
+                    s=players.get(j).listOfDetails().get(i);
 
+                }
+                catch (Exception e)
+                {
+                    s="";
+                }
+
+                System.out.print(s);
                 for(int k=s.length();k<=maxLength;k++)
                     System.out.print(" ");
 
@@ -71,5 +108,39 @@ public class GameStateBoard {
             System.out.print("    ");
         }
         System.out.println();
+    }
+
+
+    private static void printTwoPlayersForHand(List<Player> players, int maxLength)
+    {
+        printBorder(maxLength,players.size());
+        String s="";
+        for(int i=0;i<5; i++)
+        {
+            for (int j=0; j<players.size(); j++)
+            {
+                System.out.print("| ");
+                try{
+                    s=players.get(j).listOfDetailesForHand().get(i);
+
+                }
+                catch (Exception e)
+                {
+                    s="";
+                }
+
+                System.out.print(s);
+                for(int k=s.length();k<=maxLength;k++)
+                    System.out.print(" ");
+
+                System.out.print("|");
+                System.out.print("    ");
+            }
+            System.out.println();
+
+        }
+        printBorder(maxLength,players.size());
+
+
     }
 }

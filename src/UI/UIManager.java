@@ -95,7 +95,12 @@ public class UIManager {
                 break;
             }
 
-            case 4: RunOneHand();break;
+            case 4:
+            {
+                try{ RunOneHand();}
+                catch (GameStateException e) { System.out.println(e.getMessage()); }
+                break;
+            }
             case 5: {
                 try { getStatistics(); }
                 catch (GameStateException e) { System.out.println(e.getMessage()); }
@@ -152,8 +157,10 @@ public class UIManager {
         else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }
 
-    private void RunOneHand() {
-        gameManager.runHand();
+    private void RunOneHand() throws GameStateException {
+        if(gameManager.GetStateOfGame() ==CurrGameState.Started)
+            gameManager.runHand();
+        else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }
 
     private void showGameState() throws GameStateException {

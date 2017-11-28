@@ -4,7 +4,8 @@ public enum Suit {
     CLUB("C"),
     DIAMOND("D"),
     HEART("H"),
-    SPADE("S");
+    SPADE("S"),
+    NA("?");
 
     private String suitChar;
 

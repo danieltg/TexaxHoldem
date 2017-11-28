@@ -25,8 +25,6 @@ public class GameManager {
     private int numberOfPlayers=NUM_OF_COMPUTER_PLAYERS+NUM_OF_HUMAN_PLAYERS;
     private static GameDescriptor gameDescriptor;
     private CurrGameState stateOfGame;
-    private Deck deck;
-    private List<Card> cards= new ArrayList<Card>();
     private List<Player> players= new ArrayList<Player>();
     private int dealerIndex;
     private int maxPot;
@@ -74,7 +72,6 @@ public class GameManager {
             {
                 startTime= new Date();
                 stateOfGame = CurrGameState.Started;
-                deck=new Deck();
                 //TODO: remove it!! 0== HUMAN_PLAYER
                 indexActivePlayer=0;
                 break;
@@ -132,10 +129,25 @@ public class GameManager {
 
     }
 
-    public void runHand() {
-        handNumber++;
-        setRoles(dealerIndex+1);
-        printGameState();
+    public void runHand() throws GameStateException {
+
+        if (handNumber<getGameDescriptor().getStructure().getHandsCount())
+        {
+            handNumber++;
+            Hand currHand= new Hand(gameDescriptor.getStructure().getBlindes(), players);
+
+            currHand.printHand();
+            currHand.play();
+            currHand.printHand();
+
+            //we do it for the next hand...
+            setRoles(dealerIndex+1);
+
+        }
+        else
+            throw new GameStateException(GameStateException.INVALID_VALUE + ": ran out of hands");
+
+
     }
 
     public void getStatistics() {

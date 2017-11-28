@@ -5,6 +5,11 @@ public class Card {
     private Rank rank;
     private Suit suit;
 
+    public  Card()
+    {
+        this.rank=Rank.NA;
+        this.suit=Suit.NA;
+    }
     public Card(Rank rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;

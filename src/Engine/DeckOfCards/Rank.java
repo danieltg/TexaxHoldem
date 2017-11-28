@@ -13,7 +13,8 @@ public enum Rank {
     JACK("J"),
     QUEEN("Q"),
     KING("K"),
-    ACE("A");
+    ACE("A"),
+    NA("?");
 
     private String rankChar;
 

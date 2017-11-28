@@ -13,9 +13,13 @@ public class Deck {
         this.cards=new LinkedList<>();
         for (Suit s:Suit.values())
         {
-            for (Rank r:Rank.values())
-            {
-                this.cards.add(new Card(r,s));
+            if (s!=Suit.NA) {
+                for (Rank r : Rank.values()) {
+                    if (r!=Rank.NA)
+                    {
+                        this.cards.add(new Card(r, s));
+                    }
+                }
             }
         }
 
