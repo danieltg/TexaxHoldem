@@ -9,40 +9,42 @@ import java.util.List;
 
 public abstract class Player {
 
-    private final int TWO=2;
-
     private PlayerType type;
     private PlayerState state;
 
     private int id;
     private String name;
-    private boolean isActive;
-    private int bet;
+    private boolean folded;  //whether or not a player has folded
+    private int bet;        //The amount that a player is betting in one session of betting
 
-    public int getChips() {
-        return chips;
-    }
 
-    private int chips;
+    private int chips;      //The amount of money that a player has
     private int numbersOfBuy;
 
     private Card[] holeCards ;
     private int handsWon;
 
-    public Player(int id){
-        this.chips=0;
-        this.numbersOfBuy=0;
-        this.handsWon=0;
-        this.state=PlayerState.NONE;
-        this.id=id;
-        bet=0;
+    public Player(int playerID){
 
-        holeCards= new Card[TWO];
-        for (int i=0; i<TWO; i++)
+        chips=0;
+        bet =0;
+        folded=false;
+
+        numbersOfBuy=0;
+        handsWon=0;
+        state=PlayerState.NONE;
+        id=playerID;
+
+        holeCards= new Card[2];
+        for (int i=0; i<2; i++)
             holeCards[i]=new Card();
     };
 
-    abstract void play();
+    public int getChips() {
+        return chips;
+    }
+
+    abstract public String play();
 
     public void setState (PlayerState state) {this.state=state;}
     public void setType (PlayerType type)
@@ -50,9 +52,15 @@ public abstract class Player {
         this.type=type;
     }
     public void buy(int amount) {
-        chips+=amount;
+        addChips(amount);
         numbersOfBuy++;
     }
+
+    public void addChips (int amount)
+    {
+        chips=chips+amount;
+    }
+
     public PlayerState getState() {
         return state;
     }
@@ -84,19 +92,49 @@ public abstract class Player {
 
     public void setCard(Card c,int index)
     {
-        if (index< TWO && index>=0)
+        if (index< 2 && index>=0)
             holeCards[index]=c;
 
     }
 
-    public void bet(int num)
+    public void collectBet()
     {
-        bet=bet+num;
-        chips=chips-num;
+        chips=chips-bet;
+    }
+
+    public int getBet() {
+        return bet;
     }
 
     protected String getHoleCards()
     {
         return holeCards[0] + " " +holeCards[1];
+    }
+
+    public void setBet(int newBet)
+    {
+        // Checks to make sure the bet is valid
+        if (newBet < 0) {
+            System.out.println("Invalid bet detected");
+        } else if (newBet > chips) {
+            bet = chips;
+        } else {
+            bet = newBet;
+        }
+
+    }
+
+
+    public void setFolded(boolean status)
+    {
+        folded=status;
+    }
+
+    public boolean isFolded() {
+        return folded;
+    }
+
+    public PlayerType getType() {
+        return type;
     }
 }

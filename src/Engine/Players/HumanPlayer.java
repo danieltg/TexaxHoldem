@@ -1,5 +1,9 @@
 package Engine.Players;
 
+import Engine.Hand;
+import UI.Boards.GameStateBoard;
+import UI.Menus.HandMenu;
+
 import java.util.List;
 
 public class HumanPlayer extends Player {
@@ -11,8 +15,8 @@ public class HumanPlayer extends Player {
 
     }
     @Override
-    public void play() {
-        System.out.println("Play-> HumanPlayer");
+    public String play() {
+        return Hand.getUserSelection();
     }
 
 

@@ -9,8 +9,8 @@ public class ComputerPlayer extends Player {
     }
 
     @Override
-    public void play() {
-        System.out.println("ComputerPlayer-> HumanPlayer");
+    public String play() {
+        return "F";
 
     }
 }

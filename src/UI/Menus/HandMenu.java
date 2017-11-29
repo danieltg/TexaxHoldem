@@ -24,7 +24,7 @@ public class HandMenu {
         System.out.flush();
         String choice = scanner.nextLine();
         if (isValidOption(choice))
-            return choice;
+            return choice.toUpperCase();
         else
             throw new NumberFormatException("Invalid input. Its have to be: F | B | C | K | R ");
     }
