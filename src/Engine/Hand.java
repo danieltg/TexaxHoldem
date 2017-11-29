@@ -6,6 +6,7 @@ import Engine.GameDescriptor.Blindes;
 import Engine.Players.Player;
 import Engine.Players.PlayerState;
 import UI.Boards.GameStateBoard;
+import UI.Menus.HandMenu;
 
 import java.util.List;
 
@@ -80,11 +81,32 @@ public class Hand {
         firstBettingRound();
         dealingFlopCards();
 
+        getUserSelection();
         GameStateBoard.printHandState(players,printHand());
-
 
     }
 
+
+    private void getUserSelection()
+    {
+        boolean validSelection=false;
+
+        while (!validSelection)
+        {
+            HandMenu.print();
+            try {
+                String selection= HandMenu.getOptionFromUser();
+                System.out.println("Valid selection, your selection is: "+selection);
+                validSelection=true;
+            }
+            catch (Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+
+        }
+
+    }
     private void dealingFlopCards() {
 
         for (int i=0; i<3; i++)
@@ -112,9 +134,6 @@ public class Hand {
         pot+=blinde.getBig();
     }
     private void firstBettingRound() {
-
-
-
     }
 
     private void getStateIndex()

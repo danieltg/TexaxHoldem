@@ -1,6 +1,5 @@
 package Engine.Players;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HumanPlayer extends Player {

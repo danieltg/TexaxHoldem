@@ -1,7 +1,5 @@
 package UI.Menus;
 
-import javax.swing.*;
-import java.util.InvalidPropertiesFormatException;
 import java.util.Scanner;
 
 public class MainMenu extends Menu {
@@ -31,14 +29,14 @@ public class MainMenu extends Menu {
 
     public int getOptionFromUser() {
 
-        int choise=0;
+        int choice=0;
 
         Scanner scanner=new Scanner(System.in);
         System.out.print("Please enter your choice: ");
         System.out.flush();
-        choise = Integer.parseInt(scanner.nextLine());
-        if (isValidOption(choise))
-            return choise;
+        choice = Integer.parseInt(scanner.nextLine());
+        if (isValidOption(choice))
+            return choice;
         else
             throw new NumberFormatException();
     }
