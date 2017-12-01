@@ -123,7 +123,7 @@ public class Hand {
              int winner=whoIsLeft();
              players.get(winner).addChips(pot);
              players.get(winner).isAWinner();
-             System.out.println("Player ("+winner+") won with " +currentBet + "!");
+             System.out.println("Player ("+winner+") won with " +pot + "!");
 
     }
 
