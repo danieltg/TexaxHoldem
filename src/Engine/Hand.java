@@ -152,13 +152,20 @@ public class Hand {
     // Collect all bets
     private void collectBets() {
 
-        int p=1;
+        int p;
         int currIndex;
-
         boolean checkOccurred = false;
-        currentBet = 0;
 
-        lastRaise = players.get((p + dealer) % numberOfPlayers);
+        if (round==0) {
+            lastRaise = players.get((2 + dealer) % numberOfPlayers);
+            p = 3;
+            currentBet = blinde.getBig();
+        }
+        else {
+            p = 1;
+            lastRaise = players.get((p + dealer) % numberOfPlayers);
+            currentBet = 0;
+        }
 
         while (true) {
             if (playersLeft() == 1)
@@ -167,17 +174,16 @@ public class Hand {
             currIndex = (p + dealer) % numberOfPlayers;
             Player currPlayer = players.get(currIndex);
 
-            if (round==0 || round ==1) {
+/*            if (round==0 || round ==1) {
                 pot += currPlayer.getBet();
                 currPlayer.collectBet();
                 lastRaise = currPlayer;
-            }
+            }*/
             
-            else if (lastRaise != currPlayer || !checkOccurred) {
+            /*else*/ if (lastRaise != currPlayer || !checkOccurred) {
                 if (!currPlayer.isFolded() && currPlayer.getChips() > 0) {
                     if(currPlayer.getType()== PlayerType.Human)
                         GameStateBoard.printHandState(players,printHand());
-
 
                     doThis(currPlayer.play(),currPlayer);
 
@@ -194,6 +200,7 @@ public class Hand {
 
         resetPlayersBets();
     }
+
 
     private void doThis(String whatToDo, Player p) {
 
@@ -216,7 +223,6 @@ public class Hand {
                     p.setBet(currentBet);
 
                 break;
-
             }
 
             if (whatToDo.equals("R"))
@@ -246,8 +252,6 @@ public class Hand {
                 lastRaise = p;
                 p.setBet(currentBet);
                 break;
-
-
             }
 
             if (whatToDo.equals("K"))
@@ -313,6 +317,12 @@ public class Hand {
         players.get(s).setBet(blinde.getSmall());
         players.get(b).setBet(blinde.getBig());
 
+        pot = blinde.getSmall() +blinde.getBig();
+        players.get(s).collectBet();
+        players.get(b).collectBet();
+
+        players.get(s).setBet(0);
+        players.get(b).setBet(0);
     }
 
     private void getStateIndex()
