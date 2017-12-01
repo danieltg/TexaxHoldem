@@ -67,7 +67,7 @@ public abstract class Player {
 
     public List<String> listOfDetails() {
         List<String> list = new ArrayList<String>();
-        list.add("Type: "+this.type.getType());
+        list.add("Type: "+this.type.getType() +" ("+id+")");
         list.add("State: "+this.state.getStateWithVal());
         list.add("Chips: "+this.chips);
         list.add("Buys: "+this.numbersOfBuy);
@@ -136,5 +136,10 @@ public abstract class Player {
 
     public PlayerType getType() {
         return type;
+    }
+
+    public void isAWinner()
+    {
+        handsWon++;
     }
 }

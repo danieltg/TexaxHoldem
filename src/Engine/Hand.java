@@ -10,6 +10,7 @@ import UI.Boards.GameStateBoard;
 import UI.Menus.HandMenu;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Hand {
 
@@ -83,33 +84,56 @@ public class Hand {
     public void play()
     {
         dealingHoleCards();
+        betSmallAndBig();
         collectBets();
 
-        if (playersLeft() == 1)
-            evaluateRound();
+        if (playersLeft() == 1) {
+            onlyOneLeft();
+            return;
+        }
 
         GameStateBoard.printHandState(players,printHand());
         dealingFlopCards();
         collectBets();
 
         if (playersLeft() == 1)
-            evaluateRound();
+        {
+          onlyOneLeft();
+          return;
+        }
 
         GameStateBoard.printHandState(players,printHand());
         dealingTurnCard();
         collectBets();
 
         if (playersLeft() == 1)
-            evaluateRound();
-
+        {
+            onlyOneLeft();
+            return;
+        }
+        
         GameStateBoard.printHandState(players,printHand());
         dealingRiverCard();
         collectBets();
         evaluateRound();
 
-        getUserSelection();
-        GameStateBoard.printHandState(players,printHand());
+    }
 
+    private void onlyOneLeft() {
+             int winner=whoIsLeft();
+             players.get(winner).addChips(pot);
+             players.get(winner).isAWinner();
+             System.out.println("Player ("+winner+") won with " +currentBet + "!");
+
+    }
+
+    private int whoIsLeft()
+    {
+     for (int i=0; i<numberOfPlayers; i++)
+         if (!players.get(i).isFolded())
+             return i;
+
+     return 0;
     }
 
     private void dealingRiverCard() {
@@ -122,40 +146,38 @@ public class Hand {
 
 
     private void evaluateRound() {
+
     }
 
     // Collect all bets
     private void collectBets() {
 
-        int p;
-        boolean checkOccurred = false;
+        int p=1;
+        int currIndex;
 
-        if (round==0)
-        {
-            betSmallAndBig();
-            p=2;
-            currentBet=blinde.getBig();
-        }
-        else
-        {
-            p=1;
-            currentBet = 0;
-        }
+        boolean checkOccurred = false;
+        currentBet = 0;
 
         lastRaise = players.get((p + dealer) % numberOfPlayers);
-        int currIndex;
 
         while (true) {
             if (playersLeft() == 1)
                 break;
 
             currIndex = (p + dealer) % numberOfPlayers;
-
             Player currPlayer = players.get(currIndex);
-            if (lastRaise != currPlayer || !checkOccurred) {
+
+            if (round==0 || round ==1) {
+                pot += currPlayer.getBet();
+                currPlayer.collectBet();
+                lastRaise = currPlayer;
+            }
+            
+            else if (lastRaise != currPlayer || !checkOccurred) {
                 if (!currPlayer.isFolded() && currPlayer.getChips() > 0) {
                     if(currPlayer.getType()== PlayerType.Human)
                         GameStateBoard.printHandState(players,printHand());
+
 
                     doThis(currPlayer.play(),currPlayer);
 
@@ -167,23 +189,23 @@ public class Hand {
 
             checkOccurred = true;
             p++;
+            round++;
         }
 
         resetPlayersBets();
-        round++;
     }
 
     private void doThis(String whatToDo, Player p) {
 
         while (true) {
 
-            if (whatToDo== "F")
+            if (whatToDo.equals("F"))
             {
                 p.setFolded(true);
                 break;
             }
 
-            if (whatToDo=="C")
+            if (whatToDo.equals("C"))
             {
                 p.addChips(p.getBet());
                 pot -= p.getBet();
@@ -197,17 +219,18 @@ public class Hand {
 
             }
 
-            if (whatToDo=="R")
+            if (whatToDo.equals("R"))
             {
                 pot -= p.getBet();
                 p.addChips(p.getBet());
 
+                Scanner scanner=new Scanner(System.in);
                 System.out.print("What would you like to raise to? ");
                 int raiseTo = 0;
 
                 while (raiseTo == 0) {
                     try {
-                        raiseTo = Integer.parseInt(System.console().readLine());
+                        raiseTo = Integer.parseInt(scanner.nextLine());
                     } catch (NumberFormatException e) {
                         System.out.print("Please enter a valid bet: ");
                         raiseTo = 0;
@@ -227,7 +250,7 @@ public class Hand {
 
             }
 
-            if (whatToDo=="K")
+            if (whatToDo.equals("K"))
             {
                 break;
             }
@@ -288,10 +311,8 @@ public class Hand {
 
     private void betSmallAndBig(){
         players.get(s).setBet(blinde.getSmall());
-        pot+=blinde.getSmall();
-
         players.get(b).setBet(blinde.getBig());
-        pot+=blinde.getBig();
+
     }
 
     private void getStateIndex()
@@ -315,7 +336,7 @@ public class Hand {
         int count=0;
 
         for (Player p:players) {
-            if (p.isFolded())
+            if (!p.isFolded())
                 count++;
         }
 
