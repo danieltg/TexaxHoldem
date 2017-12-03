@@ -48,7 +48,7 @@ public class UIManager {
     }
 
 
-    public void run() throws InterruptedException {
+    public void run() throws Exception {
         int selectedMainOption=6;
         boolean shouldContinue=true;
 
@@ -65,10 +65,11 @@ public class UIManager {
                 TimeUnit.MILLISECONDS.sleep(500);
             }
 
+
         }
 
     }
-    private void runOption(int selectedMainOption) {
+    private void runOption(int selectedMainOption) throws Exception {
         switch (selectedMainOption) {
             case 1: {
                 try
@@ -76,7 +77,9 @@ public class UIManager {
                     ReadSettingsXML();
                 }
                 catch (Exception e) {
-                    System.out.println(e.getMessage()); }
+                    System.out.println(e.getMessage());
+                    runOption(1);
+                }
                 break;
 
             }
@@ -114,10 +117,13 @@ public class UIManager {
                 break;
             }
             case 7: {
-                leaveTheCurrentGame();
+                try{
+                leaveTheCurrentGame();}
+                catch (GameStateException e) {System.out.println(e.getMessage());
+                }
                 break;
             }
-            case 8: SaveGame();break;
+           case 8: SaveGame();break;
             case 9: LoadGame();break;
             case 10: {
                 exitGame();
@@ -146,9 +152,12 @@ public class UIManager {
     private void SaveGame() {
     }
 
-    private void leaveTheCurrentGame() {
-        System.out.println("Alright, you leaved the game... You can either start a new one or exit the game");
-        gameManager.resetGame();
+    private void leaveTheCurrentGame() throws GameStateException {
+        if(gameManager.GetStateOfGame()==CurrGameState.Started) {
+            System.out.println("Alright, you leaved the game... You can either start a new one or exit the game");
+            gameManager.resetGame();
+        }
+        else throw new GameStateException(GameStateException.INVALID_VALUE+":before you can use this option,game must be running");
     }
 
     private void getStatistics() throws GameStateException {
@@ -164,7 +173,7 @@ public class UIManager {
     }
 
     private void showGameState() throws GameStateException {
-        if(gameManager.GetStateOfGame() ==CurrGameState.Started)
+        if(gameManager.GetStateOfGame() ==CurrGameState.Started||gameManager.GetStateOfGame() ==CurrGameState.Initialized)
             gameManager.printGameState();
         else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }

@@ -9,7 +9,7 @@ public class HandMenu {
         System.out.println("|   Hand MENU                          |");
         System.out.println("========================================");
         System.out.println("| Please make a selection:             |");
-        System.out.println("|   F  Flod                            |");
+        System.out.println("|   F  Fold                            |");
         System.out.println("|   B  Bet                             |");
         System.out.println("|   C  Call                            |");
         System.out.println("|   K  Check                           |");
