@@ -8,11 +8,14 @@ import Engine.Players.PlayerState;
 import Engine.Players.PlayerType;
 import UI.Boards.GameStateBoard;
 import UI.Menus.HandMenu;
+import com.rundef.poker.EquityCalculator;
+import com.rundef.poker.Hand;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Hand {
+public class PokerHand {
 
     private int pot;    //the amount of money in the pot
     private Card[] tableCards;
@@ -29,7 +32,7 @@ public class Hand {
     private int round;
     private Player lastRaise;
 
-    public Hand(Blindes gameBlinde, List<Player> playersInHand)
+    public PokerHand(Blindes gameBlinde, List<Player> playersInHand)
     {
         pot=0;
         currentBet=0;
@@ -81,53 +84,48 @@ public class Hand {
     }
     
     
-    public void play()
-    {
+    public List<Winner> play() throws Exception {
+
         dealingHoleCards();
         betSmallAndBig();
         collectBets();
 
-        if (playersLeft() == 1) {
-            onlyOneLeft();
-            return;
-        }
+        if (playersLeft() == 1)
+            return getWinner();
 
         GameStateBoard.printHandState(players,printHand());
         dealingFlopCards();
         collectBets();
 
         if (playersLeft() == 1)
-        {
-          onlyOneLeft();
-          return;
-        }
+            return getWinner();
 
-        GameStateBoard.printHandState(players,printHand());
+        //GameStateBoard.printHandState(players,printHand());
         dealingTurnCard();
         collectBets();
 
         if (playersLeft() == 1)
-        {
-            onlyOneLeft();
-            return;
-        }
-        
-        GameStateBoard.printHandState(players,printHand());
+            return getWinner();
+
         dealingRiverCard();
         collectBets();
-        evaluateRound();
+        //GameStateBoard.printHandState(players,printHand());
 
+        return evaluateRound();
     }
 
-    private void onlyOneLeft() {
-             int winner=whoIsLeft();
-             players.get(winner).addChips(pot);
-             players.get(winner).isAWinner();
-             System.out.println("Player ("+winner+") won with " +pot + "!");
+    private List<Winner> getWinner() {
 
+        List<Winner> winnersList = new ArrayList<Winner>();
+        int index=whoIsInTheGame();
+        String cards=players.get(index).getHoleCards();
+        Winner winner=new Winner(players.get(index),100,cards,pot);
+        winnersList.add(winner);
+        return winnersList;
     }
 
-    private int whoIsLeft()
+
+    private int whoIsInTheGame()
     {
      for (int i=0; i<numberOfPlayers; i++)
          if (!players.get(i).isFolded())
@@ -145,8 +143,56 @@ public class Hand {
     }
 
 
-    private void evaluateRound() {
+    private List<Winner> evaluateRound() throws Exception {
 
+        int numOfPlayerHands=0;
+
+        EquityCalculator calculator = new EquityCalculator();
+        calculator.reset();
+        String tableCardsStr="";
+
+        for (Card c:tableCards)
+            tableCardsStr=tableCardsStr+c.toString();
+
+        calculator.setBoardFromString(tableCardsStr);
+
+        for (Player p:players)
+        {
+            if (!p.isFolded())
+            {
+                String playerCards=(p.getHoleCards()).replaceAll("\\s+","");
+                Hand hand = Hand.fromString(playerCards);
+                calculator.addHand(hand);
+                numOfPlayerHands++;
+            }
+        }
+        calculator.calculate();
+
+        return getWinners(calculator,numOfPlayerHands);
+    }
+
+    private List<Winner> getWinners(EquityCalculator calculator, int numOfPlayerHands)
+    {
+
+        List<Winner> winnersList = new ArrayList<Winner>();
+        int index=0;
+
+        for (Player p:players)
+        {
+            if (!p.isFolded() && index<numOfPlayerHands)
+            {
+                int equity=calculator.getHandEquity(index).getEquity();
+                if (equity>0)
+                {
+                    String handRanking=calculator.getHandRanking(index).toString();
+                    Winner tmp=new Winner(p,equity,handRanking,this.pot);
+                    winnersList.add(tmp);
+                }
+                index++;
+            }
+        }
+
+        return winnersList;
     }
 
     // Collect all bets

@@ -1,8 +1,7 @@
 package Engine.Players;
 
-import Engine.Hand;
-import UI.Boards.GameStateBoard;
-import UI.Menus.HandMenu;
+import Engine.PokerHand;
+
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class HumanPlayer extends Player {
     }
     @Override
     public String play() {
-        return Hand.getUserSelection();
+        return PokerHand.getUserSelection();
     }
 
 

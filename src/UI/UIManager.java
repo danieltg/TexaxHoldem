@@ -5,10 +5,12 @@ import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
 
+import Engine.Winner;
 import UI.Boards.GameStateBoard;
 import UI.Menus.MainMenu;
 
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -166,9 +168,19 @@ public class UIManager {
         else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }
 
-    private void RunOneHand() throws GameStateException {
+    private void RunOneHand() throws Exception {
         if(gameManager.GetStateOfGame() ==CurrGameState.Started)
-            gameManager.runHand();
+        {
+            List<Winner> winners= gameManager.runHand();
+
+            //inc the handsWon for each winner
+            for (Winner w: winners)
+                w.getPlayer().isAWinner();
+
+            //TODO
+            //WE SHOULD PRINT IT! SO MABYE WE NEED TO RETURN THE winners TO THE MAIN...
+        }
+
         else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }
 

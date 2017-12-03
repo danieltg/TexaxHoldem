@@ -106,7 +106,7 @@ public abstract class Player {
         return bet;
     }
 
-    protected String getHoleCards()
+    public String getHoleCards()
     {
         return holeCards[0] + " " +holeCards[1];
     }

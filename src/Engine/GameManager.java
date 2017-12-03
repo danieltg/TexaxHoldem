@@ -1,7 +1,6 @@
 package Engine;
 
-import Engine.DeckOfCards.Card;
-import Engine.DeckOfCards.Deck;
+
 import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.GameDescriptor;
 import Engine.GameDescriptor.GameType;
@@ -129,24 +128,24 @@ public class GameManager {
 
     }
 
-    public void runHand() throws GameStateException {
+    public List<Winner> runHand() throws Exception {
 
         if (handNumber<getGameDescriptor().getStructure().getHandsCount())
         {
             handNumber++;
-            Hand currHand= new Hand(gameDescriptor.getStructure().getBlindes(), players);
+            PokerHand currHand= new PokerHand(gameDescriptor.getStructure().getBlindes(), players);
 
             currHand.printHand();
-            currHand.play();
+            List<Winner> winnerList= currHand.play();
             currHand.printHand();
 
             //we do it for the next hand...
             setRoles(dealerIndex+1);
+            return winnerList;
 
         }
         else
             throw new GameStateException(GameStateException.INVALID_VALUE + ": ran out of hands");
-
 
     }
 
