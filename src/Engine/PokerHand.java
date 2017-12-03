@@ -220,13 +220,7 @@ public class PokerHand {
             currIndex = (p + dealer) % numberOfPlayers;
             Player currPlayer = players.get(currIndex);
 
-/*            if (round==0 || round ==1) {
-                pot += currPlayer.getBet();
-                currPlayer.collectBet();
-                lastRaise = currPlayer;
-            }*/
-            
-            /*else*/ if (lastRaise != currPlayer || !checkOccurred) {
+            if (lastRaise != currPlayer || !checkOccurred) {
                 if (!currPlayer.isFolded() && currPlayer.getChips() > 0) {
                     if(currPlayer.getType()== PlayerType.Human)
                         GameStateBoard.printHandState(players,printHand());
@@ -276,20 +270,18 @@ public class PokerHand {
                 pot -= p.getBet();
                 p.addChips(p.getBet());
 
-                Scanner scanner=new Scanner(System.in);
-                System.out.print("What would you like to raise to? ");
                 int raiseTo = 0;
-
                 while (raiseTo == 0) {
                     try {
-                        raiseTo = Integer.parseInt(scanner.nextLine());
+                        //TODO:I'm not sure the min and mac are correct
+                        raiseTo = p.getRaise(currentBet, maxBet);
                     } catch (NumberFormatException e) {
-                        System.out.print("Please enter a valid bet: ");
+                        System.out.println("Please enter a valid bet: ");
                         raiseTo = 0;
                         continue;
                     }
                     if (raiseTo <= currentBet || raiseTo > p.getChips() || raiseTo>maxBet) {
-                        System.out.print("Please enter a valid bet: ");
+                        System.out.println("Please enter a valid bet: ");
                         raiseTo = 0;
                     }
                 }

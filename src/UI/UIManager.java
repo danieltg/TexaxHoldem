@@ -174,9 +174,11 @@ public class UIManager {
             List<Winner> winners= gameManager.runHand();
 
             //inc the handsWon for each winner
-            for (Winner w: winners)
+            for (Winner w: winners) {
                 w.getPlayer().isAWinner();
-
+                int chipsToAdd=(w.getEquity()*w.getPot()/100);
+                w.getPlayer().addChips(chipsToAdd);
+            }
             //TODO
             //WE SHOULD PRINT IT! SO MABYE WE NEED TO RETURN THE winners TO THE MAIN...
         }

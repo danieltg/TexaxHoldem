@@ -45,6 +45,7 @@ public abstract class Player {
     }
 
     abstract public String play();
+    abstract public int getRaise(int min, int max);
 
     public void setState (PlayerState state) {this.state=state;}
     public void setType (PlayerType type)

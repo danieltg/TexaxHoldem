@@ -4,6 +4,7 @@ import Engine.PokerHand;
 
 
 import java.util.List;
+import java.util.Scanner;
 
 public class HumanPlayer extends Player {
 
@@ -16,6 +17,13 @@ public class HumanPlayer extends Player {
     @Override
     public String play() {
         return PokerHand.getUserSelection();
+    }
+
+    @Override
+    public int getRaise(int min, int max) {
+        Scanner scanner=new Scanner(System.in);
+        System.out.print("What would you like to raise to? ");
+        return Integer.parseInt(scanner.nextLine());
     }
 
 
