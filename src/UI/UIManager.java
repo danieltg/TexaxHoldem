@@ -1,19 +1,17 @@
 package UI;
 
-import Engine.CurrGameState;
+import Engine.*;
 import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
-import Engine.GameManager;
 
 import Engine.Players.Player;
 import Engine.Players.PlayerType;
-import Engine.PokerHand;
-import Engine.Winner;
 import UI.Boards.GameStateBoard;
 import UI.Menus.HandMenu;
 import UI.Menus.MainMenu;
 
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -157,6 +155,11 @@ public class UIManager {
 
 
     private void SaveGame() {
+        try {
+            SaveGameState.saveGameDataToFile("gameFile.data",gameManager);
+        } catch (IOException e) {
+            System.out.println("Failed to save Game file");
+        }
     }
 
     private void leaveTheCurrentGame() throws GameStateException {
