@@ -11,12 +11,11 @@ import UI.Menus.HandMenu;
 import com.rundef.poker.EquityCalculator;
 import com.rundef.poker.Hand;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class PokerHand implements Serializable {
+public class PokerHand {
 
     private int pot;    //the amount of money in the pot
     private Card[] tableCards;
@@ -52,15 +51,18 @@ public class PokerHand implements Serializable {
         updateMaxBet();
     }
 
-    private void updateMaxBet() {
-        maxBet=players.get(0).getChips();
-
+    public void updateMaxBet() {
+        int maxBetByPlayers=players.get(0).getChips();
+//add min pot
         for (int i=1; i<numberOfPlayers; i++)
         {
-            if (maxBet<players.get(i).getChips())
-                maxBet=players.get(i).getChips();
+            if (maxBetByPlayers<players.get(i).getChips())
+                maxBetByPlayers=players.get(i).getChips();
         }
-
+        if(pot<=maxBetByPlayers)
+            maxBet=pot;
+        else
+            maxBet=maxBetByPlayers;
     }
 
 
@@ -284,5 +286,14 @@ public class PokerHand implements Serializable {
 
     public int getMaxBet() {
         return maxBet;
+    }
+
+    public boolean humanIsLeft() {
+        for(Player p:players)
+        {
+            if(p.isFolded()&&p.getType()==PlayerType.Human)
+                return true;
+        }
+        return false;
     }
 }

@@ -14,12 +14,9 @@ import UI.Menus.HandMenu;
 import UI.Menus.MainMenu;
 
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-
-import static Engine.SaveGameState.saveGameDataToFile;
 
 public class UIManager {
 
@@ -160,12 +157,6 @@ public class UIManager {
 
 
     private void SaveGame() {
-
-        try {
-            saveGameDataToFile("GameMan.data",gameManager);
-        } catch (IOException e) {
-            System.out.println("Fail to save game state");
-        }
     }
 
     private void leaveTheCurrentGame() throws GameStateException {
@@ -220,7 +211,7 @@ public class UIManager {
         //run round
         collectBets();
 
-        if (currHand.playersLeft() == 1)
+        if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
         GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
@@ -228,7 +219,7 @@ public class UIManager {
 
         collectBets();
 
-        if (currHand.playersLeft() == 1)
+        if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
         GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
@@ -236,7 +227,7 @@ public class UIManager {
 
         collectBets();
 
-        if (currHand.playersLeft() == 1)
+        if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
         return currHand.evaluateRound();
@@ -272,19 +263,21 @@ public class UIManager {
                         GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
 
                   doThis(nowPlay(currPlayer),currPlayer);
+                  if(currPlayer.getType()==PlayerType.Human&&currPlayer.isFolded())
+                      return;
 
                    currHand.addToPot(currPlayer.getBet());
                     currPlayer.collectBet();
-
+                    currHand.updateMaxBet();
                 } else
                     break;
             }
 
             checkOccurred = true;
             p++;
-           currHand.upRound();
-        }
 
+        }
+        currHand.upRound();
        currHand.resetPlayersBets();
         currHand.setLastRaise(null);
 
@@ -327,6 +320,7 @@ public class UIManager {
 
             if (whatToDo.equals("F")) {
                 p.setFolded(true);
+
                 break;
             }
             if (whatToDo.equals("B")) {
@@ -346,11 +340,12 @@ public class UIManager {
                         currHand.setCurrentBet(betTO);
                         currHand.setLastRaise(p);
                         p.setBet(currHand.getCurrentBet());
+                        break;
 
                     }
                     else {
                         System.out.println("You can't Bet now ,please choose other option");
-                        getUSerSelection();
+                       whatToDo= getUSerSelection();
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Please enter a valid bet: ");
@@ -358,7 +353,7 @@ public class UIManager {
                     continue; }
 
 
-                break;
+
             }
 
             if (whatToDo.equals("C")) {
@@ -387,18 +382,22 @@ public class UIManager {
                             System.out.print("What would you like to raise to? ");
                             raiseTo = Integer.parseInt(scanner.nextLine());
                         } else
-                            raiseTo = p.getRaise(currHand.getCurrentBet(), currHand.getMaxBet());
+                            raiseTo = p.getRaise(1,currHand.getMaxBet());
                     } catch (NumberFormatException e) {
                         System.out.println("Please enter a valid raise: ");
                         raiseTo = 0;
                         continue;
                     }
 
-                        if (raiseTo <= currHand.getCurrentBet() || raiseTo > p.getChips() || raiseTo > currHand.getMaxBet()) {
+                        if ( raiseTo > currHand.getMaxBet())
+                        {
                             if (p.getType() == PlayerType.Human) {
                                 System.out.println("Please enter a valid raise: ");
                             }
-
+                            else
+                            {
+                                doThis(p.play(),p);
+                            }
                             raiseTo = 0;
                         }
 
@@ -407,26 +406,27 @@ public class UIManager {
                     currHand.setCurrentBet(currHand.getCurrentBet()+ raiseTo);
                     currHand.setLastRaise(p);
                     p.setBet(currHand.getCurrentBet());
-
                 break;
 
             }
             if (whatToDo.equals("K")) {
-                if(currHand.getRound()>0&&p.getBet()==currHand.getCurrentBet())
+                if(p.getBet()==currHand.getCurrentBet())
                 {
                     currHand.setLastRaise(p);
                     p.setBet(currHand.getCurrentBet());
+                    break;
                 }
                 else
                 {
 
                     if(p.getType()==PlayerType.Human) {
                         System.out.println("You can't Check now ,please choose other option");
-                        getUSerSelection();
+                    whatToDo=getUSerSelection();
                     }
                     else
-                       doThis( p.play(),p);
+                       whatToDo=p.play();
                 }
+
             }
 
         }
