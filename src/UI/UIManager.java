@@ -154,9 +154,9 @@ public class UIManager {
         try {
             gameManager=SaveGameState.loadGameDataFromFile("gameFile.data");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("File not found");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Invalid file- Game Manager class not found in the file");
         }
     }
 
@@ -165,7 +165,7 @@ public class UIManager {
         try {
             SaveGameState.saveGameDataToFile("gameFile.data",gameManager);
         } catch (IOException e) {
-            System.out.println("Failed to save Game file");
+            System.out.println("Failed to save Game data");
         }
     }
 
