@@ -374,7 +374,6 @@ public class UIManager {
 
         }
     }
-
     private void showGameState() throws GameStateException {
         if(gameManager.GetStateOfGame() ==CurrGameState.Started||gameManager.GetStateOfGame() ==CurrGameState.Initialized)
             gameManager.printGameState();
