@@ -151,6 +151,13 @@ public class UIManager {
     }
 
     private void LoadGame() {
+        try {
+            gameManager=SaveGameState.loadGameDataFromFile("gameFile.data");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
