@@ -51,15 +51,18 @@ public class PokerHand {
         updateMaxBet();
     }
 
-    private void updateMaxBet() {
-        maxBet=players.get(0).getChips();
-
+    public void updateMaxBet() {
+        int maxBetByPlayers=players.get(0).getChips();
+//add min pot
         for (int i=1; i<numberOfPlayers; i++)
         {
-            if (maxBet<players.get(i).getChips())
-                maxBet=players.get(i).getChips();
+            if (maxBetByPlayers<players.get(i).getChips())
+                maxBetByPlayers=players.get(i).getChips();
         }
-
+        if(pot<=maxBetByPlayers)
+            maxBet=pot;
+        else
+            maxBet=maxBetByPlayers;
     }
 
 
@@ -283,5 +286,14 @@ public class PokerHand {
 
     public int getMaxBet() {
         return maxBet;
+    }
+
+    public boolean humanIsLeft() {
+        for(Player p:players)
+        {
+            if(p.isFolded()&&p.getType()==PlayerType.Human)
+                return true;
+        }
+        return false;
     }
 }
