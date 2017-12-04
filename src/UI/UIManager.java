@@ -299,7 +299,6 @@ public class UIManager {
            HandMenu.print();
            try {
                selection= HandMenu.getOptionFromUser();
-               System.out.println("Valid selection, your selection is: "+selection);
                validSelection=true;
            }
            catch (Exception e)
@@ -346,8 +345,7 @@ public class UIManager {
                 } catch (NumberFormatException e) {
                     System.out.println("Please enter a valid bet: ");
                     betTO = 0;
-                    continue;
-                }
+                    continue; }
 
 
                 break;
@@ -404,7 +402,21 @@ public class UIManager {
 
             }
             if (whatToDo.equals("K")) {
-                break;
+                if(currHand.getRound()>0&&p.getBet()==currHand.getCurrentBet())
+                {
+                    currHand.setLastRaise(p);
+                    p.setBet(currHand.getCurrentBet());
+                }
+                else
+                {
+
+                    if(p.getType()==PlayerType.Human) {
+                        System.out.println("You can't Check now ,please choose other option");
+                        getUSerSelection();
+                    }
+                    else
+                       doThis( p.play(),p);
+                }
             }
 
         }
