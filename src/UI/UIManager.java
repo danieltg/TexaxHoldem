@@ -276,6 +276,7 @@ public class UIManager {
         }
 
        currHand.resetPlayersBets();
+        currHand.setLastRaise(null);
 
     }
 
@@ -315,65 +316,101 @@ public class UIManager {
 
         while (true) {
 
-            if (whatToDo.equals("F"))
-            {
+            if (whatToDo.equals("F")) {
                 p.setFolded(true);
                 break;
             }
+            if (whatToDo.equals("B")) {
+                int betTO = 0;
+                try {
+                    if (currHand.getLastRaise() == null) {
 
-            if (whatToDo.equals("C"))
-            {
+                        Scanner scanner = new Scanner(System.in);
+                        System.out.print("What would you like to Bet to? ");
+                        betTO = Integer.parseInt(scanner.nextLine());
+
+                        if (betTO <= currHand.getCurrentBet() || betTO > p.getChips() || betTO > currHand.getMaxBet()) {
+                            System.out.println("Please enter a valid bet: ");
+                            betTO = 0;
+                        }
+
+                        currHand.setCurrentBet(betTO);
+                        currHand.setLastRaise(p);
+                        p.setBet(currHand.getCurrentBet());
+
+                    }
+                    else {
+                        System.out.println("You can't Bet now ,please choose other option");
+                        getUSerSelection();
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter a valid bet: ");
+                    betTO = 0;
+                    continue;
+                }
+
+
+                break;
+            }
+
+            if (whatToDo.equals("C")) {
                 p.addChips(p.getBet());
-              currHand.subFromPot( p.getBet());
+                currHand.subFromPot(p.getBet());
 
-                if (p.getChips() <currHand.getCurrentBet())
+                if (p.getChips() < currHand.getCurrentBet())
                     p.setBet(p.getChips());
                 else
                     p.setBet(currHand.getCurrentBet());
 
                 break;
+
             }
 
-            if (whatToDo.equals("R"))
-            {
-                currHand.subFromPot( p.getBet());
+            if (whatToDo.equals("R")) {
+                currHand.subFromPot(p.getBet());
                 p.addChips(p.getBet());
 
                 int raiseTo = 0;
                 while (raiseTo == 0) {
                     try {
                         //TODO:I'm not sure the min and mac are correct
-                        if(p.getType()==PlayerType.Human) {
+                        if (p.getType() == PlayerType.Human) {
                             Scanner scanner = new Scanner(System.in);
                             System.out.print("What would you like to raise to? ");
                             raiseTo = Integer.parseInt(scanner.nextLine());
-                        }
-                        else
-                        raiseTo = p.getRaise(currHand.getCurrentBet(),currHand.getMaxBet());
+                        } else
+                            raiseTo = p.getRaise(currHand.getCurrentBet(), currHand.getMaxBet());
                     } catch (NumberFormatException e) {
-                        System.out.println("Please enter a valid bet: ");
+                        System.out.println("Please enter a valid raise: ");
                         raiseTo = 0;
                         continue;
                     }
-                    if (raiseTo <=currHand.getCurrentBet()  || raiseTo > p.getChips() || raiseTo>currHand.getMaxBet()) {
-                        System.out.println("Please enter a valid bet: ");
-                        raiseTo = 0;
-                    }
+
+                        if (raiseTo <= currHand.getCurrentBet() || raiseTo > p.getChips() || raiseTo > currHand.getMaxBet()) {
+                            if (p.getType() == PlayerType.Human) {
+                                System.out.println("Please enter a valid raise: ");
+                            }
+
+                            raiseTo = 0;
+                        }
+
                 }
 
-               currHand.setCurrentBet(raiseTo);
-               currHand.setLastRaise( p);
-                p.setBet(currHand.getCurrentBet());
-                break;
-            }
+                    currHand.setCurrentBet(currHand.getCurrentBet()+ raiseTo);
+                    currHand.setLastRaise(p);
+                    p.setBet(currHand.getCurrentBet());
 
-            if (whatToDo.equals("K"))
-            {
+                break;
+
+            }
+            if (whatToDo.equals("K")) {
                 break;
             }
 
         }
     }
+
+
     private void showGameState() throws GameStateException {
         if(gameManager.GetStateOfGame() ==CurrGameState.Started||gameManager.GetStateOfGame() ==CurrGameState.Initialized)
             gameManager.printGameState();

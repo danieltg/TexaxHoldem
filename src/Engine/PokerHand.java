@@ -30,7 +30,7 @@ public class PokerHand {
     private int s;
     private int n;
     private int round;
-    private Player lastRaise;
+    private Player lastRaise=null;
 
     public PokerHand(Blindes gameBlinde, List<Player> playersInHand)
     {
