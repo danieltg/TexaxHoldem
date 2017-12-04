@@ -5,6 +5,7 @@ import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
 
+import Engine.PokerHand;
 import Engine.Winner;
 import UI.Boards.GameStateBoard;
 import UI.Menus.MainMenu;
@@ -21,6 +22,7 @@ public class UIManager {
     private MainMenu mainMenu;
     private GameManager gameManager= new GameManager();
     private GameStateBoard board;
+    private PokerHand currHand;
 
     public UIManager() {
         this.gameEnded = false;
@@ -171,19 +173,38 @@ public class UIManager {
     private void RunOneHand() throws Exception {
         if(gameManager.GetStateOfGame() ==CurrGameState.Started)
         {
-            List<Winner> winners= gameManager.runHand();
-
-            //inc the handsWon for each winner
-            for (Winner w: winners) {
-                w.getPlayer().isAWinner();
+            if(GameManager.handNumber <gameManager.getGameDescriptor().getStructure().getHandsCount())
+            {
+                GameManager.handNumber++;
+                //create and initiazlized poker hand
+                currHand= new PokerHand(gameManager.getGameDescriptor().getStructure().getBlindes(),gameManager.getPlayers());
+                List<Winner> winners= run(currHand);
+               gameManager.setRoles(gameManager.getdealerIndex()+1);
+                //inc the handsWon for each winner
+                for (Winner w: winners) {
+                  w.getPlayer().isAWinner();
                 int chipsToAdd=(w.getEquity()*w.getPot()/100);
                 w.getPlayer().addChips(chipsToAdd);
+                 }
+                //TODO
+                //WE SHOULD PRINT IT! SO MABYE WE NEED TO RETURN THE winners TO THE MAIN...
             }
-            //TODO
-            //WE SHOULD PRINT IT! SO MABYE WE NEED TO RETURN THE winners TO THE MAIN...
+            else
+            {
+                throw new GameStateException(GameStateException.INVALID_VALUE + ": ran out of hands");
+
+            }
+
+
         }
 
         else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
+    }
+
+    private List<Winner> run(PokerHand currHand) {
+        return null;
+
+
     }
 
     private void showGameState() throws GameStateException {

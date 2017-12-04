@@ -86,7 +86,7 @@ public class GameManager {
         GameStateBoard.print(players);
     }
 
-    private void setRoles(int index) {
+    public void setRoles(int index) {
 
         int d=index%numberOfPlayers;
         int s= (d+1)%numberOfPlayers;
@@ -128,26 +128,7 @@ public class GameManager {
 
     }
 
-    public List<Winner> runHand() throws Exception {
 
-        if (handNumber<getGameDescriptor().getStructure().getHandsCount())
-        {
-            handNumber++;
-            PokerHand currHand= new PokerHand(gameDescriptor.getStructure().getBlindes(), players);
-
-            currHand.printHand();
-            List<Winner> winnerList= currHand.play();
-            currHand.printHand();
-
-            //we do it for the next hand...
-            setRoles(dealerIndex+1);
-            return winnerList;
-
-        }
-        else
-            throw new GameStateException(GameStateException.INVALID_VALUE + ": ran out of hands");
-
-    }
 
     public void getStatistics() {
 
@@ -176,6 +157,14 @@ public class GameManager {
     public void resetGame() {
         this.stateOfGame=CurrGameState.Initialized;
         setTable();
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public int getdealerIndex() {
+        return dealerIndex;
     }
 }
 
