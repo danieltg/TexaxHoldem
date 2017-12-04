@@ -14,16 +14,15 @@ public class HumanPlayer extends Player {
         setType(PlayerType.Human);
 
     }
-    @Override
-    public String play() {
-        return PokerHand.getUserSelection();
-    }
 
     @Override
-    public int getRaise(int min, int max) {
-        Scanner scanner=new Scanner(System.in);
-        System.out.print("What would you like to raise to? ");
-        return Integer.parseInt(scanner.nextLine());
+    public String play() {
+        return null;
+    }
+
+
+    @Override
+    public int getRaise(int min, int max) {return 0;
     }
 
 

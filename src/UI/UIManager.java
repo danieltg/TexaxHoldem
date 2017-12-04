@@ -5,9 +5,12 @@ import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
 
+import Engine.Players.Player;
+import Engine.Players.PlayerType;
 import Engine.PokerHand;
 import Engine.Winner;
 import UI.Boards.GameStateBoard;
+import UI.Menus.HandMenu;
 import UI.Menus.MainMenu;
 
 
@@ -201,10 +204,175 @@ public class UIManager {
         else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }
 
-    private List<Winner> run(PokerHand currHand) {
-        return null;
+    private List<Winner> run(PokerHand currHand) throws Exception {
 
+        currHand.dealingHoleCards();
+        currHand. betSmallAndBig();
+        //run round
+        collectBets();
 
+        if (currHand.playersLeft() == 1)
+            return currHand.getWinner();
+
+        GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
+        currHand.dealingFlopCards();
+
+        collectBets();
+
+        if (currHand.playersLeft() == 1)
+            return currHand.getWinner();
+
+        GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
+        currHand. dealingTurnCard();
+
+        collectBets();
+
+        if (currHand.playersLeft() == 1)
+            return currHand.getWinner();
+
+        return currHand.evaluateRound();
+
+    }
+
+    private void collectBets() {
+        int p;
+        int currIndex;
+        boolean checkOccurred = false;
+
+        if (currHand.getRound()==0) {
+            currHand.setLastRaise(currHand.getPlayers().get((2 + currHand.getDealer()) %currHand.getNumberOfPlayers()));
+            p = 3;
+           currHand.setCurrentBet(currHand.getBlinde().getBig());
+        }
+        else {
+            p = 1;
+            currHand.setLastRaise(currHand.getPlayers().get((p + currHand.getDealer()) %currHand.getNumberOfPlayers()));
+           currHand.setCurrentBet(0);
+        }
+
+        while (true) {
+            if (currHand.playersLeft() == 1)
+                break;
+
+            currIndex = (p + currHand.getDealer()) % currHand.getNumberOfPlayers();
+            Player currPlayer =currHand.getPlayers().get(currIndex);
+
+            if (currHand.getLastRaise() != currPlayer || !checkOccurred) {
+                if (!currPlayer.isFolded() && currPlayer.getChips() > 0) {
+                    if(currPlayer.getType()== PlayerType.Human)
+                        GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
+
+                  doThis(nowPlay(currPlayer),currPlayer);
+
+                   currHand.addToPot(currPlayer.getBet());
+                    currPlayer.collectBet();
+                } else
+                    break;
+            }
+
+            checkOccurred = true;
+            p++;
+           currHand.upRound();
+        }
+
+       currHand.resetPlayersBets();
+
+    }
+
+    private String nowPlay(Player currPlayer) {
+
+        if (currPlayer.getType()==PlayerType.Computer)
+           return currPlayer.play();
+        else {
+            return getUSerSelection();
+        }
+
+    }
+   private String getUSerSelection()
+   {
+       boolean validSelection=false;
+       String selection="";
+
+       while (!validSelection)
+       {
+           HandMenu.print();
+           try {
+               selection= HandMenu.getOptionFromUser();
+               System.out.println("Valid selection, your selection is: "+selection);
+               validSelection=true;
+           }
+           catch (Exception e)
+           {
+               System.out.println(e.getMessage());
+           }
+
+       }
+
+       return selection;
+
+   }
+    private void doThis(String whatToDo, Player p) {
+
+        while (true) {
+
+            if (whatToDo.equals("F"))
+            {
+                p.setFolded(true);
+                break;
+            }
+
+            if (whatToDo.equals("C"))
+            {
+                p.addChips(p.getBet());
+              currHand.subFromPot( p.getBet());
+
+                if (p.getChips() <currHand.getCurrentBet())
+                    p.setBet(p.getChips());
+                else
+                    p.setBet(currHand.getCurrentBet());
+
+                break;
+            }
+
+            if (whatToDo.equals("R"))
+            {
+                currHand.subFromPot( p.getBet());
+                p.addChips(p.getBet());
+
+                int raiseTo = 0;
+                while (raiseTo == 0) {
+                    try {
+                        //TODO:I'm not sure the min and mac are correct
+                        if(p.getType()==PlayerType.Human) {
+                            Scanner scanner = new Scanner(System.in);
+                            System.out.print("What would you like to raise to? ");
+                            raiseTo = Integer.parseInt(scanner.nextLine());
+                        }
+                        else
+                        raiseTo = p.getRaise(currHand.getCurrentBet(),currHand.getMaxBet());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter a valid bet: ");
+                        raiseTo = 0;
+                        continue;
+                    }
+                    if (raiseTo <=currHand.getCurrentBet()  || raiseTo > p.getChips() || raiseTo>currHand.getMaxBet()) {
+                        System.out.println("Please enter a valid bet: ");
+                        raiseTo = 0;
+                    }
+                }
+
+               currHand.setCurrentBet(raiseTo);
+               currHand.setLastRaise( p);
+                p.setBet(currHand.getCurrentBet());
+                break;
+            }
+
+            if (whatToDo.equals("K"))
+            {
+                break;
+            }
+
+        }
     }
 
     private void showGameState() throws GameStateException {

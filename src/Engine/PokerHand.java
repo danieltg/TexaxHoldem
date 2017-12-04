@@ -82,39 +82,8 @@ public class PokerHand {
 
         return handStr;
     }
-    
-    
-    public List<Winner> play() throws Exception {
 
-        dealingHoleCards();
-        betSmallAndBig();
-        collectBets();
-
-        if (playersLeft() == 1)
-            return getWinner();
-
-        GameStateBoard.printHandState(players,printHand());
-        dealingFlopCards();
-        collectBets();
-
-        if (playersLeft() == 1)
-            return getWinner();
-
-        //GameStateBoard.printHandState(players,printHand());
-        dealingTurnCard();
-        collectBets();
-
-        if (playersLeft() == 1)
-            return getWinner();
-
-        dealingRiverCard();
-        collectBets();
-        //GameStateBoard.printHandState(players,printHand());
-
-        return evaluateRound();
-    }
-
-    private List<Winner> getWinner() {
+    public List<Winner> getWinner() {
 
         List<Winner> winnersList = new ArrayList<Winner>();
         int index=whoIsInTheGame();
@@ -138,12 +107,12 @@ public class PokerHand {
         tableCards[4]=deck.drawCard();
     }
 
-    private void dealingTurnCard() {
+    public void dealingTurnCard() {
         tableCards[3]=deck.drawCard();
     }
 
 
-    private List<Winner> evaluateRound() throws Exception {
+    public List<Winner> evaluateRound() throws Exception {
 
         int numOfPlayerHands=0;
 
@@ -195,142 +164,13 @@ public class PokerHand {
         return winnersList;
     }
 
-    // Collect all bets
-    private void collectBets() {
-
-        int p;
-        int currIndex;
-        boolean checkOccurred = false;
-
-        if (round==0) {
-            lastRaise = players.get((2 + dealer) % numberOfPlayers);
-            p = 3;
-            currentBet = blinde.getBig();
-        }
-        else {
-            p = 1;
-            lastRaise = players.get((p + dealer) % numberOfPlayers);
-            currentBet = 0;
-        }
-
-        while (true) {
-            if (playersLeft() == 1)
-                break;
-
-            currIndex = (p + dealer) % numberOfPlayers;
-            Player currPlayer = players.get(currIndex);
-
-            if (lastRaise != currPlayer || !checkOccurred) {
-                if (!currPlayer.isFolded() && currPlayer.getChips() > 0) {
-                    if(currPlayer.getType()== PlayerType.Human)
-                        GameStateBoard.printHandState(players,printHand());
-
-                    doThis(currPlayer.play(),currPlayer);
-
-                    pot += currPlayer.getBet();
-                    currPlayer.collectBet();
-                } else
-                    break;
-            }
-
-            checkOccurred = true;
-            p++;
-            round++;
-        }
-
-        resetPlayersBets();
-    }
-
-
-    private void doThis(String whatToDo, Player p) {
-
-        while (true) {
-
-            if (whatToDo.equals("F"))
-            {
-                p.setFolded(true);
-                break;
-            }
-
-            if (whatToDo.equals("C"))
-            {
-                p.addChips(p.getBet());
-                pot -= p.getBet();
-
-                if (p.getChips() < currentBet)
-                    p.setBet(p.getChips());
-                else
-                    p.setBet(currentBet);
-
-                break;
-            }
-
-            if (whatToDo.equals("R"))
-            {
-                pot -= p.getBet();
-                p.addChips(p.getBet());
-
-                int raiseTo = 0;
-                while (raiseTo == 0) {
-                    try {
-                        //TODO:I'm not sure the min and mac are correct
-                        raiseTo = p.getRaise(currentBet, maxBet);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Please enter a valid bet: ");
-                        raiseTo = 0;
-                        continue;
-                    }
-                    if (raiseTo <= currentBet || raiseTo > p.getChips() || raiseTo>maxBet) {
-                        System.out.println("Please enter a valid bet: ");
-                        raiseTo = 0;
-                    }
-                }
-
-                currentBet=raiseTo;
-                lastRaise = p;
-                p.setBet(currentBet);
-                break;
-            }
-
-            if (whatToDo.equals("K"))
-            {
-                break;
-            }
-
-        }
-    }
-
-    private void resetPlayersBets()
+    public void resetPlayersBets()
     {
         for (Player p:players)
             p.setBet(0);
     }
 
-    public static String getUserSelection()
-    {
-        boolean validSelection=false;
-        String selection="";
-
-        while (!validSelection)
-        {
-            HandMenu.print();
-            try {
-                selection= HandMenu.getOptionFromUser();
-                System.out.println("Valid selection, your selection is: "+selection);
-                validSelection=true;
-            }
-            catch (Exception e)
-            {
-                System.out.println(e.getMessage());
-            }
-
-        }
-
-        return selection;
-
-    }
-
-    private void dealingFlopCards() {
+    public void dealingFlopCards() {
 
         for (int i=0; i<3; i++)
             tableCards[i]=deck.drawCard();
@@ -339,7 +179,7 @@ public class PokerHand {
 
 
     // Deal cards to all players
-    private void dealingHoleCards()
+    public void dealingHoleCards()
     {
         for (Player p:players)
         {
@@ -351,7 +191,7 @@ public class PokerHand {
 
 
 
-    private void betSmallAndBig(){
+    public void betSmallAndBig(){
         players.get(s).setBet(blinde.getSmall());
         players.get(b).setBet(blinde.getBig());
 
@@ -379,7 +219,7 @@ public class PokerHand {
         }
     }
 
-    private int playersLeft()
+    public int playersLeft()
     {
         int count=0;
 
@@ -392,4 +232,56 @@ public class PokerHand {
 
     }
 
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setLastRaise(Player lastRaisePlayer) {
+        lastRaise=lastRaisePlayer;
+    }
+
+    public int getDealer() {
+        return dealer;
+    }
+
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public void setCurrentBet(int currbet) {
+        currentBet=currbet;
+    }
+
+    public Blindes getBlinde() {
+        return blinde;
+    }
+
+    public Player getLastRaise() {
+        return lastRaise;
+    }
+
+    public void addToPot(int bet) {
+        pot+=bet;
+    }
+
+    public void upRound() {
+        round++;
+    }
+
+    public void subFromPot(int bet) {
+        pot=pot-bet;
+    }
+
+    public int getCurrentBet() {
+        return currentBet;
+    }
+
+    public int getMaxBet() {
+        return maxBet;
+    }
 }
