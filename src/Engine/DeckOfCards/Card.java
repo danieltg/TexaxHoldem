@@ -1,6 +1,8 @@
 package Engine.DeckOfCards;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable {
 
     private Rank rank;
     private Suit suit;

@@ -11,11 +11,12 @@ import UI.Menus.HandMenu;
 import com.rundef.poker.EquityCalculator;
 import com.rundef.poker.Hand;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class PokerHand {
+public class PokerHand implements Serializable {
 
     private int pot;    //the amount of money in the pot
     private Card[] tableCards;

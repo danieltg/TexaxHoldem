@@ -10,6 +10,7 @@ import Engine.Players.Player;
 import Engine.Players.PlayerState;
 import UI.Boards.GameStateBoard;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 import static Engine.GameDescriptor.GameDescriptor.NUM_OF_COMPUTER_PLAYERS;
 import static Engine.GameDescriptor.GameDescriptor.NUM_OF_HUMAN_PLAYERS;
 
-public class GameManager {
+public class GameManager implements Serializable {
 
     private int numberOfPlayers=NUM_OF_COMPUTER_PLAYERS+NUM_OF_HUMAN_PLAYERS;
     private static GameDescriptor gameDescriptor;

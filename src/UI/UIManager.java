@@ -14,9 +14,12 @@ import UI.Menus.HandMenu;
 import UI.Menus.MainMenu;
 
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+
+import static Engine.SaveGameState.saveGameDataToFile;
 
 public class UIManager {
 
@@ -157,6 +160,12 @@ public class UIManager {
 
 
     private void SaveGame() {
+
+        try {
+            saveGameDataToFile("GameMan.data",gameManager);
+        } catch (IOException e) {
+            System.out.println("Fail to save game state");
+        }
     }
 
     private void leaveTheCurrentGame() throws GameStateException {
@@ -266,6 +275,7 @@ public class UIManager {
 
                    currHand.addToPot(currPlayer.getBet());
                     currPlayer.collectBet();
+
                 } else
                     break;
             }

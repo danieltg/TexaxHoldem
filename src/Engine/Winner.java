@@ -2,7 +2,9 @@ package Engine;
 
 import Engine.Players.Player;
 
-public class Winner {
+import java.io.Serializable;
+
+public class Winner implements Serializable {
 
     public Player getPlayer() {
         return player;
