@@ -406,7 +406,7 @@ public class UIManager {
                             }
                             else
                             {
-                                doThis(p.play(),p);
+                                whatToDo=p.play();
                             }
                             raiseTo = 0;
                         }
