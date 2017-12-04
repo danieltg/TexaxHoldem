@@ -340,11 +340,12 @@ public class UIManager {
                         currHand.setCurrentBet(betTO);
                         currHand.setLastRaise(p);
                         p.setBet(currHand.getCurrentBet());
+                        break;
 
                     }
                     else {
                         System.out.println("You can't Bet now ,please choose other option");
-                        getUSerSelection();
+                       whatToDo= getUSerSelection();
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Please enter a valid bet: ");
@@ -352,7 +353,7 @@ public class UIManager {
                     continue; }
 
 
-                break;
+
             }
 
             if (whatToDo.equals("C")) {
@@ -405,27 +406,27 @@ public class UIManager {
                     currHand.setCurrentBet(currHand.getCurrentBet()+ raiseTo);
                     currHand.setLastRaise(p);
                     p.setBet(currHand.getCurrentBet());
-
                 break;
 
             }
             if (whatToDo.equals("K")) {
-                if(currHand.getRound()>0&&p.getBet()==currHand.getCurrentBet())
+                if(p.getBet()==currHand.getCurrentBet())
                 {
                     currHand.setLastRaise(p);
                     p.setBet(currHand.getCurrentBet());
+                    break;
                 }
                 else
                 {
 
                     if(p.getType()==PlayerType.Human) {
                         System.out.println("You can't Check now ,please choose other option");
-                        getUSerSelection();
+                    whatToDo=getUSerSelection();
                     }
                     else
-                       doThis( p.play(),p);
+                       whatToDo=p.play();
                 }
-                break;
+
             }
 
         }
