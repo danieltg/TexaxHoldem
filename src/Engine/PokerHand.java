@@ -2,6 +2,8 @@ package Engine;
 
 import Engine.DeckOfCards.Card;
 import Engine.DeckOfCards.Deck;
+import Engine.DeckOfCards.Rank;
+import Engine.DeckOfCards.Suit;
 import Engine.GameDescriptor.Blindes;
 import Engine.Players.Player;
 import Engine.Players.PlayerState;
@@ -123,8 +125,10 @@ public class PokerHand {
         calculator.reset();
         String tableCardsStr="";
 
-        for (Card c:tableCards)
-            tableCardsStr=tableCardsStr+c.toString();
+        for (Card c:tableCards) {
+            if (c.getSuit()!= Suit.NA && c.getRank()!= Rank.NA)
+                tableCardsStr = tableCardsStr + c.toString();
+        }
 
         calculator.setBoardFromString(tableCardsStr);
 
