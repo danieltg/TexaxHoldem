@@ -25,14 +25,6 @@ public class Card implements Serializable {
         return suit;
     }
 
-    public void setRank(Rank rank) {
-        this.rank = rank;
-    }
-
-    public void setSuit(Suit suit) {
-        this.suit = suit;
-    }
-
     @Override
     public String toString() {
         return rank.getRank() +""+ suit.getSuit();

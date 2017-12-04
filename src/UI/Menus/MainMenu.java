@@ -29,12 +29,10 @@ public class MainMenu extends Menu {
 
     public int getOptionFromUser() {
 
-        int choice=0;
-
         Scanner scanner=new Scanner(System.in);
         System.out.print("Please enter your choice: ");
         System.out.flush();
-        choice = Integer.parseInt(scanner.nextLine());
+        int choice = Integer.parseInt(scanner.nextLine());
         if (isValidOption(choice))
             return choice;
         else

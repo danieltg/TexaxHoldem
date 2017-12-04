@@ -48,6 +48,7 @@ public class ReadGameDescriptorFile {
         GameType type=getGameType(gameDescriptor);
 
         //Get to the Structure node
+        assert gameDescriptor != null;
         Node structureNode = getNode(Tags.STRUCTURE, gameDescriptor.getChildNodes());
 
         Structure structure=getGameStructure(structureNode);

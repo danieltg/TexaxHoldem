@@ -4,6 +4,6 @@ public enum GameType {
 
     Basic,
     MultiPlayer,
-    DynamicMultiPlayer;
+    DynamicMultiPlayer
 
 }

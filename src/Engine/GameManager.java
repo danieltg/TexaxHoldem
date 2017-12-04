@@ -25,16 +25,27 @@ public class GameManager implements Serializable {
     private int numberOfPlayers=NUM_OF_COMPUTER_PLAYERS+NUM_OF_HUMAN_PLAYERS;
     private static GameDescriptor gameDescriptor;
     private CurrGameState stateOfGame;
-    private List<Player> players= new ArrayList<Player>();
+    private List<Player> players= new ArrayList<>();
     private int dealerIndex;
     private int maxPot;
     private Date startTime;
     private int indexActivePlayer;
 
+    private int moneyFromLastHand;
+
     public static int handNumber;
 
     public  GameManager(){
         stateOfGame=CurrGameState.NotInitialized;
+        moneyFromLastHand=0;
+    }
+
+    public int getMoneyFromLastHand() {
+        return moneyFromLastHand;
+    }
+
+    public void setMoneyFromLastHand(int moneyFromLastHand) {
+        this.moneyFromLastHand = moneyFromLastHand;
     }
 
     public void setGameDescriptor(GameDescriptor gameDescriptor) {

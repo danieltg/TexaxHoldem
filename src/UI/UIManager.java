@@ -152,20 +152,31 @@ public class UIManager {
 
     private void LoadGame() {
         try {
-            gameManager=SaveGameState.loadGameDataFromFile("gameFile.data");
-        } catch (IOException e) {
-            System.out.println("File not found");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Invalid file- Game Manager class not found in the file");
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("What Game file would you like to load? Please provide full path");
+            System.out.flush();
+            String filename = scanner.nextLine();
+            gameManager=SaveGameState.loadGameDataFromFile(filename);
+        } catch (Exception e) {
+            System.out.println("Failed to load game from file. Please check your file name");
         }
     }
 
-
     private void SaveGame() {
-        try {
-            SaveGameState.saveGameDataToFile("gameFile.data",gameManager);
-        } catch (IOException e) {
-            System.out.println("Failed to save Game data");
+        if(gameManager.GetStateOfGame() ==CurrGameState.NotInitialized)
+            System.out.println("Game not initialized yet... nothing to save");
+        else
+        {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Where would you like to save the file (Please give full path include file extension)?");
+                System.out.flush();
+                String filename = scanner.nextLine();
+                SaveGameState.saveGameDataToFile(filename,gameManager);
+            } catch (IOException e) {
+                System.out.println("Failed to save Game data");
+            }
+
         }
     }
 
@@ -191,16 +202,22 @@ public class UIManager {
                 GameManager.handNumber++;
                 //create and initiazlized poker hand
                 currHand= new PokerHand(gameManager.getGameDescriptor().getStructure().getBlindes(),gameManager.getPlayers());
+                currHand.addToPot(gameManager.getMoneyFromLastHand());
+
                 List<Winner> winners= run(currHand);
                gameManager.setRoles(gameManager.getdealerIndex()+1);
+
                 //inc the handsWon for each winner
                 for (Winner w: winners) {
                   w.getPlayer().isAWinner();
-                int chipsToAdd=(w.getPot());
-                w.getPlayer().addChips(chipsToAdd);
-                 }
-                //TODO
-                //WE SHOULD PRINT IT! SO MABYE WE NEED TO RETURN THE winners TO THE MAIN...
+                  int chipsToAdd=currHand.getPot()/winners.size();
+                  w.getPlayer().addChips(chipsToAdd);
+                  System.out.println("Player with ID: "+w.getPlayer().getId() +
+                          " won with this hand: "+w.getHandRank() +
+                          " .Prize: "+(currHand.getPot()/winners.size()) +"$");
+                }
+
+                gameManager.setMoneyFromLastHand(currHand.getPot()%winners.size());
             }
             else
             {
@@ -233,12 +250,14 @@ public class UIManager {
             return currHand.getWinner();
 
         GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
-        currHand. dealingTurnCard();
-
+        currHand.dealingTurnCard();
         collectBets();
 
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
+
+        currHand.dealingRiverCard();
+        collectBets();
 
         return currHand.evaluateRound();
 

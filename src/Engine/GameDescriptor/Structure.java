@@ -60,7 +60,7 @@ public class Structure {
                 '}';
     }
 
-    public static boolean validateStructure(Structure s) throws BlindesException, StructureException {
+    public static void validateStructure(Structure s) throws BlindesException, StructureException {
         if (s.getHandsCount()<0 )
             throw new StructureException(StructureException.NEGATIVE_HANDSCOUNT);
 
@@ -70,6 +70,5 @@ public class Structure {
         if (!validateBlindes(s.getBlindes()))
             throw new BlindesException(BlindesException.ILLEGAL_BLINDES);
 
-        return true;
     }
 }

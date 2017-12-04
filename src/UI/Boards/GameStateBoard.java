@@ -4,7 +4,6 @@ import Engine.Players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class GameStateBoard {
 
@@ -12,7 +11,7 @@ public class GameStateBoard {
     {
         int maxLength=getMaxLength(players);
 
-        List<Player> tmp = new ArrayList<Player>();
+        List<Player> tmp = new ArrayList<>();
         tmp.add(players.get(0));
         tmp.add(players.get(3));
 
@@ -35,7 +34,7 @@ public class GameStateBoard {
 
         int maxLength=0;
 
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         for(Player p:players )
             list.addAll(p.listOfDetailesForHand());
 
@@ -51,7 +50,7 @@ public class GameStateBoard {
   {
       int maxLength=getMaxLength(players);
 
-      List<Player> tmp = new ArrayList<Player>();
+      List<Player> tmp = new ArrayList<>();
       tmp.add(players.get(0));
       tmp.add(players.get(3));
 
@@ -64,7 +63,7 @@ public class GameStateBoard {
   }
     private static void printTwoPlayers(List<Player> players, int maxLength)
     {
-        String s="";
+        String s;
         printBorder(maxLength,players.size());
 
         for(int i=0;i<5; i++)
@@ -114,7 +113,7 @@ public class GameStateBoard {
     private static void printTwoPlayersForHand(List<Player> players, int maxLength)
     {
         printBorder(maxLength,players.size());
-        String s="";
+        String s;
         for(int i=0;i<5; i++)
         {
             for (int j=0; j<players.size(); j++)

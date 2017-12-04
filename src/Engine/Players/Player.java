@@ -12,7 +12,6 @@ public abstract class Player implements Serializable {
 
     private PlayerType type;
     private PlayerState state;
-
     private int id;
     private String name;
     private boolean folded;  //whether or not a player has folded
@@ -39,7 +38,11 @@ public abstract class Player implements Serializable {
         holeCards= new Card[2];
         for (int i=0; i<2; i++)
             holeCards[i]=new Card();
-    };
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public int getChips() {
         return chips;
@@ -68,7 +71,7 @@ public abstract class Player implements Serializable {
     }
 
     public List<String> listOfDetails() {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         list.add("Type: "+this.type.getType() +" ("+id+")");
         list.add("State: "+this.state.getStateWithVal());
         list.add("Chips: "+this.chips);
@@ -79,7 +82,7 @@ public abstract class Player implements Serializable {
 
     public List<String> listOfDetailesForHand()
     {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         list.add("Type: "+this.type.getType());
         list.add("State: "+this.state.getStateWithVal());
 

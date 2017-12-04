@@ -4,7 +4,7 @@ public enum PlayerType {
     Human ("H"),
     Computer ("C");
 
-    private String type;
+    private final String type;
 
     PlayerType(String type) {
         this.type = type;

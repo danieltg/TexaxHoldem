@@ -8,14 +8,11 @@ import Engine.GameDescriptor.Blindes;
 import Engine.Players.Player;
 import Engine.Players.PlayerState;
 import Engine.Players.PlayerType;
-import UI.Boards.GameStateBoard;
-import UI.Menus.HandMenu;
 import com.rundef.poker.EquityCalculator;
 import com.rundef.poker.Hand;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class PokerHand {
 
@@ -30,7 +27,6 @@ public class PokerHand {
     private int dealer;      //the index of the dealer
     private int b;
     private int s;
-    private int n;
     private int round;
     private Player lastRaise=null;
 
@@ -53,6 +49,10 @@ public class PokerHand {
         updateMaxBet();
     }
 
+    public int getPot() {
+        return pot;
+    }
+
     public void updateMaxBet() {
         int maxBetByPlayers=players.get(0).getChips();
 //add min pot
@@ -68,33 +68,49 @@ public class PokerHand {
     }
 
 
-    public String getCardsAsString ()
+    private String getCardsAsString()
     {
-        String s="";
+        StringBuilder s= new StringBuilder();
 
         for (int i=0; i<4; i++)
-            s=s+ tableCards[i].toString()+  " | ";
+            s.append(tableCards[i].toString()).append(" | ");
 
-        s=s+tableCards[4].toString();
+        s.append(tableCards[4].toString());
 
-        return s;
+        return s.toString();
 
     }
     public String printHand()
     {
-        String handStr=getCardsAsString()+
-                "  POT: "+pot;
 
-        return handStr;
+        return getCardsAsString()+
+                "  POT: "+pot;
     }
 
     public List<Winner> getWinner() {
 
-        List<Winner> winnersList = new ArrayList<Winner>();
-        int index=whoIsInTheGame();
-        String cards=players.get(index).getHoleCards();
-        Winner winner=new Winner(players.get(index),cards,pot);
-        winnersList.add(winner);
+        List<Winner> winnersList = new ArrayList<>();
+
+        if (playersLeft() == 1) {
+            int index = whoIsInTheGame();
+            String cards = players.get(index).getHoleCards();
+            Winner winner = new Winner(players.get(index), cards);
+            winnersList.add(winner);
+        }
+
+        //Human player left the game
+        else
+        {
+            for (Player p:players)
+            {
+                if (!p.isFolded()) {
+                    String cards = p.getHoleCards();
+                    Winner winner = new Winner(p, cards);
+                    winnersList.add(winner);
+                }
+            }
+        }
+
         return winnersList;
     }
 
@@ -108,7 +124,7 @@ public class PokerHand {
      return 0;
     }
 
-    private void dealingRiverCard() {
+    public void dealingRiverCard() {
         tableCards[4]=deck.drawCard();
     }
 
@@ -119,47 +135,40 @@ public class PokerHand {
 
     public List<Winner> evaluateRound() throws Exception {
 
-        int numOfPlayerHands=0;
-
         EquityCalculator calculator = new EquityCalculator();
         calculator.reset();
-        String tableCardsStr="";
+        StringBuilder tableCardsStr= new StringBuilder();
 
         for (Card c:tableCards) {
             if (c.getSuit()!= Suit.NA && c.getRank()!= Rank.NA)
-                tableCardsStr = tableCardsStr + c.toString();
+                tableCardsStr.append(c.toString());
         }
 
-        //calculator.setBoardFromString(tableCardsStr);
-        calculator.setBoardFromString("3S4CQS6C7D");
-        calculator.addHand(Hand.fromString("3c5h"));
-        calculator.addHand(Hand.fromString("7h5d"));
-        calculator.addHand(Hand.fromString("7c7s"));
-        calculator.addHand(Hand.fromString("4d2c"));
- /*       for (Player p:players)
+        calculator.setBoardFromString(tableCardsStr.toString());
+
+        for (Player p:players)
         {
             if (!p.isFolded())
             {
                 String playerCards=(p.getHoleCards()).replaceAll("\\s+","");
                 Hand hand = Hand.fromString(playerCards);
                 calculator.addHand(hand);
-                numOfPlayerHands++;
             }
-        }*/
+        }
         calculator.calculate();
-        return getWinners(calculator,numOfPlayerHands);
+        return getWinners(calculator);
     }
 
-    private List<Winner> getWinners(EquityCalculator calculator, int numOfPlayerHands)
+    private List<Winner> getWinners(EquityCalculator calculator)
     {
 
-        List<Winner> winnersList = new ArrayList<Winner>();
+        List<Winner> winnersList = new ArrayList<>();
         List<Integer> winningHands= calculator.getWinningHands();
         for (int index: winningHands)
         {
             Player p=getActivePlayerInIndex(index);
             String handRanking=calculator.getHandRanking(index).toString();
-            Winner tmp=new Winner(p,handRanking,this.pot);
+            Winner tmp=new Winner(p,handRanking);
             winnersList.add(tmp);
 
         }
@@ -234,9 +243,6 @@ public class PokerHand {
                 s=i;
             else if (players.get(i).getState()== PlayerState.BIG)
                 b=i;
-            else
-                n=i;
-
         }
     }
 

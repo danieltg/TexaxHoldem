@@ -1,10 +1,7 @@
 package Engine.Players;
 
-import Engine.PokerHand;
-
 
 import java.util.List;
-import java.util.Scanner;
 
 public class HumanPlayer extends Player {
 

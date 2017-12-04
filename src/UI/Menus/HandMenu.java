@@ -30,13 +30,10 @@ public class HandMenu {
     }
 
     private static boolean isValidOption(String selectedMainOption) {
-        if (selectedMainOption!=null &&
+        return selectedMainOption != null &&
                 (selectedMainOption.toUpperCase().equals("F") || selectedMainOption.toUpperCase().equals("B") ||
                         selectedMainOption.toUpperCase().equals("C") || selectedMainOption.toUpperCase().equals("K") ||
-                        selectedMainOption.toUpperCase().equals("R") ))
-            return true;
-
-        return false;
+                        selectedMainOption.toUpperCase().equals("R"));
 
     }
 }
