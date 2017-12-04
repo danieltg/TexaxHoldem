@@ -196,7 +196,7 @@ public class UIManager {
                 //inc the handsWon for each winner
                 for (Winner w: winners) {
                   w.getPlayer().isAWinner();
-                int chipsToAdd=(w.getEquity()*w.getPot()/100);
+                int chipsToAdd=(w.getPot());
                 w.getPlayer().addChips(chipsToAdd);
                  }
                 //TODO

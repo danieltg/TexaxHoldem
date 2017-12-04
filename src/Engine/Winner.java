@@ -10,10 +10,6 @@ public class Winner implements Serializable {
         return player;
     }
 
-    public int getEquity() {
-        return equity;
-    }
-
     public String getHandRank() {
         return handRank;
     }
@@ -23,13 +19,11 @@ public class Winner implements Serializable {
     }
 
     private Player player;
-    private int equity;
     private String handRank;
     private int pot;
 
-    public Winner(Player player, int equity, String handRank, int pot) {
+    public Winner(Player player, String handRank, int pot) {
         this.player = player;
-        this.equity = equity;
         this.handRank = handRank;
         this.pot=pot;
     }

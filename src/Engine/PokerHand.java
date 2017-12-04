@@ -93,7 +93,7 @@ public class PokerHand {
         List<Winner> winnersList = new ArrayList<Winner>();
         int index=whoIsInTheGame();
         String cards=players.get(index).getHoleCards();
-        Winner winner=new Winner(players.get(index),100,cards,pot);
+        Winner winner=new Winner(players.get(index),cards,pot);
         winnersList.add(winner);
         return winnersList;
     }
@@ -130,9 +130,13 @@ public class PokerHand {
                 tableCardsStr = tableCardsStr + c.toString();
         }
 
-        calculator.setBoardFromString(tableCardsStr);
-
-        for (Player p:players)
+        //calculator.setBoardFromString(tableCardsStr);
+        calculator.setBoardFromString("3S4CQS6C7D");
+        calculator.addHand(Hand.fromString("3c5h"));
+        calculator.addHand(Hand.fromString("7h5d"));
+        calculator.addHand(Hand.fromString("7c7s"));
+        calculator.addHand(Hand.fromString("4d2c"));
+ /*       for (Player p:players)
         {
             if (!p.isFolded())
             {
@@ -141,9 +145,8 @@ public class PokerHand {
                 calculator.addHand(hand);
                 numOfPlayerHands++;
             }
-        }
+        }*/
         calculator.calculate();
-
         return getWinners(calculator,numOfPlayerHands);
     }
 
@@ -151,24 +154,35 @@ public class PokerHand {
     {
 
         List<Winner> winnersList = new ArrayList<Winner>();
-        int index=0;
-
-        for (Player p:players)
+        List<Integer> winningHands= calculator.getWinningHands();
+        for (int index: winningHands)
         {
-            if (!p.isFolded() && index<numOfPlayerHands)
-            {
-                int equity=calculator.getHandEquity(index).getEquity();
-                if (equity>0)
-                {
-                    String handRanking=calculator.getHandRanking(index).toString();
-                    Winner tmp=new Winner(p,equity,handRanking,this.pot);
-                    winnersList.add(tmp);
-                }
-                index++;
-            }
+            Player p=getActivePlayerInIndex(index);
+            String handRanking=calculator.getHandRanking(index).toString();
+            Winner tmp=new Winner(p,handRanking,this.pot);
+            winnersList.add(tmp);
+
         }
 
         return winnersList;
+    }
+
+    private Player getActivePlayerInIndex(int index) {
+
+        int i=0;
+
+        for (Player p:players)
+        {
+            if (!p.isFolded())
+            {
+                if (i==index)
+                    return p;
+                else
+                    i++;
+            }
+        }
+
+        return null;
     }
 
     public void resetPlayersBets()
