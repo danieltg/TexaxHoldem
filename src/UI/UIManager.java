@@ -35,7 +35,7 @@ public class UIManager {
         if (gameManager.GetStateOfGame() !=CurrGameState.Started && gameManager.GetStateOfGame()!=CurrGameState.RunningHand) {
             try {
                 Scanner scanner = new Scanner(System.in);
-                System.out.print("Enter a file name:");
+                System.out.print("Enter a file name: ");
                 System.out.flush();
                 String filename = scanner.nextLine();
                 gameManager.setGameDescriptor(ReadGameDescriptorFile.readFile(filename));
@@ -83,7 +83,6 @@ public class UIManager {
                 }
                 catch (Exception e) {
                     System.out.println(e.getMessage());
-                    runOption(1);
                 }
                 break;
 
@@ -134,7 +133,6 @@ public class UIManager {
                 exitGame();
                 break;
             }
-
 
         }
     }

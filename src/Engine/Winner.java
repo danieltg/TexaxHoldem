@@ -6,14 +6,7 @@ import java.io.Serializable;
 
 public class Winner implements Serializable {
 
-    public Player getPlayer() {
-        return player;
-    }
-
     private Player player;
-
-
-
     private String handRank;
 
     public Winner(Player player, String handRank) {
@@ -22,6 +15,9 @@ public class Winner implements Serializable {
     }
     public String getHandRank() {
         return handRank;
+    }
+    public Player getPlayer() {
+        return player;
     }
 
 }
