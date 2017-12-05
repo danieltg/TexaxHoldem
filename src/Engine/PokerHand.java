@@ -55,7 +55,7 @@ public class PokerHand {
 
     public void updateMaxBet() {
         int maxBetByPlayers=players.get(0).getChips();
-//add min pot
+        //add min pot
         for (int i=1; i<numberOfPlayers; i++)
         {
             if (maxBetByPlayers<players.get(i).getChips())

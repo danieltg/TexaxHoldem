@@ -235,7 +235,8 @@ public class UIManager {
     private List<Winner> run(PokerHand currHand) throws Exception {
 
         currHand.dealingHoleCards();
-        currHand. betSmallAndBig();
+        currHand.betSmallAndBig();
+        currHand.updateMaxBet();
 
         collectBets();
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())

@@ -119,6 +119,9 @@ public abstract class Player implements Serializable {
             list.add("Bet: "+this.bet);
 
         list.add("Chips: "+this.chips);
+        if (isFolded())
+            list.add("***Floded***");
+
         return list;
     }
 
