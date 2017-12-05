@@ -23,7 +23,7 @@ import static Engine.GameDescriptor.GameDescriptor.NUM_OF_HUMAN_PLAYERS;
 public class GameManager implements Serializable {
 
     private int numberOfPlayers=NUM_OF_COMPUTER_PLAYERS+NUM_OF_HUMAN_PLAYERS;
-    private static GameDescriptor gameDescriptor;
+    private GameDescriptor gameDescriptor;
     private CurrGameState stateOfGame;
     private List<Player> players= new ArrayList<>();
     private int dealerIndex;
@@ -95,7 +95,7 @@ public class GameManager implements Serializable {
 
     public void printGameState()
     {
-        GameStateBoard.print(players);
+        GameStateBoard.printGameSate(players);
     }
 
     public void setRoles(int index) {
@@ -109,6 +109,9 @@ public class GameManager implements Serializable {
         players.get(s).setState(PlayerState.SMALL);
         players.get(b).setState(PlayerState.BIG);
         players.get(n).setState(PlayerState.NONE);
+
+        players.get(s).setInitialAmount(gameDescriptor.getStructure().getBlindes().getSmall());
+        players.get(b).setInitialAmount(gameDescriptor.getStructure().getBlindes().getBig());
 
         dealerIndex=d;
 
@@ -163,8 +166,8 @@ public class GameManager implements Serializable {
         setPlayers();
         setRoles(randomNumber);
     }
-    public static int getBig(){ return gameDescriptor.getStructure().getBlindes().getBig();}
-    public static int getSmall(){ return gameDescriptor.getStructure().getBlindes().getSmall();}
+    public int getBig(){ return gameDescriptor.getStructure().getBlindes().getBig();}
+    public int getSmall(){ return gameDescriptor.getStructure().getBlindes().getSmall();}
 
     public void resetGame() {
         this.stateOfGame=CurrGameState.Initialized;

@@ -22,7 +22,6 @@ public class UIManager {
 
     private MainMenu mainMenu;
     private GameManager gameManager= new GameManager();
-    private GameStateBoard board;
     private PokerHand currHand;
 
     public UIManager() {
@@ -155,6 +154,7 @@ public class UIManager {
             System.out.flush();
             String filename = scanner.nextLine();
             gameManager=SaveGameState.loadGameDataFromFile(filename);
+            System.out.println("Game file loaded successfully...");
         } catch (Exception e) {
             System.out.println("Failed to load game from file. Please check your file name");
         }
@@ -203,7 +203,6 @@ public class UIManager {
                 currHand.addToPot(gameManager.getMoneyFromLastHand());
 
                 List<Winner> winners= run(currHand);
-               gameManager.setRoles(gameManager.getdealerIndex()+1);
 
                 //inc the handsWon for each winner
                 for (Winner w: winners) {
@@ -215,6 +214,10 @@ public class UIManager {
                           " .Prize: "+(currHand.getPot()/winners.size()) +"$");
                 }
 
+                //Print the game statistic at the end of hand
+                gameManager.getStatistics();
+
+                gameManager.setRoles(gameManager.getdealerIndex()+1);
                 gameManager.setMoneyFromLastHand(currHand.getPot()%winners.size());
             }
             else
@@ -233,32 +236,53 @@ public class UIManager {
 
         currHand.dealingHoleCards();
         currHand. betSmallAndBig();
-        //run round
-        collectBets();
 
+        collectBets();
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
-        GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
+        notifyUser(1);
         currHand.dealingFlopCards();
 
         collectBets();
-
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
-        GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
+        notifyUser(2);
         currHand.dealingTurnCard();
-        collectBets();
 
+        collectBets();
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
+        notifyUser(3);
         currHand.dealingRiverCard();
         collectBets();
-
+        pressAnyKeyToContinue("Hand finished. Press any key to see who is the winner");
         return currHand.evaluateRound();
 
+    }
+
+    private void notifyUser(int round) {
+
+        int currIndex = (1 + currHand.getDealer()) % currHand.getNumberOfPlayers();
+        currHand.getPlayers().get(currIndex).itIsMyTurn();
+
+        System.out.println("Here is the hand state after "+round +" round(s) of bet");
+        GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
+        pressAnyKeyToContinue("Press any key to continue the next bet round...");
+
+    }
+
+    private void pressAnyKeyToContinue(String str)
+    {
+        System.out.println(str);
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception e)
+        {}
     }
 
     private void collectBets() {
@@ -283,6 +307,7 @@ public class UIManager {
 
             currIndex = (p + currHand.getDealer()) % currHand.getNumberOfPlayers();
             Player currPlayer =currHand.getPlayers().get(currIndex);
+            currPlayer.itIsMyTurn();
 
             if (currHand.getLastRaise() != currPlayer || !checkOccurred) {
                 if (!currPlayer.isFolded() && currPlayer.getChips() > 0) {
@@ -296,12 +321,16 @@ public class UIManager {
                    currHand.addToPot(currPlayer.getBet());
                     currPlayer.collectBet();
                     currHand.updateMaxBet();
-                } else
+                } else {
+                    //He doesn't have money anymore so we don't want him in this hand
+                    currPlayer.setFolded(true);
                     break;
+                }
             }
 
             checkOccurred = true;
             p++;
+            currPlayer.itIsNotMyTurn();
 
         }
         currHand.upRound();
@@ -403,15 +432,16 @@ public class UIManager {
                 int raiseTo = 0;
                 while (raiseTo == 0) {
                     try {
-                        //TODO:I'm not sure the min and mac are correct
                         if (p.getType() == PlayerType.Human) {
                             Scanner scanner = new Scanner(System.in);
                             System.out.print("What would you like to raise to? ");
                             raiseTo = Integer.parseInt(scanner.nextLine());
+
                         } else
                             raiseTo = p.getRaise(1,currHand.getMaxBet());
                     } catch (NumberFormatException e) {
-                        System.out.println("Please enter a valid raise: ");
+                        System.out.println("Your input is not valid. Raise must be a number between 1 - " +currHand.getMaxBet()+
+                                ", please try again.");
                         raiseTo = 0;
                         continue;
                     }
@@ -419,7 +449,8 @@ public class UIManager {
                         if ( raiseTo > currHand.getMaxBet())
                         {
                             if (p.getType() == PlayerType.Human) {
-                                System.out.println("Please enter a valid raise: ");
+                                System.out.println("Your input is not valid. Raise must be a number between 1 - " +currHand.getMaxBet()+
+                                        ", please try again.");
                             }
                             else
                             {

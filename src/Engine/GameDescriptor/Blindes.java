@@ -2,7 +2,9 @@ package Engine.GameDescriptor;
 
 import Engine.Exceptions.BlindesException;
 
-public class Blindes {
+import java.io.Serializable;
+
+public class Blindes implements Serializable {
 
     private boolean fixed;
     private int big;

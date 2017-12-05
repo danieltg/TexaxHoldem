@@ -10,7 +10,6 @@ public enum PlayerState {
     NONE("");
 
     private String state;
-    private int value;
 
     PlayerState(String state) {
         this.state = state;
@@ -20,16 +19,5 @@ public enum PlayerState {
         return this.state;
     }
 
-    public String getStateWithVal()
-    {
-        switch (state)
-        {
-            case "S":
-                return this.state+ " ("+GameManager.getSmall()+")";
-            case "B":
-                return this.state+ " ("+GameManager.getBig()+")";
-            default:
-                return this.state;
-        }
-    }
+
 }

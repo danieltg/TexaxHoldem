@@ -11,9 +11,11 @@ package Engine.GameDescriptor;
 import Engine.Exceptions.BlindesException;
 import Engine.Exceptions.StructureException;
 
+import java.io.Serializable;
+
 import static Engine.GameDescriptor.Blindes.validateBlindes;
 
-public class Structure {
+public class Structure implements Serializable {
 
     private int handsCount;
     private int buy;

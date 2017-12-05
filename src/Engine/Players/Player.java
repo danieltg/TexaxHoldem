@@ -17,6 +17,7 @@ public abstract class Player implements Serializable {
     private boolean folded;  //whether or not a player has folded
     private int bet;        //The amount that a player is betting in one session of betting
 
+    private boolean isMyTurn;
 
     private int chips;      //The amount of money that a player has
     private int numbersOfBuy;
@@ -24,12 +25,15 @@ public abstract class Player implements Serializable {
     private Card[] holeCards ;
     private int handsWon;
 
+    private int initialAmount;
+
     public Player(int playerID){
 
         chips=0;
         bet =0;
+        initialAmount=0;
         folded=false;
-
+        isMyTurn=false;
         numbersOfBuy=0;
         handsWon=0;
         state=PlayerState.NONE;
@@ -38,6 +42,18 @@ public abstract class Player implements Serializable {
         holeCards= new Card[2];
         for (int i=0; i<2; i++)
             holeCards[i]=new Card();
+    }
+
+    public void setInitialAmount(int initialAmount) {
+        this.initialAmount = initialAmount;
+    }
+
+    public void itIsMyTurn() {
+        isMyTurn = true;
+    }
+
+    public void itIsNotMyTurn() {
+        isMyTurn = false;
     }
 
     public int getId() {
@@ -72,8 +88,12 @@ public abstract class Player implements Serializable {
 
     public List<String> listOfDetails() {
         List<String> list = new ArrayList<>();
-        list.add("Type: "+this.type.getType() +" ("+id+")");
-        list.add("State: "+this.state.getStateWithVal());
+        list.add("Type: "+this.type.getType());
+        if (initialAmount==0)
+            list.add("State: "+this.state.getState());
+        else
+            list.add("State: "+this.state.getState()+" ("+initialAmount+")");
+
         list.add("Chips: "+this.chips);
         list.add("Buys: "+this.numbersOfBuy);
         list.add("Hands won: "+this.handsWon+"/"+ GameManager.handNumber);
@@ -83,8 +103,15 @@ public abstract class Player implements Serializable {
     public List<String> listOfDetailesForHand()
     {
         List<String> list = new ArrayList<>();
-        list.add("Type: "+this.type.getType());
-        list.add("State: "+this.state.getStateWithVal());
+        if (isMyTurn)
+            list.add("Type: "+this.type.getType() + " ***");
+        else
+            list.add("Type: "+this.type.getType());
+
+        if (initialAmount==0)
+            list.add("State: "+this.state.getState());
+        else
+            list.add("State: "+this.state.getState()+" ("+initialAmount+")");
 
         if (this.bet==0)
             list.add("Bet: ??");

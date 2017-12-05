@@ -9,7 +9,7 @@ public class GameStateBoard {
 
     public static void printHandState(List<Player> players,String str)
     {
-        int maxLength=getMaxLength(players);
+        int maxLength=getMaxLength(players,"HandState");
 
         List<Player> tmp = new ArrayList<>();
         tmp.add(players.get(0));
@@ -29,14 +29,18 @@ public class GameStateBoard {
     }
 
 
-    public static int getMaxLength(List<Player> players)
+    public static int getMaxLength(List<Player> players,String str)
     {
 
         int maxLength=0;
 
         List<String> list = new ArrayList<>();
-        for(Player p:players )
-            list.addAll(p.listOfDetailesForHand());
+        for(Player p:players ) {
+            if (str.equals("GameSate"))
+                list.addAll(p.listOfDetails());
+            else
+                list.addAll(p.listOfDetailesForHand());
+        }
 
 
         for (String st:list) {
@@ -46,9 +50,9 @@ public class GameStateBoard {
 
         return maxLength;
     }
-  public static void print ( List<Player> players)
+  public static void printGameSate ( List<Player> players)
   {
-      int maxLength=getMaxLength(players);
+      int maxLength=getMaxLength(players,"GameSate");
 
       List<Player> tmp = new ArrayList<>();
       tmp.add(players.get(0));

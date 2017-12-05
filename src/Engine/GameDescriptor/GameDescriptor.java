@@ -1,6 +1,8 @@
 package Engine.GameDescriptor;
 
-public class GameDescriptor {
+import java.io.Serializable;
+
+public class GameDescriptor implements Serializable {
 
     private GameType type;
     private Structure structure;
