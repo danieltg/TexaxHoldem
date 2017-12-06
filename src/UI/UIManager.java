@@ -266,7 +266,7 @@ public class UIManager {
         currHand.dealingRiverCard();
 
         collectBets();
-        pressAnyKeyToContinue("Hand finished.../n Press enter to see who is the winner");
+        pressAnyKeyToContinue("Hand finished...\n Press enter to see who is the winner");
         return currHand.evaluateRound();
 
     }
