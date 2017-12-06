@@ -22,7 +22,7 @@ public class ComputerPlayer extends Player {
 
         if(randomNumber<10)
             return "F";
-        else if (randomNumber<25)
+        else if (randomNumber<15)
             return "R";
         else if (randomNumber<45)
             return "C";
