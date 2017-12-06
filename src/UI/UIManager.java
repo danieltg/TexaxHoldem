@@ -373,7 +373,7 @@ public class UIManager {
                     System.out.println("***Player "+currPlayer.toString() +" is either folded or without chips");
                     currPlayer.setFolded(true);
                     currPlayer.setBet(0);
-                    break;
+                    //break;
                 }
             }
 
