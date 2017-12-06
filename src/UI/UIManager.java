@@ -142,8 +142,10 @@ public class UIManager {
     }
 
     private void buy() throws GameStateException {
-        if(gameManager.GetStateOfGame() ==CurrGameState.Started)
+        if(gameManager.GetStateOfGame() ==CurrGameState.Started) {
             gameManager.buy();
+            System.out.println("Buy operation completed successfully");
+        }
         else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }
 
@@ -266,15 +268,26 @@ public class UIManager {
         currHand.dealingRiverCard();
 
         collectBets();
-        pressAnyKeyToContinue("Hand finished...\n Press enter to see who is the winner");
+        pressAnyKeyToContinue("Hand finished...\nPress enter to see who is the winner");
         return currHand.evaluateRound();
 
     }
 
     private void notifyUser(int round) {
 
-        int currIndex = (1 + currHand.getDealer()) % currHand.getNumberOfPlayers();
-        currHand.getPlayers().get(currIndex).itIsMyTurn();
+        int currIndex;
+        int p=1;
+
+        while (true)
+        {
+            currIndex = (p + currHand.getDealer()) % currHand.getNumberOfPlayers();
+            if (currHand.getPlayers().get(currIndex).isFolded()==false) {
+                currHand.getPlayers().get(currIndex).itIsMyTurn();
+                break;
+            }
+            p++;
+        }
+
 
         System.out.println("Here is the hand state after "+round +" round(s) of bet");
         GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
