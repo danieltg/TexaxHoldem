@@ -194,8 +194,10 @@ public class PokerHand {
 
     public void resetPlayersBets()
     {
-        for (Player p:players)
+        for (Player p:players) {
+            p.setCheckOccurred(false);
             p.setBet(0);
+        }
     }
 
     public void dealingFlopCards() {

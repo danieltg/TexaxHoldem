@@ -299,48 +299,85 @@ public class UIManager {
 
 
         if (currHand.getRound()==0) {
+            System.out.println("***First round- before dealing Flop Cards ");
             currHand.setLastRaise(currHand.getPlayers().get((2 + currHand.getDealer()) %currHand.getNumberOfPlayers()));
+            System.out.println("***Last Raise was by Player with ID: " +currHand.getLastRaise().toString());
             p = 3;
            currHand.setCurrentBet(currHand.getBlinde().getBig());
         }
         else {
+            System.out.println("***New bets round");
             p = 1;
-            currHand.setLastRaise(currHand.getPlayers().get((p + currHand.getDealer()) %currHand.getNumberOfPlayers()));
-           currHand.setCurrentBet(0);
+            //currHand.setLastRaise(currHand.getPlayers().get((p + currHand.getDealer()) %currHand.getNumberOfPlayers()));
+            currHand.setCurrentBet(0);
         }
 
         while (true) {
-            if (currHand.playersLeft() == 1)
+            if (currHand.playersLeft() == 1) {
+                System.out.println("***Only one player left...");
                 break;
+            }
 
+            if (p>10)
+            {
+                System.out.println("***We stuck");
 
-
+            }
             currIndex = (p + currHand.getDealer()) % currHand.getNumberOfPlayers();
             Player currPlayer =currHand.getPlayers().get(currIndex);
             currPlayer.itIsMyTurn();
+            System.out.println("***Player "+currPlayer.toString() +" is playing now");
 
-            if (currHand.getLastRaise() != currPlayer || !currPlayer.getCheckOccurred()) {
-                if (!currPlayer.isFolded() && currPlayer.getChips() > 0) {
-                    if(currPlayer.getType()== PlayerType.Human)
-                        GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
+
+            if (currHand.getLastRaise()==currPlayer) {
+                System.out.println("***We finished one round of bets");
+                break;
+            }
+
+            //השחקן הנוכחי הוא לא השחקן האחרון שעשה רייס וגם עוד לא פרשתי
+            if (currHand.getLastRaise() != currPlayer && currPlayer.getCheckOccurred()==false) {
+                //אם הוא לא פרש ויש לו כסף בקופה
+                if (currPlayer.isFolded()==false
+                        && currPlayer.getChips() > 0) {
+
+                    System.out.println("***Player "+currPlayer.toString() +" is not the last player who Raised and he didn't floded and his chips is begger than 0");
+
+                    if(currPlayer.getType()== PlayerType.Human) {
+                        System.out.println("***Player is Human... I'm going to print the Hand");
+                        GameStateBoard.printHandState(currHand.getPlayers(), currHand.printHand());
+                    }
 
                   doThis(nowPlay(currPlayer),currPlayer);
-                  if(currPlayer.getType()==PlayerType.Human&&currPlayer.isFolded()) {
+
+                  if(currPlayer.getType()==PlayerType.Human && currPlayer.isFolded()) {
+                      System.out.println("***Player is Human and he folded... we are going to end the hand");
                       currPlayer.setBet(0);
                       return;
                   }
-                   currHand.addToPot(currPlayer.getBet());
+
+                    System.out.println("***Pot before the action is: "+currHand.getPot());
+                    currHand.addToPot(currPlayer.getBet());
+                    System.out.println("***Pot after the action is: "+currHand.getPot());
+
+                    System.out.println("***Chips player before the collection is: "+currPlayer.getChips());
+                    System.out.println("***Bet player is: "+currPlayer.getBet());
+
                     currPlayer.collectBet();
+                    System.out.println("***Chips player after the collection is: "+currPlayer.getChips());
+
+                    System.out.println("***Curr max bet is: "+currHand.getMaxBet());
                     currHand.updateMaxBet();
+                    System.out.println("***New max bet is: "+currHand.getMaxBet());
+
                 } else {
-                    //He doesn't have money anymore so we don't want him in this hand
+                    System.out.println("***Player "+currPlayer.toString() +" is either folded or without chips");
                     currPlayer.setFolded(true);
                     currPlayer.setBet(0);
                     break;
                 }
             }
 
-           currPlayer.setCheckOccurred( true);
+           currPlayer.setCheckOccurred(true);
             p++;
             currPlayer.itIsNotMyTurn();
 
@@ -353,8 +390,10 @@ public class UIManager {
 
     private String nowPlay(Player currPlayer) {
 
-        if (currPlayer.getType()==PlayerType.Computer)
-           return currPlayer.play();
+        if (currPlayer.getType()==PlayerType.Computer) {
+            System.out.println("***Player is Computer... I'm not going to print the Hand");
+            return currPlayer.play();
+        }
         else {
             return getUSerSelection();
         }
@@ -384,13 +423,16 @@ public class UIManager {
    }
     private void doThis(String whatToDo, Player p) {
 
+        System.out.println("***Here is what the player want to do: "+whatToDo);
+
         while (true) {
 
             if (whatToDo.equals("F")) {
                 p.setFolded(true);
-
+                System.out.println("***Player "+p.toString() +" is floded...");
                 break;
             }
+
             if (whatToDo.equals("B")) {
                 int betTO = 0;
                 try {
@@ -478,9 +520,15 @@ public class UIManager {
 
                 }
 
-                    currHand.setCurrentBet(currHand.getCurrentBet()+ raiseTo);
-                    currHand.setLastRaise(p);
-                    for(Player player:currHand.getPlayers())
+                System.out.println("***Bet before raise: "+currHand.getCurrentBet());
+
+                currHand.setCurrentBet(currHand.getCurrentBet()+ raiseTo);
+                System.out.println("***Bet after raise: "+currHand.getCurrentBet());
+
+                currHand.setLastRaise(p);
+                System.out.println("***Last Raise player is now player with ID: "+p.getId());
+
+                for(Player player:currHand.getPlayers())
                     {
                         if(player!=p)
                             player.setCheckOccurred(false);

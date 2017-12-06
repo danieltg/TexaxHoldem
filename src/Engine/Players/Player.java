@@ -89,6 +89,7 @@ public abstract class Player implements Serializable {
     public List<String> listOfDetails() {
         List<String> list = new ArrayList<>();
         list.add("Type: "+this.type.getType());
+        list.add("ID: "+this.getId());
         if (initialAmount==0)
             list.add("State: "+this.state.getState());
         else
@@ -108,6 +109,7 @@ public abstract class Player implements Serializable {
         else
             list.add("Type: "+this.type.getType());
 
+        list.add("ID: "+this.getId());
         if (initialAmount==0)
             list.add("State: "+this.state.getState());
         else
@@ -121,6 +123,7 @@ public abstract class Player implements Serializable {
         list.add("Chips: "+this.chips);
         if (isFolded())
             list.add("***Folded***");
+
 
         return list;
     }
@@ -183,5 +186,10 @@ public abstract class Player implements Serializable {
 
     public void setCheckOccurred(boolean checkOccurred) {
         this.checkOccurred = checkOccurred;
+    }
+
+    public String toString()
+    {
+        return String.valueOf(this.id);
     }
 }
