@@ -416,7 +416,7 @@ public class UIManager {
             if (whatToDo.equals("C")) {
                 currHand.subFromPot(p.getBet());
                 p.addChips(p.getBet());
-                currHand.subFromPot(p.getBet());
+
 
                 if (p.getChips() < currHand.getCurrentBet()) {
 
