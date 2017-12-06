@@ -196,6 +196,7 @@ public class PokerHand {
     {
         for (Player p:players) {
             p.setCheckOccurred(false);
+            p.itIsNotMyTurn();
             p.setBet(0);
         }
     }
@@ -318,5 +319,15 @@ public class PokerHand {
                 return true;
         }
         return false;
+    }
+
+    public boolean isAllCheckOccurred() {
+        for (Player p:players)
+        {
+            if (!p.getCheckOccurred())
+                return false;
+        }
+
+        return true;
     }
 }

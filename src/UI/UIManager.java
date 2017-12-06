@@ -266,7 +266,7 @@ public class UIManager {
         currHand.dealingRiverCard();
 
         collectBets();
-        pressAnyKeyToContinue("Hand finished. Press any key to see who is the winner");
+        pressAnyKeyToContinue("Hand finished.../n Press enter to see who is the winner");
         return currHand.evaluateRound();
 
     }
@@ -278,13 +278,13 @@ public class UIManager {
 
         System.out.println("Here is the hand state after "+round +" round(s) of bet");
         GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
-        pressAnyKeyToContinue("Press any key to continue the next bet round...");
+        pressAnyKeyToContinue("Press Enter to continue the next bet round...");
 
     }
 
     private void pressAnyKeyToContinue(String str)
     {
-        System.out.println(str);
+        System.out.print(str);
         try
         {
             System.in.read();
@@ -321,15 +321,16 @@ public class UIManager {
             if (p>10)
             {
                 System.out.println("***We stuck");
-
             }
+
             currIndex = (p + currHand.getDealer()) % currHand.getNumberOfPlayers();
             Player currPlayer =currHand.getPlayers().get(currIndex);
             currPlayer.itIsMyTurn();
             System.out.println("***Player "+currPlayer.toString() +" is playing now");
 
 
-            if (currHand.getLastRaise()==currPlayer) {
+            if (currHand.getLastRaise()==currPlayer || currHand.isAllCheckOccurred()) {
+                currPlayer.itIsNotMyTurn();
                 System.out.println("***We finished one round of bets");
                 break;
             }
@@ -371,13 +372,12 @@ public class UIManager {
 
                 } else {
                     if(currPlayer.isFolded()) {
-                        System.out.println("***Player " + currPlayer.toString() + " is either folded ");
+                        System.out.println("***Player " + currPlayer.toString() + " is folded ");
                         currPlayer.setBet(0);
                     }
                     else
                     {
                         System.out.println("***Player " + currPlayer.toString() + " is  without chips");
-
                     }
                     //break;
                 }
