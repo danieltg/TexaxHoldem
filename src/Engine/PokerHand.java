@@ -227,8 +227,7 @@ public class PokerHand {
         players.get(s).collectBet();
         players.get(b).collectBet();
 
-        players.get(s).setBet(0);
-        players.get(b).setBet(0);
+
     }
 
     private void getStateIndex()
