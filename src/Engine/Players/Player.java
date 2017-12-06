@@ -120,7 +120,7 @@ public abstract class Player implements Serializable {
 
         list.add("Chips: "+this.chips);
         if (isFolded())
-            list.add("***Floded***");
+            list.add("***Folded***");
 
         return list;
     }
