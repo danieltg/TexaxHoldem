@@ -95,7 +95,7 @@ public class GameManager implements Serializable {
 
     public void printGameState()
     {
-        GameStateBoard.printGameSate(players);
+        GameStateBoard.printGameState(players);
     }
 
     public void setRoles(int index) {

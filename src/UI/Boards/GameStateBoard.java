@@ -50,7 +50,7 @@ public class GameStateBoard {
 
         return maxLength;
     }
-  public static void printGameSate ( List<Player> players)
+  public static void printGameState ( List<Player> players)
   {
       int maxLength=getMaxLength(players,"GameSate");
 
@@ -118,7 +118,7 @@ public class GameStateBoard {
     {
         printBorder(maxLength,players.size());
         String s;
-        for(int i=0;i<5; i++)
+        for(int i=0;i<6; i++)
         {
             for (int j=0; j<players.size(); j++)
             {
