@@ -243,6 +243,7 @@ public class UIManager {
             return currHand.getWinner();
 
         currHand.upRound();
+        currHand.setLastRaise(null);
         notifyUser(1);
         currHand.dealingFlopCards();
 
@@ -251,6 +252,7 @@ public class UIManager {
             return currHand.getWinner();
 
         currHand.upRound();
+        currHand.setLastRaise(null);
         notifyUser(2);
         currHand.dealingTurnCard();
 
@@ -260,6 +262,7 @@ public class UIManager {
 
         currHand.upRound();
         notifyUser(3);
+        currHand.setLastRaise(null);
         currHand.dealingRiverCard();
 
         collectBets();
@@ -322,15 +325,17 @@ public class UIManager {
                         GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
 
                   doThis(nowPlay(currPlayer),currPlayer);
-                  if(currPlayer.getType()==PlayerType.Human&&currPlayer.isFolded())
+                  if(currPlayer.getType()==PlayerType.Human&&currPlayer.isFolded()) {
+                      currPlayer.setBet(0);
                       return;
-
+                  }
                    currHand.addToPot(currPlayer.getBet());
                     currPlayer.collectBet();
                     currHand.updateMaxBet();
                 } else {
                     //He doesn't have money anymore so we don't want him in this hand
                     currPlayer.setFolded(true);
+                    currPlayer.setBet(0);
                     break;
                 }
             }
@@ -410,6 +415,7 @@ public class UIManager {
                         System.out.println("You can't Bet now ,please choose other option");
                        whatToDo= getUSerSelection();
                     }
+
                 } catch (NumberFormatException e) {
                     System.out.println("Please enter a valid bet: ");
                     betTO = 0;
