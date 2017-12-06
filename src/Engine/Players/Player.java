@@ -24,7 +24,7 @@ public abstract class Player implements Serializable {
 
     private Card[] holeCards ;
     private int handsWon;
-
+    boolean checkOccurred = false;
     private int initialAmount;
 
     public Player(int playerID){
@@ -175,5 +175,13 @@ public abstract class Player implements Serializable {
     public void isAWinner()
     {
         handsWon++;
+    }
+
+    public boolean getCheckOccurred() {
+        return checkOccurred;
+    }
+
+    public void setCheckOccurred(boolean checkOccurred) {
+        this.checkOccurred = checkOccurred;
     }
 }

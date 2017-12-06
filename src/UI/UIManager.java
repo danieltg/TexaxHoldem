@@ -242,6 +242,7 @@ public class UIManager {
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
+        currHand.upRound();
         notifyUser(1);
         currHand.dealingFlopCards();
 
@@ -249,6 +250,7 @@ public class UIManager {
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
+        currHand.upRound();
         notifyUser(2);
         currHand.dealingTurnCard();
 
@@ -256,8 +258,10 @@ public class UIManager {
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
+        currHand.upRound();
         notifyUser(3);
         currHand.dealingRiverCard();
+
         collectBets();
         pressAnyKeyToContinue("Hand finished. Press any key to see who is the winner");
         return currHand.evaluateRound();
@@ -289,7 +293,7 @@ public class UIManager {
     private void collectBets() {
         int p;
         int currIndex;
-        boolean checkOccurred = false;
+
 
         if (currHand.getRound()==0) {
             currHand.setLastRaise(currHand.getPlayers().get((2 + currHand.getDealer()) %currHand.getNumberOfPlayers()));
@@ -306,11 +310,13 @@ public class UIManager {
             if (currHand.playersLeft() == 1)
                 break;
 
+
+
             currIndex = (p + currHand.getDealer()) % currHand.getNumberOfPlayers();
             Player currPlayer =currHand.getPlayers().get(currIndex);
             currPlayer.itIsMyTurn();
 
-            if (currHand.getLastRaise() != currPlayer || !checkOccurred) {
+            if (currHand.getLastRaise() != currPlayer || !currPlayer.getCheckOccurred()) {
                 if (!currPlayer.isFolded() && currPlayer.getChips() > 0) {
                     if(currPlayer.getType()== PlayerType.Human)
                         GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
@@ -329,12 +335,12 @@ public class UIManager {
                 }
             }
 
-            checkOccurred = true;
+           currPlayer.setCheckOccurred( true);
             p++;
             currPlayer.itIsNotMyTurn();
 
         }
-        currHand.upRound();
+
        currHand.resetPlayersBets();
         currHand.setLastRaise(null);
 
@@ -468,6 +474,11 @@ public class UIManager {
 
                     currHand.setCurrentBet(currHand.getCurrentBet()+ raiseTo);
                     currHand.setLastRaise(p);
+                    for(Player player:currHand.getPlayers())
+                    {
+                        if(player!=p)
+                            player.setCheckOccurred(false);
+                    }
                     p.setBet(currHand.getCurrentBet());
                 break;
 
