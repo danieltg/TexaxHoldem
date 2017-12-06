@@ -55,10 +55,10 @@ public class PokerHand {
 
     public void updateMaxBet() {
         int maxBetByPlayers=players.get(0).getChips();
-        //add min pot
+
         for (int i=1; i<numberOfPlayers; i++)
         {
-            if (maxBetByPlayers<players.get(i).getChips())
+            if (maxBetByPlayers>players.get(i).getChips())
                 maxBetByPlayers=players.get(i).getChips();
         }
         if(pot<=maxBetByPlayers)
@@ -161,7 +161,6 @@ public class PokerHand {
 
     private List<Winner> getWinners(EquityCalculator calculator)
     {
-
         List<Winner> winnersList = new ArrayList<>();
         List<Integer> winningHands= calculator.getWinningHands();
         for (int index: winningHands)
@@ -172,7 +171,6 @@ public class PokerHand {
             winnersList.add(tmp);
 
         }
-
         return winnersList;
     }
 

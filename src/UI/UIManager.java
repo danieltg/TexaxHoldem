@@ -417,8 +417,11 @@ public class UIManager {
                 p.addChips(p.getBet());
                 currHand.subFromPot(p.getBet());
 
-                if (p.getChips() < currHand.getCurrentBet())
-                    p.setBet(p.getChips());
+                if (p.getChips() < currHand.getCurrentBet()) {
+
+                    //for check only
+                    System.out.println("You dont have enough");
+                }
                 else
                     p.setBet(currHand.getCurrentBet());
 

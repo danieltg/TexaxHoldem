@@ -151,9 +151,8 @@ public abstract class Player implements Serializable {
         // Checks to make sure the bet is valid
         if (newBet < 0) {
             System.out.println("Invalid bet detected");
-        } else if (newBet > chips) {
-            bet = chips;
-        } else {
+        }
+        else {
             bet = newBet;
         }
 
