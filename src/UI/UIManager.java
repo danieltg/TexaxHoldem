@@ -370,9 +370,15 @@ public class UIManager {
                     System.out.println("***New max bet is: "+currHand.getMaxBet());
 
                 } else {
-                    System.out.println("***Player "+currPlayer.toString() +" is either folded or without chips");
-                    currPlayer.setFolded(true);
-                    currPlayer.setBet(0);
+                    if(currPlayer.isFolded()) {
+                        System.out.println("***Player " + currPlayer.toString() + " is either folded ");
+                        currPlayer.setBet(0);
+                    }
+                    else
+                    {
+                        System.out.println("***Player " + currPlayer.toString() + " is  without chips");
+
+                    }
                     //break;
                 }
             }
