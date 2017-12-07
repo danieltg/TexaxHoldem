@@ -463,7 +463,7 @@ public class UIManager {
 
                         if (betTO <= currHand.getCurrentBet() || betTO > p.getChips() || betTO > currHand.getMaxBet()) {
                             System.out.println("Please enter a valid bet: ");
-                            betTO = 0;
+                            whatToDo=getUSerSelection();
                         }
 
                         currHand.setCurrentBet(betTO);
@@ -489,15 +489,7 @@ public class UIManager {
             if (whatToDo.equals("C")) {
                 currHand.subFromPot(p.getBet());
                 p.addChips(p.getBet());
-
-
-                if (p.getChips() < currHand.getCurrentBet()) {
-
-                    //for check only
-                    System.out.println("You dont have enough");
-                }
-                else
-                    p.setBet(currHand.getCurrentBet());
+                p.setBet(currHand.getCurrentBet());
 
                 break;
 
