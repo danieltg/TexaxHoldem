@@ -198,8 +198,12 @@ public class UIManager {
     private void RunOneHand() throws Exception {
         if(gameManager.GetStateOfGame() ==CurrGameState.Started)
         {
-            if (!gameManager.doesAllPlayersHaveMoney())
-                throw new GameStateException("We're sorry but at least one player does not have enough money to start the game.");
+            if (!gameManager.doesBigAndSallPlayersHaveMoney()) {
+                System.out.println("We're sorry but at least one of the player (Big or Small) does not have enough money to start the game.\n"
+                        + "We need " + gameManager.getBig() + "$ for Big and " + gameManager.getSmall() + "$ for Small");
+                gameManager.printGameState();
+                return;
+            }
 
             if(GameManager.handNumber <gameManager.getGameDescriptor().getStructure().getHandsCount())
             {

@@ -185,12 +185,16 @@ public class GameManager implements Serializable {
         return dealerIndex;
     }
 
-    public boolean doesAllPlayersHaveMoney()
+    public boolean doesBigAndSallPlayersHaveMoney()
     {
         for(Player p: players)
         {
-            if (p.getChips()<getBig())
+            if (p.getState()==PlayerState.BIG && p.getChips()<getBig())
                 return false;
+
+            if (p.getState()==PlayerState.SMALL && p.getChips()<getSmall())
+                return false;
+
         }
 
         return true;
