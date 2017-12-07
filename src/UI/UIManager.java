@@ -2,6 +2,7 @@ package UI;
 
 import Engine.*;
 import Engine.Exceptions.GameStateException;
+import Engine.GameDescriptor.Blindes;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 
 import Engine.Players.Player;
@@ -197,11 +198,15 @@ public class UIManager {
     private void RunOneHand() throws Exception {
         if(gameManager.GetStateOfGame() ==CurrGameState.Started)
         {
+            if (!gameManager.doesAllPlayersHaveMoney())
+                throw new GameStateException("We're sorry but at least one player does not have enough money to start the game.");
+
             if(GameManager.handNumber <gameManager.getGameDescriptor().getStructure().getHandsCount())
             {
                 GameManager.handNumber++;
-                //create and initiazlized poker hand
-                currHand= new PokerHand(gameManager.getGameDescriptor().getStructure().getBlindes(),gameManager.getPlayers());
+                Blindes blindes=gameManager.getGameDescriptor().getStructure().getBlindes();
+
+                currHand= new PokerHand(blindes,gameManager.getPlayers());
                 currHand.addToPot(gameManager.getMoneyFromLastHand());
 
                 List<Winner> winners= run(currHand);
@@ -225,7 +230,6 @@ public class UIManager {
             else
             {
                 throw new GameStateException(GameStateException.INVALID_VALUE + ": ran out of hands");
-
             }
 
 
@@ -311,6 +315,9 @@ public class UIManager {
         int currIndex;
 
 
+        currHand.resetPlayersBets();
+        currHand.setLastRaise(null);
+
         if (currHand.getRound()==0) {
             System.out.println("***First round- before dealing Flop Cards ");
             currHand.setLastRaise(currHand.getPlayers().get((2 + currHand.getDealer()) %currHand.getNumberOfPlayers()));
@@ -321,14 +328,20 @@ public class UIManager {
         else {
             System.out.println("***New bets round");
             p = 1;
-            //currHand.setLastRaise(currHand.getPlayers().get((p + currHand.getDealer()) %currHand.getNumberOfPlayers()));
             currHand.setCurrentBet(0);
         }
 
         while (true) {
-            if (currHand.playersLeft() == 1 ||currHand.getMaxBet()==0) {
+
+            if (currHand.playersLeft() == 1) {
                 System.out.println("***Only one player left...");
                 GameStateBoard.printHandState(currHand.getPlayers(), currHand.printHand());
+                break;
+            }
+
+            if (currHand.getMaxBet()==0)
+            {
+                System.out.println("***Max bet is 0...");
                 break;
             }
 
@@ -403,9 +416,6 @@ public class UIManager {
 
         }
 
-       currHand.resetPlayersBets();
-        currHand.setLastRaise(null);
-
     }
 
     private String nowPlay(Player currPlayer) {
@@ -459,12 +469,11 @@ public class UIManager {
                     if (currHand.getLastRaise() == null) {
 
                         Scanner scanner = new Scanner(System.in);
-                        System.out.print("What would you like to Bet to? ");
+                        System.out.print("How much would you like to Bet (Number between 1 -"+currHand.getMaxBet()+")? ");
                         betTO = Integer.parseInt(scanner.nextLine());
 
                         if (betTO <= currHand.getCurrentBet() || betTO > p.getChips() || betTO > currHand.getMaxBet()) {
-                            System.out.println("Please enter a valid bet: ");
-                            whatToDo=getUSerSelection();
+                            throw new NumberFormatException();
                         }
 
                         currHand.setCurrentBet(betTO);
@@ -506,7 +515,7 @@ public class UIManager {
                     try {
                         if (p.getType() == PlayerType.Human) {
                             Scanner scanner = new Scanner(System.in);
-                            System.out.print("What would you like to raise to (Number between 1 - "+currHand.getMaxBet()+")?");
+                            System.out.print("What would you like to raise to (Number between 1 - "+currHand.getMaxBet()+")? ");
                             raiseTo = Integer.parseInt(scanner.nextLine());
 
                         } else
