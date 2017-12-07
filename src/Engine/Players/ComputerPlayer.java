@@ -20,11 +20,12 @@ public class ComputerPlayer extends Player {
         //20/50 chance of Call
         //5/50 chance of Check
 
+
         if(randomNumber<10)
             return "F";
         else if (randomNumber<15)
             return "R";
-        else if (randomNumber<45)
+        else if (randomNumber<15)
             return "C";
         else
             return "K";

@@ -559,6 +559,7 @@ public class UIManager {
             if (whatToDo.equals("K")) {
                 if(p.getBet()==currHand.getCurrentBet())
                 {
+                    if(currHand.getLastRaise()==null)
                     currHand.setLastRaise(p);
                     p.setBet(currHand.getCurrentBet());
                     break;
