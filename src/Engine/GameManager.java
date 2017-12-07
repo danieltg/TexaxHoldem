@@ -4,10 +4,7 @@ package Engine;
 import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.GameDescriptor;
 import Engine.GameDescriptor.GameType;
-import Engine.Players.ComputerPlayer;
-import Engine.Players.HumanPlayer;
-import Engine.Players.Player;
-import Engine.Players.PlayerState;
+import Engine.Players.*;
 import UI.Boards.GameStateBoard;
 
 import java.io.Serializable;
@@ -195,6 +192,17 @@ public class GameManager implements Serializable {
             if (p.getState()==PlayerState.SMALL && p.getChips()<getSmall())
                 return false;
 
+        }
+
+        return true;
+    }
+
+    public boolean doesHumanPlayersHaveMoney() {
+
+        for (Player p:players)
+        {
+            if (p.getType()== PlayerType.Human && p.getChips()<=0)
+                return false;
         }
 
         return true;

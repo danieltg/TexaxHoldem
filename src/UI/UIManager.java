@@ -205,6 +205,13 @@ public class UIManager {
                 return;
             }
 
+            if (!gameManager.doesHumanPlayersHaveMoney()) {
+                System.out.println("We're sorry but the Human player does not have enough money to start the game.\n"
+                        + "You can select 6 in the main menu and get more money $$$");
+                gameManager.printGameState();
+                return;
+            }
+
             if(GameManager.handNumber <gameManager.getGameDescriptor().getStructure().getHandsCount())
             {
                 GameManager.handNumber++;
