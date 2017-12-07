@@ -106,12 +106,15 @@ public class GameManager implements Serializable {
         int n=(b+1)%numberOfPlayers;
 
         players.get(d).setState(PlayerState.DEALER);
+        players.get(n).setState(PlayerState.NONE);
         players.get(s).setState(PlayerState.SMALL);
         players.get(b).setState(PlayerState.BIG);
-        players.get(n).setState(PlayerState.NONE);
+
 
         players.get(s).setInitialAmount(gameDescriptor.getStructure().getBlindes().getSmall());
         players.get(b).setInitialAmount(gameDescriptor.getStructure().getBlindes().getBig());
+        players.get(d).setInitialAmount(0);
+        players.get(n).setInitialAmount(0);
 
         dealerIndex=d;
 

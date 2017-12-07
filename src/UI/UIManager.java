@@ -326,8 +326,9 @@ public class UIManager {
         }
 
         while (true) {
-            if (currHand.playersLeft() == 1) {
+            if (currHand.playersLeft() == 1 ||currHand.getMaxBet()==0) {
                 System.out.println("***Only one player left...");
+                GameStateBoard.printHandState(currHand.getPlayers(), currHand.printHand());
                 break;
             }
 
@@ -505,7 +506,7 @@ public class UIManager {
                     try {
                         if (p.getType() == PlayerType.Human) {
                             Scanner scanner = new Scanner(System.in);
-                            System.out.print("What would you like to raise to? ");
+                            System.out.print("What would you like to raise to (Number between 1 - "+currHand.getMaxBet()+")?");
                             raiseTo = Integer.parseInt(scanner.nextLine());
 
                         } else

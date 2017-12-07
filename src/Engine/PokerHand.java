@@ -35,7 +35,6 @@ public class PokerHand {
         pot=0;
         currentBet=0;
         round=0;
-
         tableCards=new Card[5];
         deck=new Deck();
 
@@ -54,17 +53,20 @@ public class PokerHand {
     }
 
     public void updateMaxBet() {
-        int maxBetByPlayers=players.get(0).getChips();
 
-        for (int i=1; i<numberOfPlayers; i++)
-        {
-            if (maxBetByPlayers>players.get(i).getChips())
-                maxBetByPlayers=players.get(i).getChips();
+        int maxBetByPlayers=players.get(whoIsInTheGame()).getChips();
+        for (Player p:players) {
+            if (p.isFolded()==false && maxBetByPlayers>p.getChips())
+                maxBetByPlayers=p.getChips();
         }
-        if(pot<=maxBetByPlayers)
+
+        if (maxBetByPlayers<=0)
+            maxBet = 0;
+        else if(pot<=maxBetByPlayers)
             maxBet=pot;
         else
             maxBet=maxBetByPlayers;
+
     }
 
 
