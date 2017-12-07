@@ -489,6 +489,7 @@ public class UIManager {
             if (whatToDo.equals("C")) {
                 currHand.subFromPot(p.getBet());
                 p.addChips(p.getBet());
+                currHand.updateMaxBet();
                 p.setBet(currHand.getCurrentBet());
 
                 break;
@@ -498,7 +499,7 @@ public class UIManager {
             if (whatToDo.equals("R")) {
                 currHand.subFromPot(p.getBet());
                 p.addChips(p.getBet());
-
+                currHand.updateMaxBet();
                 int raiseTo = 0;
                 while (raiseTo == 0) {
                     try {
