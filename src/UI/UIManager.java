@@ -255,7 +255,6 @@ public class UIManager {
     {
         currHand.resetPlayersBets();
         currHand.setLastRaise(null);
-        currHand.upRound();
     }
 
     private List<Winner> run(PokerHand currHand) throws Exception {
@@ -269,27 +268,30 @@ public class UIManager {
 
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
+        currHand.upRound();
 
-        notifyUser(1);
+        notifyUser(currHand.getRound());
 
         resetPlayerState();
 
         currHand.dealingFlopCards();
 
         collectBets();
+        currHand.upRound();
 
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
-        notifyUser(2);
+        notifyUser(currHand.getRound());
 
         resetPlayerState();
         currHand.dealingTurnCard();
         collectBets();
+        currHand.upRound();
 
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
-        notifyUser(3);
+        notifyUser(currHand.getRound());
 
         resetPlayerState();
         currHand.dealingRiverCard();
@@ -489,10 +491,11 @@ public class UIManager {
             if (whatToDo.equals("B")) {
                 int betTO = 0;
                 try {
-                    if (currHand.getLastRaise() == null) {
+                    if (currHand.getLastRaise() == null ||
+                            currHand.getLastRaise().getBet()==0) {
 
                         Scanner scanner = new Scanner(System.in);
-                        System.out.print("How much would you like to Bet (Number between 1 -"+currHand.getMaxBet()+")? ");
+                        System.out.print("How much would you like to Bet (Number between 1 - "+currHand.getMaxBet()+")? ");
                         betTO = Integer.parseInt(scanner.nextLine());
 
                         if (betTO <= currHand.getCurrentBet() || betTO > p.getChips() || betTO > currHand.getMaxBet()) {
@@ -511,7 +514,7 @@ public class UIManager {
                     }
 
                 } catch (NumberFormatException e) {
-                    System.out.println("Please enter a valid bet: ");
+                    System.out.println("Please enter a valid bet. Number between 1 - "+currHand.getMaxBet()+"");
                     betTO = 0;
                     continue; }
 
