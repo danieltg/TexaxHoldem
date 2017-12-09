@@ -137,7 +137,7 @@ public abstract class Player implements Serializable {
 
     public void collectBet()
     {
-        if ((chips-bet)<=0)
+        if ((chips-bet)<0)
             System.out.println("We have bug!!!");
         chips=chips-bet;
     }

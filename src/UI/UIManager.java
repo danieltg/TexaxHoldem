@@ -104,7 +104,9 @@ public class UIManager {
 
             case 4:
             {
-                try{ RunOneHand();}
+                try{
+
+                    RunOneHand();}
                 catch (GameStateException e) { System.out.println(e.getMessage()); }
                 break;
             }
@@ -256,15 +258,20 @@ public class UIManager {
         currHand.updateMaxBet();
 
         collectBets();
+        currHand.resetPlayersBets();
+        currHand.setLastRaise(null);
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
         currHand.upRound();
         currHand.setLastRaise(null);
+
         notifyUser(1);
         currHand.dealingFlopCards();
 
         collectBets();
+        currHand.resetPlayersBets();
+        currHand.setLastRaise(null);
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
@@ -274,6 +281,8 @@ public class UIManager {
         currHand.dealingTurnCard();
 
         collectBets();
+        currHand.resetPlayersBets();
+        currHand.setLastRaise(null);
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
@@ -283,6 +292,8 @@ public class UIManager {
         currHand.dealingRiverCard();
 
         collectBets();
+        currHand.resetPlayersBets();
+        currHand.setLastRaise(null);
         pressAnyKeyToContinue("Hand finished...\nPress enter to see who is the winner");
         return currHand.evaluateRound();
 
@@ -326,8 +337,7 @@ public class UIManager {
         int currIndex;
 
 
-        currHand.resetPlayersBets();
-        currHand.setLastRaise(null);
+
 
         if (currHand.getRound()==0) {
             System.out.println("***First round- before dealing Flop Cards ");
@@ -404,7 +414,7 @@ public class UIManager {
                     if(currPlayer.getChips()-currPlayer.getBet()<0)
                         System.out.println("we have bug");
                     currPlayer.collectBet();
-                    currPlayer.setBet(0);
+
                     System.out.println("***Chips player after the collection is: "+currPlayer.getChips());
 
                     System.out.println("***Curr max bet is: "+currHand.getMaxBet());
@@ -474,6 +484,7 @@ public class UIManager {
             if (whatToDo.equals("F")) {
                 p.setFolded(true);
                 System.out.println("***Player "+p.toString() +" is floded...");
+                p.setBet(0);
                 break;
             }
 
@@ -511,6 +522,7 @@ public class UIManager {
             }
 
             if (whatToDo.equals("C")) {
+
                 if(currHand.getCurrentBet()>p.getBet()) {
                     currHand.subFromPot(p.getBet());
                     p.addChips(p.getBet());
@@ -582,11 +594,11 @@ public class UIManager {
 
             }
             if (whatToDo.equals("K")) {
-                if(p.getBet()==currHand.getCurrentBet())
+                if(p.getBet()==currHand.getCurrentBet()&&currHand.getRound()>0)
                 {
                     if(currHand.getLastRaise()==null)
                     currHand.setLastRaise(p);
-                    p.setBet(currHand.getCurrentBet());
+                    p.setBet(0);
                     break;
                 }
                 else
