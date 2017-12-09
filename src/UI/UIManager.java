@@ -404,6 +404,7 @@ public class UIManager {
                     if(currPlayer.getChips()-currPlayer.getBet()<0)
                         System.out.println("we have bug");
                     currPlayer.collectBet();
+                    currPlayer.setBet(0);
                     System.out.println("***Chips player after the collection is: "+currPlayer.getChips());
 
                     System.out.println("***Curr max bet is: "+currHand.getMaxBet());
