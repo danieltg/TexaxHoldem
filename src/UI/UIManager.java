@@ -401,6 +401,8 @@ public class UIManager {
                     System.out.println("***Chips player before the collection is: "+currPlayer.getChips());
                     System.out.println("***Bet player is: "+currPlayer.getBet());
 
+                    if(currPlayer.getChips()-currPlayer.getBet()<0)
+                        System.out.println("we have bug");
                     currPlayer.collectBet();
                     System.out.println("***Chips player after the collection is: "+currPlayer.getChips());
 
@@ -508,12 +510,20 @@ public class UIManager {
             }
 
             if (whatToDo.equals("C")) {
-                currHand.subFromPot(p.getBet());
-                p.addChips(p.getBet());
-                currHand.updateMaxBet();
-                p.setBet(currHand.getCurrentBet());
+                if(currHand.getCurrentBet()>p.getBet()) {
+                    currHand.subFromPot(p.getBet());
+                    p.addChips(p.getBet());
+                    currHand.updateMaxBet();
+                    p.setBet(currHand.getCurrentBet());
 
-                break;
+                    break;
+                }
+                else  if(p.getType()==PlayerType.Human) {
+                    System.out.println("You can't Call now ,please choose other option");
+                    whatToDo=getUSerSelection();
+                }
+                else
+                    whatToDo=p.play();
 
             }
 

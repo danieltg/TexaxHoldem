@@ -229,6 +229,11 @@ public class PokerHand {
         players.get(b).setBet(blinde.getBig());
 
         pot = blinde.getSmall() +blinde.getBig();
+
+        if(players.get(s).getChips()-players.get(s).getBet()<0)
+            System.out.println("we have chips bug");
+        if(players.get(b).getChips()-players.get(b).getBet()<0)
+            System.out.println("we have chipa bug");
         players.get(s).collectBet();
         players.get(b).collectBet();
 
