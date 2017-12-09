@@ -92,6 +92,9 @@ public class GameManager implements Serializable {
 
     public void printGameState()
     {
+        System.out.println("========================================");
+        System.out.println("|      Game State                      |");
+        System.out.println("========================================");
         GameStateBoard.printGameState(players);
     }
 
@@ -151,6 +154,9 @@ public class GameManager implements Serializable {
         long minutes=TimeUnit.MILLISECONDS.toMinutes(totalTime);
         long seconds=TimeUnit.MILLISECONDS.toSeconds(totalTime)- TimeUnit.MINUTES.toSeconds(minutes);
 
+        System.out.println("========================================");
+        System.out.println("|      Game Statistics                 |");
+        System.out.println("========================================");
         System.out.println("Time: "+ minutes+ ":"+ seconds);
         System.out.println("Hands: "+handNumber+ "/"+this.getGameDescriptor().getStructure().getHandsCount());
         System.out.println("Max pot: "+maxPot);

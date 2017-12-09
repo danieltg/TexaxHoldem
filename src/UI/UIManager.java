@@ -251,50 +251,54 @@ public class UIManager {
         else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
     }
 
+    private void resetPlayerState()
+    {
+        currHand.resetPlayersBets();
+        currHand.setLastRaise(null);
+        currHand.upRound();
+    }
+
     private List<Winner> run(PokerHand currHand) throws Exception {
+        resetPlayerState();
 
         currHand.dealingHoleCards();
         currHand.betSmallAndBig();
         currHand.updateMaxBet();
 
         collectBets();
-        currHand.resetPlayersBets();
-        currHand.setLastRaise(null);
+
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
-        currHand.upRound();
-        currHand.setLastRaise(null);
-
         notifyUser(1);
+
+        resetPlayerState();
+
         currHand.dealingFlopCards();
 
         collectBets();
-        currHand.resetPlayersBets();
-        currHand.setLastRaise(null);
+
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
 
-        currHand.upRound();
-        currHand.setLastRaise(null);
         notifyUser(2);
-        currHand.dealingTurnCard();
 
+        resetPlayerState();
+        currHand.dealingTurnCard();
         collectBets();
-        currHand.resetPlayersBets();
-        currHand.setLastRaise(null);
+
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
-
-        currHand.upRound();
         notifyUser(3);
-        currHand.setLastRaise(null);
-        currHand.dealingRiverCard();
 
+        resetPlayerState();
+        currHand.dealingRiverCard();
         collectBets();
-        currHand.resetPlayersBets();
-        currHand.setLastRaise(null);
-        pressAnyKeyToContinue("Hand finished...\nPress enter to see who is the winner");
+
+        System.out.println("Hand finished...");
+        GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
+        pressAnyKeyToContinue("Press enter to see who is the winner");
+
         return currHand.evaluateRound();
 
     }
@@ -323,21 +327,15 @@ public class UIManager {
 
     private void pressAnyKeyToContinue(String str)
     {
+
         System.out.print(str);
-        try
-        {
-            System.in.read();
-        }
-        catch(Exception e)
-        {}
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     private void collectBets() {
         int p;
         int currIndex;
-
-
-
 
         if (currHand.getRound()==0) {
             System.out.println("***First round- before dealing Flop Cards ");
