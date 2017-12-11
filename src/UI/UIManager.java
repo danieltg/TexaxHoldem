@@ -35,12 +35,12 @@ public class UIManager {
         if (gameManager.GetStateOfGame() !=CurrGameState.Started && gameManager.GetStateOfGame()!=CurrGameState.RunningHand) {
             try {
                 Scanner scanner = new Scanner(System.in);
-                System.out.print("Enter a file name: ");
+                System.out.println("Which configuration game file (.xml) would you like to load? Please provide full path including file extension");
                 System.out.flush();
                 String filename = scanner.nextLine();
                 gameManager.setGameDescriptor(ReadGameDescriptorFile.readFile(filename));
                 gameManager.setTable();
-                System.out.println("Configuration file loaded successfully...");
+                System.out.println("Configuration file was loaded successfully...");
                 gameManager.printGameState();
 
             } catch (Exception e) {
@@ -66,7 +66,7 @@ public class UIManager {
                 runOption(selectedMainOption);
 
             } catch (NumberFormatException ne) {
-                System.out.println("***Your input is not a valid option , please try again.");
+                System.out.println("Your input is invalid, it must be a number between 1- 10. Please try again.");
                 TimeUnit.MILLISECONDS.sleep(500);
             }
 
@@ -140,7 +140,7 @@ public class UIManager {
     }
 
     private void exitGame() {
-        System.out.println("Thanks for using Texas Hold'em.");
+        System.out.println("Thanks for playing Texas Hold'em.");
         System.exit(0);
     }
 
@@ -149,17 +149,17 @@ public class UIManager {
             gameManager.buy();
             System.out.println("Buy operation completed successfully");
         }
-        else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
+        else throw new GameStateException(GameStateException.INVALID_VALUE+": game must be started before choosing this option");
     }
 
     private void LoadGame() {
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("What Game file would you like to load? Please provide full path");
+            System.out.println("Which game file would you like to load? Please provide full path including file extension");
             System.out.flush();
             String filename = scanner.nextLine();
             gameManager=SaveGameState.loadGameDataFromFile(filename);
-            System.out.println("Game file loaded successfully...");
+            System.out.println("Game file was loaded successfully...");
         } catch (Exception e) {
             System.out.println("Failed to load game from file. Please check your file name");
         }
@@ -172,12 +172,13 @@ public class UIManager {
         {
             try {
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Where would you like to save the file (Please give full path include file extension)?");
+                System.out.println("Where would you like to save the file (Please write full path including file extension)?");
                 System.out.flush();
                 String filename = scanner.nextLine();
                 SaveGameState.saveGameDataToFile(filename,gameManager);
+                System.out.println("Game file was saved successfully");
             } catch (IOException e) {
-                System.out.println("Failed to save Game data");
+                System.out.println("Failed to save game data");
             }
 
         }
@@ -185,22 +186,22 @@ public class UIManager {
 
     private void leaveTheCurrentGame() throws GameStateException {
         if(gameManager.GetStateOfGame()==CurrGameState.Started) {
-            System.out.println("Alright, you leaved the game... You can either start a new one or exit the game");
+            System.out.println("Alright, you quit the game... You can either start a new one or exit the game");
             gameManager.resetGame();
         }
-        else throw new GameStateException(GameStateException.INVALID_VALUE+":before you can use this option,game must be running");
+        else throw new GameStateException(GameStateException.INVALID_VALUE+":game must be started before choosing this option");
     }
 
     private void getStatistics() throws GameStateException {
         if(gameManager.GetStateOfGame() ==CurrGameState.Started)
             gameManager.getStatistics();
-        else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
+        else throw new GameStateException(GameStateException.INVALID_VALUE+": game must be started before choosing this option");
     }
 
     private void RunOneHand() throws Exception {
         if(gameManager.GetStateOfGame() ==CurrGameState.Started)
         {
-            if (!gameManager.doesBigAndSallPlayersHaveMoney()) {
+            if (!gameManager.doesBigAndSmallPlayersHaveMoney()) {
                 System.out.println("We're sorry but at least one of the player (Big or Small) does not have enough money to start the game.\n"
                         + "We need " + gameManager.getBig() + "$ for Big and " + gameManager.getSmall() + "$ for Small");
                 gameManager.printGameState();
@@ -224,6 +225,10 @@ public class UIManager {
 
                 List<Winner> winners= run(currHand);
 
+                System.out.println("Hand finished...");
+                //GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
+                pressAnyKeyToContinue("Press Enter to see who is the winner");
+
                 //inc the handsWon for each winner
                 for (Winner w: winners) {
                   w.getPlayer().isAWinner();
@@ -237,18 +242,20 @@ public class UIManager {
                 //Print the game statistic at the end of hand
                 gameManager.getStatistics();
 
-                gameManager.setRoles(gameManager.getdealerIndex()+1);
+                gameManager.setRoles(gameManager.getDealerIndex()+1);
                 gameManager.setMoneyFromLastHand(currHand.getPot()%winners.size());
             }
             else
             {
-                throw new GameStateException(GameStateException.INVALID_VALUE + ": ran out of hands");
+                gameManager.setStateOfGame(CurrGameState.Initialized);
+                gameManager.setTable();
+                throw new GameStateException(GameStateException.INVALID_VALUE + ": ran out of hands. You can re-start the game (option number 2)");
             }
 
 
         }
 
-        else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
+        else throw new GameStateException(GameStateException.INVALID_VALUE+": game must be started before choosing this option");
     }
 
     private void resetPlayerState()
@@ -268,6 +275,7 @@ public class UIManager {
 
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
+
         currHand.upRound();
 
         notifyUser(currHand.getRound());
@@ -297,10 +305,6 @@ public class UIManager {
         currHand.dealingRiverCard();
         collectBets();
 
-        System.out.println("Hand finished...");
-        GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
-        pressAnyKeyToContinue("Press enter to see who is the winner");
-
         return currHand.evaluateRound();
 
     }
@@ -313,7 +317,7 @@ public class UIManager {
         while (true)
         {
             currIndex = (p + currHand.getDealer()) % currHand.getNumberOfPlayers();
-            if (currHand.getPlayers().get(currIndex).isFolded()==false) {
+            if (!currHand.getPlayers().get(currIndex).isFolded()) {
                 currHand.getPlayers().get(currIndex).itIsMyTurn();
                 break;
             }
@@ -323,7 +327,7 @@ public class UIManager {
 
         System.out.println("Here is the hand state after "+round +" round(s) of bet");
         GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
-        pressAnyKeyToContinue("Press Enter to continue the next bet round...");
+        pressAnyKeyToContinue("Press Enter to continue to the next bet round...");
 
     }
 
@@ -340,14 +344,14 @@ public class UIManager {
         int currIndex;
 
         if (currHand.getRound()==0) {
-            System.out.println("***First round- before dealing Flop Cards ");
+            //System.out.println("***First round- before dealing Flop Cards ");
             currHand.setLastRaise(currHand.getPlayers().get((2 + currHand.getDealer()) %currHand.getNumberOfPlayers()));
-            System.out.println("***Last Raise was by Player with ID: " +currHand.getLastRaise().toString());
+            //System.out.println("***Last Raise was by Player with ID: " +currHand.getLastRaise().toString());
             p = 3;
            currHand.setCurrentBet(currHand.getBlinde().getBig());
         }
         else {
-            System.out.println("***New bets round");
+            //System.out.println("***New bets round");
             p = 1;
             currHand.setCurrentBet(0);
         }
@@ -355,82 +359,74 @@ public class UIManager {
         while (true) {
 
             if (currHand.playersLeft() == 1) {
-                System.out.println("***Only one player left...");
+                //System.out.println("***Only one player left...");
                 GameStateBoard.printHandState(currHand.getPlayers(), currHand.printHand());
                 break;
             }
 
             if (currHand.getMaxBet()==0)
             {
-                System.out.println("***Max bet is 0...");
+                //System.out.println("***Max bet is 0...");
+                GameStateBoard.printHandState(currHand.getPlayers(), currHand.printHand());
                 break;
             }
 
-            if (p>10)
-            {
-                System.out.println("***We stuck");
-            }
 
             currIndex = (p + currHand.getDealer()) % currHand.getNumberOfPlayers();
             Player currPlayer =currHand.getPlayers().get(currIndex);
             currPlayer.itIsMyTurn();
-            System.out.println("***Player "+currPlayer.toString() +" is playing now");
+           // System.out.println("***Player "+currPlayer.toString() +" is playing now");
 
 
             if (currHand.getLastRaise()==currPlayer || currHand.isAllCheckOccurred()) {
                 currPlayer.itIsNotMyTurn();
-                System.out.println("***We finished one round of bets");
+                //System.out.println("***We finished one round of bets");
                 break;
             }
 
-            //השחקן הנוכחי הוא לא השחקן האחרון שעשה רייס וגם עוד לא פרשתי
-            if (currHand.getLastRaise() != currPlayer && currPlayer.getCheckOccurred()==false) {
-                //אם הוא לא פרש ויש לו כסף בקופה
-                if (currPlayer.isFolded()==false
+            if (currHand.getLastRaise() != currPlayer && !currPlayer.getCheckOccurred()) {
+                if (!currPlayer.isFolded()
                         && currPlayer.getChips() > 0) {
 
-                    System.out.println("***Player "+currPlayer.toString() +" is not the last player who Raised and he didn't floded and his chips is begger than 0");
+                    //System.out.println("***Player "+currPlayer.toString() +" is not the last player who Raised and he didn't floded and his chips is begger than 0");
 
                     if(currPlayer.getType()== PlayerType.Human) {
-                        System.out.println("***Player is Human... I'm going to print the Hand");
+                        //System.out.println("***Player is Human... I'm going to print the Hand");
                         GameStateBoard.printHandState(currHand.getPlayers(), currHand.printHand());
                     }
 
                   doThis(nowPlay(currPlayer),currPlayer);
 
                   if(currPlayer.getType()==PlayerType.Human && currPlayer.isFolded()) {
-                      System.out.println("***Player is Human and he folded... we are going to end the hand");
+                      //System.out.println("***Player is Human and he folded... we are going to end the hand");
                       currPlayer.setBet(0);
                       return;
                   }
 
-                    System.out.println("***Pot before the action is: "+currHand.getPot());
+                    //System.out.println("***Pot before the action is: "+currHand.getPot());
                     currHand.addToPot(currPlayer.getBet());
-                    System.out.println("***Pot after the action is: "+currHand.getPot());
+                    //System.out.println("***Pot after the action is: "+currHand.getPot());
 
-                    System.out.println("***Chips player before the collection is: "+currPlayer.getChips());
-                    System.out.println("***Bet player is: "+currPlayer.getBet());
+                    //System.out.println("***Chips player before the collection is: "+currPlayer.getChips());
+                    //System.out.println("***Bet player is: "+currPlayer.getBet());
 
-                    if(currPlayer.getChips()-currPlayer.getBet()<0)
-                        System.out.println("we have bug");
                     currPlayer.collectBet();
 
-                    System.out.println("***Chips player after the collection is: "+currPlayer.getChips());
+                    //System.out.println("***Chips player after the collection is: "+currPlayer.getChips());
 
-                    System.out.println("***Curr max bet is: "+currHand.getMaxBet());
+                    //System.out.println("***Curr max bet is: "+currHand.getMaxBet());
                     currHand.updateMaxBet();
-                    System.out.println("***New max bet is: "+currHand.getMaxBet());
+                    //System.out.println("***New max bet is: "+currHand.getMaxBet());
 
                 } else {
                     if(currPlayer.isFolded()) {
-                        System.out.println("***Player " + currPlayer.toString() + " is folded ");
+                        //System.out.println("***Player " + currPlayer.toString() + " is folded ");
                         currPlayer.setBet(0);
                     }
                     else
                     {
-                        System.out.println("***Player " + currPlayer.toString() + " is  without chips");
+                        //System.out.println("***Player " + currPlayer.toString() + " is  without chips");
                     }
-                    //break;
                 }
             }
 
@@ -445,7 +441,7 @@ public class UIManager {
     private String nowPlay(Player currPlayer) {
 
         if (currPlayer.getType()==PlayerType.Computer) {
-            System.out.println("***Player is Computer... I'm not going to print the Hand");
+            //System.out.println("***Player is Computer... I'm not going to print the Hand");
             return currPlayer.play();
         }
         else {
@@ -477,13 +473,13 @@ public class UIManager {
    }
     private void doThis(String whatToDo, Player p) {
 
-        System.out.println("***Here is what the player want to do: "+whatToDo);
+        //System.out.println("***Here is what the player want to do: "+whatToDo);
 
         while (true) {
 
             if (whatToDo.equals("F")) {
                 p.setFolded(true);
-                System.out.println("***Player "+p.toString() +" is floded...");
+                //System.out.println("***Player "+p.toString() +" is floded...");
                 p.setBet(0);
                 break;
             }
@@ -495,7 +491,7 @@ public class UIManager {
                             currHand.getLastRaise().getBet()==0) {
 
                         Scanner scanner = new Scanner(System.in);
-                        System.out.print("How much would you like to Bet (Number between 1 - "+currHand.getMaxBet()+")? ");
+                        System.out.print("How much would you like to Bet (number between 1 - "+currHand.getMaxBet()+")? ");
                         betTO = Integer.parseInt(scanner.nextLine());
 
                         if (betTO <= currHand.getCurrentBet() || betTO > p.getChips() || betTO > currHand.getMaxBet()) {
@@ -514,7 +510,7 @@ public class UIManager {
                     }
 
                 } catch (NumberFormatException e) {
-                    System.out.println("Please enter a valid bet. Number between 1 - "+currHand.getMaxBet()+"");
+                    System.out.println("Your input is invalid. Your bet must be number between 1 - "+currHand.getMaxBet()+"");
                     betTO = 0;
                     continue; }
 
@@ -542,21 +538,28 @@ public class UIManager {
             }
 
             if (whatToDo.equals("R")) {
+
                 currHand.subFromPot(p.getBet());
                 p.addChips(p.getBet());
                 currHand.updateMaxBet();
+
                 int raiseTo = 0;
                 while (raiseTo == 0) {
                     try {
+
+                        int maybeNewMaxBet= p.getChips()-currHand.getCurrentBet();
+                        if (maybeNewMaxBet<currHand.getMaxBet())
+                            currHand.setMaxBet(maybeNewMaxBet);
+
                         if (p.getType() == PlayerType.Human) {
                             Scanner scanner = new Scanner(System.in);
-                            System.out.print("What would you like to raise to (Number between 1 - "+currHand.getMaxBet()+")? ");
+                            System.out.print("What number would you like to raise to (number between 1 - "+currHand.getMaxBet()+")? ");
                             raiseTo = Integer.parseInt(scanner.nextLine());
 
                         } else
                             raiseTo = p.getRaise(1,currHand.getMaxBet());
                     } catch (NumberFormatException e) {
-                        System.out.println("Your input is not valid. Raise must be a number between 1 - " +currHand.getMaxBet()+
+                        System.out.println("Your input is invalid. Raise must be a number between 1 - " +currHand.getMaxBet()+
                                 ", please try again.");
                         raiseTo = 0;
                         continue;
@@ -577,13 +580,13 @@ public class UIManager {
 
                 }
 
-                System.out.println("***Bet before raise: "+currHand.getCurrentBet());
+                //System.out.println("***Bet before raise: "+currHand.getCurrentBet());
 
                 currHand.setCurrentBet(currHand.getCurrentBet()+ raiseTo);
-                System.out.println("***Bet after raise: "+currHand.getCurrentBet());
+                //System.out.println("***Bet after raise: "+currHand.getCurrentBet());
 
                 currHand.setLastRaise(p);
-                System.out.println("***Last Raise player is now player with ID: "+p.getId());
+                //System.out.println("***Last Raise player is now player with ID: "+p.getId());
 
                 for(Player player:currHand.getPlayers())
                     {
@@ -622,7 +625,7 @@ public class UIManager {
     private void showGameState() throws GameStateException {
         if(gameManager.GetStateOfGame() ==CurrGameState.Started||gameManager.GetStateOfGame() ==CurrGameState.Initialized)
             gameManager.printGameState();
-        else throw new GameStateException(GameStateException.INVALID_VALUE+": before you can use this option, game must be running");
+        else throw new GameStateException(GameStateException.INVALID_VALUE+": game must be started before choosing this option");
     }
 
     private void startGame() throws GameStateException {

@@ -1,7 +1,5 @@
 package Engine.Players;
 
-import Engine.GameManager;
-
 public enum PlayerState {
 
     DEALER("D"),

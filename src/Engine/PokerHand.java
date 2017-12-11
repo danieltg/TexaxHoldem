@@ -56,7 +56,7 @@ public class PokerHand {
 
         int maxBetByPlayers=players.get(whoIsInTheGame()).getChips();
         for (Player p:players) {
-            if (p.isFolded()==false && maxBetByPlayers>p.getChips())
+            if (!p.isFolded() && maxBetByPlayers>p.getChips())
                 maxBetByPlayers=p.getChips();
         }
 
@@ -336,5 +336,10 @@ public class PokerHand {
         }
 
         return true;
+    }
+
+    public void setMaxBet(int newMaxbet)
+    {
+        maxBet=newMaxbet;
     }
 }

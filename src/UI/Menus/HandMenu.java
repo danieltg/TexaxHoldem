@@ -5,16 +5,16 @@ import java.util.Scanner;
 public class HandMenu {
 
     public static void print() {
-        System.out.println("========================================");
-        System.out.println("|   Hand MENU                          |");
-        System.out.println("========================================");
-        System.out.println("| Please make a selection:             |");
-        System.out.println("|   F  Fold                            |");
-        System.out.println("|   B  Bet                             |");
-        System.out.println("|   C  Call                            |");
-        System.out.println("|   K  Check                           |");
-        System.out.println("|   R  Raise                           |");
-        System.out.println("========================================");
+        System.out.println("================================================");
+        System.out.println("|   Hand MENU                                  |");
+        System.out.println("================================================");
+        System.out.println("| Please make a selection:                     |");
+        System.out.println("|   F for Fold                                 |");
+        System.out.println("|   B for Bet                                  |");
+        System.out.println("|   C for Call                                 |");
+        System.out.println("|   K for Check                                |");
+        System.out.println("|   R for Raise                                |");
+        System.out.println("================================================");
     }
 
     public static String getOptionFromUser() {

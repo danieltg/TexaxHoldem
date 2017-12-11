@@ -95,7 +95,11 @@ public abstract class Player implements Serializable {
         else
             list.add("State: "+this.state.getState()+" ("+initialAmount+")");
 
-        list.add("Chips: "+this.chips);
+        if (chips<1)
+            list.add("Chips: 0");
+        else
+            list.add("Chips: "+this.chips);
+
         list.add("Buys: "+this.numbersOfBuy);
         list.add("Hands won: "+this.handsWon+"/"+ GameManager.handNumber);
         return list;
@@ -120,7 +124,11 @@ public abstract class Player implements Serializable {
         else
             list.add("Bet: "+this.bet);
 
-        list.add("Chips: "+this.chips);
+        if (chips<1)
+            list.add("Chips: 0");
+        else
+            list.add("Chips: "+this.chips);
+
         if (isFolded())
             list.add("***Folded***");
 

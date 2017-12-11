@@ -6,7 +6,7 @@
         <HandsCount>5</HandsCount>
         <Buy>100</Buy>
         <Blindes fixed="true">
-            <Big>4</Big>
+            <Big>14</Big>
             <Small>12</Small>
         </Blindes>
     </Structure>
