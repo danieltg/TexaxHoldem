@@ -22,7 +22,7 @@ public class GameManager implements Serializable {
     private int numberOfPlayers=NUM_OF_COMPUTER_PLAYERS+NUM_OF_HUMAN_PLAYERS;
     private GameDescriptor gameDescriptor;
     private CurrGameState stateOfGame;
-    private List<Player> players= new ArrayList<>();
+    private List<PokerPlayer> players= new ArrayList<>();
     private int dealerIndex;
     private int maxPot;
     private Date startTime;
@@ -180,7 +180,7 @@ public class GameManager implements Serializable {
         setTable();
     }
 
-    public List<Player> getPlayers() {
+    public List<PokerPlayer> getPlayers() {
         return players;
     }
 
@@ -190,7 +190,7 @@ public class GameManager implements Serializable {
 
     public boolean doesBigAndSmallPlayersHaveMoney()
     {
-        for(Player p: players)
+        for(PokerPlayer p: players)
         {
             if (p.getState()==PlayerState.BIG && p.getChips()<getBig())
                 return false;
@@ -205,7 +205,7 @@ public class GameManager implements Serializable {
 
     public boolean doesHumanPlayersHaveMoney() {
 
-        for (Player p:players)
+        for (PokerPlayer p:players)
         {
             if (p.getType()== PlayerType.Human && p.getChips()<=0)
                 return false;

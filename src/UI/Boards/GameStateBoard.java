@@ -1,17 +1,17 @@
 package UI.Boards;
 
-import Engine.Players.Player;
+import Engine.Players.PokerPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameStateBoard {
 
-    public static void printHandState(List<Player> players,String str)
+    public static void printHandState(List<PokerPlayer> players,String str)
     {
         int maxLength=getMaxLength(players,"HandState");
 
-        List<Player> tmp = new ArrayList<>();
+        List<PokerPlayer> tmp = new ArrayList<>();
         tmp.add(players.get(0));
         tmp.add(players.get(3));
 
@@ -29,13 +29,13 @@ public class GameStateBoard {
     }
 
 
-    public static int getMaxLength(List<Player> players,String str)
+    public static int getMaxLength(List<PokerPlayer> players,String str)
     {
 
         int maxLength=0;
 
         List<String> list = new ArrayList<>();
-        for(Player p:players ) {
+        for(PokerPlayer p:players ) {
             if (str.equals("GameSate"))
                 list.addAll(p.listOfDetails());
             else
@@ -50,11 +50,11 @@ public class GameStateBoard {
 
         return maxLength;
     }
-  public static void printGameState ( List<Player> players)
+  public static void printGameState ( List<PokerPlayer> players)
   {
       int maxLength=getMaxLength(players,"GameSate");
 
-      List<Player> tmp = new ArrayList<>();
+      List<PokerPlayer> tmp = new ArrayList<>();
       tmp.add(players.get(0));
       tmp.add(players.get(3));
 
@@ -65,7 +65,7 @@ public class GameStateBoard {
       tmp.add(players.get(2));
       printTwoPlayers(tmp,maxLength);
   }
-    private static void printTwoPlayers(List<Player> players, int maxLength)
+    private static void printTwoPlayers(List<PokerPlayer> players, int maxLength)
     {
         String s;
         printBorder(maxLength,players.size());
@@ -114,7 +114,7 @@ public class GameStateBoard {
     }
 
 
-    private static void printTwoPlayersForHand(List<Player> players, int maxLength)
+    private static void printTwoPlayersForHand(List<PokerPlayer> players, int maxLength)
     {
         printBorder(maxLength,players.size());
         String s;

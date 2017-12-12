@@ -5,7 +5,7 @@ import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.Blindes;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 
-import Engine.Players.Player;
+import Engine.Players.PokerPlayer;
 import Engine.Players.PlayerType;
 import UI.Boards.GameStateBoard;
 import UI.Menus.HandMenu;
@@ -373,7 +373,7 @@ public class UIManager {
 
 
             currIndex = (p + currHand.getDealer()) % currHand.getNumberOfPlayers();
-            Player currPlayer =currHand.getPlayers().get(currIndex);
+            PokerPlayer currPlayer =currHand.getPlayers().get(currIndex);
             currPlayer.itIsMyTurn();
            // System.out.println("***Player "+currPlayer.toString() +" is playing now");
 
@@ -438,7 +438,7 @@ public class UIManager {
 
     }
 
-    private String nowPlay(Player currPlayer) {
+    private String nowPlay(PokerPlayer currPlayer) {
 
         if (currPlayer.getType()==PlayerType.Computer) {
             //System.out.println("***Player is Computer... I'm not going to print the Hand");
@@ -471,7 +471,7 @@ public class UIManager {
        return selection;
 
    }
-    private void doThis(String whatToDo, Player p) {
+    private void doThis(String whatToDo, PokerPlayer p) {
 
         //System.out.println("***Here is what the player want to do: "+whatToDo);
 
@@ -588,7 +588,7 @@ public class UIManager {
                 currHand.setLastRaise(p);
                 //System.out.println("***Last Raise player is now player with ID: "+p.getId());
 
-                for(Player player:currHand.getPlayers())
+                for(PokerPlayer player:currHand.getPlayers())
                     {
                         if(player!=p)
                             player.setCheckOccurred(false);

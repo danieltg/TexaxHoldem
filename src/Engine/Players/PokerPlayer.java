@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class Player implements Serializable {
+public abstract class PokerPlayer implements Serializable {
 
     private PlayerType type;
     private PlayerState state;
@@ -27,7 +27,7 @@ public abstract class Player implements Serializable {
     boolean checkOccurred = false;
     private int initialAmount;
 
-    public Player(int playerID){
+    public PokerPlayer(int playerID){
 
         chips=0;
         bet =0;

@@ -2,7 +2,7 @@ package Engine.Players;
 
 import java.util.Random;
 
-public class ComputerPlayer extends Player {
+public class ComputerPlayer extends PokerPlayer {
 
     public ComputerPlayer(int id)
     {

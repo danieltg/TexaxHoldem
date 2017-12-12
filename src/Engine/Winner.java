@@ -1,22 +1,22 @@
 package Engine;
 
-import Engine.Players.Player;
+import Engine.Players.PokerPlayer;
 
 import java.io.Serializable;
 
 public class Winner implements Serializable {
 
-    private Player player;
+    private PokerPlayer player;
     private String handRank;
 
-    public Winner(Player player, String handRank) {
+    public Winner(PokerPlayer player, String handRank) {
         this.player = player;
         this.handRank = handRank;
     }
     public String getHandRank() {
         return handRank;
     }
-    public Player getPlayer() {
+    public PokerPlayer getPlayer() {
         return player;
     }
 

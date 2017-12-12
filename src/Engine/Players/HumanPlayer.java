@@ -3,7 +3,7 @@ package Engine.Players;
 
 import java.util.List;
 
-public class HumanPlayer extends Player {
+public class HumanPlayer extends PokerPlayer {
 
     public HumanPlayer(int id)
     {

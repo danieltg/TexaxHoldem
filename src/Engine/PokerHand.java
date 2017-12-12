@@ -5,7 +5,7 @@ import Engine.DeckOfCards.Deck;
 import Engine.DeckOfCards.Rank;
 import Engine.DeckOfCards.Suit;
 import Engine.GameDescriptor.Blindes;
-import Engine.Players.Player;
+import Engine.Players.PokerPlayer;
 import Engine.Players.PlayerState;
 import Engine.Players.PlayerType;
 import com.rundef.poker.EquityCalculator;
@@ -20,7 +20,7 @@ public class PokerHand {
     private Card[] tableCards;
     private int maxBet;
     private int numberOfPlayers;
-    private List<Player> players;
+    private List<PokerPlayer> players;
     private Deck deck;
     private Blindes blinde;
     private int currentBet;   //Current bet amount that must be called/raised
@@ -28,9 +28,9 @@ public class PokerHand {
     private int b;
     private int s;
     private int round;
-    private Player lastRaise=null;
+    private PokerPlayer lastRaise=null;
 
-    public PokerHand(Blindes gameBlinde, List<Player> playersInHand)
+    public PokerHand(Blindes gameBlinde, List<PokerPlayer> playersInHand)
     {
         pot=0;
         currentBet=0;
@@ -55,7 +55,7 @@ public class PokerHand {
     public void updateMaxBet() {
 
         int maxBetByPlayers=players.get(whoIsInTheGame()).getChips();
-        for (Player p:players) {
+        for (PokerPlayer p:players) {
             if (!p.isFolded() && maxBetByPlayers>p.getChips())
                 maxBetByPlayers=p.getChips();
         }
@@ -103,7 +103,7 @@ public class PokerHand {
         //Human player left the game
         else
         {
-            for (Player p:players)
+            for (PokerPlayer p:players)
             {
                 if (!p.isFolded()) {
                     String cards = p.getHoleCards();
@@ -148,7 +148,7 @@ public class PokerHand {
 
         calculator.setBoardFromString(tableCardsStr.toString());
 
-        for (Player p:players)
+        for (PokerPlayer p:players)
         {
             if (!p.isFolded())
             {
@@ -167,7 +167,7 @@ public class PokerHand {
         List<Integer> winningHands= calculator.getWinningHands();
         for (int index: winningHands)
         {
-            Player p=getActivePlayerInIndex(index);
+            PokerPlayer p=getActivePlayerInIndex(index);
             String handRanking=calculator.getHandRanking(index).toString();
             Winner tmp=new Winner(p,handRanking);
             winnersList.add(tmp);
@@ -176,11 +176,11 @@ public class PokerHand {
         return winnersList;
     }
 
-    private Player getActivePlayerInIndex(int index) {
+    private PokerPlayer getActivePlayerInIndex(int index) {
 
         int i=0;
 
-        for (Player p:players)
+        for (PokerPlayer p:players)
         {
             if (!p.isFolded())
             {
@@ -196,7 +196,7 @@ public class PokerHand {
 
     public void resetPlayersBets()
     {
-        for (Player p:players) {
+        for (PokerPlayer p:players) {
             p.setCheckOccurred(false);
             p.itIsNotMyTurn();
             p.setBet(0);
@@ -214,7 +214,7 @@ public class PokerHand {
     // Deal cards to all players
     public void dealingHoleCards()
     {
-        for (Player p:players)
+        for (PokerPlayer p:players)
         {
             p.setFolded(false);
             for (int i=0; i<2; i++)
@@ -257,7 +257,7 @@ public class PokerHand {
     {
         int count=0;
 
-        for (Player p:players) {
+        for (PokerPlayer p:players) {
             if (!p.isFolded())
                 count++;
         }
@@ -267,7 +267,7 @@ public class PokerHand {
     }
 
 
-    public List<Player> getPlayers() {
+    public List<PokerPlayer> getPlayers() {
         return players;
     }
 
@@ -275,7 +275,7 @@ public class PokerHand {
         return round;
     }
 
-    public void setLastRaise(Player lastRaisePlayer) {
+    public void setLastRaise(PokerPlayer lastRaisePlayer) {
         lastRaise=lastRaisePlayer;
     }
 
@@ -295,7 +295,7 @@ public class PokerHand {
         return blinde;
     }
 
-    public Player getLastRaise() {
+    public PokerPlayer getLastRaise() {
         return lastRaise;
     }
 
@@ -320,7 +320,7 @@ public class PokerHand {
     }
 
     public boolean humanIsLeft() {
-        for(Player p:players)
+        for(PokerPlayer p:players)
         {
             if(p.isFolded()&&p.getType()==PlayerType.Human)
                 return true;
@@ -329,7 +329,7 @@ public class PokerHand {
     }
 
     public boolean isAllCheckOccurred() {
-        for (Player p:players)
+        for (PokerPlayer p:players)
         {
             if (!p.getCheckOccurred())
                 return false;
