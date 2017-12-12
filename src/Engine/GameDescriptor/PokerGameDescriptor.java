@@ -1,16 +1,24 @@
 package Engine.GameDescriptor;
 
+import Jaxb.GameDescriptor;
+
 import java.io.Serializable;
 
-public class GameDescriptor implements Serializable {
+public class PokerGameDescriptor implements Serializable {
 
     private GameType type;
-    private Structure structure;
+    private PokerStructure structure;
 
     public final static int NUM_OF_HUMAN_PLAYERS= 1;
     public final static int NUM_OF_COMPUTER_PLAYERS= 3;
 
-    public GameDescriptor(GameType type, Structure structure) {
+    public PokerGameDescriptor (GameDescriptor g)
+    {
+        type= GameType.valueOf(g.getGameType());
+        structure=new PokerStructure((g.getStructure()));
+    }
+
+    public PokerGameDescriptor(GameType type, PokerStructure structure) {
         this.type = type;
         this.structure = structure;
     }
@@ -19,7 +27,7 @@ public class GameDescriptor implements Serializable {
         return type;
     }
 
-    public Structure getStructure() {
+    public PokerStructure getStructure() {
         return structure;
     }
 

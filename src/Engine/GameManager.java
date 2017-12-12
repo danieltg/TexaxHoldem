@@ -2,7 +2,7 @@ package Engine;
 
 
 import Engine.Exceptions.GameStateException;
-import Engine.GameDescriptor.GameDescriptor;
+import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.GameDescriptor.GameType;
 import Engine.Players.*;
 import UI.Boards.GameStateBoard;
@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import static Engine.GameDescriptor.GameDescriptor.NUM_OF_COMPUTER_PLAYERS;
-import static Engine.GameDescriptor.GameDescriptor.NUM_OF_HUMAN_PLAYERS;
+import static Engine.GameDescriptor.PokerGameDescriptor.NUM_OF_COMPUTER_PLAYERS;
+import static Engine.GameDescriptor.PokerGameDescriptor.NUM_OF_HUMAN_PLAYERS;
 
 public class GameManager implements Serializable {
 
     private int numberOfPlayers=NUM_OF_COMPUTER_PLAYERS+NUM_OF_HUMAN_PLAYERS;
-    private GameDescriptor gameDescriptor;
+    private PokerGameDescriptor gameDescriptor;
     private CurrGameState stateOfGame;
     private List<PokerPlayer> players= new ArrayList<>();
     private int dealerIndex;
@@ -45,7 +45,7 @@ public class GameManager implements Serializable {
         this.moneyFromLastHand = moneyFromLastHand;
     }
 
-    public void setGameDescriptor(GameDescriptor gameDescriptor) {
+    public void setGameDescriptor(PokerGameDescriptor gameDescriptor) {
         this.gameDescriptor = gameDescriptor;
         this.stateOfGame=CurrGameState.Initialized;
     }
@@ -62,7 +62,7 @@ public class GameManager implements Serializable {
         maxPot+=numToBuy;
     }
 
-    public GameDescriptor getGameDescriptor() {
+    public PokerGameDescriptor getGameDescriptor() {
         return gameDescriptor;
     }
 

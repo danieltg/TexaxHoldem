@@ -10,18 +10,27 @@ package Engine.GameDescriptor;
 
 import Engine.Exceptions.BlindesException;
 import Engine.Exceptions.StructureException;
+import Jaxb.Structure;
 
 import java.io.Serializable;
 
-import static Engine.GameDescriptor.Blindes.validateBlindes;
+import static Engine.GameDescriptor.PokerBlindes.validateBlindes;
 
-public class Structure implements Serializable {
+public class PokerStructure implements Serializable {
 
     private int handsCount;
     private int buy;
-    private Blindes blindes;
+    private PokerBlindes blindes;
 
-    public Structure(int handsCount, int buy, Blindes blindes) {
+
+    public PokerStructure (Structure s)
+    {
+        this.handsCount=s.getHandsCount().intValue();
+        this.buy=s.getBuy().intValue();
+        this.blindes= new PokerBlindes(s.getBlindes());
+    }
+
+    public PokerStructure(int handsCount, int buy, PokerBlindes blindes) {
         this.handsCount = handsCount;
         this.buy = buy;
         this.blindes = blindes;
@@ -36,7 +45,7 @@ public class Structure implements Serializable {
         return buy;
     }
 
-    public Blindes getBlindes() {
+    public PokerBlindes getBlindes() {
         return blindes;
     }
 
@@ -49,7 +58,7 @@ public class Structure implements Serializable {
         this.buy = buy;
     }
 
-    public void setBlindes(Blindes blindes) {
+    public void setBlindes(PokerBlindes blindes) {
         this.blindes = blindes;
     }
 
@@ -62,7 +71,7 @@ public class Structure implements Serializable {
                 '}';
     }
 
-    public static void validateStructure(Structure s) throws BlindesException, StructureException {
+    public static void validateStructure(PokerStructure s) throws BlindesException, StructureException {
         if (s.getHandsCount()<0 )
             throw new StructureException(StructureException.NEGATIVE_HANDSCOUNT);
 

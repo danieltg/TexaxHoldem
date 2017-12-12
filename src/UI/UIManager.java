@@ -2,7 +2,7 @@ package UI;
 
 import Engine.*;
 import Engine.Exceptions.GameStateException;
-import Engine.GameDescriptor.Blindes;
+import Engine.GameDescriptor.PokerBlindes;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 
 import Engine.Players.PokerPlayer;
@@ -218,7 +218,7 @@ public class UIManager {
             if(GameManager.handNumber <gameManager.getGameDescriptor().getStructure().getHandsCount())
             {
                 GameManager.handNumber++;
-                Blindes blindes=gameManager.getGameDescriptor().getStructure().getBlindes();
+                PokerBlindes blindes=gameManager.getGameDescriptor().getStructure().getBlindes();
 
                 currHand= new PokerHand(blindes,gameManager.getPlayers());
                 currHand.addToPot(gameManager.getMoneyFromLastHand());

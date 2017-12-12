@@ -4,7 +4,7 @@ import Engine.DeckOfCards.Card;
 import Engine.DeckOfCards.Deck;
 import Engine.DeckOfCards.Rank;
 import Engine.DeckOfCards.Suit;
-import Engine.GameDescriptor.Blindes;
+import Engine.GameDescriptor.PokerBlindes;
 import Engine.Players.PokerPlayer;
 import Engine.Players.PlayerState;
 import Engine.Players.PlayerType;
@@ -22,7 +22,7 @@ public class PokerHand {
     private int numberOfPlayers;
     private List<PokerPlayer> players;
     private Deck deck;
-    private Blindes blinde;
+    private PokerBlindes blinde;
     private int currentBet;   //Current bet amount that must be called/raised
     private int dealer;      //the index of the dealer
     private int b;
@@ -30,7 +30,7 @@ public class PokerHand {
     private int round;
     private PokerPlayer lastRaise=null;
 
-    public PokerHand(Blindes gameBlinde, List<PokerPlayer> playersInHand)
+    public PokerHand(PokerBlindes gameBlinde, List<PokerPlayer> playersInHand)
     {
         pot=0;
         currentBet=0;
@@ -291,7 +291,7 @@ public class PokerHand {
         currentBet=currbet;
     }
 
-    public Blindes getBlinde() {
+    public PokerBlindes getBlinde() {
         return blinde;
     }
 

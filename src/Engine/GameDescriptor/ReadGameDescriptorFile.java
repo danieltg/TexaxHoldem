@@ -3,11 +3,17 @@ package Engine.GameDescriptor;
 import Engine.Exceptions.BlindesException;
 import Engine.Exceptions.GameTypeException;
 import Engine.Exceptions.StructureException;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 
 import Engine.Utils.EngineUtils;
+import Jaxb.Blindes;
+import Jaxb.GameDescriptor;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
@@ -19,12 +25,29 @@ import java.io.IOException;
 import org.w3c.dom.NamedNodeMap;
 import org.xml.sax.SAXException;
 
-import static Engine.GameDescriptor.Structure.validateStructure;
+import static Engine.GameDescriptor.PokerStructure.validateStructure;
 
 public class ReadGameDescriptorFile {
 
 
-    public static GameDescriptor readFile(String filePath) throws IOException, ParserConfigurationException, SAXException, GameTypeException, BlindesException, StructureException {
+    public static PokerGameDescriptor readFile(String filePath) throws FileNotFoundException, JAXBException {
+
+        File file = new File(filePath);
+        if (!EngineUtils.getFileExtension(file).equals("xml"))
+            throw new FileNotFoundException("Invalid file extension");
+
+        JAXBContext jaxbContext = JAXBContext.newInstance(GameDescriptor.class);
+
+        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        GameDescriptor gameDescriptor = (GameDescriptor) jaxbUnmarshaller.unmarshal(file);
+
+        PokerGameDescriptor pokerGameDescriptor = new PokerGameDescriptor(gameDescriptor);
+
+        return pokerGameDescriptor;
+
+    }
+
+    public static PokerGameDescriptor oldreadFile(String filePath) throws IOException, ParserConfigurationException, SAXException, GameTypeException, BlindesException, StructureException {
         File fXMLFile = new File(filePath);
 
         if (!EngineUtils.getFileExtension(fXMLFile).equals("xml"))
@@ -51,7 +74,7 @@ public class ReadGameDescriptorFile {
         assert gameDescriptor != null;
         Node structureNode = getNode(Tags.STRUCTURE, gameDescriptor.getChildNodes());
 
-        Structure structure=getGameStructure(structureNode);
+        PokerStructure structure=getGameStructure(structureNode);
         int numberOfPlayer=0;
 
         switch (type){
@@ -68,10 +91,10 @@ public class ReadGameDescriptorFile {
         if ((structure.getHandsCount()<numberOfPlayer)||(structure.getHandsCount()%numberOfPlayer)!=0)
             throw new StructureException(StructureException.INVALID_HANDSCOUNT);
 
-        return new GameDescriptor(type,structure);
+        return new PokerGameDescriptor(type,structure);
     }
 
-    private static Structure getGameStructure(Node structureNode) throws BlindesException, StructureException {
+    private static PokerStructure getGameStructure(Node structureNode) throws BlindesException, StructureException {
         NodeList nodes = structureNode.getChildNodes();
 
         if(!EngineUtils.isNumeric(getNodeValue(Tags.HANDS_COUNT,nodes)))
@@ -84,13 +107,13 @@ public class ReadGameDescriptorFile {
         int buy = Integer.parseInt(getNodeValue(Tags.BUY, nodes));
 
         Node blindesNode = getNode(Tags.BLINDES, structureNode.getChildNodes());
-        Blindes blinde=getBlindes(blindesNode);
-        Structure structure=new Structure(handsCount,buy,blinde);
+        PokerBlindes blinde=getBlindes(blindesNode);
+        PokerStructure structure=new PokerStructure(handsCount,buy,blinde);
         validateStructure(structure);
         return structure;
     }
 
-    private static Blindes getBlindes(Node blindes) throws BlindesException {
+    private static PokerBlindes getBlindes(Node blindes) throws BlindesException {
         int additions=0;
         int maxTotalRounds=0;
 
@@ -118,7 +141,7 @@ public class ReadGameDescriptorFile {
         int big=Integer.parseInt(getNodeValue(Tags.BIG,nodes));
         int small=Integer.parseInt(getNodeValue(Tags.SMALL,nodes));
 
-        return new Blindes(big,small,fixed,additions,maxTotalRounds);
+        return new PokerBlindes(big,small,fixed,additions,maxTotalRounds);
     }
 
     private static GameType getGameType(Node gameDescriptor) throws GameTypeException {
