@@ -21,7 +21,7 @@ public class ComputerPlayer extends Player {
         //5/50 chance of Check
 
 
-        if(randomNumber<7)
+        if(randomNumber<10)
             return "F";
         else if (randomNumber<20)
             return "R";
