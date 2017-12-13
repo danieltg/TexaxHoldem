@@ -1,8 +1,6 @@
 package Engine.GameDescriptor;
 
-import Engine.Exceptions.BlindesException;
 import Jaxb.Blindes;
-
 import java.io.Serializable;
 
 public class PokerBlindes implements Serializable {
@@ -28,14 +26,6 @@ public class PokerBlindes implements Serializable {
             this.maxTotalRounds=b.getMaxTotalRounds().intValue();
         else
             this.maxTotalRounds=0;
-    }
-
-    public PokerBlindes(int big, int small,boolean fixed, int additions, int maxTotalRounds ) {
-        this.big = big;
-        this.small = small;
-        this.fixed = fixed;
-        this.additions=additions;
-        this.maxTotalRounds=maxTotalRounds;
     }
 
     //Getter
@@ -71,22 +61,4 @@ public class PokerBlindes implements Serializable {
                 '}';
     }
 
-    public static boolean validateBlindes(PokerBlindes b) throws BlindesException {
-        if (b.getSmall()<0 )
-            throw new BlindesException(BlindesException.NEGATIVE_SMALL);
-
-        if (b.getBig()<0)
-            throw new BlindesException(BlindesException.NEGATIVE_BIG);
-
-        if(b.getAdditions()<0)
-            throw new BlindesException(BlindesException.NEGATIVE_ADDITIONS);
-
-        if(b.getMaxTotalRounds()<0)
-            throw new BlindesException(BlindesException.NEGATIVE_MAX_TOTAL_ROUNDS);
-
-        if(b.getSmall()>=b.getBig())
-            throw new BlindesException(BlindesException.SMALL_BIGGER_THEN_SMALL);
-
-        return true;
-    }
 }

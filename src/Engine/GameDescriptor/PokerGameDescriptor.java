@@ -18,11 +18,6 @@ public class PokerGameDescriptor implements Serializable {
         structure=new PokerStructure((g.getStructure()));
     }
 
-    public PokerGameDescriptor(GameType type, PokerStructure structure) {
-        this.type = type;
-        this.structure = structure;
-    }
-
     public GameType getType() {
         return type;
     }
