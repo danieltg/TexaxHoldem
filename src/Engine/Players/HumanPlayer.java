@@ -12,6 +12,12 @@ public class HumanPlayer extends PokerPlayer {
 
     }
 
+    public HumanPlayer(int id,String name)
+    {
+        super(id,name);
+        setType(PlayerType.Human);
+    }
+
     @Override
     public String play() {
         return null;

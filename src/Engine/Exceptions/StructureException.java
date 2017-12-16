@@ -9,8 +9,12 @@ public class StructureException extends Exception{
     public static final String NEGATIVE_HANDSCOUNT = "HandsCount cannot be negative"+CANNOT_CREATE;
     public static final String NEGATIVE_BUY = "Buy cannot be negative"+CANNOT_CREATE;
 
-    public static final String INVALID_HANDSCOUNT = "Invalid HandsCount (must be >0 and divisible by 4"+CANNOT_CREATE;
-    public static final String INVALID_HANDSCOUNT_EX2 = "Invalid HandsCount (must be >3 and <6"+CANNOT_CREATE;
+    public static final String INVALID_HANDSCOUNT_BIGGER_THEN_NUMOFPLAYERS = "Invalid HandsCount. HandsCount must be bigger than the number of players";
+
+
+    public static final String INVALID_HANDSCOUNT = "Invalid HandsCount. HandsCount must be divisible by the number of players";
+
+    public static final String INVALID_PLAYERS = "Invalid Players (duplicate players ID)";
 
     public static final String ILLEGAL_STRUCTURE="Illegal Structure";
 

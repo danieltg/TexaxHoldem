@@ -44,6 +44,24 @@ public abstract class PokerPlayer implements Serializable {
             holeCards[i]=new Card();
     }
 
+    public PokerPlayer(int playerID, String playerName){
+
+        chips=0;
+        bet =0;
+        initialAmount=0;
+        folded=false;
+        isMyTurn=false;
+        numbersOfBuy=0;
+        handsWon=0;
+        state=PlayerState.NONE;
+        id=playerID;
+        name=playerName;
+
+        holeCards= new Card[2];
+        for (int i=0; i<2; i++)
+            holeCards[i]=new Card();
+    }
+
     public void setInitialAmount(int initialAmount) {
         this.initialAmount = initialAmount;
     }
@@ -59,6 +77,8 @@ public abstract class PokerPlayer implements Serializable {
     public int getId() {
         return id;
     }
+
+    public String getName(){return name;}
 
     public int getChips() {
         return chips;

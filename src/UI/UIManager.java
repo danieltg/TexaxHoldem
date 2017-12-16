@@ -146,7 +146,7 @@ public class UIManager {
 
     private void buy() throws GameStateException {
         if(gameManager.GetStateOfGame() ==CurrGameState.Started) {
-            gameManager.buy();
+            gameManager.buy(gameManager.getGameDescriptor().getPlayers().get(0));
             System.out.println("Buy operation completed successfully");
         }
         else throw new GameStateException(GameStateException.INVALID_VALUE+": game must be started before choosing this option");

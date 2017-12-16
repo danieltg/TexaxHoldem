@@ -14,12 +14,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import static Engine.GameDescriptor.PokerGameDescriptor.NUM_OF_COMPUTER_PLAYERS;
-import static Engine.GameDescriptor.PokerGameDescriptor.NUM_OF_HUMAN_PLAYERS;
-
 public class GameManager implements Serializable {
 
-    private int numberOfPlayers=NUM_OF_COMPUTER_PLAYERS+NUM_OF_HUMAN_PLAYERS;
+    private int numberOfPlayers;
     private PokerGameDescriptor gameDescriptor;
     private CurrGameState stateOfGame;
     private List<PokerPlayer> players= new ArrayList<>();
@@ -35,6 +32,7 @@ public class GameManager implements Serializable {
     public  GameManager(){
         stateOfGame=CurrGameState.NotInitialized;
         moneyFromLastHand=0;
+        numberOfPlayers=0;
     }
 
     public int getMoneyFromLastHand() {
@@ -47,6 +45,7 @@ public class GameManager implements Serializable {
 
     public void setGameDescriptor(PokerGameDescriptor gameDescriptor) {
         this.gameDescriptor = gameDescriptor;
+        this.numberOfPlayers=this.gameDescriptor.getNumberOfPlayers();
         this.stateOfGame=CurrGameState.Initialized;
     }
 
@@ -55,10 +54,10 @@ public class GameManager implements Serializable {
         return stateOfGame;
     }
 
-    public void buy()
+    public void buy(PokerPlayer p)
     {
         int numToBuy=gameDescriptor.getStructure().getBuy();
-        players.get(indexActivePlayer).buy(numToBuy);
+        p.buy(numToBuy);
         maxPot+=numToBuy;
     }
 
@@ -103,10 +102,8 @@ public class GameManager implements Serializable {
         int d=index%numberOfPlayers;
         int s= (d+1)%numberOfPlayers;
         int b=(s+1)%numberOfPlayers;
-        int n=(b+1)%numberOfPlayers;
 
         players.get(d).setState(PlayerState.DEALER);
-        players.get(n).setState(PlayerState.NONE);
         players.get(s).setState(PlayerState.SMALL);
         players.get(b).setState(PlayerState.BIG);
 
@@ -114,7 +111,6 @@ public class GameManager implements Serializable {
         players.get(s).setInitialAmount(gameDescriptor.getStructure().getBlindes().getSmall());
         players.get(b).setInitialAmount(gameDescriptor.getStructure().getBlindes().getBig());
         players.get(d).setInitialAmount(0);
-        players.get(n).setInitialAmount(0);
 
         dealerIndex=d;
 
@@ -123,29 +119,6 @@ public class GameManager implements Serializable {
     public void setStateOfGame(CurrGameState stateOfGame) {
         this.stateOfGame = stateOfGame;
     }
-
-    private void setPlayers() {
-
-        if (gameDescriptor.getType()== GameType.Basic)
-        {
-
-            players.clear();
-
-            for (int i=0; i<NUM_OF_HUMAN_PLAYERS; i++) {
-                players.add(new HumanPlayer(i));
-                indexActivePlayer=i;
-                buy();
-            }
-
-            for (int i=NUM_OF_HUMAN_PLAYERS; i<numberOfPlayers; i++) {
-                players.add(new ComputerPlayer(i));
-                indexActivePlayer=i;
-                buy();
-            }
-       }
-
-    }
-
 
 
     public void getStatistics() {
@@ -166,10 +139,14 @@ public class GameManager implements Serializable {
 
     public void setTable()
     {
+        players.clear();
         int randomNumber= new Random().nextInt(numberOfPlayers);
         maxPot=0;
         handNumber=0;
-        setPlayers();
+        players=gameDescriptor.getPlayers();
+        for (PokerPlayer p: players)
+            buy(p);
+
         setRoles(randomNumber);
     }
     public int getBig(){ return gameDescriptor.getStructure().getBlindes().getBig();}

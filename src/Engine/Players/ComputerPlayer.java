@@ -10,6 +10,12 @@ public class ComputerPlayer extends PokerPlayer {
         setType(PlayerType.Computer);
     }
 
+    public ComputerPlayer(int id,String name)
+    {
+        super(id,name);
+        setType(PlayerType.Computer);
+    }
+
     @Override
     public String play() {
 

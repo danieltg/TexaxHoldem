@@ -7,11 +7,14 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import Engine.Players.PokerPlayer;
 import Engine.Utils.EngineUtils;
 import Jaxb.GameDescriptor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ReadGameDescriptorFile {
 
@@ -39,20 +42,22 @@ public class ReadGameDescriptorFile {
 
         PokerStructure s=game.getStructure();
         PokerBlindes b=s.getBlindes();
+        int numberOfPlayers=game.getNumberOfPlayers();
 
-        switch (game.getType()) {
-            case Basic: {
-                if ((s.getHandsCount() < 4) || (s.getHandsCount() % 4) != 0)
-                    throw new StructureException(StructureException.INVALID_HANDSCOUNT);
-                break;
-            }
-            case MultiPlayer:
-            case DynamicMultiPlayer:
-            {
-                if ((s.getHandsCount() < 3) || (s.getHandsCount() >6))
-                    throw new StructureException(StructureException.INVALID_HANDSCOUNT_EX2);
-                break;
-            }
+        if (s.getHandsCount() < numberOfPlayers)
+                    throw new StructureException(StructureException.INVALID_HANDSCOUNT_BIGGER_THEN_NUMOFPLAYERS +" ("+numberOfPlayers+")");
+
+        if ((s.getHandsCount() % numberOfPlayers) != 0)
+            throw new StructureException(StructureException.INVALID_HANDSCOUNT+" ("+numberOfPlayers+")");
+
+
+        try{
+            game.getPlayers().stream().collect(
+                    Collectors.toMap(PokerPlayer::getId, PokerPlayer::getName));
+        }
+        catch (IllegalStateException e)
+        {
+            throw new StructureException(StructureException.INVALID_PLAYERS);
         }
 
         if (s.getHandsCount()<0 )
