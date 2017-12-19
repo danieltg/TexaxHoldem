@@ -13,9 +13,12 @@ import UI.Menus.MainMenu;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+
+import static Engine.Utils.EngineUtils.saveListToFile;
 
 public class UIManager {
 
@@ -24,6 +27,7 @@ public class UIManager {
     private MainMenu mainMenu;
     private GameManager gameManager= new GameManager();
     private PokerHand currHand;
+    private List<PokerHandStep> handReplay=new ArrayList<>();
 
     public UIManager() {
         this.gameEnded = false;
@@ -225,6 +229,9 @@ public class UIManager {
 
                 List<Winner> winners= run(currHand);
 
+                //I want to save the Hand Replay
+                saveListToFile(handReplay,"handReplay.txt");
+
                 System.out.println("Hand finished...");
                 //GameStateBoard.printHandState(currHand.getPlayers(),currHand.printHand());
                 pressAnyKeyToContinue("Press Enter to see who is the winner");
@@ -266,9 +273,17 @@ public class UIManager {
 
     private List<Winner> run(PokerHand currHand) throws Exception {
         resetPlayerState();
+        handReplay.clear();
 
         currHand.dealingHoleCards();
-        currHand.betSmallAndBig();
+        addStepToHandReplay();
+
+        currHand.betSmall();
+        addStepToHandReplay();
+
+        currHand.betBig();
+        addStepToHandReplay();
+
         currHand.updateMaxBet();
 
         collectBets();
@@ -283,6 +298,7 @@ public class UIManager {
         resetPlayerState();
 
         currHand.dealingFlopCards();
+        addStepToHandReplay();
 
         collectBets();
         currHand.upRound();
@@ -294,6 +310,8 @@ public class UIManager {
 
         resetPlayerState();
         currHand.dealingTurnCard();
+        addStepToHandReplay();
+
         collectBets();
         currHand.upRound();
 
@@ -303,10 +321,27 @@ public class UIManager {
 
         resetPlayerState();
         currHand.dealingRiverCard();
+        addStepToHandReplay();
+
         collectBets();
 
         return currHand.evaluateRound();
 
+    }
+
+    private void addStepToHandReplay() {
+
+
+        PokerHandStep step= new PokerHandStep(
+                currHand.getPlayers(),
+                currHand.getLastPlayerToPlay(),
+                currHand.getPot(),
+                currHand.getCardsAsString(),
+                currHand.getCurrentBet(),
+                currHand.getLastAction()
+                ,currHand.getLastActionInfo());
+
+            handReplay.add(step);
     }
 
     private void notifyUser(int round) {
@@ -433,7 +468,8 @@ public class UIManager {
            currPlayer.setCheckOccurred(true);
             p++;
             currPlayer.itIsNotMyTurn();
-
+            currHand.setLastPlayerToPlay(currPlayer.getId());
+            addStepToHandReplay();
         }
 
     }
@@ -481,6 +517,8 @@ public class UIManager {
                 p.setFolded(true);
                 //System.out.println("***Player "+p.toString() +" is floded...");
                 p.setBet(0);
+                currHand.setLastAction("F");
+                currHand.setLastActionInfo(0);
                 break;
             }
 
@@ -501,6 +539,10 @@ public class UIManager {
                         currHand.setCurrentBet(betTO);
                         currHand.setLastRaise(p);
                         p.setBet(currHand.getCurrentBet());
+
+                        currHand.setLastAction("B");
+                        currHand.setLastActionInfo(betTO);
+
                         break;
 
                     }
@@ -525,7 +567,8 @@ public class UIManager {
                     p.addChips(p.getBet());
                     currHand.updateMaxBet();
                     p.setBet(currHand.getCurrentBet());
-
+                    currHand.setLastAction("C");
+                    currHand.setLastActionInfo(currHand.getCurrentBet());
                     break;
                 }
                 else  if(p.getType()==PlayerType.Human) {
@@ -588,6 +631,9 @@ public class UIManager {
                 currHand.setLastRaise(p);
                 //System.out.println("***Last Raise player is now player with ID: "+p.getId());
 
+                currHand.setLastAction("R");
+                currHand.setLastActionInfo(raiseTo);
+
                 for(PokerPlayer player:currHand.getPlayers())
                     {
                         if(player!=p)
@@ -603,6 +649,10 @@ public class UIManager {
                     if(currHand.getLastRaise()==null)
                     currHand.setLastRaise(p);
                     p.setBet(0);
+
+                    currHand.setLastAction("K");
+                    currHand.setLastActionInfo(0);
+
                     break;
                 }
                 else

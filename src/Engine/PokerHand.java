@@ -29,6 +29,9 @@ public class PokerHand {
     private int s;
     private int round;
     private PokerPlayer lastRaise=null;
+    private String lastAction;
+    private int lastActionInfo;
+    private int lastPlayerToPlay;
 
     public PokerHand(PokerBlindes gameBlinde, List<PokerPlayer> playersInHand)
     {
@@ -40,6 +43,10 @@ public class PokerHand {
 
         for (int i=0; i<5; i++)
             tableCards[i]= new Card();
+
+        lastAction="N";
+        lastActionInfo=0;
+        lastPlayerToPlay=-999;
 
         numberOfPlayers=playersInHand.size();
         players=playersInHand;
@@ -70,7 +77,7 @@ public class PokerHand {
     }
 
 
-    private String getCardsAsString()
+    public String getCardsAsString()
     {
         StringBuilder s= new StringBuilder();
 
@@ -128,10 +135,16 @@ public class PokerHand {
 
     public void dealingRiverCard() {
         tableCards[4]=deck.drawCard();
+        lastAction="CARD";
+        lastActionInfo=0;
+        lastPlayerToPlay=-999;
     }
 
     public void dealingTurnCard() {
         tableCards[3]=deck.drawCard();
+        lastAction="CARD";
+        lastActionInfo=0;
+        lastPlayerToPlay=-999;
     }
 
 
@@ -208,6 +221,9 @@ public class PokerHand {
         for (int i=0; i<3; i++)
             tableCards[i]=deck.drawCard();
 
+        lastAction="CARD";
+        lastActionInfo=0;
+        lastPlayerToPlay=-999;
     }
 
 
@@ -220,24 +236,33 @@ public class PokerHand {
             for (int i=0; i<2; i++)
                 p.setCard(deck.drawCard(),i);
         }
+        lastAction="CARD";
+        lastActionInfo=0;
+        lastPlayerToPlay=-999;
     }
 
 
 
-    public void betSmallAndBig(){
+    public void betSmall(){
+
         players.get(s).setBet(blinde.getSmall());
-        players.get(b).setBet(blinde.getBig());
-
-        pot = blinde.getSmall() +blinde.getBig();
-
-        if(players.get(s).getChips()-players.get(s).getBet()<0)
-            System.out.println("we have chips bug");
-        if(players.get(b).getChips()-players.get(b).getBet()<0)
-            System.out.println("we have chipa bug");
+        pot = pot+ blinde.getSmall();
         players.get(s).collectBet();
+
+        lastAction="B";
+        lastActionInfo=blinde.getSmall();
+        lastPlayerToPlay=players.get(s).getId();
+    }
+
+    public void betBig()
+    {
+        players.get(b).setBet(blinde.getBig());
+        pot = pot +blinde.getBig();
         players.get(b).collectBet();
 
-
+        lastAction="R";
+        lastActionInfo=blinde.getBig();
+        lastPlayerToPlay=players.get(b).getId();
     }
 
     private void getStateIndex()
@@ -341,5 +366,38 @@ public class PokerHand {
     public void setMaxBet(int newMaxbet)
     {
         maxBet=newMaxbet;
+    }
+
+    public Card[] getTableCards() {
+        return tableCards;
+    }
+
+    public void setLastAction(String s)
+    {
+        lastAction=s;
+    }
+
+    public void setLastActionInfo (int i)
+    {
+        lastActionInfo=i;
+    }
+    public void setLastPlayerToPlay (int id)
+    {
+        lastPlayerToPlay=id;
+    }
+
+    public String getLastAction()
+    {
+        return lastAction;
+    }
+
+    public int getLastActionInfo()
+    {
+        return lastActionInfo;
+    }
+
+    public int getLastPlayerToPlay()
+    {
+        return lastPlayerToPlay;
     }
 }

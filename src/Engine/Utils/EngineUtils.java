@@ -1,6 +1,11 @@
 package Engine.Utils;
 
+import Engine.PokerHandStep;
+
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 
 public class EngineUtils {
 
@@ -13,5 +18,25 @@ public class EngineUtils {
         if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
             return (fileName.substring(fileName.lastIndexOf(".")+1)).toLowerCase();
         else return "";
+    }
+
+
+    public static void saveListToFile(List<PokerHandStep> list, String path)
+    {
+        try {
+
+            FileWriter writer = new FileWriter(path);
+            for (PokerHandStep step: list)
+            {
+                writer.write("************************************************************************************************\n");
+                writer.write(step.getStepAsString());
+            }
+
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

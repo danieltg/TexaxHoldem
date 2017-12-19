@@ -11,19 +11,19 @@
 		</Blindes>
 	</Structure>
 	<Players>
-		<Player id="123">
+		<Player id="1">
 			<Name>Mushon</Name>
-			<Type>Human</Type>
+			<Type>Computer</Type>
 		</Player>
-		<Player id="456">
+		<Player id="2">
 			<Name>Avrum</Name>
 			<Type>Human</Type>
 		</Player>
-		<Player id="789">
+		<Player id="3">
 			<Name>Nachtze</Name>
 			<Type>Computer</Type>
 		</Player>
-		<Player id="012">
+		<Player id="4">
 			<Name>Daniel</Name>
 			<Type>Computer</Type>
 		</Player>
