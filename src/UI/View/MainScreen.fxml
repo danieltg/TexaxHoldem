@@ -2,7 +2,7 @@
 
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
     <top>
     <fx:include fx:id="MainMenu" source="MainMenu.fxml" BorderPane.alignment="CENTER" />
@@ -14,6 +14,6 @@
         <fx:include fx:id="GameTable" source="GameTable.fxml" BorderPane.alignment="CENTER" />
     </center>
     <right>
-        <fx:include fx:id="GameInfo" source="GameInfoAndActions.fxml" BorderPane.alignment="CENTER" />
+        <fx:include fx:id="GameInfo" source="GameInfoAndActions.fxml" BorderPane.alignment="CENTER_RIGHT" />
     </right>
 </BorderPane>

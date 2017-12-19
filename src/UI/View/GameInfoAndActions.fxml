@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane hbarPolicy="ALWAYS" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <Accordion prefWidth="300.0">
         <panes>
@@ -88,7 +88,7 @@
                   </AnchorPane>
                </content>
           </TitledPane>
-          <TitledPane animated="false" prefWidth="202.0" text="Human turn">
+          <TitledPane animated="false" prefWidth="202.0" text="Human Turn">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -119,7 +119,7 @@
                   </AnchorPane>
                </content>
           </TitledPane>
-            <TitledPane animated="false" layoutX="10.0" layoutY="49.0" prefHeight="200.0" prefWidth="300.0" text="Turn actions">
+            <TitledPane animated="false" layoutX="10.0" layoutY="49.0" prefHeight="700.0" prefWidth="300.0" text="Turn actions">
                <content>
                   <GridPane>
                      <columnConstraints>
@@ -141,25 +141,64 @@
                         </VBox>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <Button layoutX="130.0" layoutY="67.0" mnemonicParsing="false" text="OK" />
-                              <TextField layoutX="14.0" layoutY="67.0" prefHeight="19.0" prefWidth="116.0" text="How Much?" />
-                              <TextField layoutX="14.0" layoutY="100.0" prefHeight="19.0" prefWidth="116.0" text="How Much?" />
-                              <Button layoutX="130.0" layoutY="100.0" mnemonicParsing="false" text="OK" />
+                              <Button layoutX="130.0" layoutY="65.0" mnemonicParsing="false" text="OK" />
+                              <TextField layoutX="14.0" layoutY="65.0" prefHeight="21.0" prefWidth="116.0" text="How Much?" />
+                              <TextField layoutX="14.0" layoutY="98.0" prefHeight="21.0" prefWidth="116.0" text="How Much?" />
+                              <Button layoutX="130.0" layoutY="98.0" mnemonicParsing="false" text="OK" />
                            </children>
-                           <GridPane.margin>
-                              <Insets />
-                           </GridPane.margin>
                         </AnchorPane>
                      </children>
                   </GridPane>
                </content>
             </TitledPane>
-            <TitledPane animated="false" layoutX="10.0" layoutY="86.0" prefHeight="0.0" prefWidth="300.0" text="Replay">
+            <TitledPane animated="false" layoutX="10.0" layoutY="86.0" prefHeight="0.0" prefWidth="300.0" text="Hand finished actions">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane>
+                     <children>
+                        <GridPane prefHeight="136.0" prefWidth="259.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Previous">
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Next">
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="219.0" text="Run next hand">
+                                 <GridPane.margin>
+                                    <Insets bottom="19.0" left="19.0" right="19.0" top="19.0" />
+                                 </GridPane.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="246.0" text="Replay" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets bottom="19.0" left="19.0" right="19.0" top="19.0" />
+                                 </GridPane.margin>
+                              </Button>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
                </content>
             </TitledPane>
         </panes>
       </Accordion>
    </content>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
 </ScrollPane>
