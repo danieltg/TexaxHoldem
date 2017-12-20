@@ -14,6 +14,6 @@
         <fx:include fx:id="GameTable" source="GameTable.fxml" BorderPane.alignment="CENTER" />
     </center>
     <right>
-        <fx:include fx:id="GameInfo" source="GameInfoAndActions.fxml" BorderPane.alignment="CENTER_RIGHT" />
+        <fx:include fx:id="GameInfo" source="GameInfoAndActions.fxml" BorderPane.alignment="CENTER" />
     </right>
 </BorderPane>

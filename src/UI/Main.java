@@ -16,8 +16,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("View/MainScreen.fxml"));
 
 
-        primaryStage.setTitle("Texas");
-        primaryStage.setScene(new Scene(root, 1300, 700));
+        primaryStage.setTitle("Texas Holdem Poker");
+        primaryStage.setScene(new Scene(root, 1500, 700));
         primaryStage.show();
     }
 
