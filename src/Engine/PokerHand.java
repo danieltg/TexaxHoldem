@@ -236,7 +236,7 @@ public class PokerHand {
             for (int i=0; i<2; i++)
                 p.setCard(deck.drawCard(),i);
         }
-        lastAction="CARD";
+        lastAction="PLAYER_CARDS";
         lastActionInfo=0;
         lastPlayerToPlay=-999;
     }

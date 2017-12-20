@@ -342,6 +342,15 @@ public class UIManager {
                 ,currHand.getLastActionInfo());
 
             handReplay.add(step);
+
+            clearValuesFromCurrHand();
+    }
+
+    private void clearValuesFromCurrHand() {
+
+        currHand.setLastPlayerToPlay(-999);
+        currHand.setLastActionInfo(0);
+        currHand.setLastAction("N");
     }
 
     private void notifyUser(int round) {

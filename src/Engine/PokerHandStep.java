@@ -43,7 +43,13 @@ public class PokerHandStep implements Serializable {
 
         if (activePlayer==-999) {
             message = "The step is not related to any player\n";
-            message=message+"Cards: "+tableCards+"\n";
+            if (action.equals("PLAYER_CARDS")) {
+                message = message + "Players cards:\n";
+                for (PokerPlayer p: players)
+                    message=message+"Player <"+p.getName()+", "+p.getId()+"> : "+p.getHoleCards()+"\n";
+            }
+            else
+                message=message+"Cards: "+tableCards+"\n";
         }
         else {
             int indexInList=getplayerIndexById();
