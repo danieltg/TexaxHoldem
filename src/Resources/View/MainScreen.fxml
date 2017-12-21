@@ -2,14 +2,14 @@
 
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/9.0.1"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenController">
+<BorderPane prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenController">
 
     <top>
     <fx:include fx:id="MainMenu" source="MainMenu.fxml" BorderPane.alignment="CENTER" />
     </top>
-    <left>
+    <bottom>
         <fx:include fx:id="Players" source="PlayersTable.fxml" BorderPane.alignment="CENTER" />
-    </left>
+    </bottom>
     <center>
         <fx:include fx:id="GameTable" source="GameTable.fxml" BorderPane.alignment="CENTER" />
     </center>
