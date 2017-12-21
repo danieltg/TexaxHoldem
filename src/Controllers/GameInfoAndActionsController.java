@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import java.net.URL;
+import java.time.temporal.TemporalAmount;
 import java.util.ResourceBundle;
 
 public class GameInfoAndActionsController implements Initializable{
@@ -39,16 +40,16 @@ public class GameInfoAndActionsController implements Initializable{
     @FXML private TextField raiseAmountLabel;
     @FXML private TextField betAmountLabel;
 
-
-
-
-
-
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        showCardsButton.setDisable(true);
+        runNextHandButton.setDisable(true);
+        replayButton.setDisable(true);
+        prevButton.setDisable(true);
+        nextButton.setDisable(true);
+    betAmountLabel.setVisible(false);
+        raiseAmountLabel.setVisible(false);
+        okBetButton.setVisible(false);
+        okRaiseButton.setVisible(false);
     }
 }

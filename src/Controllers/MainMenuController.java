@@ -22,5 +22,7 @@ public class MainMenuController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
             fileNameLabel.setText("Not Loaded");
+            startButton.setDisable(true);
+            stopButton.setDisable(true);
     }
 }
