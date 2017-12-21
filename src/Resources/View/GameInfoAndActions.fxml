@@ -16,15 +16,15 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameInfoAndActionsController">
+<ScrollPane fx:id="gamePane" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameInfoAndActionsController">
    <content>
-      <Accordion prefHeight="500.0" prefWidth="300.0">
+      <Accordion fx:id="accordionGame" prefHeight="500.0" prefWidth="300.0">
         <panes>
-          <TitledPane animated="false" prefHeight="283.0" prefWidth="163.0" text="Game settings">
+          <TitledPane fx:id="gameSettings" animated="false" prefHeight="283.0" prefWidth="163.0" text="Game settings">
                <content>
                   <AnchorPane>
                      <children>
-                        <GridPane>
+                        <GridPane fx:id="gameSettingsGrid" prefHeight="225.0" prefWidth="235.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="130.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="42.0" />
@@ -39,16 +39,16 @@
                           </rowConstraints>
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" text="Hands:" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="40.0" GridPane.columnIndex="1" />
                               <Label text="Buy:" GridPane.rowIndex="1" />
-                              <Label prefHeight="27.0" prefWidth="40.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="buysLabel" prefHeight="34.0" prefWidth="78.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label text="Big:" GridPane.rowIndex="2" />
-                              <Label prefHeight="27.0" prefWidth="39.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label prefHeight="27.0" prefWidth="39.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="bigLabel" prefHeight="37.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="smallLabel" prefHeight="40.0" prefWidth="79.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label text="Small:" GridPane.rowIndex="3" />
-                              <CheckBox mnemonicParsing="false" prefHeight="27.0" prefWidth="165.0" text="Is B&amp;S fixed" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                              <CheckBox fx:id="isFixedCheckBox" mnemonicParsing="false" prefHeight="27.0" prefWidth="165.0" text="Is B&amp;S fixed" GridPane.columnSpan="2" GridPane.rowIndex="4" />
                               <Label text="additions:" GridPane.rowIndex="5" />
-                              <Label prefHeight="27.0" prefWidth="41.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="additionsLabel" prefHeight="38.0" prefWidth="78.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="handsLabel" text="" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -73,15 +73,16 @@
                               <Label text="Max POT:" GridPane.rowIndex="1" />
                               <HBox alignment="CENTER" prefHeight="37.0" prefWidth="150.0" GridPane.columnIndex="1">
                                  <children>
-                                    <Label />
+                                    <Label fx:id="handsCountLabel" prefHeight="27.0" prefWidth="30.0" />
                                     <Label text="/">
                                        <HBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label />
+                                    <Label fx:id="totalHandsLabel" prefHeight="27.0" prefWidth="30.0" />
                                  </children>
                               </HBox>
+                              <Label fx:id="maxPotLabel" prefHeight="30.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -104,15 +105,15 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="117.0" fitWidth="76.0" layoutX="22.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="firstCardImage" fitHeight="117.0" fitWidth="76.0" layoutX="22.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <ImageView fitHeight="117.0" fitWidth="76.0" layoutX="25.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="secondCardImage" fitHeight="117.0" fitWidth="76.0" layoutX="25.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </AnchorPane>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="253.0" text="Show me my cards!" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                              <Button fx:id="showCardsButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="253.0" text="Show me my cards!" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -135,24 +136,24 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Previous">
+                                    <Button fx:id="prevButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="112.0" text="Previous">
                                        <HBox.margin>
                                           <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Next">
+                                    <Button fx:id="nextButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Next">
                                        <HBox.margin>
                                           <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>
                               </HBox>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="219.0" text="Run next hand">
+                              <Button fx:id="runNextHandButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="219.0" text="Run next hand">
                                  <GridPane.margin>
                                     <Insets bottom="19.0" left="19.0" right="19.0" top="19.0" />
                                  </GridPane.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="246.0" text="Replay" GridPane.rowIndex="1">
+                              <Button fx:id="replayButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="246.0" text="Replay" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="19.0" left="19.0" right="19.0" top="19.0" />
                                  </GridPane.margin>
@@ -176,19 +177,19 @@
                      <children>
                         <VBox prefHeight="276.0" prefWidth="105.0" spacing="10.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="84.0" text="Check" />
-                              <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" text="Bet" />
-                              <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="93.0" text="Raise" />
-                              <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="98.0" text="Call" />
-                              <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="90.0" text="Fold" />
+                              <Button fx:id="checkButton" mnemonicParsing="false" prefHeight="47.0" prefWidth="84.0" text="Check" />
+                              <Button fx:id="betButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" text="Bet" />
+                              <Button fx:id="raiseButton" mnemonicParsing="false" prefHeight="43.0" prefWidth="93.0" text="Raise" />
+                              <Button fx:id="callButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="98.0" text="Call" />
+                              <Button fx:id="foldButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="90.0" text="Fold" />
                            </children>
                         </VBox>
                         <AnchorPane prefHeight="276.0" prefWidth="168.0" GridPane.columnIndex="1">
                            <children>
-                              <Button layoutX="130.0" layoutY="58.0" mnemonicParsing="false" text="OK" />
-                              <TextField layoutX="7.0" layoutY="57.0" prefHeight="21.0" prefWidth="116.0" text="How Much?" />
-                              <TextField layoutX="9.0" layoutY="107.0" prefHeight="21.0" prefWidth="116.0" text="How Much?" />
-                              <Button layoutX="129.0" layoutY="106.0" mnemonicParsing="false" text="OK" />
+                              <Button fx:id="okBetButton" layoutX="130.0" layoutY="58.0" mnemonicParsing="false" text="OK" />
+                              <TextField fx:id="betAmountLabel" layoutX="7.0" layoutY="57.0" prefHeight="21.0" prefWidth="116.0" text="How Much?" />
+                              <TextField fx:id="raiseAmountLabel" layoutX="9.0" layoutY="107.0" prefHeight="21.0" prefWidth="116.0" text="How Much?" />
+                              <Button fx:id="okRaiseButton" layoutX="129.0" layoutY="106.0" mnemonicParsing="false" text="OK" />
                            </children>
                         </AnchorPane>
                      </children>

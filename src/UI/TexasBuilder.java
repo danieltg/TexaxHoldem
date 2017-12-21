@@ -33,7 +33,6 @@ public class TexasBuilder {
         URL url = getClass().getResource("/Resources/View/MainScreen.fxml");
         fxmlLoader.setLocation(url);
         Parent view = fxmlLoader.load(url.openStream());
-
         MainScreenController mainScreenController=fxmlLoader.getController();
 
         mainScreenController.setGameManager(gameManager);

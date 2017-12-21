@@ -10,12 +10,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable{
-@FXML ComboBox styleComboBox;
-@FXML ComboBox animationComboBox;
-@FXML Button loadXmlButton;
-@FXML Button startButton;
-@FXML Label fileNameLabel;
-@FXML Button stopButton;
+@FXML private ComboBox styleComboBox;
+@FXML private ComboBox animationComboBox;
+@FXML private Button loadXmlButton;
+@FXML private Button startButton;
+@FXML private Label fileNameLabel;
+@FXML private Button stopButton;
 
 
 
