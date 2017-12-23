@@ -9,6 +9,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainScreenController implements Initializable {
+@FXML private  GameTableController gameTableController;
+@FXML private  GameInfoAndActionsController gameInfoAndActionsController;
+@FXML private MainMenuController mainMenuController;
+@FXML private PlayersTableController playersTableController;
 
 
     private GameManager gameManager;
