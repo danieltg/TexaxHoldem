@@ -60,4 +60,9 @@ public class MainScreenController implements Initializable {
         gameInfoAndActionsController.updateGameSettings();
 
     }
+
+    public void updateGameDetails() {
+        gameInfoAndActionsController.updateGameDetails();
+
+    }
 }

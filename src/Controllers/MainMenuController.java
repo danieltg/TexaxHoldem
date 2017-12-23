@@ -75,6 +75,13 @@ public class MainMenuController implements Initializable{
 
     }
 
+    @FXML
+    public void startGameButtonAction() {
+
+        loadXmlButton.setDisable(true);
+        businessLogic.startGame();
+
+    }
 
     public  void setPrimaryStage (Stage s) { primaryStage=s; }
 

@@ -137,6 +137,8 @@ public class GameManager implements Serializable {
 
     }
 
+    public int getMaxPot() {return maxPot;}
+
     public void setTable()
     {
         players.clear();
@@ -154,6 +156,9 @@ public class GameManager implements Serializable {
 
     public int getBuy(){ return gameDescriptor.getStructure().getBuy();}
     public int getHandsCount() {return gameDescriptor.getStructure().getHandsCount();}
+
+    public boolean getIsFixed(){return gameDescriptor.getStructure().getBlindes().isFixed();}
+    public int getAdditions(){return gameDescriptor.getStructure().getBlindes().getAdditions();}
 
     public void resetGame() {
         this.stateOfGame=CurrGameState.Initialized;
