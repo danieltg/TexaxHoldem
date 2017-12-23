@@ -12,6 +12,7 @@ public class MainScreenController implements Initializable {
 
 
     private GameManager gameManager;
+    private final GameManager model = new GameManager();
     private Stage primaryStage;
 
 
