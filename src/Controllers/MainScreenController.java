@@ -26,6 +26,7 @@ public class MainScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         mainMenuController.setGameManager(gameManager);
         gameInfoAndActionsController.setGameManager(gameManager);
+        gameTableController.setGameManager(gameManager);
     }
 
     public GameManager getGameManager() {
@@ -45,6 +46,7 @@ public class MainScreenController implements Initializable {
     public void setBusinessLogic(BusinessLogic businessLogic) {
         this.businessLogic = businessLogic;
         mainMenuController.setBusinessLogic(this.businessLogic);
+        gameTableController.setBusinessLogic(this.businessLogic);
     }
 
     public void setPlayerTable()
@@ -64,5 +66,10 @@ public class MainScreenController implements Initializable {
     public void updateGameDetails() {
         gameInfoAndActionsController.updateGameDetails();
 
+    }
+
+    public void setGameTable() {
+
+        gameTableController.updateGame();
     }
 }

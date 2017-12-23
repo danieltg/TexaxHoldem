@@ -22,6 +22,11 @@ public class BusinessLogic {
 
         updatePlayersList();
         updateGameSettings();
+        setGameTable();
+    }
+
+    private void setGameTable() {
+        controller.setGameTable();
     }
 
     public void startGame() {

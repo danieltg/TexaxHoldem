@@ -107,6 +107,11 @@ public class GameManager implements Serializable {
         players.get(s).setState(PlayerState.SMALL);
         players.get(b).setState(PlayerState.BIG);
 
+        players.get(d).setStyle("-fx-background-color: red;");
+        players.get(s).setStyle("-fx-background-color: green;");
+        players.get(b).setStyle("-fx-background-color: yellow;");
+
+
 
         players.get(s).setInitialAmount(gameDescriptor.getStructure().getBlindes().getSmall());
         players.get(b).setInitialAmount(gameDescriptor.getStructure().getBlindes().getBig());

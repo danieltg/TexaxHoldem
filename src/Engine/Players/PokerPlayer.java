@@ -26,7 +26,7 @@ public abstract class PokerPlayer implements Serializable {
     private int handsWon;
     boolean checkOccurred = false;
     private int initialAmount;
-
+    private String style="-fx-background-color: white;";
     public PokerPlayer(int playerID){
 
         chips=0;
@@ -231,4 +231,12 @@ public abstract class PokerPlayer implements Serializable {
         return handsWon;
     }
 
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String newStyle)
+    {
+        style=newStyle;
+    }
 }
