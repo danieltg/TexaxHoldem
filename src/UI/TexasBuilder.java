@@ -1,6 +1,7 @@
 package UI;
 
 import Controllers.MainScreenController;
+import Controllers.PlayersTableController;
 import Engine.GameManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,6 +35,7 @@ public class TexasBuilder {
         fxmlLoader.setLocation(url);
         Parent view = fxmlLoader.load(url.openStream());
         MainScreenController mainScreenController=fxmlLoader.getController();
+
 
         mainScreenController.setGameManager(gameManager);
         mainScreenController.setPrimaryStage(primaryStage);
