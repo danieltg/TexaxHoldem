@@ -1,6 +1,9 @@
 package Controllers;
 
 import Engine.GameManager;
+import Engine.Players.PokerPlayer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
@@ -15,21 +18,18 @@ public class MainScreenController implements Initializable {
 @FXML private PlayersTableController playersTableController;
 
 
-    private GameManager gameManager;
-    private final GameManager model = new GameManager();
+    private final GameManager gameManager = new GameManager();
     private Stage primaryStage;
-
+    private BusinessLogic businessLogic;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        mainMenuController.setGameManager(gameManager);
+        gameInfoAndActionsController.setGameManager(gameManager);
     }
 
     public GameManager getGameManager() {
         return gameManager;
-    }
-
-    public void setGameManager(GameManager gameManager) {
-        this.gameManager = gameManager;
     }
 
     public Stage getPrimaryStage() {
@@ -38,7 +38,26 @@ public class MainScreenController implements Initializable {
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
+        mainMenuController.setPrimaryStage(this.primaryStage);
     }
 
 
+    public void setBusinessLogic(BusinessLogic businessLogic) {
+        this.businessLogic = businessLogic;
+        mainMenuController.setBusinessLogic(this.businessLogic);
+    }
+
+    public void setPlayerTable()
+    {
+        ObservableList<PokerPlayer> pokerPlayers = FXCollections.observableArrayList();
+        for(PokerPlayer p: gameManager.getPlayers())
+            pokerPlayers.add(p);
+
+        playersTableController.setPlayers(pokerPlayers);
+    }
+
+    public void setGameSettings() {
+        gameInfoAndActionsController.updateGameSettings();
+
+    }
 }

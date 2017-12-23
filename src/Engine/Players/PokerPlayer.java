@@ -222,4 +222,13 @@ public abstract class PokerPlayer implements Serializable {
     {
         return String.valueOf(this.id);
     }
+
+    public int getNumbersOfBuy() {
+        return numbersOfBuy;
+    }
+
+    public int getHandsWon() {
+        return handsWon;
+    }
+
 }

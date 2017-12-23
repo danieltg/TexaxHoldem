@@ -152,6 +152,9 @@ public class GameManager implements Serializable {
     public int getBig(){ return gameDescriptor.getStructure().getBlindes().getBig();}
     public int getSmall(){ return gameDescriptor.getStructure().getBlindes().getSmall();}
 
+    public int getBuy(){ return gameDescriptor.getStructure().getBuy();}
+    public int getHandsCount() {return gameDescriptor.getStructure().getHandsCount();}
+
     public void resetGame() {
         this.stateOfGame=CurrGameState.Initialized;
         setTable();

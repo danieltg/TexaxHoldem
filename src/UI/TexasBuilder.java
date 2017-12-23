@@ -1,5 +1,6 @@
 package UI;
 
+import Controllers.BusinessLogic;
 import Controllers.MainMenuController;
 import Controllers.MainScreenController;
 import Controllers.PlayersTableController;
@@ -35,11 +36,12 @@ public class TexasBuilder {
         URL url = getClass().getResource("/Resources/View/MainScreen.fxml");
         fxmlLoader.setLocation(url);
         Parent view = fxmlLoader.load(url.openStream());
+
         MainScreenController mainScreenController=fxmlLoader.getController();
+        BusinessLogic businessLogic = new BusinessLogic(mainScreenController);
 
-        mainScreenController.setGameManager(gameManager);
         mainScreenController.setPrimaryStage(primaryStage);
-
+        mainScreenController.setBusinessLogic(businessLogic);
         return view;
     }
 

@@ -1,5 +1,10 @@
 package Controllers;
 
+import Engine.Exceptions.BlindesException;
+import Engine.Exceptions.StructureException;
+import Engine.GameDescriptor.PokerGameDescriptor;
+import Engine.GameDescriptor.ReadGameDescriptorFile;
+import Engine.GameManager;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -10,7 +15,9 @@ import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.xml.bind.JAXBException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,6 +33,8 @@ public class MainMenuController implements Initializable{
     private SimpleBooleanProperty isFileSelected;
     private SimpleStringProperty selectedFileProperty;
     private Stage primaryStage;
+    private GameManager gameManager;
+    private BusinessLogic businessLogic;
 
     public MainMenuController()
     {
@@ -56,7 +65,21 @@ public class MainMenuController implements Initializable{
         selectedFileProperty.set(absolutePath);
         isFileSelected.set(true);
 
+        try {
+            gameManager.setGameDescriptor(ReadGameDescriptorFile.readFile(selectedFile.getAbsolutePath()));
+            gameManager.setTable();
+            businessLogic.updateUI();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
+
+    public  void setPrimaryStage (Stage s) { primaryStage=s; }
+
+    public void setGameManager(GameManager g) { gameManager=g; }
+
+    public void setBusinessLogic(BusinessLogic b){businessLogic=b;}
 
 }

@@ -1,5 +1,10 @@
 package Controllers;
 
+import Engine.GameManager;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -40,6 +45,21 @@ public class GameInfoAndActionsController implements Initializable{
     @FXML private TextField raiseAmountLabel;
     @FXML private TextField betAmountLabel;
 
+    private GameManager gameManager;
+    private SimpleIntegerProperty big;
+    private SimpleIntegerProperty small;
+    private SimpleIntegerProperty buy;
+    private SimpleIntegerProperty hands;
+
+
+    public GameInfoAndActionsController()
+    {
+        big = new SimpleIntegerProperty(0);
+        small = new SimpleIntegerProperty(0);
+        buy= new SimpleIntegerProperty(0);
+        hands= new SimpleIntegerProperty(0);
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showCardsButton.setDisable(true);
@@ -51,5 +71,22 @@ public class GameInfoAndActionsController implements Initializable{
         raiseAmountLabel.setVisible(false);
         okBetButton.setVisible(false);
         okRaiseButton.setVisible(false);
+
+        bigLabel.textProperty().bind(big.asString());
+        smallLabel.textProperty().bind(small.asString());
+        handsLabel.textProperty().bind(hands.asString());
+        buysLabel.textProperty().bind(buy.asString());
+    }
+
+    public void updateGameSettings()
+    {
+        big.set(gameManager.getBig());
+        small.set(gameManager.getSmall());
+        hands.set(gameManager.getHandsCount());
+        buy.set(gameManager.getBuy());
+    }
+
+    public void setGameManager(GameManager gameManager) {
+        this.gameManager = gameManager;
     }
 }
