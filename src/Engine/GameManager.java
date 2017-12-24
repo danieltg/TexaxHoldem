@@ -2,6 +2,7 @@ package Engine;
 
 
 import Engine.Exceptions.GameStateException;
+import Engine.GameDescriptor.PokerBlindes;
 import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.GameDescriptor.GameType;
 import Engine.Players.*;
@@ -24,6 +25,8 @@ public class GameManager implements Serializable {
     private int maxPot;
     private Date startTime;
     private int indexActivePlayer;
+    private PokerHand currHand;
+    private List<PokerHandStep> handReplay=new ArrayList<>();
 
     private int moneyFromLastHand;
 
@@ -202,6 +205,66 @@ public class GameManager implements Serializable {
         }
 
         return true;
+    }
+
+    public void startNewHand()
+    {
+        this.handNumber++;
+        PokerBlindes blindes=getGameDescriptor().getStructure().getBlindes();
+
+        currHand= new PokerHand(blindes,getPlayers());
+        currHand.addToPot(getMoneyFromLastHand());
+
+        runHand();
+    }
+
+    public void runHand()
+    {
+        handReplay.clear();
+        resetPlayerState();
+
+        currHand.dealingHoleCards();
+        addStepToHandReplay();
+
+        currHand.dealingFlopCards();
+        addStepToHandReplay();
+
+    }
+
+    private void resetPlayerState()
+    {
+        currHand.resetPlayersBets();
+        currHand.setLastRaise(null);
+    }
+
+    private void addStepToHandReplay() {
+
+
+        PokerHandStep step= new PokerHandStep(
+                currHand.getPlayers(),
+                currHand.getLastPlayerToPlay(),
+                currHand.getPot(),
+                currHand.getCardsAsString(),
+                currHand.getCurrentBet(),
+                currHand.getLastAction()
+                ,currHand.getLastActionInfo());
+
+        handReplay.add(step);
+
+        clearValuesFromCurrHand();
+    }
+
+
+    private void clearValuesFromCurrHand() {
+
+        currHand.setLastPlayerToPlay(-999);
+        currHand.setLastActionInfo(0);
+        currHand.setLastAction("N");
+    }
+
+    public PokerHand getCurrHand()
+    {
+        return currHand;
     }
 }
 

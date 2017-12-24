@@ -1,15 +1,18 @@
 package Controllers;
 
 import Engine.Exceptions.BlindesException;
+import Engine.Exceptions.GameStateException;
 import Engine.Exceptions.StructureException;
 import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
@@ -23,6 +26,7 @@ import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable{
 
+    @FXML private ColorPicker tableColor;
     @FXML private ComboBox styleComboBox;
     @FXML private ComboBox animationComboBox;
     @FXML private Button loadXmlButton;
@@ -79,6 +83,12 @@ public class MainMenuController implements Initializable{
     public void startGameButtonAction() {
 
         loadXmlButton.setDisable(true);
+        try {
+            gameManager.startGame();
+            gameManager.startNewHand();
+        } catch (GameStateException e) {
+            e.printStackTrace();
+        }
         businessLogic.startGame();
 
     }
@@ -89,4 +99,8 @@ public class MainMenuController implements Initializable{
 
     public void setBusinessLogic(BusinessLogic b){businessLogic=b;}
 
+    public void changeColor(ActionEvent actionEvent) {
+
+        businessLogic.changeColor(tableColor.getValue());
+    }
 }

@@ -4,18 +4,29 @@ import Engine.GameManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GameTableController implements Initializable {
 
+    @FXML private Circle table;
     @FXML private TextField seat_1;
     @FXML private TextField seat_2;
     @FXML private TextField seat_3;
     @FXML private TextField seat_4;
     @FXML private TextField seat_5;
     @FXML private TextField seat_6;
+
+    @FXML private ImageView tCard1;
+    @FXML private ImageView tCard2;
+    @FXML private ImageView tCard3;
+    @FXML private ImageView tCard4;
+    @FXML private ImageView tCard5;
 
     private GameManager gameManager;
     private BusinessLogic businessLogic;
@@ -176,4 +187,22 @@ public class GameTableController implements Initializable {
         seat_6.setDisable(false);
     }
 
+
+    public void updateCards()
+    {
+        String[] tableCards=gameManager.getCurrHand().getCardsAsStringArray();
+
+        String BASE_PACKAGE="/Resources/cards/";
+
+        tCard1.setImage(new Image(BASE_PACKAGE+(tableCards[0].equals("??")?"back":tableCards[0])+".png"));
+        tCard2.setImage(new Image(BASE_PACKAGE+(tableCards[1].equals("??")?"back":tableCards[1])+".png"));
+        tCard3.setImage(new Image(BASE_PACKAGE+(tableCards[2].equals("??")?"back":tableCards[2])+".png"));
+        tCard4.setImage(new Image(BASE_PACKAGE+(tableCards[3].equals("??")?"back":tableCards[3])+".png"));
+        tCard5.setImage(new Image(BASE_PACKAGE+(tableCards[4].equals("??")?"back":tableCards[4])+".png"));
+
+    }
+
+    public void changeTableColor(Color value) {
+        table.setFill(value);
+    }
 }

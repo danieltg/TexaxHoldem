@@ -1,5 +1,7 @@
 package Controllers;
 
+import javafx.scene.paint.Color;
+
 public class BusinessLogic {
 
     private MainScreenController controller;
@@ -30,10 +32,11 @@ public class BusinessLogic {
     }
 
     public void startGame() {
-        updateGameDetails();
+        controller.updateGameDetails();
+        controller.updateTableCards();
     }
 
-    private void updateGameDetails() {
-        controller.updateGameDetails();
+    public void changeColor(Color value) {
+        controller.updateColor(value);
     }
 }

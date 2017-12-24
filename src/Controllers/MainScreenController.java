@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -71,5 +72,14 @@ public class MainScreenController implements Initializable {
     public void setGameTable() {
 
         gameTableController.updateGame();
+    }
+
+    public void updateTableCards()
+    {
+        gameTableController.updateCards();
+    }
+
+    public void updateColor(Color value) {
+        gameTableController.changeTableColor(value);
     }
 }

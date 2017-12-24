@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameTableController">
     <children>
-        <Circle fx:id="table" fill="DODGERBLUE" layoutX="300.0" layoutY="200.0" radius="124.0" stroke="BLACK" strokeType="INSIDE" />
-        <TextField fx:id="seat_1" alignment="CENTER" disable="true" editable="false" layoutX="268.0" layoutY="63.0" prefHeight="27.0" prefWidth="64.0" />
-        <TextField fx:id="seat_2" alignment="CENTER" disable="true" editable="false" layoutX="392.0" layoutY="131.0" prefHeight="27.0" prefWidth="64.0" />
-        <TextField fx:id="seat_4" alignment="CENTER" disable="true" editable="false" layoutX="268.0" layoutY="311.0" prefHeight="27.0" prefWidth="64.0" />
-        <TextField fx:id="seat_5" alignment="CENTER" disable="true" editable="false" layoutX="144.0" layoutY="241.0" prefHeight="27.0" prefWidth="64.0" />
-        <TextField fx:id="seat_3" alignment="CENTER" disable="true" editable="false" layoutX="376.0" layoutY="241.0" prefHeight="27.0" prefWidth="64.0" />
-        <TextField fx:id="seat_6" alignment="CENTER" disable="true" editable="false" layoutX="156.0" layoutY="131.0" prefHeight="27.0" prefWidth="64.0" />
+        <Circle fx:id="table" fill="#1f93ff" layoutX="296.0" layoutY="192.0" radius="153.0" stroke="BLACK" strokeType="INSIDE" />
+        <TextField fx:id="seat_1" alignment="CENTER" disable="true" editable="false" layoutX="264.0" layoutY="26.0" prefHeight="27.0" prefWidth="64.0" />
+        <TextField fx:id="seat_2" alignment="CENTER" disable="true" editable="false" layoutX="417.0" layoutY="131.0" prefHeight="27.0" prefWidth="64.0" />
+        <TextField fx:id="seat_4" alignment="CENTER" disable="true" editable="false" layoutX="264.0" layoutY="332.0" prefHeight="27.0" prefWidth="64.0" />
+        <TextField fx:id="seat_5" alignment="CENTER" disable="true" editable="false" layoutX="144.0" layoutY="268.0" prefHeight="27.0" prefWidth="64.0" />
+        <TextField fx:id="seat_3" alignment="CENTER" disable="true" editable="false" layoutX="392.0" layoutY="268.0" prefHeight="27.0" prefWidth="64.0" />
+        <TextField fx:id="seat_6" alignment="CENTER" disable="true" editable="false" layoutX="112.0" layoutY="131.0" prefHeight="27.0" prefWidth="64.0" />
+      <ImageView fx:id="tCard1" fitHeight="59.0" fitWidth="43.0" layoutX="167.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../cards/back.png" />
+         </image></ImageView>
+        <ImageView fx:id="tCard2" fitHeight="59.0" fitWidth="41.0" layoutX="276.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../cards/back.png" />
+            </image></ImageView>
+        <ImageView fx:id="tCard3" fitHeight="59.0" fitWidth="41.0" layoutX="223.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../cards/back.png" />
+            </image></ImageView>
+        <ImageView fx:id="tCard4" fitHeight="59.0" fitWidth="41.0" layoutX="383.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../cards/back.png" />
+            </image></ImageView>
+        <ImageView fx:id="tCard5" fitHeight="59.0" fitWidth="41.0" layoutX="328.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../cards/back.png" />
+            </image></ImageView>
     </children>
 </Pane>

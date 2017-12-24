@@ -76,6 +76,19 @@ public class PokerHand {
 
     }
 
+    public String[] getCardsAsStringArray()
+    {
+        String[] cards = new String[5];
+
+        cards[0]=tableCards[0].toString();
+        cards[1]=tableCards[1].toString();
+        cards[2]=tableCards[2].toString();
+        cards[3]=tableCards[3].toString();
+        cards[4]=tableCards[4].toString();
+
+
+        return cards;
+    }
 
     public String getCardsAsString()
     {
