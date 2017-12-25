@@ -106,6 +106,10 @@ public abstract class PokerPlayer implements Serializable {
         return state;
     }
 
+    public String getStateAsString() {
+        return state.getState();
+    }
+
     public List<String> listOfDetails() {
         List<String> list = new ArrayList<>();
         list.add("Type: "+this.type.getType());
@@ -239,4 +243,6 @@ public abstract class PokerPlayer implements Serializable {
     {
         style=newStyle;
     }
+
+
 }
