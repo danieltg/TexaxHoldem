@@ -12,7 +12,7 @@ public class BusinessLogic {
 
     public void updatePlayersList()
     {
-        controller.setPlayerTable();
+        controller.updatePlayersTable();
     }
 
     public void updateGameSettings()
@@ -33,7 +33,7 @@ public class BusinessLogic {
 
     public void startGame() {
         controller.updateGameDetails();
-        controller.updateTableCards();
+        controller.RunOneHand();
     }
 
     public void changeColor(Color value) {

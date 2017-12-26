@@ -30,12 +30,15 @@ public class PlayersTableController implements Initializable {
         typeColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("type"));
         buysColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("numbersOfBuy"));
         handsWinsColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("handsWon"));
+        winnigPriceColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("chips"));
+
     }
 
 
-    public void setPlayers(ObservableList<PokerPlayer> pokerPlayers)
+    public void updatePlayersTable(ObservableList<PokerPlayer> pokerPlayers)
     {
-        playersTableView.setItems(pokerPlayers);
+        playersTableView.getItems().clear();
+        playersTableView.getItems().addAll(pokerPlayers);
     }
 
 
