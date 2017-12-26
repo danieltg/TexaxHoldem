@@ -14,7 +14,6 @@ import java.util.ResourceBundle;
 
 public class GameTableController implements Initializable {
 
-    @FXML private TextArea text_1;
     @FXML private Circle table;
     @FXML private TextField seat_1;
     @FXML private TextField seat_2;
@@ -28,8 +27,6 @@ public class GameTableController implements Initializable {
     @FXML private ImageView tCard3;
     @FXML private ImageView tCard4;
     @FXML private ImageView tCard5;
-
-    @FXML private Tooltip tooltop_seat_6;
 
     private GameManager gameManager;
     private BusinessLogic businessLogic;
@@ -48,13 +45,6 @@ public class GameTableController implements Initializable {
         seat_4.setEditable(false);
         seat_5.setEditable(false);
         seat_6.setEditable(false);
-
-        //final Tooltip tooltip = new Tooltip();
-        //tooltip.setText(
-        //        "\nYour password must be\n" +
-         //               "at least 8 characters in length\n");
-        seat_6.setTooltip(tooltop_seat_6);
-
 
     }
 
@@ -108,22 +98,9 @@ public class GameTableController implements Initializable {
 
     public void update3players()
     {
-        String str="Name: "+gameManager.getPlayers().get(0).getName()+
-                "\nChips: "+gameManager.getPlayers().get(0).getChips()+
-                " \nBet: "+gameManager.getPlayers().get(0).getBet()+
-                "\nRole: "+gameManager.getPlayers().get(0).getStateAsString();
-        //str="First row\nSecond row";
-        seat_1.setText(str);
-        text_1.setText(str);
-        // seat_1.setText(gameManager.getPlayers().get(0).getName());
+        seat_1.setText(gameManager.getPlayers().get(0).getName());
         seat_1.setDisable(false);
-        text_1.setDisable(false);
-
-        text_1.setEditable(false);
-        text_1.setStyle("-fx-text-fill: green; -fx-font-size: 12; -fx-background-color: red; ");
-
         seat_1.setStyle(gameManager.getPlayers().get(0).getStyle());
-        //text_1.setStyle(gameManager.getPlayers().get(0).getStyle());
 
         seat_3.setText(gameManager.getPlayers().get(1).getName());
         seat_3.setDisable(false);
