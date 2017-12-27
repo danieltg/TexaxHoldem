@@ -23,9 +23,11 @@
 			<Name>Nachtze</Name>
 			<Type>Computer</Type>
 		</Player>
-		<Player id="4">
+	<Player id="4">
 			<Name>Daniel</Name>
 			<Type>Computer</Type>
 		</Player>
+
+	
 	</Players>
 </GameDescriptor>
