@@ -208,7 +208,6 @@ public class GameTableController implements Initializable {
         seat4_data.setVisible(false);
         seat5_data.setVisible(false);
         seat6_data.setVisible(false);
-
     }
 
 
@@ -218,7 +217,7 @@ public class GameTableController implements Initializable {
         seat1_data.setVisible(true);
         _namePlayer1.setValue(gameManager.getPlayers().get(0).getName());
         _rolePlayer1.setValue(gameManager.getPlayers().get(0).getState().name());
-       _chipsPlayer1.setValue(gameManager.getPlayers().get(0).getChips());
+        _chipsPlayer1.setValue(gameManager.getPlayers().get(0).getChips());
         _betPlayer1.setValue(gameManager.getPlayers().get(0).getBet());
 
 
