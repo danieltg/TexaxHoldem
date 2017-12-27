@@ -212,6 +212,12 @@ public class MainScreenController implements Initializable {
 
                     doThis(nowPlay(currPlayer),currPlayer);
 
+                    //TODO
+                    // TO DELETE!!!
+                    if(currPlayer.getType()==PlayerType.Human) {
+                        humanTurn(currPlayer);
+                        return;
+                    }
                     if(currPlayer.getType()==PlayerType.Human && currPlayer.isFolded()) {
                         currPlayer.setBet(0);
                         return;
@@ -238,20 +244,33 @@ public class MainScreenController implements Initializable {
 
     }
 
+    private void humanTurn(PokerPlayer currPlayer) {
+        enableHumanTurnButtons(currPlayer);
+    }
+
+
+
+
+    private void enableHumanTurnButtons(PokerPlayer currPlayer) {
+        gameInfoAndActionsController.enableButtons(currPlayer);
+    }
+
     private String nowPlay(PokerPlayer currPlayer) {
 
         if (currPlayer.getType()==PlayerType.Computer) {
             return currPlayer.play();
         }
         else {
-            return getUSerSelection();
+            return "E";
+            //TODO
+            // return getUSerSelection();
         }
 
     }
 
     //TODO
     private String getUSerSelection() {
-        return gameInfoAndActionsController.getUserSelection();
+        return "E";
     }
 
     private void doThis(String whatToDo, PokerPlayer p) {
@@ -283,6 +302,9 @@ public class MainScreenController implements Initializable {
                 break;
             }
 
+            if (whatToDo.equals("E")) {
+                break;
+            }
         }
     }
 

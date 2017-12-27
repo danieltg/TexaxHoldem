@@ -1,6 +1,8 @@
 package Controllers;
 
 import Engine.GameManager;
+import Engine.Players.PokerPlayer;
+import Engine.Utils.EngineUtils;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -11,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import java.net.URL;
@@ -53,6 +56,8 @@ public class GameInfoAndActionsController implements Initializable{
     @FXML private TextField betAmountLabel;
 
     private GameManager gameManager;
+    private PokerPlayer currPlayer;
+
     private SimpleIntegerProperty big;
     private SimpleIntegerProperty small;
     private SimpleIntegerProperty buy;
@@ -80,6 +85,20 @@ public class GameInfoAndActionsController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        firstCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
+        secondCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
+        firstCardImage.setVisible(false);
+        secondCardImage.setVisible(false);
+
+        showCardsButton.setDisable(false);
+        showCardsButton.setOnMousePressed((event) -> {
+            firstCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+currPlayer.getCardsAsStringArray()[0]+".png"));
+            secondCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+currPlayer.getCardsAsStringArray()[1]+".png"));
+        });
+        showCardsButton.setOnMouseReleased((event) -> {
+            firstCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
+            secondCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
+        });
         raiseButton.setDisable(true);
         raiseButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -192,5 +211,21 @@ public class GameInfoAndActionsController implements Initializable{
     public void userSeletedCheck(ActionEvent actionEvent) {
         userSelction="C";
         
+    }
+
+    public void enableButtons(PokerPlayer currPlayer) {
+
+        this.currPlayer=currPlayer;
+
+        raiseButton.setDisable(false);
+        checkButton.setDisable(false);
+        betButton.setDisable(false);
+        callButton.setDisable(false);
+        foldButton.setDisable(false);
+
+        showCardsButton.setDisable(false);
+        firstCardImage.setVisible(true);
+        secondCardImage.setVisible(true);
+
     }
 }

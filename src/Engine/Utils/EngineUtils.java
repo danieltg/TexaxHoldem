@@ -9,6 +9,8 @@ import java.util.List;
 
 public class EngineUtils {
 
+    public static final String BASE_PACKAGE="/Resources/cards/";
+
     public static boolean isNumeric(String s) {
         return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }

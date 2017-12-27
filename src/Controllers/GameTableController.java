@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static Engine.Utils.EngineUtils.BASE_PACKAGE;
+
 public class GameTableController implements Initializable {
 
     @FXML private Circle table;
@@ -349,8 +351,6 @@ public class GameTableController implements Initializable {
     public void updateCards()
     {
         String[] tableCards=gameManager.getCurrHand().getCardsAsStringArray();
-
-        String BASE_PACKAGE="/Resources/cards/";
 
         tCard1.setImage(new Image(BASE_PACKAGE+(tableCards[0].equals("??")?"back":tableCards[0])+".png"));
         tCard2.setImage(new Image(BASE_PACKAGE+(tableCards[1].equals("??")?"back":tableCards[1])+".png"));

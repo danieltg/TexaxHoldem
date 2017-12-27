@@ -179,6 +179,16 @@ public abstract class PokerPlayer implements Serializable {
         return holeCards[0] + " " +holeCards[1];
     }
 
+
+    public String[] getCardsAsStringArray()
+    {
+        String[] cards = new String[2];
+        cards[0]=holeCards[0].toString();
+        cards[1]=holeCards[1].toString();
+
+        return cards;
+
+    }
     public void setBet(int newBet)
     {
         // Checks to make sure the bet is valid
