@@ -15,23 +15,23 @@
         <Circle fx:id="table" fill="#1f93ff" layoutX="296.0" layoutY="196.0" radius="153.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fx:id="tCard1" fitHeight="59.0" fitWidth="43.0" layoutX="167.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../cards/back.png" />
+            <Image url="@../Images/cards/back.png" />
          </image></ImageView>
         <ImageView fx:id="tCard2" fitHeight="59.0" fitWidth="41.0" layoutX="276.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../cards/back.png" />
+                <Image url="@../Images/cards/back.png" />
             </image></ImageView>
         <ImageView fx:id="tCard3" fitHeight="59.0" fitWidth="41.0" layoutX="223.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../cards/back.png" />
+                <Image url="@../Images/cards/back.png" />
             </image></ImageView>
         <ImageView fx:id="tCard4" fitHeight="59.0" fitWidth="41.0" layoutX="383.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../cards/back.png" />
+                <Image url="@../Images/cards/back.png" />
             </image></ImageView>
         <ImageView fx:id="tCard5" fitHeight="59.0" fitWidth="41.0" layoutX="328.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../cards/back.png" />
+                <Image url="@../Images/cards/back.png" />
             </image></ImageView>
       <Pane fx:id="seat1_data" layoutX="223.0" prefHeight="108.0" prefWidth="139.0" style="-fx-border-color: red;">
          <children>
