@@ -83,15 +83,9 @@ public class MainMenuController implements Initializable{
     public void startGameButtonAction() {
 
         loadXmlButton.setDisable(true);
-        try {
-            gameManager.startGame();
-            gameManager.startNewHand();
-        } catch (GameStateException e) {
-            e.printStackTrace();
-        }
         businessLogic.startGame();
-
     }
+
 
     public  void setPrimaryStage (Stage s) { primaryStage=s; }
 

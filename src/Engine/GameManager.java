@@ -4,7 +4,6 @@ package Engine;
 import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.PokerBlindes;
 import Engine.GameDescriptor.PokerGameDescriptor;
-import Engine.GameDescriptor.GameType;
 import Engine.Players.*;
 import UI.Boards.GameStateBoard;
 
@@ -14,6 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import static Engine.Utils.EngineUtils.saveListToFile;
 
 public class GameManager implements Serializable {
 
@@ -114,8 +115,6 @@ public class GameManager implements Serializable {
         players.get(s).setStyle("-fx-background-color: green;");
         players.get(b).setStyle("-fx-background-color: yellow;");
 
-
-
         players.get(s).setInitialAmount(gameDescriptor.getStructure().getBlindes().getSmall());
         players.get(b).setInitialAmount(gameDescriptor.getStructure().getBlindes().getBig());
         players.get(d).setInitialAmount(0);
@@ -207,7 +206,7 @@ public class GameManager implements Serializable {
         return true;
     }
 
-    public void startNewHand()
+    public PokerHand startNewHand()
     {
         this.handNumber++;
         PokerBlindes blindes=getGameDescriptor().getStructure().getBlindes();
@@ -215,7 +214,7 @@ public class GameManager implements Serializable {
         currHand= new PokerHand(blindes,getPlayers());
         currHand.addToPot(getMoneyFromLastHand());
 
-        runHand();
+        return currHand;
     }
 
     public void runHand()
@@ -231,13 +230,13 @@ public class GameManager implements Serializable {
 
     }
 
-    private void resetPlayerState()
+    public void resetPlayerState()
     {
         currHand.resetPlayersBets();
         currHand.setLastRaise(null);
     }
 
-    private void addStepToHandReplay() {
+    public void addStepToHandReplay() {
 
 
         PokerHandStep step= new PokerHandStep(
@@ -265,6 +264,17 @@ public class GameManager implements Serializable {
     public PokerHand getCurrHand()
     {
         return currHand;
+    }
+
+    public void clearHandReplay()
+    {
+        handReplay.clear();
+    }
+
+
+    public void saveHandReplayToFile(String s) {
+        saveListToFile(handReplay,"handReplay.txt");
+
     }
 }
 

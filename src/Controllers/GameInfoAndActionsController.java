@@ -6,6 +6,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -60,6 +62,7 @@ public class GameInfoAndActionsController implements Initializable{
 
     private SimpleIntegerProperty handsCount;
     private SimpleIntegerProperty maxPOT;
+    private String selection;
 
     public GameInfoAndActionsController()
     {
@@ -75,6 +78,47 @@ public class GameInfoAndActionsController implements Initializable{
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        raiseButton.setDisable(true);
+        raiseButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                selection="R";
+            }
+        });
+
+        checkButton.setDisable(true);
+        checkButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                selection="K";
+            }
+        });
+
+        betButton.setDisable(true);
+        betButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                selection="B";
+            }
+        });
+
+        callButton.setDisable(true);
+        callButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                selection="C";
+            }
+        });
+
+        foldButton.setDisable(true);
+        foldButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                selection="F";
+            }
+        });
+
 
         gameSettings.setCollapsible(false);
         gameDetails.setCollapsible(false);
@@ -128,5 +172,19 @@ public class GameInfoAndActionsController implements Initializable{
     }
     public void setGameManager(GameManager gameManager) {
         this.gameManager = gameManager;
+    }
+
+
+    public String getUserSelection()
+    {
+        //selection=null;
+        raiseButton.setDisable(false);
+        checkButton.setDisable(false);
+        betButton.setDisable(false);
+        callButton.setDisable(false);
+        foldButton.setDisable(false);
+
+
+        return "F";
     }
 }
