@@ -1,70 +1,49 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Mushon, 1> : AS TD
-Player <Avrum, 2> : 9C 6S
-Player <Nachtze, 3> : 6C 4D
-Player <Daniel, 4> : 5S 8C
+Player <Or, 123> : TS 2D
+Player <Elad, 234> : 4S 8S
+Player <Daniel, 456> : 2C KH
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 2
-Player name: Avrum
+Active player ID: 456
+Player name: Daniel
 Player type: Human
-Player cards: 9C 6S
-Player chips: 98
+Player cards: 2C KH
+Player chips: 45
 Player bet: 0
-Pot: 2
+Pot: 5
 Current Bet: 0
 Action: B
-Additional Action Information: 2
+Additional Action Information: 5
 ************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
+Active player ID: 123
+Player name: Or
 Player type: Computer
-Player cards: 6C 4D
-Player chips: 96
+Player cards: TS 2D
+Player chips: 40
 Player bet: 0
-Pot: 6
+Pot: 15
 Current Bet: 0
 Action: R
-Additional Action Information: 4
-************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 5S 8C
-Player chips: 96
-Player bet: 0
-Pot: 10
-Current Bet: 4
-Action: C
-************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: AS TD
-Player chips: 100
-Player bet: 0
-Pot: 10
-Current Bet: 4
-Action: N
+Additional Action Information: 10
 ************************************************************************************************
 The step is not related to any player
-Cards: 4C | 5D | JD | ?? | ??
-Pot: 10
-Current Bet: 4
+Cards: AS | JH | 8C | ?? | ??
+Pot: 15
+Current Bet: 10
 Action: CARD
 ************************************************************************************************
 The step is not related to any player
-Cards: 4C | 5D | JD | 9D | ??
-Pot: 10
+Cards: AS | JH | 8C | 7H | ??
+Pot: 15
 Current Bet: 0
 Action: CARD
 ************************************************************************************************
 The step is not related to any player
-Cards: 4C | 5D | JD | 9D | KH
-Pot: 10
+Cards: AS | JH | 8C | 7H | 6S
+Pot: 15
 Current Bet: 0
 Action: CARD

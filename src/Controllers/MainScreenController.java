@@ -122,14 +122,17 @@ public class MainScreenController implements Initializable {
         currHand.betSmall();
         gameManager.addStepToHandReplay();
         updatePlayersTable();
+        updateGUIPot();
 
         currHand.betBig();
         gameManager.addStepToHandReplay();
         updatePlayersTable();
+        updateGUIPot();
 
         currHand.updateMaxBet();
 
-       collectBets();
+        collectBets();
+        updateGUIPot();
 
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
@@ -145,6 +148,7 @@ public class MainScreenController implements Initializable {
 
 
         collectBets();
+        updateGUIPot();
         currHand.upRound();
 
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
@@ -157,6 +161,7 @@ public class MainScreenController implements Initializable {
         gameManager.addStepToHandReplay();
 
         collectBets();
+        updateGUIPot();
         currHand.upRound();
 
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
@@ -170,10 +175,15 @@ public class MainScreenController implements Initializable {
         gameManager.addStepToHandReplay();
 
         collectBets();
+        updateGUIPot();
 
         return currHand.evaluateRound();
     //return null;
 
+    }
+
+    private void updateGUIPot() {
+        gameTableController.updatePot();
     }
 
     private void collectBets() {

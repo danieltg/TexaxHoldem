@@ -107,7 +107,7 @@ public class GameTableController implements Initializable {
 
     public GameTableController()
     {
-        _pot=new SimpleIntegerProperty();
+        _pot=new SimpleIntegerProperty(0);
 
         _namePlayer1=new SimpleStringProperty();
         _namePlayer2=new SimpleStringProperty();
@@ -144,7 +144,6 @@ public class GameTableController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         potLabel.textProperty().bind(_pot.asString());
-        _pot.setValue(0);
 
         seat1_data.setVisible(false);
         seat2_data.setVisible(false);
@@ -224,53 +223,76 @@ public class GameTableController implements Initializable {
 
     public void update3players()
     {
-
         seat1_data.setVisible(true);
+        seat1_data.setStyle(gameManager.getPlayers().get(0).getStyle());
         _namePlayer1.setValue(gameManager.getPlayers().get(0).getName());
         _rolePlayer1.setValue(gameManager.getPlayers().get(0).getState().name());
+
+        seat3_data.setVisible(true);
+        seat3_data.setStyle(gameManager.getPlayers().get(1).getStyle());
+        _namePlayer3.setValue(gameManager.getPlayers().get(1).getName());
+        _rolePlayer3.setValue(gameManager.getPlayers().get(1).getState().name());
+
+        seat5_data.setVisible(true);
+        seat5_data.setStyle(gameManager.getPlayers().get(2).getStyle());
+        _namePlayer5.setValue(gameManager.getPlayers().get(2).getName());
+        _rolePlayer5.setValue(gameManager.getPlayers().get(2).getState().name());
+
+        update3playersChipsAndBet();
+    }
+
+    private void update3playersChipsAndBet() {
         _chipsPlayer1.setValue(gameManager.getPlayers().get(0).getChips());
         _betPlayer1.setValue(gameManager.getPlayers().get(0).getBet());
 
-
-        seat3_data.setVisible(true);
-        _namePlayer3.setValue(gameManager.getPlayers().get(1).getName());
-        _rolePlayer3.setValue(gameManager.getPlayers().get(1).getState().name());
         _chipsPlayer3.setValue(gameManager.getPlayers().get(1).getChips());
         _betPlayer3.setValue(gameManager.getPlayers().get(1).getBet());
 
-
-        seat5_data.setVisible(true);
-        _namePlayer5.setValue(gameManager.getPlayers().get(2).getName());
-        _rolePlayer5.setValue(gameManager.getPlayers().get(2).getState().name());
         _chipsPlayer5.setValue(gameManager.getPlayers().get(2).getChips());
         _betPlayer5.setValue(gameManager.getPlayers().get(2).getBet());
-
     }
 
     public void update4players()
     {
 
         seat2_data.setVisible(true);
+        seat2_data.setStyle(gameManager.getPlayers().get(0).getStyle());
         _namePlayer2.setValue(gameManager.getPlayers().get(0).getName());
         _rolePlayer2.setValue(gameManager.getPlayers().get(0).getState().name());
+
+
+        seat3_data.setVisible(true);
+        seat3_data.setStyle(gameManager.getPlayers().get(1).getStyle());
+        _namePlayer3.setValue(gameManager.getPlayers().get(1).getName());
+        _rolePlayer3.setValue(gameManager.getPlayers().get(1).getState().name());
+
+
+        seat5_data.setVisible(true);
+        seat5_data.setStyle(gameManager.getPlayers().get(2).getStyle());
+        _namePlayer5.setValue(gameManager.getPlayers().get(2).getName());
+        _rolePlayer5.setValue(gameManager.getPlayers().get(2).getState().name());
+
+
+        seat6_data.setVisible(true);
+        seat6_data.setStyle(gameManager.getPlayers().get(3).getStyle());
+        _namePlayer6.setValue(gameManager.getPlayers().get(3).getName());
+        _rolePlayer6.setValue(gameManager.getPlayers().get(3).getState().name());
+
+
+        update4playersChipsAndBet();
+    }
+
+    private void update4playersChipsAndBet() {
+
         _chipsPlayer2.setValue(gameManager.getPlayers().get(0).getChips());
         _betPlayer2.setValue(gameManager.getPlayers().get(0).getBet());
 
-        seat3_data.setVisible(true);
-        _namePlayer3.setValue(gameManager.getPlayers().get(1).getName());
-        _rolePlayer3.setValue(gameManager.getPlayers().get(1).getState().name());
         _chipsPlayer3.setValue(gameManager.getPlayers().get(1).getChips());
         _betPlayer3.setValue(gameManager.getPlayers().get(1).getBet());
 
-        seat5_data.setVisible(true);
-        _namePlayer5.setValue(gameManager.getPlayers().get(2).getName());
-        _rolePlayer5.setValue(gameManager.getPlayers().get(2).getState().name());
         _chipsPlayer5.setValue(gameManager.getPlayers().get(2).getChips());
         _betPlayer5.setValue(gameManager.getPlayers().get(2).getBet());
 
-        seat6_data.setVisible(true);
-        _namePlayer6.setValue(gameManager.getPlayers().get(3).getName());
-        _rolePlayer6.setValue(gameManager.getPlayers().get(3).getState().name());
         _chipsPlayer6.setValue(gameManager.getPlayers().get(3).getChips());
         _betPlayer6.setValue(gameManager.getPlayers().get(3).getBet());
     }
@@ -278,72 +300,105 @@ public class GameTableController implements Initializable {
     public void update5players()
     {
         seat1_data.setVisible(true);
+        seat1_data.setStyle(gameManager.getPlayers().get(0).getStyle());
         _namePlayer1.setValue(gameManager.getPlayers().get(0).getName());
         _rolePlayer1.setValue(gameManager.getPlayers().get(0).getState().name());
+
+        seat2_data.setVisible(true);
+        seat2_data.setStyle(gameManager.getPlayers().get(1).getStyle());
+        _namePlayer2.setValue(gameManager.getPlayers().get(1).getName());
+        _rolePlayer2.setValue(gameManager.getPlayers().get(1).getState().name());
+
+        seat3_data.setVisible(true);
+        seat3_data.setStyle(gameManager.getPlayers().get(2).getStyle());
+        _namePlayer3.setValue(gameManager.getPlayers().get(2).getName());
+        _rolePlayer3.setValue(gameManager.getPlayers().get(2).getState().name());
+
+        seat5_data.setVisible(true);
+        seat5_data.setStyle(gameManager.getPlayers().get(3).getStyle());
+        _namePlayer5.setValue(gameManager.getPlayers().get(3).getName());
+        _rolePlayer5.setValue(gameManager.getPlayers().get(3).getState().name());
+
+        seat6_data.setVisible(true);
+        seat6_data.setStyle(gameManager.getPlayers().get(4).getStyle());
+        _namePlayer6.setValue(gameManager.getPlayers().get(4).getName());
+        _rolePlayer6.setValue(gameManager.getPlayers().get(4).getState().name());
+
+        update5playersChipsAndBet();
+    }
+
+    private void update5playersChipsAndBet() {
+
         _chipsPlayer1.setValue(gameManager.getPlayers().get(0).getChips());
         _betPlayer1.setValue(gameManager.getPlayers().get(0).getBet());
 
-        seat2_data.setVisible(true);
-        _namePlayer2.setValue(gameManager.getPlayers().get(1).getName());
-        _rolePlayer2.setValue(gameManager.getPlayers().get(1).getState().name());
         _chipsPlayer2.setValue(gameManager.getPlayers().get(1).getChips());
         _betPlayer2.setValue(gameManager.getPlayers().get(1).getBet());
 
-        seat3_data.setVisible(true);
-        _namePlayer3.setValue(gameManager.getPlayers().get(2).getName());
-        _rolePlayer3.setValue(gameManager.getPlayers().get(2).getState().name());
         _chipsPlayer3.setValue(gameManager.getPlayers().get(2).getChips());
         _betPlayer3.setValue(gameManager.getPlayers().get(2).getBet());
 
-        seat5_data.setVisible(true);
-        _namePlayer5.setValue(gameManager.getPlayers().get(3).getName());
-        _rolePlayer5.setValue(gameManager.getPlayers().get(3).getState().name());
         _chipsPlayer5.setValue(gameManager.getPlayers().get(3).getChips());
         _betPlayer5.setValue(gameManager.getPlayers().get(3).getBet());
 
-        seat6_data.setVisible(true);
-        _namePlayer6.setValue(gameManager.getPlayers().get(4).getName());
-        _rolePlayer6.setValue(gameManager.getPlayers().get(4).getState().name());
         _chipsPlayer6.setValue(gameManager.getPlayers().get(4).getChips());
         _betPlayer6.setValue(gameManager.getPlayers().get(4).getBet());
     }
+
 
     public void update6players()
     {
 
         seat1_data.setVisible(true);
+        seat1_data.setStyle(gameManager.getPlayers().get(0).getStyle());
         _namePlayer1.setValue(gameManager.getPlayers().get(0).getName());
         _rolePlayer1.setValue(gameManager.getPlayers().get(0).getState().name());
+
+        seat2_data.setVisible(true);
+        seat2_data.setStyle(gameManager.getPlayers().get(1).getStyle());
+        _namePlayer2.setValue(gameManager.getPlayers().get(1).getName());
+        _rolePlayer2.setValue(gameManager.getPlayers().get(1).getState().name());
+
+        seat3_data.setVisible(true);
+        seat3_data.setStyle(gameManager.getPlayers().get(2).getStyle());
+        _namePlayer3.setValue(gameManager.getPlayers().get(2).getName());
+        _rolePlayer3.setValue(gameManager.getPlayers().get(2).getState().name());
+
+        seat4_data.setVisible(true);
+        seat4_data.setStyle(gameManager.getPlayers().get(3).getStyle());
+        _namePlayer4.setValue(gameManager.getPlayers().get(3).getName());
+        _rolePlayer4.setValue(gameManager.getPlayers().get(3).getState().name());
+
+        seat5_data.setVisible(true);
+        seat5_data.setStyle(gameManager.getPlayers().get(4).getStyle());
+        _namePlayer5.setValue(gameManager.getPlayers().get(4).getName());
+        _rolePlayer5.setValue(gameManager.getPlayers().get(4).getState().name());
+
+        seat6_data.setVisible(true);
+        seat6_data.setStyle(gameManager.getPlayers().get(5).getStyle());
+        _namePlayer6.setValue(gameManager.getPlayers().get(5).getName());
+        _rolePlayer6.setValue(gameManager.getPlayers().get(5).getState().name());
+
+        update6playersChipsAndBet();
+    }
+
+    private void update6playersChipsAndBet() {
+
         _chipsPlayer1.setValue(gameManager.getPlayers().get(0).getChips());
         _betPlayer1.setValue(gameManager.getPlayers().get(0).getBet());
 
-        seat2_data.setVisible(true);
-        _namePlayer2.setValue(gameManager.getPlayers().get(1).getName());
-        _rolePlayer2.setValue(gameManager.getPlayers().get(1).getState().name());
         _chipsPlayer2.setValue(gameManager.getPlayers().get(1).getChips());
         _betPlayer2.setValue(gameManager.getPlayers().get(1).getBet());
 
-        seat3_data.setVisible(true);
-        _namePlayer3.setValue(gameManager.getPlayers().get(2).getName());
-        _rolePlayer3.setValue(gameManager.getPlayers().get(2).getState().name());
         _chipsPlayer3.setValue(gameManager.getPlayers().get(2).getChips());
         _betPlayer3.setValue(gameManager.getPlayers().get(2).getBet());
 
-        seat4_data.setVisible(true);
-        _namePlayer4.setValue(gameManager.getPlayers().get(3).getName());
-        _rolePlayer4.setValue(gameManager.getPlayers().get(3).getState().name());
         _chipsPlayer4.setValue(gameManager.getPlayers().get(3).getChips());
         _betPlayer4.setValue(gameManager.getPlayers().get(3).getBet());
 
-        seat5_data.setVisible(true);
-        _namePlayer5.setValue(gameManager.getPlayers().get(4).getName());
-        _rolePlayer5.setValue(gameManager.getPlayers().get(4).getState().name());
         _chipsPlayer5.setValue(gameManager.getPlayers().get(4).getChips());
         _betPlayer5.setValue(gameManager.getPlayers().get(4).getBet());
 
-        seat6_data.setVisible(true);
-        _namePlayer6.setValue(gameManager.getPlayers().get(5).getName());
-        _rolePlayer6.setValue(gameManager.getPlayers().get(5).getState().name());
         _chipsPlayer6.setValue(gameManager.getPlayers().get(5).getChips());
         _betPlayer6.setValue(gameManager.getPlayers().get(5).getBet());
     }
@@ -364,5 +419,26 @@ public class GameTableController implements Initializable {
         table.setFill(value);
     }
 
+    public void updatePot()
+    {
+        _pot.setValue(gameManager.getCurrHand().getPot());
+
+        switch (gameManager.getPlayers().size())
+        {
+            case 3:
+                update3playersChipsAndBet();
+                break;
+            case 4:
+                update4playersChipsAndBet();
+                break;
+            case 5:
+                update5playersChipsAndBet();
+                break;
+            default:
+                update6playersChipsAndBet();
+
+        }
+
+    }
 
 }
