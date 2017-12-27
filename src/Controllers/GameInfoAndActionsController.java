@@ -63,6 +63,7 @@ public class GameInfoAndActionsController implements Initializable{
     private SimpleIntegerProperty handsCount;
     private SimpleIntegerProperty maxPOT;
     private String selection;
+    private String userSelction;
 
     public GameInfoAndActionsController()
     {
@@ -185,6 +186,11 @@ public class GameInfoAndActionsController implements Initializable{
         foldButton.setDisable(false);
 
 
-        return "F";
+        return userSelction;
+    }
+
+    public void userSeletedCheck(ActionEvent actionEvent) {
+        userSelction="C";
+        
     }
 }

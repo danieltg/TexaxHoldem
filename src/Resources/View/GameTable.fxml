@@ -207,5 +207,7 @@
             <Blend />
          </effect>
       </Pane>
+      <Label layoutX="244.0" layoutY="240.0" text="Pot:" />
+      <Label fx:id="potLabel" layoutX="281.0" layoutY="240.0" />
     </children>
 </Pane>

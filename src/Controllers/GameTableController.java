@@ -23,6 +23,8 @@ public class GameTableController implements Initializable {
 
     @FXML private Circle table;
 
+    @FXML private Label potLabel;
+
 
     @FXML private Pane seat1_data;
     @FXML private Pane seat2_data;
@@ -96,11 +98,15 @@ public class GameTableController implements Initializable {
     private SimpleIntegerProperty _betPlayer5;
     private SimpleIntegerProperty _betPlayer6;
 
+    private SimpleIntegerProperty _pot;
+
     private GameManager gameManager;
     private BusinessLogic businessLogic;
 
     public GameTableController()
     {
+        _pot=new SimpleIntegerProperty();
+
         _namePlayer1=new SimpleStringProperty();
         _namePlayer2=new SimpleStringProperty();
         _namePlayer3=new SimpleStringProperty();
@@ -135,6 +141,8 @@ public class GameTableController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        potLabel.textProperty().bind(_pot.asString());
+        _pot.setValue(0);
 
         seat1_data.setVisible(false);
         seat2_data.setVisible(false);
@@ -180,7 +188,7 @@ public class GameTableController implements Initializable {
     public void setBusinessLogic(BusinessLogic b){businessLogic=b;}
 
     public void updateGame() {
-
+    _pot.setValue(0);
         clearTable();
         int numberOfPlayer=gameManager.getPlayers().size();
 
@@ -202,6 +210,7 @@ public class GameTableController implements Initializable {
     }
 
     private void clearTable() {
+
         seat1_data.setVisible(false);
         seat2_data.setVisible(false);
         seat3_data.setVisible(false);
