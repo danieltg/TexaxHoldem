@@ -160,6 +160,7 @@
                               </Button>
                            </children>
                         </GridPane>
+                        <Label fx:id="replayIndex" />
                      </children>
                   </AnchorPane>
                </content>

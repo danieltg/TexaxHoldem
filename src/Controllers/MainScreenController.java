@@ -92,6 +92,7 @@ public class MainScreenController implements Initializable {
 
         try {
             List<Winner> winners= run();
+            gameInfoAndActionsController.enableReplayButtons();
             gameManager.saveHandReplayToFile("handReplay.txt");
 
 //            for (Winner w: winners) {

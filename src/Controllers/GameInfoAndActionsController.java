@@ -2,6 +2,7 @@ package Controllers;
 
 import Engine.GameManager;
 import Engine.Players.PokerPlayer;
+import Engine.PokerHandStep;
 import Engine.Utils.EngineUtils;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
@@ -18,12 +19,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import java.net.URL;
 import java.time.temporal.TemporalAmount;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.beans.binding.Bindings.not;
 
 public class GameInfoAndActionsController implements Initializable{
 
+    @FXML private Label replayIndex;
     @FXML private Accordion accordionGame;
     @FXML private TitledPane gameSettings;
     @FXML private TitledPane gameDetails;
@@ -57,6 +60,8 @@ public class GameInfoAndActionsController implements Initializable{
 
     private GameManager gameManager;
     private PokerPlayer currPlayer;
+    private List<PokerHandStep> replay=null;
+    private int step=0;
 
     private SimpleIntegerProperty big;
     private SimpleIntegerProperty small;
@@ -146,8 +151,46 @@ public class GameInfoAndActionsController implements Initializable{
         showCardsButton.setDisable(true);
         runNextHandButton.setDisable(true);
         replayButton.setDisable(true);
+        replayButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                startReplay();
+            }
+        });
+
         prevButton.setDisable(true);
+        prevButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                step--;
+
+                if (step==0)
+                {
+                    prevButton.setDisable(true);
+                }
+
+                nextButton.setDisable(false);
+                replayIndex.setText(String.valueOf(step));
+            }
+        });
+
         nextButton.setDisable(true);
+        nextButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                step++;
+
+                if (step>=replay.size())
+                {
+                    nextButton.setDisable(true);
+                }
+
+                prevButton.setDisable(false);
+                replayIndex.setText(String.valueOf(step));
+            }
+        });
+
         betAmountLabel.setVisible(false);
         raiseAmountLabel.setVisible(false);
         okBetButton.setVisible(false);
@@ -226,6 +269,24 @@ public class GameInfoAndActionsController implements Initializable{
         showCardsButton.setDisable(false);
         firstCardImage.setVisible(true);
         secondCardImage.setVisible(true);
+
+    }
+
+
+    public void enableReplayButtons()
+    {
+        replayButton.setDisable(false);
+    }
+
+    public void startReplay()
+    {
+        replay= gameManager.getHandReplay();
+        if (step==0)
+        {
+            replayIndex.setText(String.valueOf(replay.size()));
+            prevButton.setDisable(true);
+            nextButton.setDisable(false);
+        }
 
     }
 }

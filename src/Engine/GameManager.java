@@ -276,5 +276,10 @@ public class GameManager implements Serializable {
         saveListToFile(handReplay,"handReplay.txt");
 
     }
+
+    public List<PokerHandStep> getHandReplay()
+    {
+        return handReplay;
+    }
 }
 
