@@ -61,7 +61,8 @@ public class GameInfoAndActionsController implements Initializable{
     private GameManager gameManager;
     private PokerPlayer currPlayer;
     private List<PokerHandStep> replay=null;
-    private int step=0;
+    private int step;
+    private BusinessLogic businessLogic;
 
     private SimpleIntegerProperty big;
     private SimpleIntegerProperty small;
@@ -85,6 +86,8 @@ public class GameInfoAndActionsController implements Initializable{
         isFixed= new SimpleBooleanProperty(true);
         handsCount=new SimpleIntegerProperty(1);
         maxPOT=new SimpleIntegerProperty(0);
+
+        step=0;
     }
     
     @Override
@@ -162,7 +165,6 @@ public class GameInfoAndActionsController implements Initializable{
         prevButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
                 step--;
 
                 if (step==0)
@@ -172,6 +174,8 @@ public class GameInfoAndActionsController implements Initializable{
 
                 nextButton.setDisable(false);
                 replayIndex.setText(String.valueOf(step));
+                updateGUIWithStep();
+
             }
         });
 
@@ -184,10 +188,13 @@ public class GameInfoAndActionsController implements Initializable{
                 if (step>=replay.size())
                 {
                     nextButton.setDisable(true);
+                    step--;
                 }
-
+                
+                updateGUIWithStep();
                 prevButton.setDisable(false);
                 replayIndex.setText(String.valueOf(step));
+
             }
         });
 
@@ -210,6 +217,11 @@ public class GameInfoAndActionsController implements Initializable{
         additionsLabel.visibleProperty().bind(not(isFixed));
 
         maxPotLabel.textProperty().bind(maxPOT.asString());
+    }
+
+    private void updateGUIWithStep() {
+
+        businessLogic.updateGUIwithStep(step);
     }
 
     public void updateGameSettings()
@@ -281,6 +293,7 @@ public class GameInfoAndActionsController implements Initializable{
     public void startReplay()
     {
         replay= gameManager.getHandReplay();
+        updateGUIWithStep();
         if (step==0)
         {
             replayIndex.setText(String.valueOf(replay.size()));
@@ -288,5 +301,9 @@ public class GameInfoAndActionsController implements Initializable{
             nextButton.setDisable(false);
         }
 
+    }
+
+    public void setBusinessLogic(BusinessLogic businessLogic) {
+        this.businessLogic = businessLogic;
     }
 }

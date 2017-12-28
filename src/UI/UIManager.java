@@ -336,7 +336,7 @@ public class UIManager {
                 currHand.getPlayers(),
                 currHand.getLastPlayerToPlay(),
                 currHand.getPot(),
-                currHand.getCardsAsString(),
+                currHand.getCardsAsStringArray(),
                 currHand.getCurrentBet(),
                 currHand.getLastAction()
                 ,currHand.getLastActionInfo());

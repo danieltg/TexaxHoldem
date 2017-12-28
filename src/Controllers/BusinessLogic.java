@@ -39,4 +39,9 @@ public class BusinessLogic {
     public void changeColor(Color value) {
         controller.updateColor(value);
     }
+
+    public void updateGUIwithStep(int step) {
+        controller.updatePlayersTableFromStep(step);
+        controller.updateTableCardsFromStep(step);
+    }
 }

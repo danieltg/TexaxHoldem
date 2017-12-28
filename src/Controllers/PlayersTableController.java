@@ -37,7 +37,9 @@ public class PlayersTableController implements Initializable {
 
     public void updatePlayersTable(ObservableList<PokerPlayer> pokerPlayers)
     {
-        playersTableView.getItems().clear();
+        for ( int i = 0; i<playersTableView.getItems().size(); i++) {
+            playersTableView.getItems().clear();
+        }
         playersTableView.getItems().addAll(pokerPlayers);
     }
 

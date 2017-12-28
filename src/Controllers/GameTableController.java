@@ -403,10 +403,8 @@ public class GameTableController implements Initializable {
         _betPlayer6.setValue(gameManager.getPlayers().get(5).getBet());
     }
 
-    public void updateCards()
+    public void updateCards(String[] tableCards)
     {
-        String[] tableCards=gameManager.getCurrHand().getCardsAsStringArray();
-
         tCard1.setImage(new Image(BASE_PACKAGE+(tableCards[0].equals("??")?"back":tableCards[0])+".png"));
         tCard2.setImage(new Image(BASE_PACKAGE+(tableCards[1].equals("??")?"back":tableCards[1])+".png"));
         tCard3.setImage(new Image(BASE_PACKAGE+(tableCards[2].equals("??")?"back":tableCards[2])+".png"));

@@ -3,20 +3,33 @@ package Engine;
 import Engine.Players.PokerPlayer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class PokerHandStep implements Serializable {
+public class PokerHandStep implements Serializable  {
 
     private List<PokerPlayer> players;
     private int activePlayer;
     private int pot;
-    private String tableCards;
+    private String[] tableCards;
     private int currentBet;   //Current bet amount that must be called/raised
     private String action;
     private int additionActionInformation;
 
-    public PokerHandStep(List<PokerPlayer> players, int activePlayer, int pot, String tableCards, int currentBet, String action, int additionActionInformation) {
-        this.players = players;
+    public PokerHandStep(List<PokerPlayer> playersToSave, int activePlayer, int pot, String[] tableCards, int currentBet, String action, int additionActionInformation) {
+        this.players = new ArrayList<>(playersToSave);
+
+        Iterator<PokerPlayer> ite= playersToSave.iterator();
+
+        while(ite.hasNext()) {
+            PokerPlayer p = ite.next();
+            this.players.add(p.clone());
+        }
+
+        for (int i=0; i<players.size(); i++)
+            this.players.remove(playersToSave.get(i));
+
         this.activePlayer = activePlayer;
         this.pot = pot;
         this.tableCards = tableCards;
@@ -72,4 +85,12 @@ public class PokerHandStep implements Serializable {
         return message;
     }
 
+    public List<PokerPlayer> getPlayers()
+    {
+        return players;
+    }
+
+    public String[] getTableCards() {
+        return tableCards;
+    }
 }

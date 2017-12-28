@@ -5,6 +5,7 @@ import Engine.GameManager;
 import Engine.Players.PlayerType;
 import Engine.Players.PokerPlayer;
 import Engine.PokerHand;
+import Engine.PokerHandStep;
 import Engine.Winner;
 import UI.Boards.GameStateBoard;
 import UI.Menus.HandMenu;
@@ -59,6 +60,7 @@ public class MainScreenController implements Initializable {
         this.businessLogic = businessLogic;
         mainMenuController.setBusinessLogic(this.businessLogic);
         gameTableController.setBusinessLogic(this.businessLogic);
+        gameInfoAndActionsController.setBusinessLogic(this.businessLogic);
     }
 
     public void updatePlayersTable()
@@ -78,7 +80,8 @@ public class MainScreenController implements Initializable {
 
     public void updateTableCards()
     {
-        gameTableController.updateCards();
+        String[] tableCards=gameManager.getCurrHand().getCardsAsStringArray();
+        gameTableController.updateCards(tableCards);
     }
 
     public void updateColor(Color value) {
@@ -444,5 +447,21 @@ public class MainScreenController implements Initializable {
             else
                 whatToDo=p.play();
         }*/
+    }
+
+    public void updatePlayersTableFromStep(int step) {
+        ObservableList<PokerPlayer> pokerPlayers = FXCollections.observableArrayList();
+
+        for(PokerPlayer p: gameManager.getHandReplay().get(step).getPlayers())
+            pokerPlayers.add(p);
+
+        playersTableController.updatePlayersTable(pokerPlayers);
+
+    }
+
+    public void updateTableCardsFromStep(int step) {
+
+        String[] tableCards=gameManager.getHandReplay().get(step).getTableCards();
+        gameTableController.updateCards(tableCards);
     }
 }

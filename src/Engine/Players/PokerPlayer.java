@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class PokerPlayer implements Serializable {
+public abstract class PokerPlayer implements Serializable,Cloneable {
 
     private PlayerType type;
     private PlayerState state;
@@ -27,6 +27,9 @@ public abstract class PokerPlayer implements Serializable {
     boolean checkOccurred = false;
     private int initialAmount;
     private String style="-fx-background-color: #F1DDCF;";
+
+
+
     public PokerPlayer(int playerID){
 
         chips=0;
@@ -249,4 +252,14 @@ public abstract class PokerPlayer implements Serializable {
     {
         style=newStyle;
     }
+
+    @Override
+    public final PokerPlayer clone() {
+        try {
+            return (PokerPlayer) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
 }
