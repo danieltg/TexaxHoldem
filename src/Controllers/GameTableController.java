@@ -21,11 +21,9 @@ import static Engine.Utils.EngineUtils.BASE_PACKAGE;
 
 public class GameTableController implements Initializable {
 
+    @FXML private Label replayStep;
     @FXML private Circle table;
-
     @FXML private Label potLabel;
-
-
     @FXML private Pane seat1_data;
     @FXML private Pane seat2_data;
     @FXML private Pane seat3_data;
@@ -435,5 +433,10 @@ public class GameTableController implements Initializable {
                 update6playersChipsAndBet(playerList);
 
         }
+    }
+
+    public void updateReplayInfo(String info) {
+
+        replayStep.setText(info);
     }
 }

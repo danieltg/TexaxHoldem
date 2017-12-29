@@ -45,5 +45,6 @@ public class BusinessLogic {
         controller.updateTableCardsFromStep(step);
         controller.updatePlayersOnTable(step);
         controller.updatePotFromStep(step);
+        controller.updateStepLabel(step);
     }
 }

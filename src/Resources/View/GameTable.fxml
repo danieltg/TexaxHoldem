@@ -209,5 +209,7 @@
       </Pane>
       <Label layoutX="244.0" layoutY="240.0" text="Pot:" />
       <Label fx:id="potLabel" layoutX="281.0" layoutY="240.0" />
+        <Label fx:id="replayStep" layoutX="-3.0" layoutY="371.0" prefHeight="99.0" prefWidth="208.0" />
+
     </children>
 </Pane>

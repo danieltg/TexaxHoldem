@@ -476,4 +476,9 @@ public class MainScreenController implements Initializable {
         int pot=gameManager.getHandReplay().get(step).getPot();
         gameTableController.updatePot(pot);
     }
+
+    public void updateStepLabel(int step) {
+        String info=gameManager.getHandReplay().get(step).getStepToDisplay();
+        gameTableController.updateReplayInfo(info);
+    }
 }

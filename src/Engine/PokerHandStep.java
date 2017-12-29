@@ -98,4 +98,28 @@ public class PokerHandStep implements Serializable  {
     public int getPot() {
         return pot;
     }
+
+    public String getStepToDisplay() {
+        String message="";
+        if (activePlayer!=-999) {
+            message="Player: "+getPlayerNameByID(activePlayer)+
+                    ", Action: "+action;
+            if (action=="R" || action=="B")
+                message=message+" ("+additionActionInformation+")";
+
+        }
+
+            return message;
+    }
+
+    public String getPlayerNameByID (int id)
+    {
+        for (PokerPlayer p: players)
+        {
+            if(p.getId()==id)
+                return p.getName();
+        }
+
+        return "";
+    }
 }
