@@ -94,4 +94,8 @@ public class PokerHandStep implements Serializable  {
     public String[] getTableCards() {
         return tableCards;
     }
+
+    public int getPot() {
+        return pot;
+    }
 }

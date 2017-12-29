@@ -1,14 +1,10 @@
 package Controllers;
 
-import Engine.GameDescriptor.PokerBlindes;
 import Engine.GameManager;
 import Engine.Players.PlayerType;
 import Engine.Players.PokerPlayer;
 import Engine.PokerHand;
-import Engine.PokerHandStep;
 import Engine.Winner;
-import UI.Boards.GameStateBoard;
-import UI.Menus.HandMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,9 +15,6 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Scanner;
-
-import static Engine.Utils.EngineUtils.saveListToFile;
 
 public class MainScreenController implements Initializable {
 @FXML private  GameTableController gameTableController;
@@ -76,7 +69,10 @@ public class MainScreenController implements Initializable {
 
     public void updateGameDetails() { gameInfoAndActionsController.updateGameDetails();}
 
-    public void setGameTable() { gameTableController.updateGame(); }
+    public void setGameTable() {
+        gameTableController.updatePlayersOnTable(gameManager.getPlayers());
+        gameTableController.updatePot(0);
+    }
 
     public void updateTableCards()
     {
@@ -126,17 +122,19 @@ public class MainScreenController implements Initializable {
         currHand.betSmall();
         gameManager.addStepToHandReplay();
         updatePlayersTable();
-        updateGUIPot();
+        updateGUIPotAndPlayerBetAndChips();
 
         currHand.betBig();
         gameManager.addStepToHandReplay();
+
         updatePlayersTable();
-        updateGUIPot();
+        updateGUIPotAndPlayerBetAndChips();
 
         currHand.updateMaxBet();
 
         collectBets();
-        updateGUIPot();
+        gameManager.addStepToHandReplay();
+        updateGUIPotAndPlayerBetAndChips();
 
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
             return currHand.getWinner();
@@ -152,7 +150,7 @@ public class MainScreenController implements Initializable {
 
 
         collectBets();
-        updateGUIPot();
+        updateGUIPotAndPlayerBetAndChips();
         currHand.upRound();
 
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
@@ -165,7 +163,7 @@ public class MainScreenController implements Initializable {
         gameManager.addStepToHandReplay();
 
         collectBets();
-        updateGUIPot();
+        updateGUIPotAndPlayerBetAndChips();
         currHand.upRound();
 
         if (currHand.playersLeft() == 1||currHand.humanIsLeft())
@@ -179,15 +177,17 @@ public class MainScreenController implements Initializable {
         gameManager.addStepToHandReplay();
 
         collectBets();
-        updateGUIPot();
+        updateGUIPotAndPlayerBetAndChips();
 
         return currHand.evaluateRound();
     //return null;
 
     }
 
-    private void updateGUIPot() {
-        gameTableController.updatePot();
+    private void updateGUIPotAndPlayerBetAndChips() {
+        gameTableController.updatePot(gameManager.getCurrHand().getPot());
+
+        gameTableController.updatePlayersBetAndChips(gameManager.getCurrHand().getPlayers());
     }
 
     private void collectBets() {
@@ -226,12 +226,6 @@ public class MainScreenController implements Initializable {
 
                     doThis(nowPlay(currPlayer),currPlayer);
 
-                    //TODO
-                    // TO DELETE!!!
-                    if(currPlayer.getType()==PlayerType.Human) {
-                        humanTurn(currPlayer);
-                        return;
-                    }
                     if(currPlayer.getType()==PlayerType.Human && currPlayer.isFolded()) {
                         currPlayer.setBet(0);
                         return;
@@ -241,6 +235,13 @@ public class MainScreenController implements Initializable {
                     currPlayer.collectBet();
 
                     currHand.updateMaxBet();
+
+                    //TODO
+                    // TO DELETE!!!
+                    if(currPlayer.getType()==PlayerType.Human) {
+                        humanTurn(currPlayer);
+                        //return;
+                    }
 
                 } else {
                     if(currPlayer.isFolded()) {
@@ -275,7 +276,7 @@ public class MainScreenController implements Initializable {
             return currPlayer.play();
         }
         else {
-            return "E";
+            return "R";
             //TODO
             // return getUSerSelection();
         }
@@ -384,7 +385,7 @@ public class MainScreenController implements Initializable {
 
                 if (player.getType() == PlayerType.Human) {
                     //todo
-                    raiseTo = 10;
+                    raiseTo = 2;
 
                 } else
                     raiseTo = player.getRaise(1,currHand.getMaxBet());
@@ -463,5 +464,16 @@ public class MainScreenController implements Initializable {
 
         String[] tableCards=gameManager.getHandReplay().get(step).getTableCards();
         gameTableController.updateCards(tableCards);
+    }
+
+    public void updatePlayersOnTable(int step) {
+        List<PokerPlayer> listOfPlayers=gameManager.getHandReplay().get(step).getPlayers();
+        gameTableController.updatePlayersOnTable(listOfPlayers);
+    }
+
+    public void updatePotFromStep(int step) {
+
+        int pot=gameManager.getHandReplay().get(step).getPot();
+        gameTableController.updatePot(pot);
     }
 }

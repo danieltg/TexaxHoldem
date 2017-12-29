@@ -43,5 +43,7 @@ public class BusinessLogic {
     public void updateGUIwithStep(int step) {
         controller.updatePlayersTableFromStep(step);
         controller.updateTableCardsFromStep(step);
+        controller.updatePlayersOnTable(step);
+        controller.updatePotFromStep(step);
     }
 }
