@@ -62,7 +62,8 @@ public class PokerHandStep implements Serializable  {
                     message=message+"Player <"+p.getName()+", "+p.getId()+"> : "+p.getHoleCards()+"\n";
             }
             else
-                message=message+"Cards: "+tableCards+"\n";
+                message=message+"Cards: "+tableCards[0]+","+tableCards[1]+
+                        ","+tableCards[2]+","+tableCards[3]+","+tableCards[4]+"\n";
         }
         else {
             int indexInList=getplayerIndexById();
