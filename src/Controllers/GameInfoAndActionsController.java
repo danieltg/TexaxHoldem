@@ -4,11 +4,10 @@ import Engine.GameManager;
 import Engine.Players.PokerPlayer;
 import Engine.PokerHandStep;
 import Engine.Utils.EngineUtils;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,7 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import java.net.URL;
-import java.time.temporal.TemporalAmount;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -26,6 +24,8 @@ import static javafx.beans.binding.Bindings.not;
 
 public class GameInfoAndActionsController implements Initializable{
 
+    @FXML private Button buyButton;
+    @FXML private ChoiceBox<String> dropDownPlayers;
     @FXML private Label replayIndex;
     @FXML private Accordion accordionGame;
     @FXML private TitledPane gameSettings;
@@ -76,6 +76,8 @@ public class GameInfoAndActionsController implements Initializable{
     private String selection;
     private String userSelction;
 
+    private int selectedPlayer = -1;
+
     public GameInfoAndActionsController()
     {
         big = new SimpleIntegerProperty(0);
@@ -92,6 +94,20 @@ public class GameInfoAndActionsController implements Initializable{
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        buyButton.setDisable(true);
+        buyButton.setOnAction(event -> {
+            if (selectedPlayer!=-1) {
+                gameManager.buy(gameManager.getPlayers().get(selectedPlayer));
+                businessLogic.updatePlayersList();
+                businessLogic.updateGUIPotAndPlayerBetAndChips();
+            }
+        });
+
+        dropDownPlayers.getSelectionModel().selectedIndexProperty().addListener((ChangeListener) (observable, oldValue, newValue) -> {
+            System.out.println("New Selected Option: " +newValue.toString());
+            selectedPlayer= Integer.parseInt(newValue.toString());
+        });
 
         firstCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
         secondCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
@@ -244,6 +260,7 @@ public class GameInfoAndActionsController implements Initializable{
 
         handsCount.set(gameManager.handNumber);
         maxPOT.set(gameManager.getMaxPot());
+        updateDropDownPlayersList();
     }
     public void setGameManager(GameManager gameManager) {
         this.gameManager = gameManager;
@@ -305,5 +322,20 @@ public class GameInfoAndActionsController implements Initializable{
 
     public void setBusinessLogic(BusinessLogic businessLogic) {
         this.businessLogic = businessLogic;
+    }
+
+    public void updateDropDownPlayersList()
+    {
+
+        for (PokerPlayer p: gameManager.getPlayers())
+        {
+            dropDownPlayers.getItems().addAll(p.getName()+" (ID:"+p.getId()+")");
+        }
+
+
+    }
+
+    public void enableBuyButtons() {
+        buyButton.setDisable(false);
     }
 }

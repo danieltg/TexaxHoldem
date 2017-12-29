@@ -92,6 +92,7 @@ public class MainScreenController implements Initializable {
         try {
             List<Winner> winners= run();
             gameInfoAndActionsController.enableReplayButtons();
+            gameInfoAndActionsController.enableBuyButtons();
             gameManager.saveHandReplayToFile("handReplay.txt");
 
 //            for (Winner w: winners) {
@@ -184,7 +185,7 @@ public class MainScreenController implements Initializable {
 
     }
 
-    private void updateGUIPotAndPlayerBetAndChips() {
+    public void updateGUIPotAndPlayerBetAndChips() {
         gameTableController.updatePot(gameManager.getCurrHand().getPot());
 
         gameTableController.updatePlayersBetAndChips(gameManager.getCurrHand().getPlayers());

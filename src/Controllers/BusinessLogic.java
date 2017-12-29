@@ -47,4 +47,10 @@ public class BusinessLogic {
         controller.updatePotFromStep(step);
         controller.updateStepLabel(step);
     }
+
+
+    public void updateGUIPotAndPlayerBetAndChips()
+    {
+        controller.updateGUIPotAndPlayerBetAndChips();
+    }
 }
