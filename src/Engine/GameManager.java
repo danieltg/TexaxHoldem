@@ -39,6 +39,10 @@ public class GameManager implements Serializable {
         numberOfPlayers=0;
     }
 
+    public int getHandNumber() {
+        return handNumber;
+    }
+
     public int getMoneyFromLastHand() {
         return moneyFromLastHand;
     }
@@ -266,8 +270,7 @@ public class GameManager implements Serializable {
         return currHand;
     }
 
-    public void clearHandReplay()
-    {
+    public void clearHandReplay() {
         handReplay.clear();
     }
 

@@ -81,7 +81,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </Label>
-            <Button fx:id="stopButton" mnemonicParsing="false" text="Stop">
+            <Button fx:id="stopButton" mnemonicParsing="false" onAction="#stopClicked" text="Stop">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>

@@ -32,8 +32,10 @@ public class BusinessLogic {
     }
 
     public void startGame() {
+
         controller.updateGameDetails();
-        controller.RunOneHand();
+
+       // controller.RunOneHand();
     }
 
     public void changeColor(Color value) {
@@ -52,5 +54,9 @@ public class BusinessLogic {
     public void updateGUIPotAndPlayerBetAndChips()
     {
         controller.updateGUIPotAndPlayerBetAndChips();
+    }
+
+    public void runNextHand() {
+        controller.RunOneHand();
     }
 }

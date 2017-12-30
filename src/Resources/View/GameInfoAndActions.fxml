@@ -113,7 +113,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Button fx:id="runNextHandButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="219.0" text="Run next hand">
+                              <Button fx:id="runNextHandButton" mnemonicParsing="false" onAction="#runNextHandClicked" prefHeight="25.0" prefWidth="219.0" text="Run next hand">
                                  <GridPane.margin>
                                     <Insets bottom="19.0" left="19.0" right="19.0" top="19.0" />
                                  </GridPane.margin>

@@ -340,4 +340,12 @@ public class GameInfoAndActionsController implements Initializable{
         buyButton.setDisable(false);
         dropDownPlayers.setDisable(false);
     }
+
+    public void enableRunNextHand() {
+        runNextHandButton.setDisable(true);
+    }
+
+    public void runNextHandClicked(ActionEvent actionEvent) {
+        businessLogic.runNextHand();
+    }
 }

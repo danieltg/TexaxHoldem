@@ -79,12 +79,6 @@ public class MainMenuController implements Initializable{
 
     }
 
-    @FXML
-    public void startGameButtonAction() {
-
-        loadXmlButton.setDisable(true);
-        businessLogic.startGame();
-    }
 
 
     public  void setPrimaryStage (Stage s) { primaryStage=s; }
@@ -96,5 +90,19 @@ public class MainMenuController implements Initializable{
     public void changeColor(ActionEvent actionEvent) {
 
         businessLogic.changeColor(tableColor.getValue());
+    }
+
+    public void startGameButtonAction(ActionEvent actionEvent) {
+
+            stopButton.setDisable(false);
+            loadXmlButton.setDisable(true);
+            startButton.setVisible(false);
+            businessLogic.startGame();
+        }
+
+
+    public void stopClicked(ActionEvent actionEvent) {
+        startButton.setVisible(true);
+        //TODO:: finish game
     }
 }

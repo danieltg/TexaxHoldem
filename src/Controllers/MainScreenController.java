@@ -93,6 +93,13 @@ public class MainScreenController implements Initializable {
             List<Winner> winners= run();
             gameInfoAndActionsController.enableReplayButtons();
             gameInfoAndActionsController.enableBuyButtons();
+            if(gameManager.getHandNumber()<=gameManager.getHandsCount()) {
+                gameInfoAndActionsController.enableRunNextHand();
+            }
+            else
+            {
+                //TODO game is over
+            }
             gameManager.saveHandReplayToFile("handReplay.txt");
 
 //            for (Winner w: winners) {

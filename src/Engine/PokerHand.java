@@ -10,6 +10,7 @@ import Engine.Players.PlayerState;
 import Engine.Players.PlayerType;
 import com.rundef.poker.EquityCalculator;
 import com.rundef.poker.Hand;
+import org.omg.CORBA.PRIVATE_MEMBER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class PokerHand {
     private String lastAction;
     private int lastActionInfo;
     private int lastPlayerToPlay;
+    private boolean isFinished=false;
 
     public PokerHand(PokerBlindes gameBlinde, List<PokerPlayer> playersInHand)
     {
