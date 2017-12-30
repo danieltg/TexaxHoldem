@@ -1,18 +1,20 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Mushon, 1> : JH 2S
-Player <Avrum, 2> : 2C QS
-Player <Nachtze, 3> : 3S KD
-Player <Daniel, 4> : 7D 3C
+Player <Mushon, 1> : 7D 7C
+Player <Avrum, 2> : 7S 9S
+Player <Nachtze, 3> : 2D 6D
+Player <Daniel, 4> : TD 3H
+Player <Yoni, 5> : 6C 8S
+Player <Doron, 6> : QC 5H
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
+Active player ID: 5
+Player name: Yoni
 Player type: Computer
-Player cards: 3S KD
+Player cards: 6C 8S
 Player chips: 98
 Player bet: 2
 Pot: 2
@@ -20,10 +22,10 @@ Current Bet: 0
 Action: B
 Additional Action Information: 2
 ************************************************************************************************
-Active player ID: 4
-Player name: Daniel
+Active player ID: 6
+Player name: Doron
 Player type: Computer
-Player cards: 7D 3C
+Player cards: QC 5H
 Player chips: 96
 Player bet: 4
 Pot: 6
@@ -34,165 +36,141 @@ Additional Action Information: 4
 Active player ID: 1
 Player name: Mushon
 Player type: Computer
-Player cards: JH 2S
-Player chips: 100
-Player bet: 0
-Pot: 6
-Current Bet: 4
-Action: F
+Player cards: 7D 7C
+Player chips: 91
+Player bet: 9
+Pot: 15
+Current Bet: 9
+Action: R
+Additional Action Information: 5
 ************************************************************************************************
 Active player ID: 2
 Player name: Avrum
 Player type: Human
-Player cards: 2C QS
-Player chips: 94
-Player bet: 6
-Pot: 12
-Current Bet: 6
+Player cards: 7S 9S
+Player chips: 89
+Player bet: 11
+Pot: 26
+Current Bet: 11
 Action: R
 Additional Action Information: 2
 ************************************************************************************************
 Active player ID: 3
 Player name: Nachtze
 Player type: Computer
-Player cards: 3S KD
-Player chips: 94
-Player bet: 6
-Pot: 16
-Current Bet: 6
-Action: C
+Player cards: 2D 6D
+Player chips: 65
+Player bet: 35
+Pot: 61
+Current Bet: 35
+Action: R
+Additional Action Information: 24
 ************************************************************************************************
 Active player ID: 4
 Player name: Daniel
 Player type: Computer
-Player cards: 7D 3C
-Player chips: 94
-Player bet: 6
-Pot: 18
-Current Bet: 6
+Player cards: TD 3H
+Player chips: 38
+Player bet: 62
+Pot: 123
+Current Bet: 62
+Action: R
+Additional Action Information: 27
+************************************************************************************************
+Active player ID: 5
+Player name: Yoni
+Player type: Computer
+Player cards: 6C 8S
+Player chips: 38
+Player bet: 62
+Pot: 183
+Current Bet: 62
+Action: C
+************************************************************************************************
+Active player ID: 6
+Player name: Doron
+Player type: Computer
+Player cards: QC 5H
+Player chips: 38
+Player bet: 62
+Pot: 241
+Current Bet: 62
 Action: C
 ************************************************************************************************
 Active player ID: 1
 Player name: Mushon
 Player type: Computer
-Player cards: JH 2S
-Player chips: 100
+Player cards: 7D 7C
+Player chips: 28
+Player bet: 72
+Pot: 304
+Current Bet: 72
+Action: R
+Additional Action Information: 10
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: 7S 9S
+Player chips: 26
+Player bet: 74
+Pot: 367
+Current Bet: 74
+Action: R
+Additional Action Information: 2
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: 2D 6D
+Player chips: 65
 Player bet: 0
-Pot: 18
-Current Bet: 6
-Action: N
+Pot: 367
+Current Bet: 74
+Action: F
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Computer
+Player cards: TD 3H
+Player chips: 8
+Player bet: 92
+Pot: 397
+Current Bet: 92
+Action: R
+Additional Action Information: 18
+************************************************************************************************
+Active player ID: 5
+Player name: Yoni
+Player type: Computer
+Player cards: 6C 8S
+Player chips: 0
+Player bet: 100
+Pot: 435
+Current Bet: 100
+Action: R
+Additional Action Information: 8
 ************************************************************************************************
 The step is not related to any player
 Cards: ??,??,??,??,??
-Pot: 18
-Current Bet: 6
+Pot: 435
+Current Bet: 100
 Action: N
 ************************************************************************************************
 The step is not related to any player
-Cards: 5D,4S,QH,??,??
-Pot: 18
-Current Bet: 6
+Cards: 6S,JH,5C,??,??
+Pot: 435
+Current Bet: 100
 Action: CARD
 ************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: 3S KD
-Player chips: 94
-Player bet: 0
-Pot: 18
+The step is not related to any player
+Cards: 6S,JH,5C,5S,??
+Pot: 435
 Current Bet: 0
-Action: F
+Action: CARD
 ************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 7D 3C
-Player chips: 94
-Player bet: 0
-Pot: 18
+The step is not related to any player
+Cards: 6S,JH,5C,5S,QD
+Pot: 435
 Current Bet: 0
-Action: K
-************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: JH 2S
-Player chips: 100
-Player bet: 0
-Pot: 18
-Current Bet: 0
-Action: N
-************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: 2C QS
-Player chips: 92
-Player bet: 2
-Pot: 20
-Current Bet: 2
-Action: R
-Additional Action Information: 2
-************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: 3S KD
-Player chips: 94
-Player bet: 0
-Pot: 20
-Current Bet: 2
-Action: N
-************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 7D 3C
-Player chips: 81
-Player bet: 13
-Pot: 33
-Current Bet: 13
-Action: R
-Additional Action Information: 11
-************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: JH 2S
-Player chips: 100
-Player bet: 0
-Pot: 33
-Current Bet: 13
-Action: N
-************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: 2C QS
-Player chips: 79
-Player bet: 15
-Pot: 46
-Current Bet: 15
-Action: R
-Additional Action Information: 2
-************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: 3S KD
-Player chips: 94
-Player bet: 0
-Pot: 46
-Current Bet: 15
-Action: N
-************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 7D 3C
-Player chips: 81
-Player bet: 0
-Pot: 46
-Current Bet: 15
-Action: F
+Action: CARD

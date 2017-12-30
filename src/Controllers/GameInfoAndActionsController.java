@@ -108,6 +108,7 @@ public class GameInfoAndActionsController implements Initializable{
             System.out.println("New Selected Option: " +newValue.toString());
             selectedPlayer= Integer.parseInt(newValue.toString());
         });
+        dropDownPlayers.setDisable(true);
 
         firstCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
         secondCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
@@ -337,5 +338,6 @@ public class GameInfoAndActionsController implements Initializable{
 
     public void enableBuyButtons() {
         buyButton.setDisable(false);
+        dropDownPlayers.setDisable(false);
     }
 }
