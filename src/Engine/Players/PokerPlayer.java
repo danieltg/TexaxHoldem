@@ -26,7 +26,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     private int handsWon;
     boolean checkOccurred = false;
     private int initialAmount;
-    private String style="-fx-background-color: #F1DDCF;";
+    private String style="-fx-background-color: #CCAA99;";
 
 
 

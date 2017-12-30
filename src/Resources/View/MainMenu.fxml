@@ -21,7 +21,7 @@
    <children>
       <HBox prefHeight="19.0" prefWidth="485.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
          <children>
-            <Label text="Style:">
+            <Label contentDisplay="RIGHT" prefHeight="39.0" prefWidth="255.0" text="Style:">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
@@ -29,10 +29,10 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
                <graphic>
-                  <ColorPicker fx:id="tableColor" onAction="#changeColor" />
+                  <ColorPicker fx:id="tableColor" onAction="#changeColor" prefHeight="39.0" prefWidth="178.0" />
                </graphic>
             </Label>
-            <Label text="Animation:">
+            <Label prefHeight="37.0" prefWidth="120.0" text="Animation:">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
