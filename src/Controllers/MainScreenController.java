@@ -16,6 +16,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static Engine.Players.PlayerType.Human;
+
 public class MainScreenController implements Initializable {
 @FXML private  GameTableController gameTableController;
 @FXML private  GameInfoAndActionsController gameInfoAndActionsController;
@@ -88,9 +90,28 @@ public class MainScreenController implements Initializable {
 
         gameManager.startNewHand();
         currHand=gameManager.getCurrHand();
+        gameManager.resetPlayerState();
+        updateTableCards();
 
+        gameManager.clearHandReplay();
+
+        currHand.dealingHoleCards();
+        updateTableCards();
+
+        gameManager.addStepToHandReplay();
+
+        currHand.betSmall();
+        gameManager.addStepToHandReplay();
+        updatePlayersTable();
+        updateGUIPotAndPlayerBetAndChips();
+
+        currHand.betBig();
+        gameManager.addStepToHandReplay();
+
+        updatePlayersTable();
+        updateGUIPotAndPlayerBetAndChips();
         try {
-            List<Winner> winners= run();
+          //  List<Winner> winners= run();
             gameInfoAndActionsController.enableReplayButtons();
             gameInfoAndActionsController.enableBuyButtons();
             if(gameManager.getHandNumber()<=gameManager.getHandsCount()) {
@@ -115,28 +136,17 @@ public class MainScreenController implements Initializable {
         }
     }
 
+  //  private List<Winner> runCurrHand() throws Exception {
+
+    //    while(gameManager.getCurrHand().getIsFinished()!=true&&gameManager.getCurrHand().getNextToPlay().getType()==Human)
+      //  {
+
+        //}
+
+    //}
 
     private List<Winner> run() throws Exception {
-        gameManager.resetPlayerState();
-        updateTableCards();
 
-        gameManager.clearHandReplay();
-
-        currHand.dealingHoleCards();
-        updateTableCards();
-
-        gameManager.addStepToHandReplay();
-
-        currHand.betSmall();
-        gameManager.addStepToHandReplay();
-        updatePlayersTable();
-        updateGUIPotAndPlayerBetAndChips();
-
-        currHand.betBig();
-        gameManager.addStepToHandReplay();
-
-        updatePlayersTable();
-        updateGUIPotAndPlayerBetAndChips();
 
         currHand.updateMaxBet();
 
@@ -234,7 +244,7 @@ public class MainScreenController implements Initializable {
 
                     doThis(nowPlay(currPlayer),currPlayer);
 
-                    if(currPlayer.getType()==PlayerType.Human && currPlayer.isFolded()) {
+                    if(currPlayer.getType()== Human && currPlayer.isFolded()) {
                         currPlayer.setBet(0);
                         return;
                     }
@@ -246,7 +256,7 @@ public class MainScreenController implements Initializable {
 
                     //TODO
                     // TO DELETE!!!
-                    if(currPlayer.getType()==PlayerType.Human) {
+                    if(currPlayer.getType()== Human) {
                         humanTurn(currPlayer);
                         //return;
                     }
@@ -370,7 +380,7 @@ public class MainScreenController implements Initializable {
             currHand.setLastAction("C");
             currHand.setLastActionInfo(currHand.getCurrentBet());
         }
-        else  if(player.getType()==PlayerType.Human) {
+        else  if(player.getType()== Human) {
             //System.out.println("You can't Call now ,please choose other option");
             //TODO:
             //whatToDo=getUSerSelection();
@@ -391,7 +401,7 @@ public class MainScreenController implements Initializable {
                 if (maybeNewMaxBet<currHand.getMaxBet())
                     currHand.setMaxBet(maybeNewMaxBet);
 
-                if (player.getType() == PlayerType.Human) {
+                if (player.getType() == Human) {
                     //todo
                     raiseTo = 2;
 
@@ -406,7 +416,7 @@ public class MainScreenController implements Initializable {
 
             if ( raiseTo > currHand.getMaxBet())
             {
-                if (player.getType() == PlayerType.Human) {
+                if (player.getType() == Human) {
                     System.out.println("Your input is not valid. Raise must be a number between 1 - " +currHand.getMaxBet()+
                             ", please try again.");
                 }

@@ -8,6 +8,7 @@ import Engine.GameDescriptor.PokerBlindes;
 import Engine.Players.PokerPlayer;
 import Engine.Players.PlayerState;
 import Engine.Players.PlayerType;
+import Jaxb.Players;
 import com.rundef.poker.EquityCalculator;
 import com.rundef.poker.Hand;
 import org.omg.CORBA.PRIVATE_MEMBER;
@@ -30,6 +31,7 @@ public class PokerHand {
     private int s;
     private int round;
     private PokerPlayer lastRaise=null;
+    private PokerPlayer nextToPlay=null;
     private String lastAction;
     private int lastActionInfo;
     private int lastPlayerToPlay;
@@ -55,6 +57,13 @@ public class PokerHand {
         blinde=gameBlinde;
         getStateIndex();
         updateMaxBet();
+        for(PokerPlayer p:players)
+        {
+            if(p.getState()==PlayerState.BIG)
+            {
+                nextToPlay= players.get((p.getId())%players.size());
+            }
+        }
     }
 
     public int getPot() {
@@ -414,5 +423,13 @@ public class PokerHand {
     public int getLastPlayerToPlay()
     {
         return lastPlayerToPlay;
+    }
+
+    public boolean getIsFinished() {
+        return isFinished;
+    }
+
+    public PokerPlayer getNextToPlay() {
+        return nextToPlay;
     }
 }
