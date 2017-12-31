@@ -44,4 +44,7 @@ public class PlayersTableController implements Initializable {
     }
 
 
+    public void BoldCurrPlayer(PokerPlayer currPlayer) {
+
+    }
 }

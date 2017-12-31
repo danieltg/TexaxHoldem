@@ -57,11 +57,13 @@ public class PokerHand {
         blinde=gameBlinde;
         getStateIndex();
         updateMaxBet();
+        int i=0;
         for(PokerPlayer p:players)
         {
+            i++;
             if(p.getState()==PlayerState.BIG)
             {
-                nextToPlay= players.get((p.getId())%players.size());
+                nextToPlay= players.get(i%this.getNumberOfPlayers());
             }
         }
     }
@@ -431,5 +433,13 @@ public class PokerHand {
 
     public PokerPlayer getNextToPlay() {
         return nextToPlay;
+    }
+
+    public void changeNextToPlay() {
+        for(PokerPlayer p:players)
+            if(p.getState()==PlayerState.SMALL)
+            {
+                nextToPlay=p;
+            }
     }
 }

@@ -9,9 +9,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.util.List;
@@ -21,51 +24,91 @@ import static Engine.Utils.EngineUtils.BASE_PACKAGE;
 
 public class GameTableController implements Initializable {
 
-    @FXML private Label replayStep;
-    @FXML private Circle table;
-    @FXML private Label potLabel;
-    @FXML private Pane seat1_data;
-    @FXML private Pane seat2_data;
-    @FXML private Pane seat3_data;
-    @FXML private Pane seat4_data;
-    @FXML private Pane seat5_data;
-    @FXML private Pane seat6_data;
+    @FXML
+    private Label currPlayerLabel;
+    @FXML
+    private Label replayStep;
+    @FXML
+    private Circle table;
+    @FXML
+    private Label potLabel;
+    @FXML
+    private Pane seat1_data;
+    @FXML
+    private Pane seat2_data;
+    @FXML
+    private Pane seat3_data;
+    @FXML
+    private Pane seat4_data;
+    @FXML
+    private Pane seat5_data;
+    @FXML
+    private Pane seat6_data;
 
-    @FXML private ImageView tCard1;
-    @FXML private ImageView tCard2;
-    @FXML private ImageView tCard3;
-    @FXML private ImageView tCard4;
-    @FXML private ImageView tCard5;
+    @FXML
+    private ImageView tCard1;
+    @FXML
+    private ImageView tCard2;
+    @FXML
+    private ImageView tCard3;
+    @FXML
+    private ImageView tCard4;
+    @FXML
+    private ImageView tCard5;
 
-    @FXML private Label namePlayer1;
-    @FXML private Label chipsPlayer1;
-    @FXML private Label betPlayer1;
-    @FXML private Label rolePlayer1;
+    @FXML
+    private Label namePlayer1;
+    @FXML
+    private Label chipsPlayer1;
+    @FXML
+    private Label betPlayer1;
+    @FXML
+    private Label rolePlayer1;
 
-    @FXML private Label namePlayer2;
-    @FXML private Label chipsPlayer2;
-    @FXML private Label betPlayer2;
-    @FXML private Label rolePlayer2;
+    @FXML
+    private Label namePlayer2;
+    @FXML
+    private Label chipsPlayer2;
+    @FXML
+    private Label betPlayer2;
+    @FXML
+    private Label rolePlayer2;
 
-    @FXML private Label namePlayer3;
-    @FXML private Label chipsPlayer3;
-    @FXML private Label betPlayer3;
-    @FXML private Label rolePlayer3;
+    @FXML
+    private Label namePlayer3;
+    @FXML
+    private Label chipsPlayer3;
+    @FXML
+    private Label betPlayer3;
+    @FXML
+    private Label rolePlayer3;
 
-    @FXML private Label namePlayer4;
-    @FXML private Label chipsPlayer4;
-    @FXML private Label betPlayer4;
-    @FXML private Label rolePlayer4;
+    @FXML
+    private Label namePlayer4;
+    @FXML
+    private Label chipsPlayer4;
+    @FXML
+    private Label betPlayer4;
+    @FXML
+    private Label rolePlayer4;
 
-    @FXML private Label namePlayer5;
-    @FXML private Label chipsPlayer5;
-    @FXML private Label betPlayer5;
-    @FXML private Label rolePlayer5;
+    @FXML
+    private Label namePlayer5;
+    @FXML
+    private Label chipsPlayer5;
+    @FXML
+    private Label betPlayer5;
+    @FXML
+    private Label rolePlayer5;
 
-    @FXML private Label namePlayer6;
-    @FXML private Label chipsPlayer6;
-    @FXML private Label betPlayer6;
-    @FXML private Label rolePlayer6;
+    @FXML
+    private Label namePlayer6;
+    @FXML
+    private Label chipsPlayer6;
+    @FXML
+    private Label betPlayer6;
+    @FXML
+    private Label rolePlayer6;
 
 
     private SimpleStringProperty _namePlayer1;
@@ -101,37 +144,36 @@ public class GameTableController implements Initializable {
     private GameManager gameManager;
     private BusinessLogic businessLogic;
 
-    public GameTableController()
-    {
-        _pot=new SimpleIntegerProperty(0);
+    public GameTableController() {
+        _pot = new SimpleIntegerProperty(0);
 
-        _namePlayer1=new SimpleStringProperty();
-        _namePlayer2=new SimpleStringProperty();
-        _namePlayer3=new SimpleStringProperty();
-        _namePlayer4=new SimpleStringProperty();
-        _namePlayer5=new SimpleStringProperty();
-        _namePlayer6=new SimpleStringProperty();
+        _namePlayer1 = new SimpleStringProperty();
+        _namePlayer2 = new SimpleStringProperty();
+        _namePlayer3 = new SimpleStringProperty();
+        _namePlayer4 = new SimpleStringProperty();
+        _namePlayer5 = new SimpleStringProperty();
+        _namePlayer6 = new SimpleStringProperty();
 
-        _rolePlayer1=new SimpleStringProperty();
-        _rolePlayer2=new SimpleStringProperty();
-        _rolePlayer3=new SimpleStringProperty();
-        _rolePlayer4=new SimpleStringProperty();
-        _rolePlayer5=new SimpleStringProperty();
-        _rolePlayer6=new SimpleStringProperty();
+        _rolePlayer1 = new SimpleStringProperty();
+        _rolePlayer2 = new SimpleStringProperty();
+        _rolePlayer3 = new SimpleStringProperty();
+        _rolePlayer4 = new SimpleStringProperty();
+        _rolePlayer5 = new SimpleStringProperty();
+        _rolePlayer6 = new SimpleStringProperty();
 
-        _betPlayer1=new SimpleIntegerProperty();
-        _betPlayer2=new SimpleIntegerProperty();
-        _betPlayer3=new SimpleIntegerProperty();
-        _betPlayer4=new SimpleIntegerProperty();
-        _betPlayer5=new SimpleIntegerProperty();
-        _betPlayer6=new SimpleIntegerProperty();
+        _betPlayer1 = new SimpleIntegerProperty();
+        _betPlayer2 = new SimpleIntegerProperty();
+        _betPlayer3 = new SimpleIntegerProperty();
+        _betPlayer4 = new SimpleIntegerProperty();
+        _betPlayer5 = new SimpleIntegerProperty();
+        _betPlayer6 = new SimpleIntegerProperty();
 
-        _chipsPlayer1=new SimpleIntegerProperty();
-        _chipsPlayer2= new SimpleIntegerProperty();
-        _chipsPlayer3=new SimpleIntegerProperty();
-        _chipsPlayer4=new SimpleIntegerProperty();
-        _chipsPlayer5=new SimpleIntegerProperty();
-        _chipsPlayer6=new SimpleIntegerProperty();
+        _chipsPlayer1 = new SimpleIntegerProperty();
+        _chipsPlayer2 = new SimpleIntegerProperty();
+        _chipsPlayer3 = new SimpleIntegerProperty();
+        _chipsPlayer4 = new SimpleIntegerProperty();
+        _chipsPlayer5 = new SimpleIntegerProperty();
+        _chipsPlayer6 = new SimpleIntegerProperty();
 
 
     }
@@ -177,16 +219,19 @@ public class GameTableController implements Initializable {
         betPlayer6.textProperty().bind(_betPlayer6.asString());
     }
 
-    public void setGameManager(GameManager g) { gameManager=g; }
+    public void setGameManager(GameManager g) {
+        gameManager = g;
+    }
 
-    public void setBusinessLogic(BusinessLogic b){businessLogic=b;}
+    public void setBusinessLogic(BusinessLogic b) {
+        businessLogic = b;
+    }
 
     public void updatePlayersOnTable(List<PokerPlayer> playerList) {
         clearTable();
-        int numberOfPlayer=playerList.size();
+        int numberOfPlayer = playerList.size();
 
-        switch (numberOfPlayer)
-        {
+        switch (numberOfPlayer) {
             case 3:
                 update3players(playerList);
                 break;
@@ -213,8 +258,7 @@ public class GameTableController implements Initializable {
     }
 
 
-    public void update3players(List<PokerPlayer> playerList)
-    {
+    public void update3players(List<PokerPlayer> playerList) {
         seat1_data.setVisible(true);
         seat1_data.setStyle(playerList.get(0).getStyle());
         _namePlayer1.setValue(playerList.get(0).getName());
@@ -244,8 +288,7 @@ public class GameTableController implements Initializable {
         _betPlayer5.setValue(playerList.get(2).getBet());
     }
 
-    public void update4players(List<PokerPlayer> playerList)
-    {
+    public void update4players(List<PokerPlayer> playerList) {
 
         seat2_data.setVisible(true);
         seat2_data.setStyle(playerList.get(0).getStyle());
@@ -289,8 +332,7 @@ public class GameTableController implements Initializable {
         _betPlayer6.setValue(playerList.get(3).getBet());
     }
 
-    public void update5players(List<PokerPlayer> playerList)
-    {
+    public void update5players(List<PokerPlayer> playerList) {
         seat1_data.setVisible(true);
         seat1_data.setStyle(playerList.get(0).getStyle());
         _namePlayer1.setValue(playerList.get(0).getName());
@@ -338,8 +380,7 @@ public class GameTableController implements Initializable {
     }
 
 
-    public void update6players(List<PokerPlayer> playerList)
-    {
+    public void update6players(List<PokerPlayer> playerList) {
 
         seat1_data.setVisible(true);
         seat1_data.setStyle(playerList.get(0).getStyle());
@@ -395,13 +436,12 @@ public class GameTableController implements Initializable {
         _betPlayer6.setValue(playerList.get(5).getBet());
     }
 
-    public void updateCards(String[] tableCards)
-    {
-        tCard1.setImage(new Image(BASE_PACKAGE+(tableCards[0].equals("??")?"back":tableCards[0])+".png"));
-        tCard2.setImage(new Image(BASE_PACKAGE+(tableCards[1].equals("??")?"back":tableCards[1])+".png"));
-        tCard3.setImage(new Image(BASE_PACKAGE+(tableCards[2].equals("??")?"back":tableCards[2])+".png"));
-        tCard4.setImage(new Image(BASE_PACKAGE+(tableCards[3].equals("??")?"back":tableCards[3])+".png"));
-        tCard5.setImage(new Image(BASE_PACKAGE+(tableCards[4].equals("??")?"back":tableCards[4])+".png"));
+    public void updateCards(String[] tableCards) {
+        tCard1.setImage(new Image(BASE_PACKAGE + (tableCards[0].equals("??") ? "back" : tableCards[0]) + ".png"));
+        tCard2.setImage(new Image(BASE_PACKAGE + (tableCards[1].equals("??") ? "back" : tableCards[1]) + ".png"));
+        tCard3.setImage(new Image(BASE_PACKAGE + (tableCards[2].equals("??") ? "back" : tableCards[2]) + ".png"));
+        tCard4.setImage(new Image(BASE_PACKAGE + (tableCards[3].equals("??") ? "back" : tableCards[3]) + ".png"));
+        tCard5.setImage(new Image(BASE_PACKAGE + (tableCards[4].equals("??") ? "back" : tableCards[4]) + ".png"));
 
     }
 
@@ -409,17 +449,15 @@ public class GameTableController implements Initializable {
         table.setFill(value);
     }
 
-    public void updatePot(int i)
-    {
+    public void updatePot(int i) {
         _pot.setValue(i);
     }
 
     public void updatePlayersBetAndChips(List<PokerPlayer> playerList) {
 
-        int numberOfPlayer=playerList.size();
+        int numberOfPlayer = playerList.size();
 
-        switch (numberOfPlayer)
-        {
+        switch (numberOfPlayer) {
             case 3:
                 update3playersChipsAndBet(playerList);
                 break;
@@ -438,5 +476,15 @@ public class GameTableController implements Initializable {
     public void updateReplayInfo(String info) {
 
         replayStep.setText(info);
+    }
+
+    public void BoldCurrPlayer(PokerPlayer currPlayer, List<PokerPlayer> playerList) {
+        int i = 1;
+        for (PokerPlayer p : playerList) {
+            if (p == currPlayer) {
+                currPlayerLabel.textProperty().setValue(p.getName()+" id: " +p.getId());
+            }
+            i++;
+        }
     }
 }

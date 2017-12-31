@@ -3,7 +3,7 @@
 <GameDescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="TexaxHoldem.xsd">
 	<GameType>MultiPlayer</GameType>
 	<Structure>
-		<HandsCount>9</HandsCount>
+		<HandsCount>12</HandsCount>
 		<Buy>100</Buy>
 		<Blindes fixed="true">
 			<Big>4</Big>
@@ -21,6 +21,18 @@
 		</Player>
 		<Player id="3">
 			<Name>Nachtze</Name>
+			<Type>Computer</Type>
+		</Player>
+		<Player id="4">
+			<Name>Avi</Name>
+			<Type>Computer</Type>
+		</Player>
+		<Player id="5">
+			<Name>Yoram</Name>
+			<Type>Human</Type>
+		</Player>
+		<Player id="6">
+			<Name>Assi</Name>
 			<Type>Computer</Type>
 		</Player>
 

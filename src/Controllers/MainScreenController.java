@@ -16,13 +16,18 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static Engine.Players.PlayerType.Computer;
 import static Engine.Players.PlayerType.Human;
 
 public class MainScreenController implements Initializable {
-@FXML private  GameTableController gameTableController;
-@FXML private  GameInfoAndActionsController gameInfoAndActionsController;
-@FXML private MainMenuController mainMenuController;
-@FXML private PlayersTableController playersTableController;
+    @FXML
+    private GameTableController gameTableController;
+    @FXML
+    private GameInfoAndActionsController gameInfoAndActionsController;
+    @FXML
+    private MainMenuController mainMenuController;
+    @FXML
+    private PlayersTableController playersTableController;
 
 
     private final GameManager gameManager = new GameManager();
@@ -58,27 +63,29 @@ public class MainScreenController implements Initializable {
         gameInfoAndActionsController.setBusinessLogic(this.businessLogic);
     }
 
-    public void updatePlayersTable()
-    {
+    public void updatePlayersTable() {
         ObservableList<PokerPlayer> pokerPlayers = FXCollections.observableArrayList();
-        for(PokerPlayer p: gameManager.getPlayers())
+        for (PokerPlayer p : gameManager.getPlayers())
             pokerPlayers.add(p);
 
         playersTableController.updatePlayersTable(pokerPlayers);
     }
 
-    public void setGameSettings() { gameInfoAndActionsController.updateGameSettings(); }
+    public void setGameSettings() {
+        gameInfoAndActionsController.updateGameSettings();
+    }
 
-    public void updateGameDetails() { gameInfoAndActionsController.updateGameDetails();}
+    public void updateGameDetails() {
+        gameInfoAndActionsController.updateGameDetails();
+    }
 
     public void setGameTable() {
         gameTableController.updatePlayersOnTable(gameManager.getPlayers());
         gameTableController.updatePot(0);
     }
 
-    public void updateTableCards()
-    {
-        String[] tableCards=gameManager.getCurrHand().getCardsAsStringArray();
+    public void updateTableCards() {
+        String[] tableCards = gameManager.getCurrHand().getCardsAsStringArray();
         gameTableController.updateCards(tableCards);
     }
 
@@ -86,10 +93,10 @@ public class MainScreenController implements Initializable {
         gameTableController.changeTableColor(value);
     }
 
-    public void RunOneHand(){
+    public void RunOneHand() {
 
         gameManager.startNewHand();
-        currHand=gameManager.getCurrHand();
+        currHand = gameManager.getCurrHand();
         gameManager.resetPlayerState();
         updateTableCards();
 
@@ -110,15 +117,16 @@ public class MainScreenController implements Initializable {
 
         updatePlayersTable();
         updateGUIPotAndPlayerBetAndChips();
+
+        currHand.updateMaxBet();
+        currHand.updateMaxBet();
         try {
-          //  List<Winner> winners= run();
+            List<Winner> winners = runHand();
             gameInfoAndActionsController.enableReplayButtons();
             gameInfoAndActionsController.enableBuyButtons();
-            if(gameManager.getHandNumber()<=gameManager.getHandsCount()) {
+            if (gameManager.getHandNumber() <= gameManager.getHandsCount()) {
                 gameInfoAndActionsController.enableRunNextHand();
-            }
-            else
-            {
+            } else {
                 //TODO game is over
             }
             gameManager.saveHandReplayToFile("handReplay.txt");
@@ -136,71 +144,65 @@ public class MainScreenController implements Initializable {
         }
     }
 
-  //  private List<Winner> runCurrHand() throws Exception {
+    //  private List<Winner> runCurrHand() throws Exception {
 
     //    while(gameManager.getCurrHand().getIsFinished()!=true&&gameManager.getCurrHand().getNextToPlay().getType()==Human)
-      //  {
-
-        //}
+    //  {
 
     //}
 
-    private List<Winner> run() throws Exception {
+    //}
 
 
-        currHand.updateMaxBet();
+    private List<Winner> runHand() throws Exception {
+        updateFirstLastRaiseAndCurrBet();
+        List<Winner> winners=null;
+        int round=currHand.getRound();
+        while (currHand.getIsFinished() != true) {
 
-        collectBets();
-        gameManager.addStepToHandReplay();
-        updateGUIPotAndPlayerBetAndChips();
-
-        if (currHand.playersLeft() == 1||currHand.humanIsLeft())
-            return currHand.getWinner();
-
-        currHand.upRound();
-
-        gameManager.resetPlayerState();
-
-        currHand.dealingFlopCards();
-        updateTableCards();
-
-        gameManager.addStepToHandReplay();
+            while(round<=4) {
 
 
-        collectBets();
-        updateGUIPotAndPlayerBetAndChips();
-        currHand.upRound();
+        runRound();
 
-        if (currHand.playersLeft() == 1||currHand.humanIsLeft())
-            return currHand.getWinner();
 
-        gameManager.resetPlayerState();
-        currHand.dealingTurnCard();
-        updateTableCards();
+                gameManager.addStepToHandReplay();
+                updateGUIPotAndPlayerBetAndChips();
 
-        gameManager.addStepToHandReplay();
+                if (currHand.playersLeft() == 1||currHand.humanIsLeft())
+                    return currHand.getWinner();
 
-        collectBets();
-        updateGUIPotAndPlayerBetAndChips();
-        currHand.upRound();
+                currHand.upRound();
 
-        if (currHand.playersLeft() == 1||currHand.humanIsLeft())
-            return currHand.getWinner();
+                gameManager.resetPlayerState();
 
-        gameManager.resetPlayerState();
-
-        currHand.dealingRiverCard();
-        updateTableCards();
-
-        gameManager.addStepToHandReplay();
-
-        collectBets();
-        updateGUIPotAndPlayerBetAndChips();
-
-        return currHand.evaluateRound();
-    //return null;
-
+                currHand.dealingFlopCards();
+                updateTableCards();
+            }
+        }
+        return  winners;
     }
+
+    private void runRound() {
+        boolean isFinished=false;
+
+        while(isFinished==false) {
+            PokerPlayer currPlayer = currHand.getNextToPlay();
+
+            gameTableController.BoldCurrPlayer(currPlayer, currHand.getPlayers());
+            playersTableController.BoldCurrPlayer(currPlayer);
+            if (currPlayer.getType() == Computer) {
+
+            } else {
+                gameInfoAndActionsController.enableButtons(currHand.getNextToPlay());
+
+            }
+        }
+    }
+
+
+
+
 
     public void updateGUIPotAndPlayerBetAndChips() {
         gameTableController.updatePot(gameManager.getCurrHand().getPot());
@@ -208,26 +210,29 @@ public class MainScreenController implements Initializable {
         gameTableController.updatePlayersBetAndChips(gameManager.getCurrHand().getPlayers());
     }
 
+    private void updateFirstLastRaiseAndCurrBet()
+    {
+        if (currHand.getRound()==0) {
+            currHand.setLastRaise(currHand.getPlayers().get((2 + currHand.getDealer()) %currHand.getNumberOfPlayers()));
+            currHand.setCurrentBet(currHand.getBlinde().getBig());
+        }
+        else {
+            currHand.setCurrentBet(0);
+        }
+    }
     private void collectBets() {
         int p;
         int currIndex;
 
-        if (currHand.getRound()==0) {
-            currHand.setLastRaise(currHand.getPlayers().get((2 + currHand.getDealer()) %currHand.getNumberOfPlayers()));
-            p = 3;
-            currHand.setCurrentBet(currHand.getBlinde().getBig());
-        }
-        else {
-            p = 1;
-            currHand.setCurrentBet(0);
-        }
+
 
         while (true) {
 
             if (currHand.playersLeft() == 1 ||currHand.getMaxBet()==0) {
                 break;
             }
-
+//fake
+            p=3;
             currIndex = (p + currHand.getDealer()) % currHand.getNumberOfPlayers();
             PokerPlayer currPlayer =currHand.getPlayers().get(currIndex);
             currPlayer.itIsMyTurn();
