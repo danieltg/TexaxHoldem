@@ -140,6 +140,8 @@ public class GameInfoAndActionsController implements Initializable{
 
         gameSettings.setCollapsible(false);
         gameDetails.setCollapsible(false);
+        humanTurn.setCollapsible(false);
+        handFinishedActions.setCollapsible(false);
 
         showCardsButton.setDisable(true);
         runNextHandButton.setDisable(true);
@@ -170,10 +172,15 @@ public class GameInfoAndActionsController implements Initializable{
         nextButton.setOnAction(event -> {
             step++;
 
-            if (step>=replay.size())
+            if (step==replay.size()-1)
             {
                 nextButton.setDisable(true);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("We have some winners!");
+                alert.setContentText(replay.get(step).getAction());
+                alert.showAndWait();
                 step--;
+                return;
             }
 
             updateGUIWithStep();
@@ -250,6 +257,7 @@ public class GameInfoAndActionsController implements Initializable{
 
     public void enableButtons(PokerPlayer currPlayer) {
 
+        humanTurn.setCollapsible(true);
         humanTurn.setExpanded(true);
 
         this.currPlayer=currPlayer;
@@ -269,6 +277,7 @@ public class GameInfoAndActionsController implements Initializable{
 
     public void enableReplayButtons()
     {
+        handFinishedActions.setCollapsible(true);
         handFinishedActions.setExpanded(true);
         replayButton.setDisable(false);
 

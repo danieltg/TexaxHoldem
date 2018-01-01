@@ -19,6 +19,7 @@ import java.util.List;
 import static Engine.HandState.*;
 import static Engine.Players.PlayerType.Computer;
 import static Engine.Players.PlayerType.Human;
+import static Engine.Utils.EngineUtils.saveListToFile;
 
 public class PokerHand {
 
@@ -600,5 +601,19 @@ public class PokerHand {
         }
 
         nextToPlay.clearSelection();
+    }
+
+    public String getWinnersToDisplay() {
+
+        String message="";
+        List<Winner> winners= getWinner();
+
+        for (Winner w: winners) {
+            message=message+ w.getPlayer().getName() + " ("+w.getPlayer().getId()+")"+
+                    " won with this hand: "+w.getHandRank() +".\n"+
+                    "Prize: "+(getPot()/winners.size()) +"$\n\n";
+        }
+
+        return message;
     }
 }

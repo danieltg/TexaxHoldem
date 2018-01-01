@@ -10,6 +10,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -116,15 +119,6 @@ public class MainScreenController implements Initializable {
         playBettingRounds();
 
         gameManager.saveHandReplayToFile("handReplay.txt");
-
-//            for (Winner w: winners) {
-//                w.getPlayer().isAWinner();
-//                int chipsToAdd=currHand.getPot()/winners.size();
-//                w.getPlayer().addChips(chipsToAdd);
-//                System.out.println("Player with ID: "+w.getPlayer().getId() +
-//                        " won with this hand: "+w.getHandRank() +
-//                        " .Prize: "+(currHand.getPot()/winners.size()) +"$");
-
     }
 
 
@@ -177,10 +171,29 @@ public class MainScreenController implements Initializable {
                 gameInfoAndActionsController.enableReplayButtons();
                 gameInfoAndActionsController.enableBuyButtons();
                 gameInfoAndActionsController.enableRunNextHandButton();
+
+                String message=currHand.getWinnersToDisplay();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("We have some winners!");
+                alert.setContentText(message);
+                alert.showAndWait();
+
+                updateHandReplayWithTheWinners(message);
+
                 break;
             }
         }
     }
+
+    private void updateHandReplayWithTheWinners(String message) {
+
+        currHand.setLastPlayerToPlay(-888);
+        currHand.setLastAction(message);
+        gameManager.addStepToHandReplay();
+
+    }
+
 
     private void bettingRound() {
         PokerPlayer currPlayer = currHand.getNextToPlay();

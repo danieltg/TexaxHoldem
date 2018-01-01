@@ -129,4 +129,9 @@ public class PokerHandStep implements Serializable  {
 
         return "";
     }
+
+    public String getAction()
+    {
+        return action;
+    }
 }
