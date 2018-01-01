@@ -176,6 +176,7 @@ public class MainScreenController implements Initializable {
             {
                 gameInfoAndActionsController.enableReplayButtons();
                 gameInfoAndActionsController.enableBuyButtons();
+                gameInfoAndActionsController.enableRunNextHandButton();
                 break;
             }
         }

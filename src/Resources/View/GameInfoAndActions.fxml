@@ -83,7 +83,7 @@
                   </GridPane>
                </content>
           </TitledPane>
-            <TitledPane animated="false" layoutX="10.0" layoutY="86.0" prefHeight="0.0" prefWidth="300.0" text="Hand finished actions">
+            <TitledPane fx:id="handFinishedActions" animated="false" layoutX="10.0" layoutY="86.0" prefHeight="0.0" prefWidth="300.0" text="Hand finished actions">
                <content>
                   <AnchorPane>
                      <children>
@@ -104,6 +104,11 @@
                                     <Button fx:id="prevButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="112.0" text="Previous">
                                        <HBox.margin>
                                           <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="stopReplay" layoutX="25.0" layoutY="25.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="46.0" text="X" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
                                     <Button fx:id="nextButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Next">

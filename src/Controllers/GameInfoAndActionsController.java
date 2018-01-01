@@ -21,6 +21,8 @@ import static javafx.beans.binding.Bindings.not;
 
 public class GameInfoAndActionsController implements Initializable{
 
+    @FXML private TitledPane handFinishedActions;
+    @FXML private Button stopReplay;
     @FXML private TitledPane humanTurn;
     @FXML private Button buyButton;
     @FXML private ChoiceBox<String> dropDownPlayers;
@@ -142,7 +144,10 @@ public class GameInfoAndActionsController implements Initializable{
         showCardsButton.setDisable(true);
         runNextHandButton.setDisable(true);
         replayButton.setDisable(true);
-        replayButton.setOnAction(event -> startReplay());
+        replayButton.setOnAction(event ->
+        {
+            startReplay();
+        });
 
         prevButton.setDisable(true);
         prevButton.setOnAction(event -> {
@@ -154,6 +159,8 @@ public class GameInfoAndActionsController implements Initializable{
             }
 
             nextButton.setDisable(false);
+            stopReplay.setDisable(false);
+
             replayIndex.setText(String.valueOf(step));
             updateGUIWithStep();
 
@@ -171,8 +178,22 @@ public class GameInfoAndActionsController implements Initializable{
 
             updateGUIWithStep();
             prevButton.setDisable(false);
+            stopReplay.setDisable(false);
             replayIndex.setText(String.valueOf(step));
 
+        });
+
+        stopReplay.setDisable(true);
+        stopReplay.setOnAction(event -> {
+            prevButton.setDisable(true);
+            nextButton.setDisable(true);
+            replayButton.setDisable(false);
+            runNextHandButton.setDisable(false);
+
+            stopReplay.setDisable(true);
+
+            buyButton.setDisable(false);
+            dropDownPlayers.setDisable(false);
         });
 
         betAmountLabel.setVisible(false);
@@ -248,25 +269,26 @@ public class GameInfoAndActionsController implements Initializable{
 
     public void enableReplayButtons()
     {
+        handFinishedActions.setExpanded(true);
         replayButton.setDisable(false);
 
     }
 
     public void startReplay()
     {
+        step=0;
 
         //Disable the buy button first
         buyButton.setDisable(true);
         dropDownPlayers.setDisable(true);
+        runNextHandButton.setDisable(true);
 
         replay= gameManager.getHandReplay();
         updateGUIWithStep();
-        if (step==0)
-        {
-            replayIndex.setText(String.valueOf(replay.size()));
-            prevButton.setDisable(true);
-            nextButton.setDisable(false);
-        }
+        replayIndex.setText(String.valueOf(replay.size()));
+        prevButton.setDisable(true);
+        nextButton.setDisable(false);
+        stopReplay.setDisable(false);
 
     }
 
@@ -310,5 +332,9 @@ public class GameInfoAndActionsController implements Initializable{
         showCardsButton.setDisable(true);
         firstCardImage.setVisible(false);
         secondCardImage.setVisible(false);
+    }
+
+    public void enableRunNextHandButton() {
+        runNextHandButton.setDisable(false);
     }
 }
