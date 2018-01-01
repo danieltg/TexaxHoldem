@@ -473,8 +473,8 @@ public class GameTableController implements Initializable {
         }
     }
 
-    public void updateReplayInfo(String info) {
-
+    public void updateReplayInfo(String info,String name) {
+        currPlayerLabel.setText(name);
         replayStep.setText(info);
     }
 
@@ -482,7 +482,7 @@ public class GameTableController implements Initializable {
         int i = 1;
         for (PokerPlayer p : playerList) {
             if (p == currPlayer) {
-                currPlayerLabel.textProperty().setValue(p.getName()+" id: " +p.getId());
+                currPlayerLabel.textProperty().setValue(p.getName()+" (" +p.getId()+")");
             }
             i++;
         }

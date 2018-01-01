@@ -273,7 +273,9 @@ public class MainScreenController implements Initializable {
 
     public void updateStepLabel(int step) {
         String info=gameManager.getHandReplay().get(step).getStepToDisplay();
-        gameTableController.updateReplayInfo(info);
+        String playerNameAndID=gameManager.getHandReplay().get(step).getPlayerAndID();
+        gameTableController.updateReplayInfo(info,playerNameAndID);
+
     }
 
     public void updateCurrPlayerWithSelection(String action, int info) {

@@ -112,6 +112,13 @@ public class PokerHandStep implements Serializable  {
             return message;
     }
 
+    public String getPlayerAndID()
+    {
+        if(activePlayer!=-999)
+            return getPlayerNameByID(activePlayer)+ " ("+activePlayer+")";
+        return "";
+    }
+
     public String getPlayerNameByID (int id)
     {
         for (PokerPlayer p: players)

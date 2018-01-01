@@ -7,11 +7,8 @@ import Engine.Utils.EngineUtils;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -124,48 +121,19 @@ public class GameInfoAndActionsController implements Initializable{
             secondCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
         });
         raiseButton.setDisable(true);
-        raiseButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                businessLogic.updateUserSelection("R",1);
-            }
-        });
+        raiseButton.setOnAction(event -> businessLogic.updateUserSelection("R",1));
 
         checkButton.setDisable(true);
-        checkButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                businessLogic.updateUserSelection("K",0);
-
-            }
-        });
+        checkButton.setOnAction(event -> businessLogic.updateUserSelection("K",0));
 
         betButton.setDisable(true);
-        betButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                businessLogic.updateUserSelection("B",10);
-
-            }
-        });
+        betButton.setOnAction(event -> businessLogic.updateUserSelection("B",10));
 
         callButton.setDisable(true);
-        callButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                businessLogic.updateUserSelection("C",0);
-
-            }
-        });
+        callButton.setOnAction(event -> businessLogic.updateUserSelection("C",0));
 
         foldButton.setDisable(true);
-        foldButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                businessLogic.updateUserSelection("F",0);
-
-            }
-        });
+        foldButton.setOnAction(event -> businessLogic.updateUserSelection("F",0));
 
 
         gameSettings.setCollapsible(false);
@@ -174,48 +142,37 @@ public class GameInfoAndActionsController implements Initializable{
         showCardsButton.setDisable(true);
         runNextHandButton.setDisable(true);
         replayButton.setDisable(true);
-        replayButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                startReplay();
-            }
-        });
+        replayButton.setOnAction(event -> startReplay());
 
         prevButton.setDisable(true);
-        prevButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                step--;
+        prevButton.setOnAction(event -> {
+            step--;
 
-                if (step==0)
-                {
-                    prevButton.setDisable(true);
-                }
-
-                nextButton.setDisable(false);
-                replayIndex.setText(String.valueOf(step));
-                updateGUIWithStep();
-
+            if (step==0)
+            {
+                prevButton.setDisable(true);
             }
+
+            nextButton.setDisable(false);
+            replayIndex.setText(String.valueOf(step));
+            updateGUIWithStep();
+
         });
 
         nextButton.setDisable(true);
-        nextButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                step++;
+        nextButton.setOnAction(event -> {
+            step++;
 
-                if (step>=replay.size())
-                {
-                    nextButton.setDisable(true);
-                    step--;
-                }
-                
-                updateGUIWithStep();
-                prevButton.setDisable(false);
-                replayIndex.setText(String.valueOf(step));
-
+            if (step>=replay.size())
+            {
+                nextButton.setDisable(true);
+                step--;
             }
+
+            updateGUIWithStep();
+            prevButton.setDisable(false);
+            replayIndex.setText(String.valueOf(step));
+
         });
 
         betAmountLabel.setVisible(false);
@@ -292,10 +249,16 @@ public class GameInfoAndActionsController implements Initializable{
     public void enableReplayButtons()
     {
         replayButton.setDisable(false);
+
     }
 
     public void startReplay()
     {
+
+        //Disable the buy button first
+        buyButton.setDisable(true);
+        dropDownPlayers.setDisable(true);
+
         replay= gameManager.getHandReplay();
         updateGUIWithStep();
         if (step==0)

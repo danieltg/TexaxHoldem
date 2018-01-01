@@ -1,87 +1,31 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Mushon, 1> : 8D KC
-Player <Avrum, 2> : 7D 9C
-Player <Nachtze, 3> : TS TD
-Player <Daniel, 4> : 7H JS
-Player <Yoni, 5> : 6H JH
-Player <Doron, 6> : 2C QH
+Player <Or, 123> : 2S AD
+Player <Elad, 234> : 4S AS
+Player <Daniel, 456> : KC TH
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: 8D KC
-Player chips: 98
-Player bet: 2
-Pot: 2
+Active player ID: 234
+Player name: Elad
+Player type: Human
+Player cards: 4S AS
+Player chips: 45
+Player bet: 5
+Pot: 5
 Current Bet: 0
 Action: B
-Additional Action Information: 2
+Additional Action Information: 5
 ************************************************************************************************
-Active player ID: 2
-Player name: Avrum
+Active player ID: 456
+Player name: Daniel
 Player type: Human
-Player cards: 7D 9C
-Player chips: 96
-Player bet: 4
-Pot: 6
+Player cards: KC TH
+Player chips: 40
+Player bet: 10
+Pot: 15
 Current Bet: 0
 Action: R
-Additional Action Information: 4
-************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: TS TD
-Player chips: 99
-Player bet: 1
-Pot: 7
-Current Bet: 1
-Action: R
-Additional Action Information: 1
-************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 7H JS
-Player chips: 98
-Player bet: 2
-Pot: 9
-Current Bet: 2
-Action: R
-Additional Action Information: 1
-************************************************************************************************
-Active player ID: 5
-Player name: Yoni
-Player type: Computer
-Player cards: 6H JH
-Player chips: 100
-Player bet: 0
-Pot: 9
-Current Bet: 2
-Action: K
-************************************************************************************************
-Active player ID: 6
-Player name: Doron
-Player type: Computer
-Player cards: 2C QH
-Player chips: 97
-Player bet: 3
-Pot: 12
-Current Bet: 3
-Action: R
-Additional Action Information: 1
-************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: 8D KC
-Player chips: 97
-Player bet: 3
-Pot: 13
-Current Bet: 3
-Action: C
+Additional Action Information: 10
