@@ -41,4 +41,12 @@ public class EngineUtils {
         }
 
     }
+
+    /**
+     * Circularly increment i.
+     */
+    public static int inc(int i, int max) {
+        return (i == max) ? 0 : i + 1;
+    }
+
 }

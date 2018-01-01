@@ -59,4 +59,9 @@ public class BusinessLogic {
     public void runNextHand() {
         controller.RunOneHand();
     }
+
+    public void updateUserSelection(String action, int info) {
+
+        controller.updateCurrPlayerWithSelection(action,info);
+    }
 }

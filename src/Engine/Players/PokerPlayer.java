@@ -27,7 +27,8 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     boolean checkOccurred = false;
     private int initialAmount;
     private String style="-fx-background-color: #CCAA99;";
-
+    private String action;
+    private int actionInfo;
 
 
     public PokerPlayer(int playerID){
@@ -262,4 +263,24 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
         }
     }
 
+    public int getAdditionalActionInfo() {
+        return actionInfo;
+    }
+
+    public String getPlayerSelection() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public void setAdditionalActionInfo(int info) {
+        actionInfo=info;
+    }
+
+    public void clearSelection() {
+        this.action= "NOT SELECTED";
+        this.actionInfo=0;
+    }
 }

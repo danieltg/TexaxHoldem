@@ -1,6 +1,7 @@
 package Controllers;
 
 import Engine.GameManager;
+import Engine.HandState;
 import Engine.Players.PlayerType;
 import Engine.Players.PokerPlayer;
 import Engine.PokerHand;
@@ -34,7 +35,12 @@ public class MainScreenController implements Initializable {
     private Stage primaryStage;
     private BusinessLogic businessLogic;
     private PokerHand currHand;
+    private int counter;
 
+    public MainScreenController()
+    {
+        counter=0;
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mainMenuController.setGameManager(gameManager);
@@ -119,8 +125,9 @@ public class MainScreenController implements Initializable {
         updateGUIPotAndPlayerBetAndChips();
 
         currHand.updateMaxBet();
-        currHand.updateMaxBet();
-        try {
+
+        playBettingRounds();
+/*        try {
             List<Winner> winners = runHand();
             gameInfoAndActionsController.enableReplayButtons();
             gameInfoAndActionsController.enableBuyButtons();
@@ -129,7 +136,7 @@ public class MainScreenController implements Initializable {
             } else {
                 //TODO game is over
             }
-            gameManager.saveHandReplayToFile("handReplay.txt");
+            gameManager.saveHandReplayToFile("handReplay.txt");*/
 
 //            for (Winner w: winners) {
 //                w.getPlayer().isAWinner();
@@ -139,9 +146,9 @@ public class MainScreenController implements Initializable {
 //                        " won with this hand: "+w.getHandRank() +
 //                        " .Prize: "+(currHand.getPot()/winners.size()) +"$");
 //            }
-        } catch (Exception e) {
+/*        } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     //  private List<Winner> runCurrHand() throws Exception {
@@ -153,6 +160,93 @@ public class MainScreenController implements Initializable {
 
     //}
 
+
+    public void playBettingRounds()
+    {
+        HandState state= currHand.getHandState();
+
+        switch (state)
+        {
+
+            case GameInit:
+            case bettingAfterFlop:
+            case bettingAfterTurn:
+            case bettingAfterRiver:
+            {
+                bettingRound();
+                break;
+            }
+
+            case TheFlop: {
+                currHand.dealingFlopCards();
+                updateTableCards();
+                gameManager.addStepToHandReplay();
+                currHand.setHandState(HandState.bettingAfterFlop);
+                playBettingRounds();
+                break;
+            }
+            case TheTurn: {
+                currHand.dealingTurnCard();
+                updateTableCards();
+                gameManager.addStepToHandReplay();
+                currHand.setHandState(HandState.bettingAfterTurn);
+                playBettingRounds();
+                break;
+            }
+            case TheRiver:
+            {
+                currHand.dealingRiverCard();
+                updateTableCards();
+                gameManager.addStepToHandReplay();
+                currHand.setHandState(HandState.bettingAfterRiver);
+                playBettingRounds();
+                break;
+            }
+
+            case END:
+            {
+                gameInfoAndActionsController.enableReplayButtons();
+                gameInfoAndActionsController.enableBuyButtons();
+                break;
+            }
+        }
+    }
+
+    private void bettingRound() {
+        PokerPlayer currPlayer = currHand.getNextToPlay();
+
+        gameTableController.BoldCurrPlayer(currPlayer, currHand.getPlayers());
+        playersTableController.BoldCurrPlayer(currPlayer);
+
+        if (currPlayer.getType() == Computer) {
+
+            String whatToDo=currPlayer.play();
+            System.out.println("Computer player is now playing and he wants to: "+whatToDo);
+            currPlayer.setAction(whatToDo);
+            currPlayer.setAdditionalActionInfo(1);
+            currHand.bettingRoundForAPlayer();
+            gameManager.addStepToHandReplay();
+            updateGUIPotAndPlayerBetAndChips();
+            playBettingRounds();
+
+        }
+        else
+        {
+            System.out.println("Human player");
+            if (currPlayer.getPlayerSelection()!="NOT SELECTED")
+            {
+                currHand.bettingRoundForAPlayer();
+                gameManager.addStepToHandReplay();
+                updateGUIPotAndPlayerBetAndChips();
+                playBettingRounds();
+
+            }
+            else
+            {
+                enableHumanTurnButtons(currPlayer);
+            }
+        }
+    }
 
     private List<Winner> runHand() throws Exception {
         updateFirstLastRaiseAndCurrBet();
@@ -504,4 +598,20 @@ public class MainScreenController implements Initializable {
         String info=gameManager.getHandReplay().get(step).getStepToDisplay();
         gameTableController.updateReplayInfo(info);
     }
+
+    public void updateCurrPlayerWithSelection(String action, int info) {
+
+        PokerPlayer currPlayer = currHand.getNextToPlay();
+        currPlayer.setAction(action);
+        currPlayer.setAdditionalActionInfo(info);
+        disableHumanTurnButtons();
+        playBettingRounds();
+
+    }
+
+    private void disableHumanTurnButtons() {
+        gameInfoAndActionsController.disableHumanButtons();
+
+    }
+
 }

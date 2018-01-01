@@ -217,7 +217,7 @@ public class GameManager implements Serializable {
 
         currHand= new PokerHand(blindes,getPlayers());
         currHand.addToPot(getMoneyFromLastHand());
-
+        currHand.setHandState(HandState.GameInit);
         return currHand;
     }
 
@@ -233,6 +233,7 @@ public class GameManager implements Serializable {
         addStepToHandReplay();
 
     }
+
 
     public void resetPlayerState()
     {
@@ -284,5 +285,6 @@ public class GameManager implements Serializable {
     {
         return handReplay;
     }
+
 }
 

@@ -128,7 +128,7 @@ public class GameInfoAndActionsController implements Initializable{
         raiseButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                selection="R";
+                businessLogic.updateUserSelection("R",1);
             }
         });
 
@@ -136,7 +136,8 @@ public class GameInfoAndActionsController implements Initializable{
         checkButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                selection="K";
+                businessLogic.updateUserSelection("K",0);
+
             }
         });
 
@@ -144,7 +145,8 @@ public class GameInfoAndActionsController implements Initializable{
         betButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                selection="B";
+                businessLogic.updateUserSelection("B",10);
+
             }
         });
 
@@ -152,7 +154,8 @@ public class GameInfoAndActionsController implements Initializable{
         callButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                selection="C";
+                businessLogic.updateUserSelection("C",0);
+
             }
         });
 
@@ -160,7 +163,8 @@ public class GameInfoAndActionsController implements Initializable{
         foldButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                selection="F";
+                businessLogic.updateUserSelection("F",0);
+
             }
         });
 
@@ -347,5 +351,19 @@ public class GameInfoAndActionsController implements Initializable{
 
     public void runNextHandClicked(ActionEvent actionEvent) {
         businessLogic.runNextHand();
+    }
+
+    public void disableHumanButtons() {
+
+
+        raiseButton.setDisable(true);
+        checkButton.setDisable(true);
+        betButton.setDisable(true);
+        callButton.setDisable(true);
+        foldButton.setDisable(true);
+
+        showCardsButton.setDisable(true);
+        firstCardImage.setVisible(false);
+        secondCardImage.setVisible(false);
     }
 }

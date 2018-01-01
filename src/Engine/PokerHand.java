@@ -16,6 +16,10 @@ import org.omg.CORBA.PRIVATE_MEMBER;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Engine.HandState.*;
+import static Engine.Players.PlayerType.Computer;
+import static Engine.Players.PlayerType.Human;
+
 public class PokerHand {
 
     private int pot;    //the amount of money in the pot
@@ -30,42 +34,47 @@ public class PokerHand {
     private int b;
     private int s;
     private int round;
-    private PokerPlayer lastRaise=null;
-    private PokerPlayer nextToPlay=null;
+    private PokerPlayer lastRaise = null;
+    private PokerPlayer nextToPlay = null;
     private String lastAction;
     private int lastActionInfo;
     private int lastPlayerToPlay;
-    private boolean isFinished=false;
+    private boolean isFinished = false;
+    private HandState state;
 
-    public PokerHand(PokerBlindes gameBlinde, List<PokerPlayer> playersInHand)
-    {
-        pot=0;
-        currentBet=0;
-        round=0;
-        tableCards=new Card[5];
-        deck=new Deck();
+    public PokerHand(PokerBlindes gameBlinde, List<PokerPlayer> playersInHand) {
+        pot = 0;
+        currentBet = 0;
+        round = 0;
+        tableCards = new Card[5];
+        deck = new Deck();
 
-        for (int i=0; i<5; i++)
-            tableCards[i]= new Card();
+        for (int i = 0; i < 5; i++)
+            tableCards[i] = new Card();
 
-        lastAction="N";
-        lastActionInfo=0;
-        lastPlayerToPlay=-999;
+        lastAction = "N";
+        lastActionInfo = 0;
+        lastPlayerToPlay = -999;
 
-        numberOfPlayers=playersInHand.size();
-        players=playersInHand;
-        blinde=gameBlinde;
+        numberOfPlayers = playersInHand.size();
+        players = playersInHand;
+        blinde = gameBlinde;
         getStateIndex();
         updateMaxBet();
-        int i=0;
-        for(PokerPlayer p:players)
-        {
+        int i = 0;
+        for (PokerPlayer p : players) {
             i++;
-            if(p.getState()==PlayerState.BIG)
-            {
-                nextToPlay= players.get(i%this.getNumberOfPlayers());
+            if (p.getState() == PlayerState.BIG) {
+                nextToPlay = players.get(i % this.getNumberOfPlayers());
             }
         }
+
+        nextToPlay.clearSelection();
+    }
+
+
+    public void setHandState(HandState newState) {
+        state = newState;
     }
 
     public int getPot() {
@@ -74,40 +83,38 @@ public class PokerHand {
 
     public void updateMaxBet() {
 
-        int maxBetByPlayers=players.get(whoIsInTheGame()).getChips();
-        for (PokerPlayer p:players) {
-            if (!p.isFolded() && maxBetByPlayers>p.getChips())
-                maxBetByPlayers=p.getChips();
+        int maxBetByPlayers = players.get(whoIsInTheGame()).getChips();
+        for (PokerPlayer p : players) {
+            if (!p.isFolded() && maxBetByPlayers > p.getChips())
+                maxBetByPlayers = p.getChips();
         }
 
-        if (maxBetByPlayers<=0)
+        if (maxBetByPlayers <= 0)
             maxBet = 0;
-        else if(pot<=maxBetByPlayers)
-            maxBet=pot;
+        else if (pot <= maxBetByPlayers)
+            maxBet = pot;
         else
-            maxBet=maxBetByPlayers;
+            maxBet = maxBetByPlayers;
 
     }
 
-    public String[] getCardsAsStringArray()
-    {
+    public String[] getCardsAsStringArray() {
         String[] cards = new String[5];
 
-        cards[0]=tableCards[0].toString();
-        cards[1]=tableCards[1].toString();
-        cards[2]=tableCards[2].toString();
-        cards[3]=tableCards[3].toString();
-        cards[4]=tableCards[4].toString();
+        cards[0] = tableCards[0].toString();
+        cards[1] = tableCards[1].toString();
+        cards[2] = tableCards[2].toString();
+        cards[3] = tableCards[3].toString();
+        cards[4] = tableCards[4].toString();
 
 
         return cards;
     }
 
-    public String getCardsAsString()
-    {
-        StringBuilder s= new StringBuilder();
+    public String getCardsAsString() {
+        StringBuilder s = new StringBuilder();
 
-        for (int i=0; i<4; i++)
+        for (int i = 0; i < 4; i++)
             s.append(tableCards[i].toString()).append(" | ");
 
         s.append(tableCards[4].toString());
@@ -115,11 +122,11 @@ public class PokerHand {
         return s.toString();
 
     }
-    public String printHand()
-    {
 
-        return getCardsAsString()+
-                "  POT: "+pot;
+    public String printHand() {
+
+        return getCardsAsString() +
+                "  POT: " + pot;
     }
 
     public List<Winner> getWinner() {
@@ -134,10 +141,8 @@ public class PokerHand {
         }
 
         //Human player left the game
-        else
-        {
-            for (PokerPlayer p:players)
-            {
+        else {
+            for (PokerPlayer p : players) {
                 if (!p.isFolded()) {
                     String cards = p.getHoleCards();
                     Winner winner = new Winner(p, cards);
@@ -150,27 +155,26 @@ public class PokerHand {
     }
 
 
-    private int whoIsInTheGame()
-    {
-     for (int i=0; i<numberOfPlayers; i++)
-         if (!players.get(i).isFolded())
-             return i;
+    private int whoIsInTheGame() {
+        for (int i = 0; i < numberOfPlayers; i++)
+            if (!players.get(i).isFolded())
+                return i;
 
-     return 0;
+        return 0;
     }
 
     public void dealingRiverCard() {
-        tableCards[4]=deck.drawCard();
-        lastAction="CARD";
-        lastActionInfo=0;
-        lastPlayerToPlay=-999;
+        tableCards[4] = deck.drawCard();
+        lastAction = "CARD";
+        lastActionInfo = 0;
+        lastPlayerToPlay = -999;
     }
 
     public void dealingTurnCard() {
-        tableCards[3]=deck.drawCard();
-        lastAction="CARD";
-        lastActionInfo=0;
-        lastPlayerToPlay=-999;
+        tableCards[3] = deck.drawCard();
+        lastAction = "CARD";
+        lastActionInfo = 0;
+        lastPlayerToPlay = -999;
     }
 
 
@@ -178,20 +182,18 @@ public class PokerHand {
 
         EquityCalculator calculator = new EquityCalculator();
         calculator.reset();
-        StringBuilder tableCardsStr= new StringBuilder();
+        StringBuilder tableCardsStr = new StringBuilder();
 
-        for (Card c:tableCards) {
-            if (c.getSuit()!= Suit.NA && c.getRank()!= Rank.NA)
+        for (Card c : tableCards) {
+            if (c.getSuit() != Suit.NA && c.getRank() != Rank.NA)
                 tableCardsStr.append(c.toString());
         }
 
         calculator.setBoardFromString(tableCardsStr.toString());
 
-        for (PokerPlayer p:players)
-        {
-            if (!p.isFolded())
-            {
-                String playerCards=(p.getHoleCards()).replaceAll("\\s+","");
+        for (PokerPlayer p : players) {
+            if (!p.isFolded()) {
+                String playerCards = (p.getHoleCards()).replaceAll("\\s+", "");
                 Hand hand = Hand.fromString(playerCards);
                 calculator.addHand(hand);
             }
@@ -200,15 +202,13 @@ public class PokerHand {
         return getWinners(calculator);
     }
 
-    private List<Winner> getWinners(EquityCalculator calculator)
-    {
+    private List<Winner> getWinners(EquityCalculator calculator) {
         List<Winner> winnersList = new ArrayList<>();
-        List<Integer> winningHands= calculator.getWinningHands();
-        for (int index: winningHands)
-        {
-            PokerPlayer p=getActivePlayerInIndex(index);
-            String handRanking=calculator.getHandRanking(index).toString();
-            Winner tmp=new Winner(p,handRanking);
+        List<Integer> winningHands = calculator.getWinningHands();
+        for (int index : winningHands) {
+            PokerPlayer p = getActivePlayerInIndex(index);
+            String handRanking = calculator.getHandRanking(index).toString();
+            Winner tmp = new Winner(p, handRanking);
             winnersList.add(tmp);
 
         }
@@ -217,13 +217,11 @@ public class PokerHand {
 
     private PokerPlayer getActivePlayerInIndex(int index) {
 
-        int i=0;
+        int i = 0;
 
-        for (PokerPlayer p:players)
-        {
-            if (!p.isFolded())
-            {
-                if (i==index)
+        for (PokerPlayer p : players) {
+            if (!p.isFolded()) {
+                if (i == index)
                     return p;
                 else
                     i++;
@@ -233,9 +231,8 @@ public class PokerHand {
         return null;
     }
 
-    public void resetPlayersBets()
-    {
-        for (PokerPlayer p:players) {
+    public void resetPlayersBets() {
+        for (PokerPlayer p : players) {
             p.setCheckOccurred(false);
             p.itIsNotMyTurn();
             p.setBet(0);
@@ -244,71 +241,64 @@ public class PokerHand {
 
     public void dealingFlopCards() {
 
-        for (int i=0; i<3; i++)
-            tableCards[i]=deck.drawCard();
+        for (int i = 0; i < 3; i++)
+            tableCards[i] = deck.drawCard();
 
-        lastAction="CARD";
-        lastActionInfo=0;
-        lastPlayerToPlay=-999;
+        lastAction = "CARD";
+        lastActionInfo = 0;
+        lastPlayerToPlay = -999;
     }
 
 
     // Deal cards to all players
-    public void dealingHoleCards()
-    {
-        for (PokerPlayer p:players)
-        {
+    public void dealingHoleCards() {
+        for (PokerPlayer p : players) {
             p.setFolded(false);
-            for (int i=0; i<2; i++)
-                p.setCard(deck.drawCard(),i);
+            for (int i = 0; i < 2; i++)
+                p.setCard(deck.drawCard(), i);
         }
-        lastAction="PLAYER_CARDS";
-        lastActionInfo=0;
-        lastPlayerToPlay=-999;
+        lastAction = "PLAYER_CARDS";
+        lastActionInfo = 0;
+        lastPlayerToPlay = -999;
     }
 
 
-
-    public void betSmall(){
+    public void betSmall() {
 
         players.get(s).setBet(blinde.getSmall());
-        pot = pot+ blinde.getSmall();
+        pot = pot + blinde.getSmall();
         players.get(s).collectBet();
 
-        lastAction="B";
-        lastActionInfo=blinde.getSmall();
-        lastPlayerToPlay=players.get(s).getId();
+        lastAction = "B";
+        lastActionInfo = blinde.getSmall();
+        lastPlayerToPlay = players.get(s).getId();
     }
 
-    public void betBig()
-    {
+    public void betBig() {
         players.get(b).setBet(blinde.getBig());
-        pot = pot +blinde.getBig();
+        pot = pot + blinde.getBig();
         players.get(b).collectBet();
 
-        lastAction="R";
-        lastActionInfo=blinde.getBig();
-        lastPlayerToPlay=players.get(b).getId();
+        lastAction = "R";
+        lastActionInfo = blinde.getBig();
+        lastPlayerToPlay = players.get(b).getId();
     }
 
-    private void getStateIndex()
-    {
-        for (int i=0; i<numberOfPlayers; i++)
-        {
-            if (players.get(i).getState()== PlayerState.DEALER)
-                dealer= i;
-            else if (players.get(i).getState()== PlayerState.SMALL)
-                s=i;
-            else if (players.get(i).getState()== PlayerState.BIG)
-                b=i;
+    private void getStateIndex() {
+        for (int i = 0; i < numberOfPlayers; i++) {
+            if (players.get(i).getState() == PlayerState.DEALER)
+                dealer = i;
+            else if (players.get(i).getState() == PlayerState.SMALL)
+                s = i;
+            else if (players.get(i).getState() == PlayerState.BIG)
+                b = i;
         }
     }
 
-    public int playersLeft()
-    {
-        int count=0;
+    public int playersLeft() {
+        int count = 0;
 
-        for (PokerPlayer p:players) {
+        for (PokerPlayer p : players) {
             if (!p.isFolded())
                 count++;
         }
@@ -327,7 +317,7 @@ public class PokerHand {
     }
 
     public void setLastRaise(PokerPlayer lastRaisePlayer) {
-        lastRaise=lastRaisePlayer;
+        lastRaise = lastRaisePlayer;
     }
 
     public int getDealer() {
@@ -339,7 +329,7 @@ public class PokerHand {
     }
 
     public void setCurrentBet(int currbet) {
-        currentBet=currbet;
+        currentBet = currbet;
     }
 
     public PokerBlindes getBlinde() {
@@ -351,7 +341,7 @@ public class PokerHand {
     }
 
     public void addToPot(int bet) {
-        pot+=bet;
+        pot += bet;
     }
 
     public void upRound() {
@@ -359,7 +349,7 @@ public class PokerHand {
     }
 
     public void subFromPot(int bet) {
-        pot=pot-bet;
+        pot = pot - bet;
     }
 
     public int getCurrentBet() {
@@ -371,17 +361,15 @@ public class PokerHand {
     }
 
     public boolean humanIsLeft() {
-        for(PokerPlayer p:players)
-        {
-            if(p.isFolded()&&p.getType()==PlayerType.Human)
+        for (PokerPlayer p : players) {
+            if (p.isFolded() && p.getType() == PlayerType.Human)
                 return true;
         }
         return false;
     }
 
     public boolean isAllCheckOccurred() {
-        for (PokerPlayer p:players)
-        {
+        for (PokerPlayer p : players) {
             if (!p.getCheckOccurred())
                 return false;
         }
@@ -389,41 +377,35 @@ public class PokerHand {
         return true;
     }
 
-    public void setMaxBet(int newMaxbet)
-    {
-        maxBet=newMaxbet;
+    public void setMaxBet(int newMaxbet) {
+        maxBet = newMaxbet;
     }
 
     public Card[] getTableCards() {
         return tableCards;
     }
 
-    public void setLastAction(String s)
-    {
-        lastAction=s;
+    public void setLastAction(String s) {
+        lastAction = s;
     }
 
-    public void setLastActionInfo (int i)
-    {
-        lastActionInfo=i;
-    }
-    public void setLastPlayerToPlay (int id)
-    {
-        lastPlayerToPlay=id;
+    public void setLastActionInfo(int i) {
+        lastActionInfo = i;
     }
 
-    public String getLastAction()
-    {
+    public void setLastPlayerToPlay(int id) {
+        lastPlayerToPlay = id;
+    }
+
+    public String getLastAction() {
         return lastAction;
     }
 
-    public int getLastActionInfo()
-    {
+    public int getLastActionInfo() {
         return lastActionInfo;
     }
 
-    public int getLastPlayerToPlay()
-    {
+    public int getLastPlayerToPlay() {
         return lastPlayerToPlay;
     }
 
@@ -436,10 +418,187 @@ public class PokerHand {
     }
 
     public void changeNextToPlay() {
-        for(PokerPlayer p:players)
-            if(p.getState()==PlayerState.SMALL)
-            {
-                nextToPlay=p;
+        for (PokerPlayer p : players)
+            if (p.getState() == PlayerState.SMALL) {
+                nextToPlay = p;
             }
+    }
+
+
+
+
+    /**
+     * To be called at the betting rounds, after the player has performed an
+     * action.
+     */
+
+
+
+
+    public void afterPlayerAction() {
+
+        switch (state) {
+            case GameInit:
+            {
+                if (nextToPlay==lastRaise) {
+                    System.out.println("We finished the first betting round");
+                    state=TheFlop;
+                }
+                break;
+
+            }
+            case bettingAfterFlop:
+            {
+                if (nextToPlay==lastRaise) {
+                    System.out.println("We finished the second betting round");
+                    state=TheTurn;
+                }
+                break;
+            }
+            case bettingAfterTurn:
+            {
+                if (nextToPlay==lastRaise) {
+                    System.out.println("We finished the third betting round");
+                    state=TheRiver;
+                }
+                break;
+            }
+
+            case bettingAfterRiver:
+            {
+                if (nextToPlay==lastRaise) {
+                    System.out.println("We finished the game!!!");
+                    state=END;
+                }
+                break;
+            }
+
+            case TheFlop: {
+                state=bettingAfterFlop;
+                break;
+            }
+            case TheRiver: {
+                state=bettingAfterRiver;
+                break;
+            }
+            case TheTurn:
+                state=bettingAfterTurn;
+                break;
+        }
+    }
+
+    public HandState getHandState() {
+        return state;
+    }
+
+
+    public void bettingRoundForAPlayer() {
+        PokerPlayer currPlayer = getNextToPlay();
+        String action = currPlayer.getPlayerSelection();
+        int additionalActionInfo = currPlayer.getAdditionalActionInfo();
+
+        handlePlayerAction(action, additionalActionInfo);
+        addToPot(currPlayer.getBet());
+        currPlayer.collectBet();
+        updateMaxBet();
+
+        incCurrPlayer();
+        afterPlayerAction();
+    }
+
+
+    private void handlePlayerAction(String action, int additionalActionInfo) {
+        if (action.equals("F")) {
+            fold(nextToPlay);
+        }
+
+        if (action.equals("B")) {
+            bet(nextToPlay, additionalActionInfo);
+        }
+
+        if (action.equals("C")) {
+            call(nextToPlay);
+        }
+
+        if (action.equals("R")) {
+            raise(nextToPlay, additionalActionInfo);
+        }
+
+        if (action.equals("K")) {
+            check(nextToPlay);
+        }
+
+    }
+
+    private void fold(PokerPlayer player) {
+        player.setFolded(true);
+        player.setBet(0);
+        setLastAction("F");
+        setLastActionInfo(0);
+    }
+
+    private void bet(PokerPlayer player, int betTo) {
+        setCurrentBet(betTo);
+        setLastRaise(player);
+        player.setBet(getCurrentBet());
+
+        setLastAction("B");
+        setLastActionInfo(betTo);
+    }
+
+    private void call(PokerPlayer player) {
+        subFromPot(player.getBet());
+        player.addChips(player.getBet());
+        updateMaxBet();
+        player.setBet(getCurrentBet());
+
+        setLastAction("C");
+        setLastActionInfo(getCurrentBet());
+    }
+
+    private void raise(PokerPlayer player, int raiseTo) {
+        subFromPot(player.getBet());
+        player.addChips(player.getBet());
+        updateMaxBet();
+
+        setCurrentBet(getCurrentBet() + raiseTo);
+        setLastRaise(player);
+
+        setLastAction("R");
+        setLastActionInfo(raiseTo);
+
+        for (PokerPlayer playerInLoop : getPlayers()) {
+            if (playerInLoop != player)
+                playerInLoop.setCheckOccurred(false);
+        }
+
+        player.setBet(getCurrentBet());
+    }
+
+    private void check(PokerPlayer player) {
+        if (getLastRaise() == null)
+            setLastRaise(player);
+
+        player.setBet(0);
+        setLastAction("K");
+        setLastActionInfo(0);
+    }
+
+
+    public void incCurrPlayer()
+    {
+        int i=0;
+        nextToPlay.clearSelection();
+        lastPlayerToPlay=nextToPlay.getId();
+
+        for (PokerPlayer p : players) {
+            i++;
+            if (p==nextToPlay) {
+                nextToPlay = players.get(i % this.getNumberOfPlayers());
+                break;
+            }
+        }
+
+        nextToPlay.clearSelection();
     }
 }
