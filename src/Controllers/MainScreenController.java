@@ -180,9 +180,20 @@ public class MainScreenController implements Initializable {
                 alert.showAndWait();
 
                 updateHandReplayWithTheWinners(message);
-
+                updateHandCount();
                 break;
             }
+        }
+    }
+
+    private void updateHandCount() {
+
+        gameInfoAndActionsController.updateHandsCount();
+
+        //We need to start a new game
+        if (gameManager.handNumber>=gameManager.getHandsCount())
+        {
+            mainMenuController.enableLoadXMLButton();
         }
     }
 

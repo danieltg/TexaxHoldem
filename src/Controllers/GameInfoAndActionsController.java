@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static javafx.application.Platform.exit;
 import static javafx.beans.binding.Bindings.not;
 
 public class GameInfoAndActionsController implements Initializable{
@@ -99,6 +100,7 @@ public class GameInfoAndActionsController implements Initializable{
                 gameManager.buy(gameManager.getPlayers().get(selectedPlayer));
                 businessLogic.updatePlayersList();
                 businessLogic.updateGUIPotAndPlayerBetAndChips();
+                updateMaxPot();
             }
         });
 
@@ -179,6 +181,14 @@ public class GameInfoAndActionsController implements Initializable{
                 alert.setHeaderText("We have some winners!");
                 alert.setContentText(replay.get(step).getAction());
                 alert.showAndWait();
+
+                if (gameManager.handNumber>=gameManager.getHandsCount())
+                {
+                    alert.setHeaderText("Game over");
+                    alert.setContentText("Thanks for playing Texas Hold'em!\nYou can either start the same game or load a new one");
+                    alert.showAndWait();
+                    return;
+                }
                 step--;
                 return;
             }
@@ -195,7 +205,7 @@ public class GameInfoAndActionsController implements Initializable{
             prevButton.setDisable(true);
             nextButton.setDisable(true);
             replayButton.setDisable(false);
-            runNextHandButton.setDisable(false);
+            runNextHandButton.setDisable(gameManager.handNumber>=gameManager.getHandsCount());
 
             stopReplay.setDisable(true);
 
@@ -246,10 +256,20 @@ public class GameInfoAndActionsController implements Initializable{
     public void updateGameDetails()
     {
         gameDetails.setCollapsible(true);
-
-        handsCount.set(gameManager.handNumber);
-        maxPOT.set(gameManager.getMaxPot());
+        updateHandsCount();
+        updateMaxPot();
         updateDropDownPlayersList();
+    }
+
+
+    public void updateHandsCount()
+    {
+        handsCount.set(gameManager.handNumber);
+    }
+
+    public void updateMaxPot()
+    {
+        maxPOT.set(gameManager.getMaxPot());
     }
     public void setGameManager(GameManager gameManager) {
         this.gameManager = gameManager;
@@ -344,6 +364,6 @@ public class GameInfoAndActionsController implements Initializable{
     }
 
     public void enableRunNextHandButton() {
-        runNextHandButton.setDisable(false);
+        runNextHandButton.setDisable(gameManager.handNumber>=gameManager.getHandsCount());
     }
 }

@@ -606,7 +606,12 @@ public class PokerHand {
     public String getWinnersToDisplay() {
 
         String message="";
-        List<Winner> winners= getWinner();
+        List<Winner> winners= null;
+        try {
+            winners = evaluateRound();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         for (Winner w: winners) {
             message=message+ w.getPlayer().getName() + " ("+w.getPlayer().getId()+")"+
