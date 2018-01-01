@@ -24,6 +24,7 @@ import static javafx.beans.binding.Bindings.not;
 
 public class GameInfoAndActionsController implements Initializable{
 
+    @FXML private TitledPane humanTurn;
     @FXML private Button buyButton;
     @FXML private ChoiceBox<String> dropDownPlayers;
     @FXML private Label replayIndex;
@@ -73,8 +74,6 @@ public class GameInfoAndActionsController implements Initializable{
 
     private SimpleIntegerProperty handsCount;
     private SimpleIntegerProperty maxPOT;
-    private String selection;
-    private String userSelction;
 
     private int selectedPlayer = -1;
 
@@ -271,26 +270,9 @@ public class GameInfoAndActionsController implements Initializable{
         this.gameManager = gameManager;
     }
 
-
-    public String getUserSelection()
-    {
-        //selection=null;
-        raiseButton.setDisable(false);
-        checkButton.setDisable(false);
-        betButton.setDisable(false);
-        callButton.setDisable(false);
-        foldButton.setDisable(false);
-
-
-        return userSelction;
-    }
-
-    public void userSeletedCheck(ActionEvent actionEvent) {
-        userSelction="C";
-        
-    }
-
     public void enableButtons(PokerPlayer currPlayer) {
+
+        humanTurn.setExpanded(true);
 
         this.currPlayer=currPlayer;
 
