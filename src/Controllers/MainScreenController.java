@@ -191,10 +191,12 @@ public class MainScreenController implements Initializable {
         gameInfoAndActionsController.updateHandsCount();
 
         //We need to start a new game
-        if (gameManager.handNumber>=gameManager.getHandsCount())
+        if (gameManager.getHandNumber()>=gameManager.getHandsCount())
         {
             mainMenuController.enableLoadXMLButton();
+            mainMenuController.enableStartGameButton();
         }
+
     }
 
     private void updateHandReplayWithTheWinners(String message) {

@@ -182,7 +182,7 @@ public class GameInfoAndActionsController implements Initializable{
                 alert.setContentText(replay.get(step).getAction());
                 alert.showAndWait();
 
-                if (gameManager.handNumber>=gameManager.getHandsCount())
+                if (gameManager.getHandNumber()>=gameManager.getHandsCount())
                 {
                     alert.setHeaderText("Game over");
                     alert.setContentText("Thanks for playing Texas Hold'em!\nYou can either start the same game or load a new one");
@@ -205,7 +205,7 @@ public class GameInfoAndActionsController implements Initializable{
             prevButton.setDisable(true);
             nextButton.setDisable(true);
             replayButton.setDisable(false);
-            runNextHandButton.setDisable(gameManager.handNumber>=gameManager.getHandsCount());
+            runNextHandButton.setDisable(gameManager.getHandNumber()>=gameManager.getHandsCount());
 
             stopReplay.setDisable(true);
 
@@ -264,7 +264,7 @@ public class GameInfoAndActionsController implements Initializable{
 
     public void updateHandsCount()
     {
-        handsCount.set(gameManager.handNumber);
+        handsCount.set(gameManager.getHandNumber());
     }
 
     public void updateMaxPot()
@@ -364,6 +364,6 @@ public class GameInfoAndActionsController implements Initializable{
     }
 
     public void enableRunNextHandButton() {
-        runNextHandButton.setDisable(gameManager.handNumber>=gameManager.getHandsCount());
+        runNextHandButton.setDisable(gameManager.getHandNumber()>=gameManager.getHandsCount());
     }
 }

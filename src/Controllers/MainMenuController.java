@@ -73,8 +73,7 @@ public class MainMenuController implements Initializable{
             gameManager.setGameDescriptor(ReadGameDescriptorFile.readFile(selectedFile.getAbsolutePath()));
             gameManager.setTable();
             businessLogic.updateUI();
-            startButton.setVisible(true);
-            startButton.setDisable(false);
+            enableStartGameButton();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,5 +110,10 @@ public class MainMenuController implements Initializable{
 
     public void enableLoadXMLButton() {
         loadXmlButton.setDisable(false);
+    }
+
+    public void enableStartGameButton() {
+        startButton.setVisible(true);
+        startButton.setDisable(false);
     }
 }
