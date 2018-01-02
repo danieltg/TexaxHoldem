@@ -102,14 +102,18 @@ public class MainScreenController implements Initializable {
         updateTableCards();
 
         gameManager.addStepToHandReplay();
+        gameManager.clearValuesFromCurrHand();
 
         currHand.betSmall();
         gameManager.addStepToHandReplay();
+        gameManager.clearValuesFromCurrHand();
+
         updatePlayersTable();
         updateGUIPotAndPlayerBetAndChips();
 
         currHand.betBig();
         gameManager.addStepToHandReplay();
+        gameManager.clearValuesFromCurrHand();
 
         updatePlayersTable();
         updateGUIPotAndPlayerBetAndChips();
@@ -143,7 +147,10 @@ public class MainScreenController implements Initializable {
             case TheFlop: {
                 currHand.dealingFlopCards();
                 updateTableCards();
+
                 gameManager.addStepToHandReplay();
+                gameManager.clearValuesFromCurrHand();
+
                 currHand.setHandState(HandState.bettingAfterFlop);
                 playBettingRounds();
                 break;
@@ -151,7 +158,10 @@ public class MainScreenController implements Initializable {
             case TheTurn: {
                 currHand.dealingTurnCard();
                 updateTableCards();
+
                 gameManager.addStepToHandReplay();
+                gameManager.clearValuesFromCurrHand();
+
                 currHand.setHandState(HandState.bettingAfterTurn);
                 playBettingRounds();
                 break;
@@ -160,7 +170,10 @@ public class MainScreenController implements Initializable {
             {
                 currHand.dealingRiverCard();
                 updateTableCards();
+
                 gameManager.addStepToHandReplay();
+                gameManager.clearValuesFromCurrHand();
+
                 currHand.setHandState(HandState.bettingAfterRiver);
                 playBettingRounds();
                 break;
@@ -214,9 +227,11 @@ public class MainScreenController implements Initializable {
         gameTableController.BoldCurrPlayer(currPlayer, currHand.getPlayers());
         playersTableController.BoldCurrPlayer(currPlayer);
 
+        List<String> options= currHand.getPossibleOptions();
+
         if (currPlayer.getType() == Computer) {
 
-            String whatToDo=currPlayer.play();
+            String whatToDo=currPlayer.getSelection(options);
             System.out.println("Computer player is now playing and he wants to: "+whatToDo);
             currPlayer.setAction(whatToDo);
             currPlayer.setAdditionalActionInfo(1);
@@ -239,7 +254,7 @@ public class MainScreenController implements Initializable {
             }
             else
             {
-                enableHumanTurnButtons(currPlayer);
+                enableHumanTurnButtons(currPlayer,options);
             }
         }
     }
@@ -262,8 +277,8 @@ public class MainScreenController implements Initializable {
         }
     }
 
-    private void enableHumanTurnButtons(PokerPlayer currPlayer) {
-        gameInfoAndActionsController.enableButtons(currPlayer);
+    private void enableHumanTurnButtons(PokerPlayer currPlayer, List<String> options) {
+        gameInfoAndActionsController.enableButtons(currPlayer,options);
     }
 
     private void disableHumanTurnButtons() {

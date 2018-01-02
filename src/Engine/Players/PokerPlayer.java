@@ -283,4 +283,6 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
         this.action= "NOT SELECTED";
         this.actionInfo=0;
     }
+
+    abstract public String getSelection(List<String> options);
 }

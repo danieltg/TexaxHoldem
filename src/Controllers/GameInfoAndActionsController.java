@@ -275,22 +275,41 @@ public class GameInfoAndActionsController implements Initializable{
         this.gameManager = gameManager;
     }
 
-    public void enableButtons(PokerPlayer currPlayer) {
+    public void enableButtons(PokerPlayer currPlayer, List<String> options) {
+
+        disableHumanButtons();
 
         humanTurn.setCollapsible(true);
         humanTurn.setExpanded(true);
 
-        this.currPlayer=currPlayer;
-
-        raiseButton.setDisable(false);
-        checkButton.setDisable(false);
-        betButton.setDisable(false);
-        callButton.setDisable(false);
-        foldButton.setDisable(false);
-
         showCardsButton.setDisable(false);
         firstCardImage.setVisible(true);
         secondCardImage.setVisible(true);
+
+        this.currPlayer=currPlayer;
+
+        if (options.contains("R"))
+        {
+            raiseButton.setDisable(false);
+            raiseAmountLabel.setVisible(true);
+        }
+
+        if (options.contains("C")) {
+            callButton.setDisable(false);
+        }
+
+        if (options.contains("K")) {
+            checkButton.setDisable(false);
+        }
+
+        if (options.contains("B")) {
+            betButton.setDisable(false);
+            betAmountLabel.setVisible(true);
+        }
+
+        if (options.contains("F")) {
+            foldButton.setDisable(false);
+        }
 
     }
 
