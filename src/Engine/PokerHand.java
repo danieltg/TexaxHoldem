@@ -536,6 +536,9 @@ public class PokerHand {
         player.setBet(0);
         setLastAction("F");
         setLastActionInfo(0);
+
+        if (getLastRaise() == player)
+            setLastRaise(null);
     }
 
     private void bet(PokerPlayer player, int betTo) {
@@ -591,12 +594,21 @@ public class PokerHand {
         int i=0;
         nextToPlay.clearSelection();
         lastPlayerToPlay=nextToPlay.getId();
+        boolean found=false;
 
-        for (PokerPlayer p : players) {
-            i++;
-            if (p==nextToPlay) {
-                nextToPlay = players.get(i % this.getNumberOfPlayers());
-                break;
+        for (i=0; i<numberOfPlayers; i++)
+        {
+            if (players.get(i)==nextToPlay)
+            {
+                for (int j=1; j<=numberOfPlayers; j++)
+                {
+                    if (players.get((i+j)%numberOfPlayers).isFolded()==false)
+                    {
+                        nextToPlay = players.get((i + j)% this.numberOfPlayers);
+                        nextToPlay.clearSelection();
+                        return;
+                    }
+                }
             }
         }
 
