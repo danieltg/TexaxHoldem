@@ -54,10 +54,7 @@ public class GameInfoAndActionsController implements Initializable{
     @FXML private Button  betButton;
     @FXML private Button  callButton;
     @FXML private Button  foldButton;
-    @FXML private Button  okRaiseButton;
-    @FXML private Button  okBetButton;
-    @FXML private TextField raiseAmountLabel;
-    @FXML private TextField betAmountLabel;
+
 
     @FXML private Spinner betSpinner;
     @FXML private Spinner raiseSpinner;
@@ -216,11 +213,6 @@ public class GameInfoAndActionsController implements Initializable{
             dropDownPlayers.setDisable(false);
         });
 
-        betAmountLabel.setVisible(false);
-        raiseAmountLabel.setVisible(false);
-        okBetButton.setVisible(false);
-        okRaiseButton.setVisible(false);
-
         bigLabel.textProperty().bind(big.asString());
         smallLabel.textProperty().bind(small.asString());
         handsLabel.textProperty().bind(hands.asString());
@@ -303,7 +295,6 @@ public class GameInfoAndActionsController implements Initializable{
         if (options.contains("R"))
         {
             raiseButton.setDisable(false);
-            raiseAmountLabel.setVisible(true);
         }
 
         if (options.contains("C")) {
@@ -316,7 +307,6 @@ public class GameInfoAndActionsController implements Initializable{
 
         if (options.contains("B")) {
             betButton.setDisable(false);
-            betAmountLabel.setVisible(true);
         }
 
         if (options.contains("F")) {
