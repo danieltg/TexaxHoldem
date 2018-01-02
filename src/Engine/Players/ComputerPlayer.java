@@ -1,5 +1,6 @@
 package Engine.Players;
 
+import java.util.List;
 import java.util.Random;
 
 public class ComputerPlayer extends PokerPlayer {
@@ -14,6 +15,14 @@ public class ComputerPlayer extends PokerPlayer {
     {
         super(id,name);
         setType(PlayerType.Computer);
+    }
+
+
+    @Override
+    public String getSelection(List<String> options)
+    {
+        int randomNumber= new Random().nextInt(options.size());
+        return options.get(randomNumber);
     }
 
     @Override

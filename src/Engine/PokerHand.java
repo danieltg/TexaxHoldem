@@ -8,18 +8,13 @@ import Engine.GameDescriptor.PokerBlindes;
 import Engine.Players.PokerPlayer;
 import Engine.Players.PlayerState;
 import Engine.Players.PlayerType;
-import Jaxb.Players;
 import com.rundef.poker.EquityCalculator;
 import com.rundef.poker.Hand;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static Engine.HandState.*;
-import static Engine.Players.PlayerType.Computer;
-import static Engine.Players.PlayerType.Human;
-import static Engine.Utils.EngineUtils.saveListToFile;
 
 public class PokerHand {
 
@@ -38,6 +33,8 @@ public class PokerHand {
     private PokerPlayer lastRaise = null;
     private PokerPlayer nextToPlay = null;
     private String lastAction;
+    private String lastActionBeforeFold;
+
     private int lastActionInfo;
     private int lastPlayerToPlay;
     private boolean isFinished = false;
@@ -54,6 +51,7 @@ public class PokerHand {
             tableCards[i] = new Card();
 
         lastAction = "N";
+        lastActionBeforeFold="N";
         lastActionInfo = 0;
         lastPlayerToPlay = -999;
 
@@ -534,6 +532,10 @@ public class PokerHand {
     private void fold(PokerPlayer player) {
         player.setFolded(true);
         player.setBet(0);
+
+        if (!lastAction.equals("F"))
+            lastActionBeforeFold=lastAction;
+
         setLastAction("F");
         setLastActionInfo(0);
 
@@ -632,5 +634,73 @@ public class PokerHand {
         }
 
         return message;
+    }
+
+
+    public List<String> getPossibleOptions()
+    {
+        List<String> options=new ArrayList<>();
+
+        if (lastAction.equals("F")) {
+            System.out.println("Last player action was Fold... I'm going to change it to: "+lastActionBeforeFold);
+            lastAction = lastActionBeforeFold;
+        }
+
+        //LastPlayerToPlay -999 is only at the
+        //beginning of a betting round
+
+        if (lastPlayerToPlay==-999 || lastAction.equals("N")) {
+            if (state==HandState.GameInit)
+            {
+                options.add("F");
+                options.add("C");
+                options.add("R");
+            }
+
+            if (state==HandState.bettingAfterFlop || state==HandState.bettingAfterRiver || state==HandState.bettingAfterTurn)
+            {
+                options.add("F");
+                options.add("B");
+                options.add("K");
+            }
+        }
+
+
+        //We are NOT at the beginning of a betting round
+        else
+        {
+            if (lastAction.toUpperCase().equals("R"))
+            {
+                options.add("F");
+                options.add("C");
+                options.add("R");
+            }
+
+            else if (lastAction.toUpperCase().equals("B"))
+            {
+                options.add("F");
+                options.add("C");
+                options.add("R");
+            }
+
+            else if (lastAction.toUpperCase().equals("C"))
+            {
+                options.add("F");
+                options.add("C");
+                options.add("R");
+            }
+            else if (lastAction.toUpperCase().equals("K"))
+            {
+                options.add("F");
+                options.add("K");
+                if (pot==0)
+                {
+                    options.add("B");
+                }
+            }
+        }
+
+        return options;
+
     }
 }

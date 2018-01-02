@@ -38,5 +38,9 @@ public class HumanPlayer extends PokerPlayer {
 
     }
 
-
+    @Override
+    public String getSelection(List<String> options)
+    {
+        return null;
+    }
 }

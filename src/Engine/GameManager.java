@@ -228,10 +228,11 @@ public class GameManager implements Serializable {
 
         currHand.dealingHoleCards();
         addStepToHandReplay();
+        clearValuesFromCurrHand();
 
         currHand.dealingFlopCards();
         addStepToHandReplay();
-
+        clearValuesFromCurrHand();
     }
 
 
@@ -254,12 +255,10 @@ public class GameManager implements Serializable {
                 ,currHand.getLastActionInfo());
 
         handReplay.add(step);
-
-        clearValuesFromCurrHand();
     }
 
 
-    private void clearValuesFromCurrHand() {
+    public void clearValuesFromCurrHand() {
 
         currHand.setLastPlayerToPlay(-999);
         currHand.setLastActionInfo(0);
