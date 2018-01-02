@@ -211,6 +211,8 @@ public class GameTableController implements Initializable {
 
         potLabel.textProperty().bind(_pot.asString());
 
+
+
         seat1_data.setVisible(false);
         seat2_data.setVisible(false);
         seat3_data.setVisible(false);
@@ -256,6 +258,23 @@ public class GameTableController implements Initializable {
     }
 
     public void updatePlayersOnTable(List<PokerPlayer> playerList) {
+        player1Card1.setImage(new Image(BASE_PACKAGE+"back.png"));
+        player1Card2.setImage(new Image(BASE_PACKAGE+"back.png"));
+
+        player2Card1.setImage(new Image(BASE_PACKAGE+"back.png"));
+        player2Card2.setImage(new Image(BASE_PACKAGE+"back.png"));
+
+        player3Card1.setImage(new Image(BASE_PACKAGE+"back.png"));
+        player3Card2.setImage(new Image(BASE_PACKAGE+"back.png"));
+
+        player4Card1.setImage(new Image(BASE_PACKAGE+"back.png"));
+        player4Card2.setImage(new Image(BASE_PACKAGE+"back.png"));
+
+        player5Card1.setImage(new Image(BASE_PACKAGE+"back.png"));
+        player5Card2.setImage(new Image(BASE_PACKAGE+"back.png"));
+
+        player6Card1.setImage(new Image(BASE_PACKAGE+"back.png"));
+        player6Card2.setImage(new Image(BASE_PACKAGE+"back.png"));
         clearTable();
         int numberOfPlayer = playerList.size();
 
@@ -470,6 +489,7 @@ public class GameTableController implements Initializable {
         tCard3.setImage(new Image(BASE_PACKAGE + (tableCards[2].equals("??") ? "back" : tableCards[2]) + ".png"));
         tCard4.setImage(new Image(BASE_PACKAGE + (tableCards[3].equals("??") ? "back" : tableCards[3]) + ".png"));
         tCard5.setImage(new Image(BASE_PACKAGE + (tableCards[4].equals("??") ? "back" : tableCards[4]) + ".png"));
+
 
     }
 

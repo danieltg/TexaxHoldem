@@ -303,10 +303,10 @@
          </effect>
       </Pane>
       <Label layoutX="178.0" layoutY="303.0" text="Pot:" />
-      <Label fx:id="potLabel" layoutX="221.0" layoutY="303.0" prefHeight="17.0" prefWidth="20.0" />
+      <Label fx:id="potLabel" layoutX="221.0" layoutY="303.0" prefHeight="27.0" prefWidth="91.0" />
         <Label fx:id="replayStep" layoutX="9.0" layoutY="425.0" prefHeight="72.0" prefWidth="208.0" />
       <Label layoutX="176.0" layoutY="273.0" text="Curr Player:" />
-      <Label fx:id="currPlayerLabel" layoutX="273.0" layoutY="273.0" prefHeight="17.0" prefWidth="20.0" />
+      <Label fx:id="currPlayerLabel" layoutX="273.0" layoutY="273.0" prefHeight="27.0" prefWidth="91.0" />
 
     </children>
 </Pane>

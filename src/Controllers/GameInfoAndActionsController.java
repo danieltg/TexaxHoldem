@@ -59,6 +59,9 @@ public class GameInfoAndActionsController implements Initializable{
     @FXML private TextField raiseAmountLabel;
     @FXML private TextField betAmountLabel;
 
+    @FXML private Spinner betSpinner;
+    @FXML private Spinner raiseSpinner;
+
     private GameManager gameManager;
     private PokerPlayer currPlayer;
     private List<PokerHandStep> replay=null;
@@ -238,7 +241,16 @@ public class GameInfoAndActionsController implements Initializable{
 
         businessLogic.updateGUIwithStep(step);
     }
-
+    public void updateBetSpinner(int min,int max)
+    {
+        SpinnerValueFactory<Integer> spinnerValueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(min,max);
+        betSpinner.setValueFactory(spinnerValueFactory);
+    }
+    public void updateRaiseSpinner(int min,int max)
+    {
+        SpinnerValueFactory<Integer> spinnerValueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(min,max);
+        raiseSpinner.setValueFactory(spinnerValueFactory);
+    }
     public void updateGameSettings()
     {
         gameSettings.setCollapsible(true);
