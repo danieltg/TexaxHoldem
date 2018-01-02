@@ -139,6 +139,34 @@ public class GameTableController implements Initializable {
     private SimpleIntegerProperty _betPlayer5;
     private SimpleIntegerProperty _betPlayer6;
 
+    @FXML
+    private ImageView player1Card1;
+    @FXML
+    private ImageView player1Card2;
+    @FXML
+    private ImageView player2Card1;
+    @FXML
+    private ImageView player2Card2;
+    @FXML
+    private ImageView player3Card1;
+    @FXML
+    private ImageView player3Card2;
+    @FXML
+    private ImageView player4Card1;
+    @FXML
+    private ImageView player4Card2;
+    @FXML
+    private ImageView player5Card1;
+    @FXML
+    private ImageView player5Card2;
+    @FXML
+    private ImageView player6Card1;
+    @FXML
+    private ImageView player6Card2;
+
+
+
+
     private SimpleIntegerProperty _pot;
 
     private GameManager gameManager;
