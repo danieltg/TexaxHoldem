@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import static Engine.Players.PlayerType.Computer;
@@ -91,6 +92,7 @@ public class MainScreenController implements Initializable {
 
     public void RunOneHand() {
 
+        clearAllCardsOnTable();
         gameManager.startNewHand();
         currHand = gameManager.getCurrHand();
         gameManager.resetPlayerState();
@@ -234,7 +236,8 @@ public class MainScreenController implements Initializable {
             String whatToDo=currPlayer.getSelection(options);
             System.out.println("Computer player is now playing and he wants to: "+whatToDo);
             currPlayer.setAction(whatToDo);
-            currPlayer.setAdditionalActionInfo(1);
+            int randomNum =  new Random().nextInt((currHand.getMaxBet()) + 1);
+            currPlayer.setAdditionalActionInfo(randomNum);
             currHand.bettingRoundForAPlayer();
             gameManager.addStepToHandReplay();
             updateGUIPotAndPlayerBetAndChips();
@@ -254,7 +257,7 @@ public class MainScreenController implements Initializable {
             }
             else
             {
-                enableHumanTurnButtons(currPlayer,options);
+                enableHumanTurnButtons(currPlayer,options,currHand.getMaxBet());
             }
         }
     }
@@ -277,8 +280,8 @@ public class MainScreenController implements Initializable {
         }
     }
 
-    private void enableHumanTurnButtons(PokerPlayer currPlayer, List<String> options) {
-        gameInfoAndActionsController.enableButtons(currPlayer,options);
+    private void enableHumanTurnButtons(PokerPlayer currPlayer, List<String> options, int maxBet) {
+        gameInfoAndActionsController.enableButtons(currPlayer,options,maxBet);
     }
 
     private void disableHumanTurnButtons() {
@@ -331,4 +334,13 @@ public class MainScreenController implements Initializable {
     }
 
 
+    public void updatePlayersCardsOnTableFromStep(int step) {
+        List<PokerPlayer> playersList=gameManager.getHandReplay().get(step).getPlayers();
+        gameTableController.updatePlayersCards(playersList);
+    }
+
+    public void clearAllCardsOnTable() {
+        gameTableController.clearPlayersCardsOnTable();
+        gameTableController.clearTableCards();
+    }
 }

@@ -125,13 +125,33 @@ public class GameInfoAndActionsController implements Initializable{
             secondCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
         });
         raiseButton.setDisable(true);
-        raiseButton.setOnAction(event -> businessLogic.updateUserSelection("R",1));
+        raiseButton.setOnAction(event -> {
+            int raiseTo= Integer.parseInt(raiseSpinner.getEditor().getText());
+            System.out.println("Raise to: "+raiseTo);
+            businessLogic.updateUserSelection("R",raiseTo);
+        });
+
+        raiseSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                raiseSpinner.increment(0); // won't change value, but will commit editor
+            }
+        });
+
+        betSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                betSpinner.increment(0); // won't change value, but will commit editor
+            }
+        });
 
         checkButton.setDisable(true);
         checkButton.setOnAction(event -> businessLogic.updateUserSelection("K",0));
 
         betButton.setDisable(true);
-        betButton.setOnAction(event -> businessLogic.updateUserSelection("B",10));
+        betButton.setOnAction(event -> {
+            int betTo= Integer.parseInt(betSpinner.getEditor().getText());
+            System.out.println("Bet to: "+betTo);
+            businessLogic.updateUserSelection("B",betTo);
+        });
 
         callButton.setDisable(true);
         callButton.setOnAction(event -> businessLogic.updateUserSelection("C",0));
@@ -208,6 +228,7 @@ public class GameInfoAndActionsController implements Initializable{
             runNextHandButton.setDisable(gameManager.getHandNumber()>=gameManager.getHandsCount());
 
             stopReplay.setDisable(true);
+            businessLogic.clearAllCardsOnTable();
 
             buyButton.setDisable(false);
             dropDownPlayers.setDisable(false);
@@ -279,7 +300,7 @@ public class GameInfoAndActionsController implements Initializable{
         this.gameManager = gameManager;
     }
 
-    public void enableButtons(PokerPlayer currPlayer, List<String> options) {
+    public void enableButtons(PokerPlayer currPlayer, List<String> options, int maxBet) {
 
         disableHumanButtons();
 
@@ -295,6 +316,8 @@ public class GameInfoAndActionsController implements Initializable{
         if (options.contains("R"))
         {
             raiseButton.setDisable(false);
+            raiseSpinner.setDisable(false);
+            updateRaiseSpinner(1,maxBet);
         }
 
         if (options.contains("C")) {
@@ -307,6 +330,8 @@ public class GameInfoAndActionsController implements Initializable{
 
         if (options.contains("B")) {
             betButton.setDisable(false);
+            betSpinner.setDisable(false);
+            updateBetSpinner(1,maxBet);
         }
 
         if (options.contains("F")) {
@@ -378,6 +403,9 @@ public class GameInfoAndActionsController implements Initializable{
         betButton.setDisable(true);
         callButton.setDisable(true);
         foldButton.setDisable(true);
+
+        betSpinner.setDisable(true);
+        raiseSpinner.setDisable(true);
 
         showCardsButton.setDisable(true);
         firstCardImage.setVisible(false);

@@ -48,6 +48,7 @@ public class BusinessLogic {
         controller.updatePlayersOnTable(step);
         controller.updatePotFromStep(step);
         controller.updateStepLabel(step);
+        controller.updatePlayersCardsOnTableFromStep(step);
     }
 
 
@@ -63,5 +64,10 @@ public class BusinessLogic {
     public void updateUserSelection(String action, int info) {
 
         controller.updateCurrPlayerWithSelection(action,info);
+    }
+
+    public void clearAllCardsOnTable()
+    {
+        controller.clearAllCardsOnTable();
     }
 }

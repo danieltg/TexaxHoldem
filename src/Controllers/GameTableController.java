@@ -257,7 +257,16 @@ public class GameTableController implements Initializable {
         businessLogic = b;
     }
 
-    public void updatePlayersOnTable(List<PokerPlayer> playerList) {
+    public void clearTableCards()
+    {
+        tCard1.setImage(new Image(BASE_PACKAGE+"back.png"));
+        tCard2.setImage(new Image(BASE_PACKAGE+"back.png"));
+        tCard3.setImage(new Image(BASE_PACKAGE+"back.png"));
+        tCard4.setImage(new Image(BASE_PACKAGE+"back.png"));
+        tCard5.setImage(new Image(BASE_PACKAGE+"back.png"));
+    }
+    public void clearPlayersCardsOnTable()
+    {
         player1Card1.setImage(new Image(BASE_PACKAGE+"back.png"));
         player1Card2.setImage(new Image(BASE_PACKAGE+"back.png"));
 
@@ -275,6 +284,11 @@ public class GameTableController implements Initializable {
 
         player6Card1.setImage(new Image(BASE_PACKAGE+"back.png"));
         player6Card2.setImage(new Image(BASE_PACKAGE+"back.png"));
+    }
+
+    public void updatePlayersOnTable(List<PokerPlayer> playerList) {
+
+        clearPlayersCardsOnTable();
         clearTable();
         int numberOfPlayer = playerList.size();
 
@@ -533,6 +547,79 @@ public class GameTableController implements Initializable {
                 currPlayerLabel.textProperty().setValue(p.getName()+" (" +p.getId()+")");
             }
             i++;
+        }
+    }
+
+    public void updatePlayersCards(List<PokerPlayer> playersList) {
+
+        int size=playersList.size();
+        switch (size)
+        {
+            case 3:
+            {
+                player1Card1.setImage(new Image(BASE_PACKAGE+playersList.get(0).getCardsAsStringArray()[0]+".png"));
+                player1Card2.setImage(new Image(BASE_PACKAGE+playersList.get(0).getCardsAsStringArray()[1]+".png"));
+
+                player3Card1.setImage(new Image(BASE_PACKAGE+playersList.get(1).getCardsAsStringArray()[0]+".png"));
+                player3Card2.setImage(new Image(BASE_PACKAGE+playersList.get(1).getCardsAsStringArray()[1]+".png"));
+
+                player5Card1.setImage(new Image(BASE_PACKAGE+playersList.get(2).getCardsAsStringArray()[0]+".png"));
+                player5Card2.setImage(new Image(BASE_PACKAGE+playersList.get(2).getCardsAsStringArray()[1]+".png"));
+                break;
+            }
+            case 4:
+            {
+                player2Card1.setImage(new Image(BASE_PACKAGE+playersList.get(0).getCardsAsStringArray()[0]+".png"));
+                player2Card2.setImage(new Image(BASE_PACKAGE+playersList.get(0).getCardsAsStringArray()[1]+".png"));
+
+                player3Card1.setImage(new Image(BASE_PACKAGE+playersList.get(1).getCardsAsStringArray()[0]+".png"));
+                player3Card2.setImage(new Image(BASE_PACKAGE+playersList.get(1).getCardsAsStringArray()[1]+".png"));
+
+                player5Card1.setImage(new Image(BASE_PACKAGE+playersList.get(2).getCardsAsStringArray()[0]+".png"));
+                player5Card2.setImage(new Image(BASE_PACKAGE+playersList.get(2).getCardsAsStringArray()[1]+".png"));
+
+                player6Card1.setImage(new Image(BASE_PACKAGE+playersList.get(3).getCardsAsStringArray()[0]+".png"));
+                player6Card2.setImage(new Image(BASE_PACKAGE+playersList.get(3).getCardsAsStringArray()[1]+".png"));
+                break;
+            }
+            case 5:
+            {
+                player1Card1.setImage(new Image(BASE_PACKAGE+playersList.get(0).getCardsAsStringArray()[0]+".png"));
+                player1Card2.setImage(new Image(BASE_PACKAGE+playersList.get(0).getCardsAsStringArray()[1]+".png"));
+
+                player2Card1.setImage(new Image(BASE_PACKAGE+playersList.get(1).getCardsAsStringArray()[0]+".png"));
+                player2Card2.setImage(new Image(BASE_PACKAGE+playersList.get(1).getCardsAsStringArray()[1]+".png"));
+
+                player3Card1.setImage(new Image(BASE_PACKAGE+playersList.get(2).getCardsAsStringArray()[0]+".png"));
+                player3Card2.setImage(new Image(BASE_PACKAGE+playersList.get(2).getCardsAsStringArray()[1]+".png"));
+
+                player5Card1.setImage(new Image(BASE_PACKAGE+playersList.get(3).getCardsAsStringArray()[0]+".png"));
+                player5Card2.setImage(new Image(BASE_PACKAGE+playersList.get(3).getCardsAsStringArray()[1]+".png"));
+
+                player6Card1.setImage(new Image(BASE_PACKAGE+playersList.get(4).getCardsAsStringArray()[0]+".png"));
+                player6Card2.setImage(new Image(BASE_PACKAGE+playersList.get(4).getCardsAsStringArray()[1]+".png"));
+                break;
+            }
+            default:
+            {
+                player1Card1.setImage(new Image(BASE_PACKAGE+playersList.get(0).getCardsAsStringArray()[0]+".png"));
+                player1Card2.setImage(new Image(BASE_PACKAGE+playersList.get(0).getCardsAsStringArray()[1]+".png"));
+
+                player2Card1.setImage(new Image(BASE_PACKAGE+playersList.get(1).getCardsAsStringArray()[0]+".png"));
+                player2Card2.setImage(new Image(BASE_PACKAGE+playersList.get(1).getCardsAsStringArray()[1]+".png"));
+
+                player3Card1.setImage(new Image(BASE_PACKAGE+playersList.get(2).getCardsAsStringArray()[0]+".png"));
+                player3Card2.setImage(new Image(BASE_PACKAGE+playersList.get(2).getCardsAsStringArray()[1]+".png"));
+
+                player4Card1.setImage(new Image(BASE_PACKAGE+playersList.get(3).getCardsAsStringArray()[0]+".png"));
+                player4Card2.setImage(new Image(BASE_PACKAGE+playersList.get(3).getCardsAsStringArray()[1]+".png"));
+
+                player5Card1.setImage(new Image(BASE_PACKAGE+playersList.get(4).getCardsAsStringArray()[0]+".png"));
+                player5Card2.setImage(new Image(BASE_PACKAGE+playersList.get(4).getCardsAsStringArray()[1]+".png"));
+
+                player6Card1.setImage(new Image(BASE_PACKAGE+playersList.get(5).getCardsAsStringArray()[0]+".png"));
+                player6Card2.setImage(new Image(BASE_PACKAGE+playersList.get(5).getCardsAsStringArray()[1]+".png"));
+            }
         }
     }
 }

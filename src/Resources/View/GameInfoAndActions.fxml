@@ -191,8 +191,8 @@
                            <children>
                               <AnchorPane prefHeight="276.0" prefWidth="168.0" GridPane.columnIndex="0">
                                  <children>
-                                    <Spinner fx:id="RaiseSpinner" layoutX="14.0" layoutY="49.0" prefHeight="39.0" prefWidth="117.0" />
-                                    <Spinner fx:id="betSpinner" layoutX="13.0" prefHeight="39.0" prefWidth="119.0" />
+                                    <Spinner fx:id="raiseSpinner" editable="true" layoutX="14.0" layoutY="49.0" prefHeight="39.0" prefWidth="117.0" />
+                                    <Spinner fx:id="betSpinner" editable="true" layoutX="13.0" prefHeight="39.0" prefWidth="119.0" />
                                  </children>
                               </AnchorPane>
                               <VBox prefHeight="276.0" prefWidth="105.0" spacing="10.0" GridPane.columnIndex="1">
