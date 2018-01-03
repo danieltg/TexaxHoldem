@@ -78,4 +78,9 @@ public class BusinessLogic {
     public void changeToStyle2() {
         controller.setStyle2();
     }
+
+    public void basicStyle()
+    {
+        controller.removeStyle();
+    }
 }

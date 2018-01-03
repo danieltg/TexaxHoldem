@@ -349,10 +349,17 @@ public class MainScreenController implements Initializable {
     }
 
     public void setStyle1() {
+        primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add(MainScreenController.class.getResource("Style1.css").toExternalForm());
     }
 
     public void setStyle2() {
+        primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add(MainScreenController.class.getResource("Style2.css").toExternalForm());
+    }
+
+    public void removeStyle()
+    {
+        primaryStage.getScene().getStylesheets().clear();
     }
 }

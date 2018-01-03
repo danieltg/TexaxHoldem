@@ -61,7 +61,7 @@ public class MainMenuController implements Initializable{
         // Use Java Collections to create the List.
         List<String> list = new ArrayList<String>();
         ObservableList<String> observableList = FXCollections.observableList(list);
-        observableList.addAll("Style1","Style2");
+        observableList.addAll("Style1","Style2","Basic");
         styleComboBox.setItems(observableList);
     }
 
@@ -132,5 +132,7 @@ public class MainMenuController implements Initializable{
         {
             businessLogic.changeToStyle2();
         }
+        else
+            businessLogic.basicStyle();
     }
 }
