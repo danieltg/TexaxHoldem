@@ -237,10 +237,11 @@ public class MainScreenController implements Initializable {
         if (currPlayer.getType() == Computer) {
 
             String whatToDo=currPlayer.getSelection(options);
-            System.out.println("Computer player is now playing and he wants to: "+whatToDo);
             currPlayer.setAction(whatToDo);
             int randomNum =  new Random().nextInt((currHand.getMaxBet()) + 1);
             currPlayer.setAdditionalActionInfo(randomNum);
+            System.out.println("Computer player ("+currPlayer.getName()+
+                    "is now playing and he wants to: "+whatToDo +" ("+randomNum+")");
             currHand.bettingRoundForAPlayer();
             gameManager.addStepToHandReplay();
             updateGUIPotAndPlayerBetAndChips();

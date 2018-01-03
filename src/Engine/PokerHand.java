@@ -448,7 +448,7 @@ public class PokerHand {
         switch (state) {
             case GameInit:
             {
-                if (nextToPlay==lastRaise) {
+                if (nextToPlay==lastRaise || getMaxBet()==0) {
                     System.out.println("We finished the first betting round");
                     state=TheFlop;
                 }
@@ -462,7 +462,7 @@ public class PokerHand {
             }
             case bettingAfterFlop:
             {
-                if (nextToPlay==lastRaise) {
+                if (nextToPlay==lastRaise || getMaxBet()==0) {
                     System.out.println("We finished the second betting round");
                     state=TheTurn;
                 }
@@ -475,7 +475,7 @@ public class PokerHand {
             }
             case bettingAfterTurn:
             {
-                if (nextToPlay==lastRaise ) {
+                if (nextToPlay==lastRaise || getMaxBet()==0) {
                     System.out.println("We finished the third betting round");
                     state=TheRiver;
                 }
@@ -489,7 +489,7 @@ public class PokerHand {
 
             case bettingAfterRiver:
             {
-                if (nextToPlay==lastRaise) {
+                if (nextToPlay==lastRaise || getMaxBet()==0) {
                     System.out.println("We finished the game!!!");
                     state=END;
                 }
@@ -622,12 +622,10 @@ public class PokerHand {
 
     public void incCurrPlayer()
     {
-        int i=0;
         nextToPlay.clearSelection();
         lastPlayerToPlay=nextToPlay.getId();
-        boolean found=false;
 
-        for (i=0; i<numberOfPlayers; i++)
+        for (int i=0; i<numberOfPlayers; i++)
         {
             if (players.get(i)==nextToPlay)
             {
