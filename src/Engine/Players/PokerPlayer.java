@@ -29,7 +29,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     private String style="-fx-background-color: #CCAA99;";
     private String action;
     private int actionInfo;
-
+    private int equity;
 
     public PokerPlayer(int playerID){
 
@@ -285,4 +285,14 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     }
 
     abstract public String getSelection(List<String> options);
+
+    public int getEquity()
+    {
+        return equity;
+    }
+
+    public void setEquity(int newEquity)
+    {
+        this.equity=newEquity;
+    }
 }

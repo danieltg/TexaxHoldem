@@ -110,6 +110,7 @@ public class MainScreenController implements Initializable {
         gameManager.clearValuesFromCurrHand();
 
         currHand.betSmall();
+        currHand.updatePlayersWithEquity();
         gameManager.addStepToHandReplay();
         gameManager.clearValuesFromCurrHand();
 
@@ -117,6 +118,7 @@ public class MainScreenController implements Initializable {
         updateGUIPotAndPlayerBetAndChips();
 
         currHand.betBig();
+        currHand.updatePlayersWithEquity();
         gameManager.addStepToHandReplay();
         gameManager.clearValuesFromCurrHand();
 
@@ -127,7 +129,6 @@ public class MainScreenController implements Initializable {
 
         playBettingRounds();
 
-        gameManager.saveHandReplayToFile("handReplay.txt");
     }
 
 
@@ -199,6 +200,7 @@ public class MainScreenController implements Initializable {
 
                 updateHandReplayWithTheWinners(message);
                 updateHandCount();
+                gameManager.saveHandReplayToFile("handReplay.txt");
                 break;
             }
         }
@@ -310,8 +312,10 @@ public class MainScreenController implements Initializable {
     }
 
     public void updatePlayersOnTable(int step) {
+        gameTableController.clearPlayersEquity();
         List<PokerPlayer> listOfPlayers=gameManager.getHandReplay().get(step).getPlayers();
         gameTableController.updatePlayersOnTable(listOfPlayers);
+        gameTableController.updatePlayersEquity(listOfPlayers);
     }
 
     public void updatePotFromStep(int step) {

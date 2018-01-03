@@ -529,9 +529,70 @@ public class PokerHand {
         addToPot(currPlayer.getBet());
         currPlayer.collectBet();
         updateMaxBet();
+        updatePlayersWithEquity();
 
         incCurrPlayer();
         afterPlayerAction();
+    }
+
+
+    private void clearPlayersEquity()
+    {
+        for (PokerPlayer p: players)
+        {
+            p.setEquity(0);
+        }
+    }
+    public void updatePlayersWithEquity() {
+
+        try {
+            clearPlayersEquity();
+
+            EquityCalculator calculator = new EquityCalculator();
+            calculator.reset();
+
+            for (PokerPlayer p: players)
+            {
+                if (!p.isFolded())
+                {
+                    String playerCards = (p.getHoleCards()).replaceAll("\\s+", "");
+                    calculator.addHand(Hand.fromString(playerCards));
+                }
+            }
+
+            StringBuilder tableCardsStr = new StringBuilder("");
+
+            for (Card c : tableCards) {
+                if (c.getSuit() != Suit.NA && c.getRank() != Rank.NA)
+                {
+                    tableCardsStr.append(c.toString());
+                }
+            }
+
+            if (!tableCardsStr.toString().equals(""))
+            {
+                calculator.setBoardFromString(String.valueOf(tableCardsStr));
+            }
+
+            calculator.calculate();
+
+            int i=0;
+
+            for (PokerPlayer p: players)
+            {
+                if (!p.isFolded())
+                {
+                    p.setEquity(calculator.getHandEquity(i).getEquity());
+                    i++;
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Failed to get players equity...");
+            e.printStackTrace();
+        }
     }
 
 

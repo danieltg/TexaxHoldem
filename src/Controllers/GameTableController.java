@@ -24,6 +24,13 @@ import static Engine.Utils.EngineUtils.BASE_PACKAGE;
 
 public class GameTableController implements Initializable {
 
+    @FXML private Label equity5;
+    @FXML private Label equity4;
+    @FXML private Label equity3;
+    @FXML private Label equity2;
+    @FXML private Label equity6;
+    @FXML private Label equity1;
+
     @FXML
     private Label currPlayerLabel;
     @FXML
@@ -211,7 +218,7 @@ public class GameTableController implements Initializable {
 
         potLabel.textProperty().bind(_pot.asString());
 
-
+        clearPlayersEquity();
 
         seat1_data.setVisible(false);
         seat2_data.setVisible(false);
@@ -619,6 +626,115 @@ public class GameTableController implements Initializable {
 
                 player6Card1.setImage(new Image(BASE_PACKAGE+playersList.get(5).getCardsAsStringArray()[0]+".png"));
                 player6Card2.setImage(new Image(BASE_PACKAGE+playersList.get(5).getCardsAsStringArray()[1]+".png"));
+            }
+        }
+    }
+
+
+    public void clearPlayersEquity()
+    {
+        equity6.setVisible(false);
+        equity5.setVisible(false);
+        equity4.setVisible(false);
+        equity3.setVisible(false);
+        equity2.setVisible(false);
+        equity1.setVisible(false);
+
+        equity6.setText("");
+        equity5.setText("");
+        equity4.setText("");
+        equity3.setText("");
+        equity2.setText("");
+        equity1.setText("");
+    }
+    public void updatePlayersEquity(List<PokerPlayer> listOfPlayers) {
+
+        int size=listOfPlayers.size();
+        switch (size) {
+            case 3: {
+                equity1.setVisible(true);
+                if (listOfPlayers.get(0).getEquity()>0)
+                    equity1.setText("Equity: "+listOfPlayers.get(0).getEquity()+"%");
+
+                equity3.setVisible(true);
+                if (listOfPlayers.get(1).getEquity()>0)
+                    equity3.setText("Equity: "+listOfPlayers.get(1).getEquity()+"%");
+
+                equity5.setVisible(true);
+                if (listOfPlayers.get(2).getEquity()>0)
+                    equity5.setText("Equity: "+listOfPlayers.get(2).getEquity()+"%");
+
+                break;
+            }
+            case 4: {
+
+                equity2.setVisible(true);
+                if (listOfPlayers.get(0).getEquity()>0)
+                    equity2.setText("Equity: "+listOfPlayers.get(0).getEquity()+"%");
+
+                equity3.setVisible(true);
+                if (listOfPlayers.get(1).getEquity()>0)
+                    equity3.setText("Equity: "+listOfPlayers.get(1).getEquity()+"%");
+
+                equity5.setVisible(true);
+                if (listOfPlayers.get(2).getEquity()>0)
+                    equity5.setText("Equity: "+listOfPlayers.get(2).getEquity()+"%");
+
+                equity6.setVisible(true);
+                if (listOfPlayers.get(3).getEquity()>0)
+                    equity6.setText("Equity: "+listOfPlayers.get(3).getEquity()+"%");
+
+                break;
+            }
+            case 5: {
+                equity1.setVisible(true);
+                if (listOfPlayers.get(0).getEquity()>0)
+                    equity1.setText("Equity: "+listOfPlayers.get(0).getEquity()+"%");
+
+                equity2.setVisible(true);
+                if (listOfPlayers.get(1).getEquity()>0)
+                    equity2.setText("Equity: "+listOfPlayers.get(1).getEquity()+"%");
+
+                equity3.setVisible(true);
+                if (listOfPlayers.get(2).getEquity()>0)
+                    equity3.setText("Equity: "+listOfPlayers.get(2).getEquity()+"%");
+
+                equity5.setVisible(true);
+                if (listOfPlayers.get(3).getEquity()>0)
+                    equity5.setText("Equity: "+listOfPlayers.get(3).getEquity()+"%");
+
+                equity6.setVisible(true);
+                if (listOfPlayers.get(4).getEquity()>0)
+                    equity6.setText("Equity: "+listOfPlayers.get(4).getEquity()+"%");
+
+
+                break;
+            }
+            default: {
+                equity1.setVisible(true);
+                if (listOfPlayers.get(0).getEquity()>0)
+                    equity1.setText("Equity: "+listOfPlayers.get(0).getEquity()+"%");
+
+                equity2.setVisible(true);
+                if (listOfPlayers.get(1).getEquity()>0)
+                    equity2.setText("Equity: "+listOfPlayers.get(1).getEquity()+"%");
+
+                equity3.setVisible(true);
+                if (listOfPlayers.get(2).getEquity()>0)
+                    equity3.setText("Equity: "+listOfPlayers.get(2).getEquity()+"%");
+
+                equity4.setVisible(true);
+                if (listOfPlayers.get(3).getEquity()>0)
+                    equity4.setText("Equity: "+listOfPlayers.get(3).getEquity()+"%");
+
+                equity5.setVisible(true);
+                if (listOfPlayers.get(4).getEquity()>0)
+                    equity5.setText("Equity: "+listOfPlayers.get(4).getEquity()+"%");
+
+                equity6.setVisible(true);
+                if (listOfPlayers.get(5).getEquity()>0)
+                    equity6.setText("Equity: "+listOfPlayers.get(5).getEquity()+"%");
+
             }
         }
     }

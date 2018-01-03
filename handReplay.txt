@@ -1,9 +1,9 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Or, 123> : 3S KS
-Player <Elad, 234> : 4D QD
-Player <Daniel, 456> : JH 9D
+Player <Or, 123> : 9C 3C
+Player <Elad, 234> : QS KC
+Player <Daniel, 456> : JS QH
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
@@ -11,9 +11,10 @@ Action: PLAYER_CARDS
 Active player ID: 456
 Player name: Daniel
 Player type: Human
-Player cards: JH 9D
+Player cards: JS QH
 Player chips: 45
 Player bet: 5
+Player equity: 24
 Pot: 5
 Current Bet: 0
 Action: B
@@ -22,10 +23,151 @@ Additional Action Information: 5
 Active player ID: 123
 Player name: Or
 Player type: Computer
-Player cards: 3S KS
+Player cards: 9C 3C
 Player chips: 40
 Player bet: 10
+Player equity: 31
 Pot: 15
 Current Bet: 0
 Action: R
 Additional Action Information: 10
+************************************************************************************************
+Active player ID: 234
+Player name: Elad
+Player type: Human
+Player cards: QS KC
+Player chips: 49
+Player bet: 1
+Player equity: 46
+Pot: 16
+Current Bet: 1
+Action: R
+Additional Action Information: 1
+************************************************************************************************
+Active player ID: 456
+Player name: Daniel
+Player type: Human
+Player cards: JS QH
+Player chips: 49
+Player bet: 1
+Player equity: 24
+Pot: 12
+Current Bet: 1
+Action: C
+************************************************************************************************
+Active player ID: 123
+Player name: Or
+Player type: Computer
+Player cards: 9C 3C
+Player chips: 49
+Player bet: 1
+Player equity: 31
+Pot: 3
+Current Bet: 1
+Action: C
+************************************************************************************************
+The step is not related to any player
+Cards: TS,9D,AH,??,??
+Pot: 3
+Current Bet: 1
+Action: CARD
+************************************************************************************************
+Active player ID: 234
+Player name: Elad
+Player type: Human
+Player cards: QS KC
+Player chips: 49
+Player bet: 0
+Player equity: 21
+Pot: 3
+Current Bet: 1
+Action: K
+************************************************************************************************
+Active player ID: 456
+Player name: Daniel
+Player type: Human
+Player cards: JS QH
+Player chips: 49
+Player bet: 0
+Player equity: 30
+Pot: 3
+Current Bet: 1
+Action: K
+************************************************************************************************
+Active player ID: 123
+Player name: Or
+Player type: Computer
+Player cards: 9C 3C
+Player chips: 49
+Player bet: 0
+Player equity: 0
+Pot: 3
+Current Bet: 1
+Action: F
+************************************************************************************************
+The step is not related to any player
+Cards: TS,9D,AH,6C,??
+Pot: 3
+Current Bet: 1
+Action: CARD
+************************************************************************************************
+Active player ID: 234
+Player name: Elad
+Player type: Human
+Player cards: QS KC
+Player chips: 48
+Player bet: 1
+Player equity: 84
+Pot: 4
+Current Bet: 1
+Action: B
+Additional Action Information: 1
+************************************************************************************************
+Active player ID: 456
+Player name: Daniel
+Player type: Human
+Player cards: JS QH
+Player chips: 48
+Player bet: 1
+Player equity: 16
+Pot: 5
+Current Bet: 1
+Action: C
+************************************************************************************************
+The step is not related to any player
+Cards: TS,9D,AH,6C,8H
+Pot: 5
+Current Bet: 1
+Action: CARD
+************************************************************************************************
+Active player ID: 234
+Player name: Elad
+Player type: Human
+Player cards: QS KC
+Player chips: 47
+Player bet: 1
+Player equity: 0
+Pot: 6
+Current Bet: 1
+Action: B
+Additional Action Information: 1
+************************************************************************************************
+Active player ID: 456
+Player name: Daniel
+Player type: Human
+Player cards: JS QH
+Player chips: 48
+Player bet: 1
+Player equity: 100
+Pot: 6
+Current Bet: 1
+Action: C
+************************************************************************************************
+The step is not related to any player
+Cards: TS,9D,AH,6C,8H
+Pot: 6
+Current Bet: 1
+Action: Daniel (456) won with this hand: Straight (Q,J,T,9,8).
+Prize: 6$
+
+
