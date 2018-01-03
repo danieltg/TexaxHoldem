@@ -17,7 +17,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static javafx.application.Platform.exit;
 import static javafx.beans.binding.Bindings.not;
 
 public class GameInfoAndActionsController implements Initializable{
@@ -60,7 +59,6 @@ public class GameInfoAndActionsController implements Initializable{
     @FXML private Spinner raiseSpinner;
 
     @FXML private Label maxBetMsgLabel;
-    @FXML private Label maxBetNumLabel;
 
     private GameManager gameManager;
     private PokerPlayer currPlayer;
@@ -107,7 +105,6 @@ public class GameInfoAndActionsController implements Initializable{
             }
         });
 
-        maxBetNumLabel.setVisible(false);
         maxBetMsgLabel.setVisible(false);
         dropDownPlayers.getSelectionModel().selectedIndexProperty().addListener((ChangeListener) (observable, oldValue, newValue) -> {
             System.out.println("New Selected Option: " +newValue.toString());
@@ -322,11 +319,9 @@ public class GameInfoAndActionsController implements Initializable{
         {
             raiseButton.setDisable(false);
             raiseSpinner.setDisable(false);
-            maxBetNumLabel.setVisible(true);
             maxBetMsgLabel.setVisible(true);
             updateRaiseSpinner(1,maxBet);
-            maxBetMsgLabel.setText("The max raise is:");
-            maxBetNumLabel.setText(String.valueOf(maxBet));
+            maxBetMsgLabel.setText("The max raise is: "+String.valueOf(maxBet));
         }
 
         if (options.contains("C")) {
@@ -340,11 +335,9 @@ public class GameInfoAndActionsController implements Initializable{
         if (options.contains("B")) {
             betButton.setDisable(false);
             betSpinner.setDisable(false);
-            maxBetNumLabel.setVisible(true);
             maxBetMsgLabel.setVisible(true);
             updateBetSpinner(1,maxBet);
-            maxBetMsgLabel.setText("The max bet is:");
-            maxBetNumLabel.setText(String.valueOf(maxBet));
+            maxBetMsgLabel.setText("The max bet is: "+String.valueOf(maxBet));
         }
 
         if (options.contains("F")) {
@@ -430,14 +423,11 @@ public class GameInfoAndActionsController implements Initializable{
     }
 
     public void betClicked(ActionEvent actionEvent) {
-
-        maxBetNumLabel.setVisible(false);
         maxBetMsgLabel.setVisible(false);
 
     }
 
     public void raiseClicked(ActionEvent actionEvent) {
-        maxBetNumLabel.setVisible(false);
         maxBetMsgLabel.setVisible(false);
     }
 }
