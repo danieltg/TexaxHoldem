@@ -241,7 +241,7 @@ public class MainScreenController implements Initializable {
             int randomNum =  new Random().nextInt((currHand.getMaxBet()) + 1);
             currPlayer.setAdditionalActionInfo(randomNum);
             System.out.println("Computer player ("+currPlayer.getName()+
-                    "is now playing and he wants to: "+whatToDo +" ("+randomNum+")");
+                    ") is now playing and he wants to: "+whatToDo +" ("+randomNum+")");
             currHand.bettingRoundForAPlayer();
             gameManager.addStepToHandReplay();
             updateGUIPotAndPlayerBetAndChips();

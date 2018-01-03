@@ -1,42 +1,31 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Mushon, 1> : 7C AS
-Player <Avrum, 2> : 4H 6H
-Player <Nachtze, 3> : 4C JS
-Player <Daniel, 4> : KC TC
+Player <Or, 123> : 3S KS
+Player <Elad, 234> : 4D QD
+Player <Daniel, 456> : JH 9D
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: 4C JS
-Player chips: 98
-Player bet: 2
-Pot: 2
+Active player ID: 456
+Player name: Daniel
+Player type: Human
+Player cards: JH 9D
+Player chips: 45
+Player bet: 5
+Pot: 5
 Current Bet: 0
 Action: B
-Additional Action Information: 2
+Additional Action Information: 5
 ************************************************************************************************
-Active player ID: 4
-Player name: Daniel
+Active player ID: 123
+Player name: Or
 Player type: Computer
-Player cards: KC TC
-Player chips: 96
-Player bet: 4
-Pot: 6
+Player cards: 3S KS
+Player chips: 40
+Player bet: 10
+Pot: 15
 Current Bet: 0
 Action: R
-Additional Action Information: 4
-************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: 7C AS
-Player chips: 100
-Player bet: 0
-Pot: 6
-Current Bet: 0
-Action: F
+Additional Action Information: 10

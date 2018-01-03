@@ -134,12 +134,30 @@ public class GameInfoAndActionsController implements Initializable{
         });
 
         raiseSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+            try{
+                Integer.parseInt(raiseSpinner.getEditor().getText());
+            }
+            catch (Exception e)
+            {
+                raiseSpinner.getEditor().setText("1");
+            }
+
             if (!newValue) {
                 raiseSpinner.increment(0); // won't change value, but will commit editor
             }
         });
 
         betSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+            try{
+                Integer.parseInt(betSpinner.getEditor().getText());
+            }
+            catch (Exception e)
+            {
+                betSpinner.getEditor().setText("1");
+            }
+
             if (!newValue) {
                 betSpinner.increment(0); // won't change value, but will commit editor
             }
