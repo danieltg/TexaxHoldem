@@ -425,14 +425,23 @@ public class PokerHand {
 
 
 
+    public boolean doWeHaveMoreThanTwoActivePlayersInTheGame()
+    {
+        int count=0;
+
+        for (PokerPlayer p: players)
+        {
+            if (p.isFolded()==false)
+                count++;
+        }
+
+        return (count>1);
+    }
 
     /**
      * To be called at the betting rounds, after the player has performed an
      * action.
      */
-
-
-
 
     public void afterPlayerAction() {
 
@@ -443,6 +452,11 @@ public class PokerHand {
                     System.out.println("We finished the first betting round");
                     state=TheFlop;
                 }
+                else if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
+                {
+                    System.out.println("We have only one player in the game...");
+                    state=END;
+                }
                 break;
 
             }
@@ -452,13 +466,23 @@ public class PokerHand {
                     System.out.println("We finished the second betting round");
                     state=TheTurn;
                 }
+                else if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
+                {
+                    System.out.println("We have only one player in the game...");
+                    state=END;
+                }
                 break;
             }
             case bettingAfterTurn:
             {
-                if (nextToPlay==lastRaise) {
+                if (nextToPlay==lastRaise ) {
                     System.out.println("We finished the third betting round");
                     state=TheRiver;
+                }
+                else if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
+                {
+                    System.out.println("We have only one player in the game...");
+                    state=END;
                 }
                 break;
             }
@@ -467,6 +491,11 @@ public class PokerHand {
             {
                 if (nextToPlay==lastRaise) {
                     System.out.println("We finished the game!!!");
+                    state=END;
+                }
+                else if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
+                {
+                    System.out.println("We have only one player in the game...");
                     state=END;
                 }
                 break;
@@ -621,16 +650,28 @@ public class PokerHand {
 
         String message="";
         List<Winner> winners= null;
-        try {
-            winners = evaluateRound();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        if (playersLeft() == 1) {
+            int index = whoIsInTheGame();
+            String cards = players.get(index).getHoleCards();
+            message=message+ players.get(index).getName() + " ("+players.get(index).getId()+")"+
+                    " won with this hand: "+cards +".\n"+
+                    "Prize: "+(getPot()) +"$\n\n";
         }
 
-        for (Winner w: winners) {
+        else
+        {
+            try {
+                winners = evaluateRound();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            for (Winner w: winners) {
             message=message+ w.getPlayer().getName() + " ("+w.getPlayer().getId()+")"+
                     " won with this hand: "+w.getHandRank() +".\n"+
                     "Prize: "+(getPot()/winners.size()) +"$\n\n";
+             }
         }
 
         return message;

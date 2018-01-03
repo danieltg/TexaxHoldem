@@ -1,31 +1,41 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Or, 123> : 5S 3C
-Player <Elad, 234> : 2D QS
-Player <Daniel, 456> : 5H 5C
+Player <Or, 123> : 9H 7D
+Player <Elad, 234> : 8H QH
+Player <Daniel, 456> : 5C KC
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 123
-Player name: Or
-Player type: Computer
-Player cards: 5S 3C
-Player chips: 45
+Active player ID: 234
+Player name: Elad
+Player type: Human
+Player cards: 8H QH
+Player chips: 40
 Player bet: 5
 Pot: 5
 Current Bet: 0
 Action: B
 Additional Action Information: 5
 ************************************************************************************************
-Active player ID: 234
-Player name: Elad
+Active player ID: 456
+Player name: Daniel
 Player type: Human
-Player cards: 2D QS
-Player chips: 40
+Player cards: 5C KC
+Player chips: 30
 Player bet: 10
 Pot: 15
 Current Bet: 0
 Action: R
 Additional Action Information: 10
+************************************************************************************************
+Active player ID: 123
+Player name: Or
+Player type: Computer
+Player cards: 9H 7D
+Player chips: 50
+Player bet: 0
+Pot: 15
+Current Bet: 0
+Action: F
