@@ -59,6 +59,9 @@ public class GameInfoAndActionsController implements Initializable{
     @FXML private Spinner betSpinner;
     @FXML private Spinner raiseSpinner;
 
+    @FXML private Label maxBetMsgLabel;
+    @FXML private Label maxBetNumLabel;
+
     private GameManager gameManager;
     private PokerPlayer currPlayer;
     private List<PokerHandStep> replay=null;
@@ -104,6 +107,8 @@ public class GameInfoAndActionsController implements Initializable{
             }
         });
 
+        maxBetNumLabel.setVisible(false);
+        maxBetMsgLabel.setVisible(false);
         dropDownPlayers.getSelectionModel().selectedIndexProperty().addListener((ChangeListener) (observable, oldValue, newValue) -> {
             System.out.println("New Selected Option: " +newValue.toString());
             selectedPlayer= Integer.parseInt(newValue.toString());
@@ -317,7 +322,11 @@ public class GameInfoAndActionsController implements Initializable{
         {
             raiseButton.setDisable(false);
             raiseSpinner.setDisable(false);
+            maxBetNumLabel.setVisible(true);
+            maxBetMsgLabel.setVisible(true);
             updateRaiseSpinner(1,maxBet);
+            maxBetMsgLabel.setText("The max raise is:");
+            maxBetNumLabel.setText(String.valueOf(maxBet));
         }
 
         if (options.contains("C")) {
@@ -331,7 +340,11 @@ public class GameInfoAndActionsController implements Initializable{
         if (options.contains("B")) {
             betButton.setDisable(false);
             betSpinner.setDisable(false);
+            maxBetNumLabel.setVisible(true);
+            maxBetMsgLabel.setVisible(true);
             updateBetSpinner(1,maxBet);
+            maxBetMsgLabel.setText("The max bet is:");
+            maxBetNumLabel.setText(String.valueOf(maxBet));
         }
 
         if (options.contains("F")) {
@@ -414,5 +427,17 @@ public class GameInfoAndActionsController implements Initializable{
 
     public void enableRunNextHandButton() {
         runNextHandButton.setDisable(gameManager.getHandNumber()>=gameManager.getHandsCount());
+    }
+
+    public void betClicked(ActionEvent actionEvent) {
+
+        maxBetNumLabel.setVisible(false);
+        maxBetMsgLabel.setVisible(false);
+
+    }
+
+    public void raiseClicked(ActionEvent actionEvent) {
+        maxBetNumLabel.setVisible(false);
+        maxBetMsgLabel.setVisible(false);
     }
 }

@@ -2,17 +2,14 @@ package Controllers;
 
 import Engine.GameManager;
 import Engine.HandState;
-import Engine.Players.PlayerType;
 import Engine.Players.PokerPlayer;
 import Engine.PokerHand;
-import Engine.Winner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -22,9 +19,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import static Engine.Players.PlayerType.Computer;
-import static Engine.Players.PlayerType.Human;
 
 public class MainScreenController implements Initializable {
+    private  Scene mainScene;
     @FXML
     private GameTableController gameTableController;
     @FXML
@@ -37,11 +34,17 @@ public class MainScreenController implements Initializable {
 
     private final GameManager gameManager = new GameManager();
     private Stage primaryStage;
+
     private BusinessLogic businessLogic;
     private PokerHand currHand;
 
+    public void setScene(Scene scene) {
+        mainScene = scene;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         mainMenuController.setGameManager(gameManager);
         gameInfoAndActionsController.setGameManager(gameManager);
         gameTableController.setGameManager(gameManager);
@@ -342,5 +345,13 @@ public class MainScreenController implements Initializable {
     public void clearAllCardsOnTable() {
         gameTableController.clearPlayersCardsOnTable();
         gameTableController.clearTableCards();
+    }
+
+    public void setStyle1() {
+        primaryStage.getScene().getStylesheets().add(MainScreenController.class.getResource("Style1.css").toExternalForm());
+    }
+
+    public void setStyle2() {
+        primaryStage.getScene().getStylesheets().add(MainScreenController.class.getResource("Style2.css").toExternalForm());
     }
 }

@@ -6,8 +6,11 @@ import Engine.Exceptions.StructureException;
 import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
+import UI.UIManager;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,11 +25,13 @@ import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable{
 
-    @FXML private ColorPicker tableColor;
+
     @FXML private ComboBox styleComboBox;
     @FXML private ComboBox animationComboBox;
     @FXML private Button loadXmlButton;
@@ -53,6 +58,11 @@ public class MainMenuController implements Initializable{
         stopButton.setDisable(true);
         fileNameLabel.textProperty().bind(selectedFileProperty);
         startButton.disableProperty().bind(isFileSelected.not());
+        // Use Java Collections to create the List.
+        List<String> list = new ArrayList<String>();
+        ObservableList<String> observableList = FXCollections.observableList(list);
+        observableList.addAll("Style1","Style2");
+        styleComboBox.setItems(observableList);
     }
 
     @FXML
@@ -87,10 +97,7 @@ public class MainMenuController implements Initializable{
 
     public void setBusinessLogic(BusinessLogic b){businessLogic=b;}
 
-    public void changeColor(ActionEvent actionEvent) {
 
-        businessLogic.changeColor(tableColor.getValue());
-    }
 
     public void startGameButtonAction(ActionEvent actionEvent) {
 
@@ -114,5 +121,16 @@ public class MainMenuController implements Initializable{
     public void enableStartGameButton() {
         startButton.setVisible(true);
         //startButton.setDisable(false);
+    }
+
+    public void styleChanged(ActionEvent actionEvent) {
+        if(styleComboBox.getSelectionModel().getSelectedItem().toString()=="Style1")
+        {
+            businessLogic.changeToStyle1();
+        }
+        else if(styleComboBox.getSelectionModel().getSelectedItem().toString()=="Style2")
+        {
+            businessLogic.changeToStyle2();
+        }
     }
 }

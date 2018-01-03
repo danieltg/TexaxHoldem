@@ -70,4 +70,12 @@ public class BusinessLogic {
     {
         controller.clearAllCardsOnTable();
     }
+
+    public void changeToStyle1() {
+        controller.setStyle1();
+    }
+
+    public void changeToStyle2() {
+        controller.setStyle2();
+    }
 }
