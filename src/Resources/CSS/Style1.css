@@ -1,5 +1,9 @@
 .root {
-    -fx-background-image: url("2.jpg");
+    -fx-background-image: url("1.jpg");
+}
+
+.scroll-pane .viewport {
+    -fx-background-image: url("1.jpg");
 }
 
 .label {
