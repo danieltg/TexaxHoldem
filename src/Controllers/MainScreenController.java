@@ -8,29 +8,31 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 import static Engine.Players.PlayerType.Computer;
 
 public class MainScreenController implements Initializable {
-    private  Scene mainScene;
-    @FXML
-    private GameTableController gameTableController;
-    @FXML
-    private GameInfoAndActionsController gameInfoAndActionsController;
-    @FXML
-    private MainMenuController mainMenuController;
-    @FXML
-    private PlayersTableController playersTableController;
 
+    @FXML private ScrollPane gameInfoAndActions;
+    @FXML private Pane gameTable;
+    @FXML private ScrollPane playersTable;
+    @FXML private GridPane mainMenu;
+    @FXML private GameTableController gameTableController;
+    @FXML private GameInfoAndActionsController gameInfoAndActionsController;
+    @FXML private MainMenuController mainMenuController;
+    @FXML private PlayersTableController playersTableController;
 
     private final GameManager gameManager = new GameManager();
     private Stage primaryStage;
@@ -38,9 +40,6 @@ public class MainScreenController implements Initializable {
     private BusinessLogic businessLogic;
     private PokerHand currHand;
 
-    public void setScene(Scene scene) {
-        mainScene = scene;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,8 +64,7 @@ public class MainScreenController implements Initializable {
 
     public void updatePlayersTable() {
         ObservableList<PokerPlayer> pokerPlayers = FXCollections.observableArrayList();
-        for (PokerPlayer p : gameManager.getPlayers())
-            pokerPlayers.add(p);
+        pokerPlayers.addAll(gameManager.getPlayers());
 
         playersTableController.updatePlayersTable(pokerPlayers);
     }
@@ -84,7 +82,7 @@ public class MainScreenController implements Initializable {
         gameTableController.updatePot(0);
     }
 
-    public void updateTableCards() {
+    private void updateTableCards() {
         String[] tableCards = gameManager.getCurrHand().getCardsAsStringArray();
         gameTableController.updateCards(tableCards);
     }
@@ -134,7 +132,7 @@ public class MainScreenController implements Initializable {
 
 
 
-    public void playBettingRounds()
+    private void playBettingRounds()
     {
         HandState state= currHand.getHandState();
 
@@ -232,11 +230,11 @@ public class MainScreenController implements Initializable {
         PokerPlayer currPlayer = currHand.getNextToPlay();
 
         gameTableController.BoldCurrPlayer(currPlayer, currHand.getPlayers());
-        playersTableController.BoldCurrPlayer(currPlayer);
 
         List<String> options= currHand.getPossibleOptions();
 
         if (currPlayer.getType() == Computer) {
+
 
             String whatToDo=currPlayer.getSelection(options);
             currPlayer.setAction(whatToDo);
@@ -253,7 +251,7 @@ public class MainScreenController implements Initializable {
         else
         {
             System.out.println("Human player");
-            if (currPlayer.getPlayerSelection()!="NOT SELECTED")
+            if (!Objects.equals(currPlayer.getPlayerSelection(), "NOT SELECTED"))
             {
                 currHand.bettingRoundForAPlayer();
                 gameManager.addStepToHandReplay();
@@ -298,8 +296,7 @@ public class MainScreenController implements Initializable {
     public void updatePlayersTableFromStep(int step) {
         ObservableList<PokerPlayer> pokerPlayers = FXCollections.observableArrayList();
 
-        for(PokerPlayer p: gameManager.getHandReplay().get(step).getPlayers())
-            pokerPlayers.add(p);
+        pokerPlayers.addAll(gameManager.getHandReplay().get(step).getPlayers());
 
         playersTableController.updatePlayersTable(pokerPlayers);
 

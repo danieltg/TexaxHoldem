@@ -37,7 +37,6 @@ public class PokerHand {
 
     private int lastActionInfo;
     private int lastPlayerToPlay;
-    private boolean isFinished = false;
     private HandState state;
 
     public PokerHand(PokerBlindes gameBlinde, List<PokerPlayer> playersInHand) {
@@ -408,9 +407,6 @@ public class PokerHand {
         return lastPlayerToPlay;
     }
 
-    public boolean getIsFinished() {
-        return isFinished;
-    }
 
     public PokerPlayer getNextToPlay() {
         return nextToPlay;
@@ -431,7 +427,7 @@ public class PokerHand {
 
         for (PokerPlayer p: players)
         {
-            if (p.isFolded()==false)
+            if (!p.isFolded())
                 count++;
         }
 
@@ -698,7 +694,7 @@ public class PokerHand {
             {
                 for (int j=1; j<=numberOfPlayers; j++)
                 {
-                    if (players.get((i+j)%numberOfPlayers).isFolded()==false)
+                    if (!players.get((i + j) % numberOfPlayers).isFolded())
                     {
                         nextToPlay = players.get((i + j)% this.numberOfPlayers);
                         nextToPlay.clearSelection();
@@ -713,15 +709,13 @@ public class PokerHand {
 
     public String getWinnersToDisplay() {
 
-        String message="";
+        StringBuilder message= new StringBuilder();
         List<Winner> winners= null;
 
         if (playersLeft() == 1) {
             int index = whoIsInTheGame();
             String cards = players.get(index).getHoleCards();
-            message=message+ players.get(index).getName() + " ("+players.get(index).getId()+")"+
-                    " won with this hand: "+cards +".\n"+
-                    "Prize: "+(getPot()) +"$\n\n";
+            message.append(players.get(index).getName()).append(" (").append(players.get(index).getId()).append(")").append(" won with this hand: ").append(cards).append(".\n").append("Prize: ").append(getPot()).append("$\n\n");
         }
 
         else
@@ -732,18 +726,17 @@ public class PokerHand {
                 e.printStackTrace();
             }
 
-            for (Winner w: winners) {
-            message=message+ w.getPlayer().getName() + " ("+w.getPlayer().getId()+")"+
-                    " won with this hand: "+w.getHandRank() +".\n"+
-                    "Prize: "+(getPot()/winners.size()) +"$\n\n";
+            for (Winner w: winners)
+            {
+                message.append(w.getPlayer().getName()).append(" (").append(w.getPlayer().getId()).append(")").append(" won with this hand: ").append(w.getHandRank()).append(".\n").append("Prize: ").append(getPot() / winners.size()).append("$\n\n");
              }
         }
 
-        if (message.equals(""))
+        if (message.toString().equals(""))
         {
             System.out.println("We have bug here.. need to understand why");
         }
-        return message;
+        return message.toString();
     }
 
 

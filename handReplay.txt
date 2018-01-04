@@ -1,255 +1,76 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Mushon, 1> : 9S KC
-Player <Avrum, 2> : 9H JS
-Player <Nachtze, 3> : 3D 2D
-Player <Daniel, 4> : 7H 8S
-Player <Yoni, 5> : TC AS
-Player <Doron, 6> : TS 7C
+Player <Mushon, 1> : 5S AS
+Player <Avrum, 2> : KC TD
+Player <Nachtze, 3> : 6C 4D
+Player <Daniel, 4> : 5D 8H
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
+Active player ID: 1
+Player name: Mushon
 Player type: Computer
-Player cards: 3D 2D
+Player cards: 5S AS
 Player chips: 98
 Player bet: 2
-Player equity: 23
+Player equity: 34
 Pot: 2
 Current Bet: 0
 Action: B
 Additional Action Information: 2
 ************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 7H 8S
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: KC TD
 Player chips: 96
 Player bet: 4
-Player equity: 13
+Player equity: 34
 Pot: 6
 Current Bet: 0
 Action: R
 Additional Action Information: 4
 ************************************************************************************************
-Active player ID: 5
-Player name: Yoni
-Player type: Computer
-Player cards: TC AS
-Player chips: 100
-Player bet: 0
-Player equity: 0
-Pot: 6
-Current Bet: 0
-Action: F
-************************************************************************************************
-Active player ID: 6
-Player name: Doron
-Player type: Computer
-Player cards: TS 7C
-Player chips: 100
-Player bet: 0
-Player equity: 17
-Pot: 6
-Current Bet: 0
-Action: C
-************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: 9S KC
-Player chips: 99
-Player bet: 1
-Player equity: 26
-Pot: 7
-Current Bet: 1
-Action: R
-Additional Action Information: 1
-************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: 9H JS
-Player chips: 100
-Player bet: 0
-Player equity: 0
-Pot: 7
-Current Bet: 1
-Action: F
-************************************************************************************************
 Active player ID: 3
 Player name: Nachtze
 Player type: Computer
-Player cards: 3D 2D
-Player chips: 98
+Player cards: 6C 4D
+Player chips: 100
 Player bet: 0
 Player equity: 0
-Pot: 7
-Current Bet: 1
-Action: F
-************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 7H 8S
-Player chips: 99
-Player bet: 1
-Player equity: 20
-Pot: 4
-Current Bet: 1
-Action: C
-************************************************************************************************
-Active player ID: 6
-Player name: Doron
-Player type: Computer
-Player cards: TS 7C
-Player chips: 98
-Player bet: 2
-Player equity: 28
 Pot: 6
-Current Bet: 2
-Action: R
-Additional Action Information: 1
-************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: 9S KC
-Player chips: 97
-Player bet: 3
-Player equity: 51
-Pot: 8
-Current Bet: 3
-Action: R
-Additional Action Information: 1
+Current Bet: 0
+Action: F
 ************************************************************************************************
 Active player ID: 4
 Player name: Daniel
 Player type: Computer
-Player cards: 7H 8S
-Player chips: 97
-Player bet: 3
-Player equity: 20
-Pot: 10
-Current Bet: 3
-Action: C
+Player cards: 5D 8H
+Player chips: 100
+Player bet: 0
+Player equity: 0
+Pot: 6
+Current Bet: 0
+Action: F
 ************************************************************************************************
-Active player ID: 6
-Player name: Doron
+Active player ID: 1
+Player name: Mushon
 Player type: Computer
-Player cards: TS 7C
+Player cards: 5S AS
 Player chips: 98
 Player bet: 0
 Player equity: 0
-Pot: 10
-Current Bet: 3
+Pot: 6
+Current Bet: 0
 Action: F
 ************************************************************************************************
 The step is not related to any player
-Cards: 8H,KD,9D,??,??
-Pot: 10
-Current Bet: 3
-Action: CARD
-************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: 9S KC
-Player chips: 97
-Player bet: 0
-Player equity: 81
-Pot: 10
-Current Bet: 3
-Action: K
-************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 7H 8S
-Player chips: 97
-Player bet: 0
-Player equity: 19
-Pot: 10
-Current Bet: 3
-Action: K
-************************************************************************************************
-The step is not related to any player
-Cards: 8H,KD,9D,2C,??
-Pot: 10
-Current Bet: 3
-Action: CARD
-************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: 9S KC
-Player chips: 87
-Player bet: 10
-Player equity: 89
-Pot: 20
-Current Bet: 10
-Action: B
-Additional Action Information: 10
-************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 7H 8S
-Player chips: 67
-Player bet: 30
-Player equity: 11
-Pot: 50
-Current Bet: 30
-Action: R
-Additional Action Information: 20
-************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: 9S KC
-Player chips: 67
-Player bet: 30
-Player equity: 89
-Pot: 70
-Current Bet: 30
-Action: C
-************************************************************************************************
-The step is not related to any player
-Cards: 8H,KD,9D,2C,7S
-Pot: 70
-Current Bet: 30
-Action: CARD
-************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 7H 8S
-Player chips: 67
-Player bet: 0
-Player equity: 0
-Pot: 70
-Current Bet: 30
-Action: K
-************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: 9S KC
-Player chips: 67
-Player bet: 0
-Player equity: 0
-Pot: 70
-Current Bet: 30
-Action: F
-************************************************************************************************
-The step is not related to any player
-Cards: 8H,KD,9D,2C,7S
-Pot: 70
-Current Bet: 30
-Action: Daniel (4) won with this hand: 7H 8S.
-Prize: 70$
+Cards: ??,??,??,??,??
+Pot: 6
+Current Bet: 0
+Action: Avrum (2) won with this hand: KC TD.
+Prize: 6$
 
 

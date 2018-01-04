@@ -1,7 +1,6 @@
 package Engine;
 
 
-import Controllers.MainScreenController;
 import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.PokerBlindes;
 import Engine.GameDescriptor.PokerGameDescriptor;
@@ -26,7 +25,6 @@ public class GameManager implements Serializable {
     private int dealerIndex;
     private int maxPot;
     private Date startTime;
-    private int indexActivePlayer;
     private PokerHand currHand;
     private List<PokerHandStep> handReplay=new ArrayList<>();
 
@@ -88,8 +86,6 @@ public class GameManager implements Serializable {
             {
                 startTime= new Date();
                 stateOfGame = CurrGameState.Started;
-                //TODO: remove it!! 0== HUMAN_PLAYER
-                indexActivePlayer=0;
                 break;
             }
 
@@ -213,7 +209,7 @@ public class GameManager implements Serializable {
 
     public PokerHand startNewHand()
     {
-        this.handNumber++;
+        handNumber++;
         PokerBlindes blindes=getGameDescriptor().getStructure().getBlindes();
 
         currHand= new PokerHand(blindes,getPlayers());

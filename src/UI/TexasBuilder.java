@@ -1,9 +1,7 @@
 package UI;
 
 import Controllers.BusinessLogic;
-import Controllers.MainMenuController;
 import Controllers.MainScreenController;
-import Controllers.PlayersTableController;
 import Engine.GameManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-public class TexasBuilder {
+class TexasBuilder {
 
     private GameManager gameManager;
     private Stage primaryStage;

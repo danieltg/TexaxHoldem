@@ -24,14 +24,14 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
 
     private Card[] holeCards ;
     private int handsWon;
-    boolean checkOccurred = false;
+    private boolean checkOccurred = false;
     private int initialAmount;
     private String style="-fx-background-color: #CCAA99;";
     private String action;
     private int actionInfo;
     private int equity;
 
-    public PokerPlayer(int playerID){
+    PokerPlayer(int playerID){
 
         chips=0;
         bet =0;
@@ -48,7 +48,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
             holeCards[i]=new Card();
     }
 
-    public PokerPlayer(int playerID, String playerName){
+    PokerPlayer(int playerID, String playerName){
 
         chips=0;
         bet =0;
@@ -92,7 +92,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     abstract public int getRaise(int min, int max);
 
     public void setState (PlayerState state) {this.state=state;}
-    public void setType (PlayerType type)
+    void setType(PlayerType type)
     {
         this.type=type;
     }

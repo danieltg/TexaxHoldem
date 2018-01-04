@@ -1,12 +1,7 @@
 package Controllers;
 
-import Engine.Exceptions.BlindesException;
-import Engine.Exceptions.GameStateException;
-import Engine.Exceptions.StructureException;
-import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
-import UI.UIManager;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -15,20 +10,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.xml.bind.JAXBException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("ALL")
 public class MainMenuController implements Initializable{
 
 
@@ -63,6 +56,7 @@ public class MainMenuController implements Initializable{
         List<String> list = new ArrayList<String>();
         ObservableList<String> observableList = FXCollections.observableList(list);
         observableList.addAll("Style1","Style2","Basic");
+        //noinspection unchecked
         styleComboBox.setItems(observableList);
     }
 

@@ -9,12 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.util.List;
@@ -326,7 +323,7 @@ public class GameTableController implements Initializable {
     }
 
 
-    public void update3players(List<PokerPlayer> playerList) {
+    private void update3players(List<PokerPlayer> playerList) {
 
         seat1_data.setVisible(true);
         seat1_data.setStyle(playerList.get(0).getStyle());
@@ -362,7 +359,7 @@ public class GameTableController implements Initializable {
         _betPlayer5.setValue(playerList.get(2).getBet());
     }
 
-    public void update4players(List<PokerPlayer> playerList) {
+    private void update4players(List<PokerPlayer> playerList) {
 
         seat2_data.setVisible(true);
         seat2_data.setStyle(playerList.get(0).getStyle());
@@ -407,7 +404,7 @@ public class GameTableController implements Initializable {
         _betPlayer6.setValue(playerList.get(3).getBet());
     }
 
-    public void update5players(List<PokerPlayer> playerList) {
+    private void update5players(List<PokerPlayer> playerList) {
 
         seat1_data.setVisible(true);
         seat1_data.setStyle(playerList.get(0).getStyle());
@@ -462,7 +459,7 @@ public class GameTableController implements Initializable {
     }
 
 
-    public void update6players(List<PokerPlayer> playerList) {
+    private void update6players(List<PokerPlayer> playerList) {
 
         seat1_data.setVisible(true);
         seat1_data.setStyle(playerList.get(0).getStyle());

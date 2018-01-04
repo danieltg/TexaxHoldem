@@ -1,11 +1,7 @@
 package UI;
 
 
-import Engine.Players.PokerPlayer;
-import com.rundef.poker.EquityCalculator;
-import com.rundef.poker.Hand;
-
-public class MainEx1 {
+class MainEx1 {
 
     public static void main(String[] args) throws Exception {
 

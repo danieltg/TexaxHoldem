@@ -7,7 +7,7 @@ import Engine.Utils.EngineUtils;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.event.ActionEvent;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -21,6 +21,7 @@ import static javafx.beans.binding.Bindings.not;
 
 public class GameInfoAndActionsController implements Initializable{
 
+    @FXML private ScrollPane gamePane;
     @FXML private TitledPane handFinishedActions;
     @FXML private Button stopReplay;
     @FXML private TitledPane humanTurn;
@@ -148,7 +149,7 @@ public class GameInfoAndActionsController implements Initializable{
             }
         });
 
-        betSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
+        betSpinner.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
 
             try{
                 Integer.parseInt(betSpinner.getEditor().getText());
@@ -189,9 +190,7 @@ public class GameInfoAndActionsController implements Initializable{
         runNextHandButton.setDisable(true);
         replayButton.setDisable(true);
         replayButton.setOnAction(event ->
-        {
-            startReplay();
-        });
+                startReplay());
 
         prevButton.setDisable(true);
         prevButton.setOnAction(event -> {
@@ -411,11 +410,8 @@ public class GameInfoAndActionsController implements Initializable{
         dropDownPlayers.setDisable(false);
     }
 
-    public void enableRunNextHand() {
-        runNextHandButton.setDisable(true);
-    }
 
-    public void runNextHandClicked(ActionEvent actionEvent) {
+    public void runNextHandClicked() {
         businessLogic.runNextHand();
     }
 
@@ -440,12 +436,12 @@ public class GameInfoAndActionsController implements Initializable{
         runNextHandButton.setDisable(gameManager.getHandNumber()>=gameManager.getHandsCount());
     }
 
-    public void betClicked(ActionEvent actionEvent) {
+    public void betClicked() {
         maxBetMsgLabel.setVisible(false);
 
     }
 
-    public void raiseClicked(ActionEvent actionEvent) {
+    public void raiseClicked() {
         maxBetMsgLabel.setVisible(false);
     }
 }

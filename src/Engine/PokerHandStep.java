@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class PokerHandStep implements Serializable  {
 
@@ -52,40 +53,39 @@ public class PokerHandStep implements Serializable  {
 
     public String getStepAsString()
     {
-        String message;
+        StringBuilder message;
 
         if (activePlayer==-999 || activePlayer==-888) {
-            message = "The step is not related to any player\n";
+            message = new StringBuilder("The step is not related to any player\n");
             if (action.equals("PLAYER_CARDS")) {
-                message = message + "Players cards:\n";
+                message.append("Players cards:\n");
                 for (PokerPlayer p: players)
-                    message=message+"Player <"+p.getName()+", "+p.getId()+"> : "+p.getHoleCards()+"\n";
+                    message.append("Player <").append(p.getName()).append(", ").append(p.getId()).append("> : ").append(p.getHoleCards()).append("\n");
             }
             else
-                message=message+"Cards: "+tableCards[0]+","+tableCards[1]+
-                        ","+tableCards[2]+","+tableCards[3]+","+tableCards[4]+"\n";
+                message.append("Cards: ").append(tableCards[0]).append(",").append(tableCards[1]).append(",").append(tableCards[2]).append(",").append(tableCards[3]).append(",").append(tableCards[4]).append("\n");
         }
         else {
             int indexInList=getplayerIndexById();
-            message = "Active player ID: " + activePlayer + "\n";
-            message=message+"Player name: "+players.get(indexInList).getName()+"\n";
-            message=message+"Player type: "+players.get(indexInList).getType()+"\n";
-            message=message+"Player cards: "+players.get(indexInList).getHoleCards()+"\n";
-            message=message+"Player chips: "+players.get(indexInList).getChips()+"\n";
-            message=message+"Player bet: "+players.get(indexInList).getBet()+"\n";
-            message=message+"Player equity: "+players.get(indexInList).getEquity()+"\n";
+            message = new StringBuilder("Active player ID: " + activePlayer + "\n");
+            message.append("Player name: ").append(players.get(indexInList).getName()).append("\n");
+            message.append("Player type: ").append(players.get(indexInList).getType()).append("\n");
+            message.append("Player cards: ").append(players.get(indexInList).getHoleCards()).append("\n");
+            message.append("Player chips: ").append(players.get(indexInList).getChips()).append("\n");
+            message.append("Player bet: ").append(players.get(indexInList).getBet()).append("\n");
+            message.append("Player equity: ").append(players.get(indexInList).getEquity()).append("\n");
 
         }
 
-        message=message+"Pot: "+pot+"\n";
-        message=message+"Current Bet: "+currentBet+"\n";
-        message=message+"Action: "+action+"\n";
+        message.append("Pot: ").append(pot).append("\n");
+        message.append("Current Bet: ").append(currentBet).append("\n");
+        message.append("Action: ").append(action).append("\n");
 
-        if (action=="R" || action=="B")
-            message=message+"Additional Action Information: "+additionActionInformation+"\n";
+        if (Objects.equals(action, "R") || Objects.equals(action, "B"))
+            message.append("Additional Action Information: ").append(additionActionInformation).append("\n");
 
 
-        return message;
+        return message.toString();
     }
 
     public List<PokerPlayer> getPlayers()
@@ -106,7 +106,7 @@ public class PokerHandStep implements Serializable  {
         if (activePlayer!=-999) {
             message="Player: "+getPlayerNameByID(activePlayer)+
                     ", Action: "+action;
-            if (action=="R" || action=="B")
+            if (Objects.equals(action, "R") || Objects.equals(action, "B"))
                 message=message+" ("+additionActionInformation+")";
 
         }

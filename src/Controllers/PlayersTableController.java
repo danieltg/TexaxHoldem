@@ -1,6 +1,5 @@
 package Controllers;
 
-import Engine.GameManager;
 import Engine.Players.PokerPlayer;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,7 +8,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javax.swing.text.TabableView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,8 +41,4 @@ public class PlayersTableController implements Initializable {
         playersTableView.getItems().addAll(pokerPlayers);
     }
 
-
-    public void BoldCurrPlayer(PokerPlayer currPlayer) {
-
-    }
 }

@@ -72,20 +72,17 @@ public class GameStateBoard {
 
         for(int i=0;i<6; i++)
         {
-            for (int j=0; j<players.size(); j++)
-            {
+            for (PokerPlayer player : players) {
                 System.out.print("| ");
-                try{
-                    s=players.get(j).listOfDetails().get(i);
+                try {
+                    s = player.listOfDetails().get(i);
 
-                }
-                catch (Exception e)
-                {
-                    s="";
+                } catch (Exception e) {
+                    s = "";
                 }
 
                 System.out.print(s);
-                for(int k=s.length();k<=maxLength;k++)
+                for (int k = s.length(); k <= maxLength; k++)
                     System.out.print(" ");
 
                 System.out.print("|");
@@ -120,20 +117,17 @@ public class GameStateBoard {
         String s;
         for(int i=0;i<6; i++)
         {
-            for (int j=0; j<players.size(); j++)
-            {
+            for (PokerPlayer player : players) {
                 System.out.print("| ");
-                try{
-                    s=players.get(j).listOfDetailesForHand().get(i);
+                try {
+                    s = player.listOfDetailesForHand().get(i);
 
-                }
-                catch (Exception e)
-                {
-                    s="";
+                } catch (Exception e) {
+                    s = "";
                 }
 
                 System.out.print(s);
-                for(int k=s.length();k<=maxLength;k++)
+                for (int k = s.length(); k <= maxLength; k++)
                     System.out.print(" ");
 
                 System.out.print("|");

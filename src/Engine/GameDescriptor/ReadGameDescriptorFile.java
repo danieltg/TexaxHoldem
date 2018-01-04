@@ -13,7 +13,6 @@ import Jaxb.GameDescriptor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReadGameDescriptorFile {
