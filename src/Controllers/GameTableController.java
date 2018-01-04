@@ -327,6 +327,7 @@ public class GameTableController implements Initializable {
 
 
     public void update3players(List<PokerPlayer> playerList) {
+
         seat1_data.setVisible(true);
         seat1_data.setStyle(playerList.get(0).getStyle());
         _namePlayer1.setValue(playerList.get(0).getName());
@@ -346,6 +347,11 @@ public class GameTableController implements Initializable {
     }
 
     private void update3playersChipsAndBet(List<PokerPlayer> playerList) {
+
+        seat1_data.setOpacity(playerList.get(0).isFolded()?0.5:1);
+        seat3_data.setOpacity(playerList.get(1).isFolded()?0.5:1);
+        seat5_data.setOpacity(playerList.get(2).isFolded()?0.5:1);
+
         _chipsPlayer1.setValue(playerList.get(0).getChips());
         _betPlayer1.setValue(playerList.get(0).getBet());
 
@@ -363,29 +369,30 @@ public class GameTableController implements Initializable {
         _namePlayer2.setValue(playerList.get(0).getName());
         _rolePlayer2.setValue(playerList.get(0).getState().name());
 
-
         seat3_data.setVisible(true);
         seat3_data.setStyle(playerList.get(1).getStyle());
         _namePlayer3.setValue(playerList.get(1).getName());
         _rolePlayer3.setValue(playerList.get(1).getState().name());
-
 
         seat5_data.setVisible(true);
         seat5_data.setStyle(playerList.get(2).getStyle());
         _namePlayer5.setValue(playerList.get(2).getName());
         _rolePlayer5.setValue(playerList.get(2).getState().name());
 
-
         seat6_data.setVisible(true);
         seat6_data.setStyle(playerList.get(3).getStyle());
         _namePlayer6.setValue(playerList.get(3).getName());
         _rolePlayer6.setValue(playerList.get(3).getState().name());
 
-
         update4playersChipsAndBet(playerList);
     }
 
     private void update4playersChipsAndBet(List<PokerPlayer> playerList) {
+
+        seat2_data.setOpacity(playerList.get(0).isFolded()?0.5:1);
+        seat3_data.setOpacity(playerList.get(1).isFolded()?0.5:1);
+        seat5_data.setOpacity(playerList.get(2).isFolded()?0.5:1);
+        seat6_data.setOpacity(playerList.get(3).isFolded()?0.5:1);
 
         _chipsPlayer2.setValue(playerList.get(0).getChips());
         _betPlayer2.setValue(playerList.get(0).getBet());
@@ -401,6 +408,7 @@ public class GameTableController implements Initializable {
     }
 
     public void update5players(List<PokerPlayer> playerList) {
+
         seat1_data.setVisible(true);
         seat1_data.setStyle(playerList.get(0).getStyle());
         _namePlayer1.setValue(playerList.get(0).getName());
@@ -430,6 +438,12 @@ public class GameTableController implements Initializable {
     }
 
     private void update5playersChipsAndBet(List<PokerPlayer> playerList) {
+
+        seat1_data.setOpacity(playerList.get(0).isFolded()?0.5:1);
+        seat2_data.setOpacity(playerList.get(1).isFolded()?0.5:1);
+        seat3_data.setOpacity(playerList.get(2).isFolded()?0.5:1);
+        seat5_data.setOpacity(playerList.get(3).isFolded()?0.5:1);
+        seat6_data.setOpacity(playerList.get(4).isFolded()?0.5:1);
 
         _chipsPlayer1.setValue(playerList.get(0).getChips());
         _betPlayer1.setValue(playerList.get(0).getBet());
@@ -484,6 +498,13 @@ public class GameTableController implements Initializable {
     }
 
     private void update6playersChipsAndBet(List<PokerPlayer> playerList) {
+
+        seat1_data.setOpacity(playerList.get(0).isFolded()?0.5:1);
+        seat2_data.setOpacity(playerList.get(1).isFolded()?0.5:1);
+        seat3_data.setOpacity(playerList.get(2).isFolded()?0.5:1);
+        seat4_data.setOpacity(playerList.get(3).isFolded()?0.5:1);
+        seat5_data.setOpacity(playerList.get(4).isFolded()?0.5:1);
+        seat6_data.setOpacity(playerList.get(5).isFolded()?0.5:1);
 
         _chipsPlayer1.setValue(playerList.get(0).getChips());
         _betPlayer1.setValue(playerList.get(0).getBet());

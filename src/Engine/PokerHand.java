@@ -448,54 +448,60 @@ public class PokerHand {
         switch (state) {
             case GameInit:
             {
-                if (nextToPlay==lastRaise || getMaxBet()==0) {
-                    System.out.println("We finished the first betting round");
-                    state=TheFlop;
-                }
-                else if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
+                if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
                 {
                     System.out.println("We have only one player in the game...");
                     state=END;
+                }
+
+                else if (nextToPlay==lastRaise || getMaxBet()==0) {
+                    System.out.println("We finished the first betting round");
+                    state=TheFlop;
                 }
                 break;
 
             }
             case bettingAfterFlop:
             {
-                if (nextToPlay==lastRaise || getMaxBet()==0) {
-                    System.out.println("We finished the second betting round");
-                    state=TheTurn;
-                }
-                else if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
+
+                if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
                 {
                     System.out.println("We have only one player in the game...");
                     state=END;
                 }
+
+                else if (nextToPlay==lastRaise || getMaxBet()==0)
+                {
+                    System.out.println("We finished the second betting round");
+                    state=TheTurn;
+                 }
+
                 break;
             }
             case bettingAfterTurn:
             {
-                if (nextToPlay==lastRaise || getMaxBet()==0) {
-                    System.out.println("We finished the third betting round");
-                    state=TheRiver;
-                }
-                else if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
+                if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
                 {
                     System.out.println("We have only one player in the game...");
                     state=END;
+                }
+
+                else if (nextToPlay==lastRaise || getMaxBet()==0) {
+                    System.out.println("We finished the third betting round");
+                    state=TheRiver;
                 }
                 break;
             }
 
             case bettingAfterRiver:
             {
-                if (nextToPlay==lastRaise || getMaxBet()==0) {
-                    System.out.println("We finished the game!!!");
-                    state=END;
-                }
-                else if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
+                if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
                 {
                     System.out.println("We have only one player in the game...");
+                    state=END;
+                }
+                else if (nextToPlay==lastRaise || getMaxBet()==0) {
+                    System.out.println("We finished the game!!!");
                     state=END;
                 }
                 break;
@@ -733,6 +739,10 @@ public class PokerHand {
              }
         }
 
+        if (message.equals(""))
+        {
+            System.out.println("We have bug here.. need to understand why");
+        }
         return message;
     }
 

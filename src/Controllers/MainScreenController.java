@@ -240,7 +240,7 @@ public class MainScreenController implements Initializable {
 
             String whatToDo=currPlayer.getSelection(options);
             currPlayer.setAction(whatToDo);
-            int randomNum =  new Random().nextInt((currHand.getMaxBet()) + 1);
+            int randomNum =  (new Random().nextInt((currHand.getMaxBet())) )+ 1;
             currPlayer.setAdditionalActionInfo(randomNum);
             System.out.println("Computer player ("+currPlayer.getName()+
                     ") is now playing and he wants to: "+whatToDo +" ("+randomNum+")");

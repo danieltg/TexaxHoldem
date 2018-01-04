@@ -58,7 +58,8 @@ public class MainMenuController implements Initializable{
         stopButton.setDisable(true);
         fileNameLabel.textProperty().bind(selectedFileProperty);
         startButton.disableProperty().bind(isFileSelected.not());
-        // Use Java Collections to create the List.
+
+
         List<String> list = new ArrayList<String>();
         ObservableList<String> observableList = FXCollections.observableList(list);
         observableList.addAll("Style1","Style2","Basic");
