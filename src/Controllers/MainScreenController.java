@@ -108,7 +108,7 @@ public class MainScreenController implements Initializable {
         gameManager.clearValuesFromCurrHand();
 
         currHand.betSmall();
-        currHand.updatePlayersWithEquity();
+        //currHand.updatePlayersWithEquity();
         gameManager.addStepToHandReplay();
         gameManager.clearValuesFromCurrHand();
 
@@ -116,7 +116,7 @@ public class MainScreenController implements Initializable {
         updateGUIPotAndPlayerBetAndChips();
 
         currHand.betBig();
-        currHand.updatePlayersWithEquity();
+        //currHand.updatePlayersWithEquity();
         gameManager.addStepToHandReplay();
         gameManager.clearValuesFromCurrHand();
 
