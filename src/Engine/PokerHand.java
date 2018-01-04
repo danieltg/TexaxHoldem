@@ -810,4 +810,11 @@ public class PokerHand {
         return options;
 
     }
+
+    public void resetPlayersFold() {
+        for (PokerPlayer p: players)
+        {
+            p.setFolded(false);
+        }
+    }
 }

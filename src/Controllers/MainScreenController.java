@@ -93,12 +93,12 @@ public class MainScreenController implements Initializable {
 
     public void RunOneHand() {
 
+        gameManager.startNewHand();
+        gameManager.resetPlayerState();
         clearAllCardsOnTable();
         businessLogic.clearGameTable();
 
-        gameManager.startNewHand();
         currHand = gameManager.getCurrHand();
-        gameManager.resetPlayerState();
         updateTableCards();
 
         gameManager.clearHandReplay();
@@ -208,6 +208,12 @@ public class MainScreenController implements Initializable {
                 updateHandReplayWithTheWinners(message);
                 updateHandCount();
                 gameManager.saveHandReplayToFile("handReplay.txt");
+
+                alert.setHeaderText("Hand finished");
+                alert.setContentText("We are going to clear the game table... You can use the Replay feature to see the previous hand");
+                alert.showAndWait();
+                gameTableController.hideGameTablePane();
+
                 break;
             }
         }
@@ -376,5 +382,9 @@ public class MainScreenController implements Initializable {
     public void clearGameTable() {
         gameTableController.clearPlayersCardsOnTable();
         gameTableController.clearAllPlayersFromScreen();
+    }
+
+    public void hideGameTable() {
+        gameTableController.hideGameTablePane();
     }
 }

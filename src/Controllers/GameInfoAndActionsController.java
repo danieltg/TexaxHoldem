@@ -263,7 +263,7 @@ public class GameInfoAndActionsController implements Initializable{
 
             stopReplay.setDisable(true);
             businessLogic.clearAllCardsOnTable();
-
+            businessLogic.hideGameTable();
             enableBuyButtons();
             enableQuitButtons();
 
@@ -312,8 +312,6 @@ public class GameInfoAndActionsController implements Initializable{
             updateHumanDropDownPlayersList();
 
             businessLogic.updatePlayersList();
-            businessLogic.updateGUIPotAndPlayerBetAndChips();
-
         }
 
     }
@@ -485,8 +483,6 @@ public class GameInfoAndActionsController implements Initializable{
     public void runNextHandClicked() {
         businessLogic.clearAllCardsOnTable();
         //businessLogic.clearGameTable();
-        humanTurn.setCollapsible(false);
-        handFinishedActions.setCollapsible(false);
         businessLogic.runNextHand();
     }
 

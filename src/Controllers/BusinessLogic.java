@@ -89,4 +89,8 @@ public class BusinessLogic {
         updatePlayersList();
         setGameTable();
     }
+
+    public void hideGameTable() {
+        controller.hideGameTable();
+    }
 }

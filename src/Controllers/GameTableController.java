@@ -21,6 +21,7 @@ import static Engine.Utils.EngineUtils.BASE_PACKAGE;
 
 public class GameTableController implements Initializable {
 
+    @FXML private Pane gameTablePane;
     @FXML private Label equity5;
     @FXML private Label equity4;
     @FXML private Label equity3;
@@ -291,7 +292,7 @@ public class GameTableController implements Initializable {
     }
 
     public void updatePlayersOnTable(List<PokerPlayer> playerList) {
-
+        gameTablePane.setVisible(true);
         clearPlayersCardsOnTable();
         clearTable();
         int numberOfPlayer = playerList.size();
@@ -759,5 +760,11 @@ public class GameTableController implements Initializable {
 
     public void clearAllPlayersFromScreen() {
         clearTable();
+    }
+
+
+    public void hideGameTablePane()
+    {
+        gameTablePane.setVisible(false);
     }
 }
