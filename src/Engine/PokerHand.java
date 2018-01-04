@@ -82,6 +82,8 @@ public class PokerHand {
     public void updateMaxBet() {
 
         int maxBetByPlayers = players.get(whoIsInTheGame()).getChips();
+
+        //Here is the min of the players chips
         for (PokerPlayer p : players) {
             if (!p.isFolded() && maxBetByPlayers > p.getChips())
                 maxBetByPlayers = p.getChips();
