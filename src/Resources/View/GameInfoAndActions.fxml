@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fx:id="gamePane" prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.121"
+<ScrollPane fx:id="gamePane"  xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameInfoAndActionsController">
     <Accordion fx:id="accordionGame" prefHeight="575.0" prefWidth="300.0">
       <panes>

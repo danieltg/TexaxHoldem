@@ -2,8 +2,10 @@
 
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenController">
+<?import javafx.scene.control.ScrollPane?>
+<ScrollPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenController">
 
+<BorderPane >
     <top>
     <fx:include fx:id="mainMenu" source="MainMenu.fxml" BorderPane.alignment="CENTER" />
     </top>
@@ -17,3 +19,4 @@
         <fx:include fx:id="gameInfoAndActions" source="GameInfoAndActions.fxml" BorderPane.alignment="CENTER" />
     </right>
 </BorderPane>
+</ScrollPane>
