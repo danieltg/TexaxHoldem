@@ -531,7 +531,7 @@ public class PokerHand {
         addToPot(currPlayer.getBet());
         currPlayer.collectBet();
         updateMaxBet();
-        updatePlayersWithEquity();
+        //updatePlayersWithEquity();
 
         incCurrPlayer();
         afterPlayerAction();
