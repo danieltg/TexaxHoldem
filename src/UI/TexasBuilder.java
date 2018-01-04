@@ -1,7 +1,9 @@
 package UI;
 
 import Controllers.BusinessLogic;
+import Controllers.MainMenuController;
 import Controllers.MainScreenController;
+import Controllers.PlayersTableController;
 import Engine.GameManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-class TexasBuilder {
+public class TexasBuilder {
 
     private GameManager gameManager;
     private Stage primaryStage;
@@ -45,7 +47,7 @@ class TexasBuilder {
 
     private void setPrimaryStage(Parent i_root)
     {
-        Scene scene = new Scene(i_root, 1100, 700);
+        Scene scene = new Scene(i_root, 1100, 800);
 
       //  scene.getStylesheets().add("/resources/Style/Default.css");
         primaryStage.setTitle("Texas Holdem");
