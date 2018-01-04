@@ -4,12 +4,15 @@ import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
@@ -25,6 +28,7 @@ import java.util.ResourceBundle;
 public class MainMenuController implements Initializable{
 
 
+    @FXML private CheckBox showEquityCheckBox;
     @FXML private ComboBox styleComboBox;
     @FXML private ComboBox animationComboBox;
     @FXML private Button loadXmlButton;
@@ -38,14 +42,26 @@ public class MainMenuController implements Initializable{
     private GameManager gameManager;
     private BusinessLogic businessLogic;
 
+    private boolean showEquity;
+
     public MainMenuController()
     {
         selectedFileProperty = new SimpleStringProperty();
         isFileSelected = new SimpleBooleanProperty(false);
+        showEquity=false;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        showEquityCheckBox.setSelected(false);
+        showEquityCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                                Boolean old_val, Boolean new_val) {
+                showEquity=new_val;
+            }
+        });
+
         fileNameLabel.setText("Not Loaded");
         startButton.setDisable(true);
         stopButton.setDisable(true);
@@ -98,6 +114,7 @@ public class MainMenuController implements Initializable{
 
             stopButton.setDisable(false);
             loadXmlButton.setDisable(true);
+            showEquityCheckBox.setDisable(true);
             startButton.setVisible(false);
             businessLogic.startGame();
         }
@@ -130,4 +147,7 @@ public class MainMenuController implements Initializable{
         else
             businessLogic.basicStyle();
     }
+
+
+    public boolean getEquity(){ return showEquity;}
 }

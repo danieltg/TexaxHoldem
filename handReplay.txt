@@ -1,9 +1,9 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Or, 123> : 4H 8C
-Player <Elad, 234> : 6S 7H
-Player <Daniel, 456> : AH KH
+Player <Or, 123> : 5C QH
+Player <Elad, 234> : 6S JC
+Player <Daniel, 456> : QD JD
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
@@ -11,10 +11,10 @@ Action: PLAYER_CARDS
 Active player ID: 456
 Player name: Daniel
 Player type: Human
-Player cards: AH KH
+Player cards: QD JD
 Player chips: 45
 Player bet: 5
-Player equity: 0
+Player equity: 61
 Pot: 5
 Current Bet: 0
 Action: B
@@ -23,10 +23,10 @@ Additional Action Information: 5
 Active player ID: 123
 Player name: Or
 Player type: Computer
-Player cards: 4H 8C
+Player cards: 5C QH
 Player chips: 40
 Player bet: 10
-Player equity: 0
+Player equity: 18
 Pot: 15
 Current Bet: 0
 Action: R
@@ -35,10 +35,10 @@ Additional Action Information: 10
 Active player ID: 234
 Player name: Elad
 Player type: Human
-Player cards: 6S 7H
+Player cards: 6S JC
 Player chips: 50
 Player bet: 0
-Player equity: 0
+Player equity: 21
 Pot: 15
 Current Bet: 0
 Action: C
@@ -46,33 +46,11 @@ Action: C
 Active player ID: 456
 Player name: Daniel
 Player type: Human
-Player cards: AH KH
-Player chips: 45
-Player bet: 0
-Player equity: 0
-Pot: 15
-Current Bet: 0
-Action: F
-************************************************************************************************
-Active player ID: 123
-Player name: Or
-Player type: Computer
-Player cards: 4H 8C
-Player chips: 50
-Player bet: 0
-Player equity: 0
-Pot: 5
-Current Bet: 0
-Action: C
-************************************************************************************************
-Active player ID: 234
-Player name: Elad
-Player type: Human
-Player cards: 6S 7H
+Player cards: QD JD
 Player chips: 49
 Player bet: 1
-Player equity: 0
-Pot: 6
+Player equity: 61
+Pot: 11
 Current Bet: 1
 Action: R
 Additional Action Information: 1
@@ -80,19 +58,47 @@ Additional Action Information: 1
 Active player ID: 123
 Player name: Or
 Player type: Computer
-Player cards: 4H 8C
-Player chips: 50
+Player cards: 5C QH
+Player chips: 40
 Player bet: 0
 Player equity: 0
-Pot: 6
+Pot: 11
+Current Bet: 1
+Action: F
+************************************************************************************************
+Active player ID: 234
+Player name: Elad
+Player type: Human
+Player cards: 6S JC
+Player chips: 49
+Player bet: 1
+Player equity: 22
+Pot: 12
+Current Bet: 1
+Action: C
+************************************************************************************************
+The step is not related to any player
+Cards: 5D,7H,JS,??,??
+Pot: 12
+Current Bet: 1
+Action: CARD
+************************************************************************************************
+Active player ID: 456
+Player name: Daniel
+Player type: Human
+Player cards: QD JD
+Player chips: 49
+Player bet: 0
+Player equity: 0
+Pot: 12
 Current Bet: 1
 Action: F
 ************************************************************************************************
 The step is not related to any player
-Cards: ??,??,??,??,??
-Pot: 6
+Cards: 5D,7H,JS,??,??
+Pot: 12
 Current Bet: 1
-Action: Elad (234) won with this hand: 6S 7H.
-Prize: 6$
+Action: Elad (234) won with this hand: 6S JC.
+Prize: 12$
 
 

@@ -108,7 +108,10 @@ public class MainScreenController implements Initializable {
         gameManager.clearValuesFromCurrHand();
 
         currHand.betSmall();
-        //currHand.updatePlayersWithEquity();
+
+        if (mainMenuController.getEquity())
+            currHand.updatePlayersWithEquity();
+
         gameManager.addStepToHandReplay();
         gameManager.clearValuesFromCurrHand();
 
@@ -116,7 +119,10 @@ public class MainScreenController implements Initializable {
         updateGUIPotAndPlayerBetAndChips();
 
         currHand.betBig();
-        //currHand.updatePlayersWithEquity();
+
+        if (mainMenuController.getEquity())
+            currHand.updatePlayersWithEquity();
+
         gameManager.addStepToHandReplay();
         gameManager.clearValuesFromCurrHand();
 
@@ -242,7 +248,7 @@ public class MainScreenController implements Initializable {
             currPlayer.setAdditionalActionInfo(randomNum);
             System.out.println("Computer player ("+currPlayer.getName()+
                     ") is now playing and he wants to: "+whatToDo +" ("+randomNum+")");
-            currHand.bettingRoundForAPlayer();
+            currHand.bettingRoundForAPlayer(mainMenuController.getEquity());
             gameManager.addStepToHandReplay();
             updateGUIPotAndPlayerBetAndChips();
             playBettingRounds();
@@ -253,7 +259,7 @@ public class MainScreenController implements Initializable {
             System.out.println("Human player");
             if (!Objects.equals(currPlayer.getPlayerSelection(), "NOT SELECTED"))
             {
-                currHand.bettingRoundForAPlayer();
+                currHand.bettingRoundForAPlayer((mainMenuController.getEquity()));
                 gameManager.addStepToHandReplay();
                 updateGUIPotAndPlayerBetAndChips();
                 playBettingRounds();
