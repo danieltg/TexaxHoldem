@@ -42,6 +42,8 @@ public class GameManager implements Serializable {
         return handNumber;
     }
 
+    public int getNumberOfPlayers(){return numberOfPlayers;}
+
     public int getMoneyFromLastHand() {
         return moneyFromLastHand;
     }
@@ -283,5 +285,37 @@ public class GameManager implements Serializable {
     }
 
 
+    public void removeHumanPlayer(int playerIndex) {
+
+        int index=0;
+
+        for (PokerPlayer p: players)
+        {
+            if (p.getType()==PlayerType.Human)
+            {
+                if (index==playerIndex)
+                {
+                    players.remove(p);
+                    break;
+                }
+                else
+                    index++;
+            }
+        }
+
+        numberOfPlayers=players.size();
+    }
+
+    public int getNumberOfHumanPlayers() {
+
+        int counter=0;
+
+        for (PokerPlayer p:players)
+        {
+            if (p.getType()==PlayerType.Human)
+                counter++;
+        }
+        return counter;
+    }
 }
 

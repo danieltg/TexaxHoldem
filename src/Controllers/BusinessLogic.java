@@ -83,4 +83,10 @@ public class BusinessLogic {
     {
         controller.removeStyle();
     }
+
+    public void clearGameTable() {
+        controller.clearGameTable();
+        updatePlayersList();
+        setGameTable();
+    }
 }

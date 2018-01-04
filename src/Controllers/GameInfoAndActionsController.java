@@ -1,9 +1,11 @@
 package Controllers;
 
 import Engine.GameManager;
+import Engine.Players.PlayerType;
 import Engine.Players.PokerPlayer;
 import Engine.PokerHandStep;
 import Engine.Utils.EngineUtils;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
@@ -20,6 +22,9 @@ import java.util.ResourceBundle;
 import static javafx.beans.binding.Bindings.not;
 
 public class GameInfoAndActionsController implements Initializable{
+
+    @FXML private Button quitGame;
+    @FXML private ChoiceBox<String>  humanPlayersList;
 
     @FXML private ScrollPane gamePane;
     @FXML private TitledPane handFinishedActions;
@@ -77,6 +82,7 @@ public class GameInfoAndActionsController implements Initializable{
     private SimpleIntegerProperty maxPOT;
 
     private int selectedPlayer = -1;
+    private int selectedPlayerForQuit= -1;
 
     public GameInfoAndActionsController()
     {
@@ -95,6 +101,13 @@ public class GameInfoAndActionsController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        quitGame.setDisable(true);
+        quitGame.setOnAction(event -> {
+            if (selectedPlayerForQuit!=-1) {
+                removePlayerFromGame(selectedPlayerForQuit);
+            }
+        });
+
         buyButton.setDisable(true);
         buyButton.setOnAction(event -> {
             if (selectedPlayer!=-1) {
@@ -111,6 +124,13 @@ public class GameInfoAndActionsController implements Initializable{
             selectedPlayer= Integer.parseInt(newValue.toString());
         });
         dropDownPlayers.setDisable(true);
+
+
+        humanPlayersList.getSelectionModel().selectedIndexProperty().addListener((ChangeListener) (observable, oldValue, newValue) -> {
+            System.out.println("New Selected Option: " +newValue.toString());
+            selectedPlayerForQuit= Integer.parseInt(newValue.toString());
+        });
+        humanPlayersList.setDisable(true);
 
         firstCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
         secondCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
@@ -244,8 +264,9 @@ public class GameInfoAndActionsController implements Initializable{
             stopReplay.setDisable(true);
             businessLogic.clearAllCardsOnTable();
 
-            buyButton.setDisable(false);
-            dropDownPlayers.setDisable(false);
+            enableBuyButtons();
+            enableQuitButtons();
+
         });
 
         bigLabel.textProperty().bind(big.asString());
@@ -262,6 +283,39 @@ public class GameInfoAndActionsController implements Initializable{
         additionsLabel.visibleProperty().bind(not(isFixed));
 
         maxPotLabel.textProperty().bind(maxPOT.asString());
+    }
+
+    private void removePlayerFromGame(int selectedPlayerForQuit) {
+
+        gameManager.removeHumanPlayer(selectedPlayerForQuit);
+        if (gameManager.getNumberOfHumanPlayers()==0 || gameManager.getNumberOfPlayers()==2)
+        {
+            //We should exit the game
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Game over");
+
+            if (gameManager.getNumberOfPlayers()==2)
+            {
+                alert.setContentText("Only 2 players remained in the game... See you next time.");
+            }
+            else
+            {
+                alert.setContentText("The last human player left the game... See you next time.");
+            }
+            alert.showAndWait();
+
+            Platform.exit();
+        }
+        else
+        {
+            updateDropDownPlayersList();
+            updateHumanDropDownPlayersList();
+
+            businessLogic.updatePlayersList();
+            businessLogic.updateGUIPotAndPlayerBetAndChips();
+
+        }
+
     }
 
     private void updateGUIWithStep() {
@@ -298,6 +352,7 @@ public class GameInfoAndActionsController implements Initializable{
         updateHandsCount();
         updateMaxPot();
         updateDropDownPlayersList();
+        updateHumanDropDownPlayersList();
     }
 
 
@@ -374,6 +429,10 @@ public class GameInfoAndActionsController implements Initializable{
         //Disable the buy button first
         buyButton.setDisable(true);
         dropDownPlayers.setDisable(true);
+
+        quitGame.setDisable(true);
+        humanPlayersList.setDisable(true);
+
         runNextHandButton.setDisable(true);
 
         replay= gameManager.getHandReplay();
@@ -391,14 +450,32 @@ public class GameInfoAndActionsController implements Initializable{
     public void updateDropDownPlayersList()
     {
 
+        dropDownPlayers.getItems().clear();
         for (PokerPlayer p: gameManager.getPlayers())
         {
             dropDownPlayers.getItems().addAll(p.getName()+" (ID:"+p.getId()+")");
         }
 
-
     }
 
+    public void updateHumanDropDownPlayersList()
+    {
+        humanPlayersList.getItems().clear();
+
+        for (PokerPlayer p: gameManager.getPlayers())
+        {
+            if (p.getType()== PlayerType.Human)
+            {
+                humanPlayersList.getItems().addAll(p.getName()+" (ID:"+p.getId()+")");
+            }
+        }
+    }
+
+    public void enableQuitButtons()
+    {
+        quitGame.setDisable(false);
+        humanPlayersList.setDisable(false);
+    }
     public void enableBuyButtons() {
         buyButton.setDisable(false);
         dropDownPlayers.setDisable(false);
@@ -406,6 +483,10 @@ public class GameInfoAndActionsController implements Initializable{
 
 
     public void runNextHandClicked() {
+        businessLogic.clearAllCardsOnTable();
+        //businessLogic.clearGameTable();
+        humanTurn.setCollapsible(false);
+        handFinishedActions.setCollapsible(false);
         businessLogic.runNextHand();
     }
 

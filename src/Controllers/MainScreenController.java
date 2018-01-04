@@ -94,6 +94,8 @@ public class MainScreenController implements Initializable {
     public void RunOneHand() {
 
         clearAllCardsOnTable();
+        businessLogic.clearGameTable();
+
         gameManager.startNewHand();
         currHand = gameManager.getCurrHand();
         gameManager.resetPlayerState();
@@ -193,6 +195,7 @@ public class MainScreenController implements Initializable {
             {
                 gameInfoAndActionsController.enableReplayButtons();
                 gameInfoAndActionsController.enableBuyButtons();
+                gameInfoAndActionsController.enableQuitButtons();
                 gameInfoAndActionsController.enableRunNextHandButton();
 
                 String message=currHand.getWinnersToDisplay();
@@ -368,5 +371,10 @@ public class MainScreenController implements Initializable {
     public void removeStyle()
     {
         primaryStage.getScene().getStylesheets().clear();
+    }
+
+    public void clearGameTable() {
+        gameTableController.clearPlayersCardsOnTable();
+        gameTableController.clearAllPlayersFromScreen();
     }
 }
