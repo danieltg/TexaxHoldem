@@ -34,7 +34,6 @@ public class MainMenuController implements Initializable{
     @FXML private Button loadXmlButton;
     @FXML private Button startButton;
     @FXML private Label fileNameLabel;
-    @FXML private Button stopButton;
 
     private SimpleBooleanProperty isFileSelected;
     private SimpleStringProperty selectedFileProperty;
@@ -64,7 +63,6 @@ public class MainMenuController implements Initializable{
 
         fileNameLabel.setText("Not Loaded");
         startButton.setDisable(true);
-        stopButton.setDisable(true);
         fileNameLabel.textProperty().bind(selectedFileProperty);
         startButton.disableProperty().bind(isFileSelected.not());
 
@@ -112,10 +110,9 @@ public class MainMenuController implements Initializable{
 
     public void startGameButtonAction(ActionEvent actionEvent) {
 
-            stopButton.setDisable(false);
             loadXmlButton.setDisable(true);
             showEquityCheckBox.setDisable(true);
-            startButton.setVisible(false);
+            isFileSelected.set(false);
             businessLogic.startGame();
         }
 

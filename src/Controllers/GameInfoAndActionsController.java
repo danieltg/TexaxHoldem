@@ -27,7 +27,6 @@ public class GameInfoAndActionsController implements Initializable{
     @FXML private TitledPane humanTurn;
     @FXML private Button buyButton;
     @FXML private ChoiceBox<String> dropDownPlayers;
-    @FXML private Label replayIndex;
     @FXML private Accordion accordionGame;
     @FXML private TitledPane gameSettings;
     @FXML private TitledPane gameDetails;
@@ -203,8 +202,6 @@ public class GameInfoAndActionsController implements Initializable{
 
             nextButton.setDisable(false);
             stopReplay.setDisable(false);
-
-            replayIndex.setText(String.valueOf(step));
             updateGUIWithStep();
 
         });
@@ -235,8 +232,6 @@ public class GameInfoAndActionsController implements Initializable{
             updateGUIWithStep();
             prevButton.setDisable(false);
             stopReplay.setDisable(false);
-            replayIndex.setText(String.valueOf(step));
-
         });
 
         stopReplay.setDisable(true);
@@ -383,7 +378,6 @@ public class GameInfoAndActionsController implements Initializable{
 
         replay= gameManager.getHandReplay();
         updateGUIWithStep();
-        replayIndex.setText(String.valueOf(replay.size()));
         prevButton.setDisable(true);
         nextButton.setDisable(false);
         stopReplay.setDisable(false);

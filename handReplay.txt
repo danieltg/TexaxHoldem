@@ -1,104 +1,192 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Or, 123> : 5C QH
-Player <Elad, 234> : 6S JC
-Player <Daniel, 456> : QD JD
+Player <Mushon, 1> : KH 6C
+Player <Avrum, 2> : 9C 8S
+Player <Nachtze, 3> : AS 3D
+Player <Daniel, 4> : 9S 8H
+Player <Yoni, 5> : 5D 2H
+Player <Doron, 6> : TH 4C
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 456
-Player name: Daniel
-Player type: Human
-Player cards: QD JD
-Player chips: 45
-Player bet: 5
-Player equity: 61
-Pot: 5
+Active player ID: 6
+Player name: Doron
+Player type: Computer
+Player cards: TH 4C
+Player chips: 98
+Player bet: 2
+Player equity: 0
+Pot: 2
 Current Bet: 0
 Action: B
-Additional Action Information: 5
+Additional Action Information: 2
 ************************************************************************************************
-Active player ID: 123
-Player name: Or
+Active player ID: 1
+Player name: Mushon
 Player type: Computer
-Player cards: 5C QH
-Player chips: 40
-Player bet: 10
-Player equity: 18
-Pot: 15
+Player cards: KH 6C
+Player chips: 96
+Player bet: 4
+Player equity: 0
+Pot: 6
 Current Bet: 0
 Action: R
-Additional Action Information: 10
+Additional Action Information: 4
 ************************************************************************************************
-Active player ID: 234
-Player name: Elad
+Active player ID: 2
+Player name: Avrum
 Player type: Human
-Player cards: 6S JC
-Player chips: 50
+Player cards: 9C 8S
+Player chips: 100
 Player bet: 0
-Player equity: 21
-Pot: 15
+Player equity: 0
+Pot: 6
 Current Bet: 0
 Action: C
 ************************************************************************************************
-Active player ID: 456
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: AS 3D
+Player chips: 100
+Player bet: 0
+Player equity: 0
+Pot: 6
+Current Bet: 0
+Action: C
+************************************************************************************************
+Active player ID: 4
 Player name: Daniel
+Player type: Computer
+Player cards: 9S 8H
+Player chips: 100
+Player bet: 0
+Player equity: 0
+Pot: 6
+Current Bet: 0
+Action: F
+************************************************************************************************
+Active player ID: 5
+Player name: Yoni
+Player type: Computer
+Player cards: 5D 2H
+Player chips: 100
+Player bet: 0
+Player equity: 0
+Pot: 6
+Current Bet: 0
+Action: C
+************************************************************************************************
+Active player ID: 6
+Player name: Doron
+Player type: Computer
+Player cards: TH 4C
+Player chips: 100
+Player bet: 0
+Player equity: 0
+Pot: 4
+Current Bet: 0
+Action: C
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Computer
+Player cards: KH 6C
+Player chips: 96
+Player bet: 4
+Player equity: 0
+Pot: 4
+Current Bet: 4
+Action: R
+Additional Action Information: 4
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
 Player type: Human
-Player cards: QD JD
-Player chips: 49
-Player bet: 1
-Player equity: 61
-Pot: 11
-Current Bet: 1
+Player cards: 9C 8S
+Player chips: 95
+Player bet: 5
+Player equity: 0
+Pot: 9
+Current Bet: 5
 Action: R
 Additional Action Information: 1
 ************************************************************************************************
-Active player ID: 123
-Player name: Or
+Active player ID: 3
+Player name: Nachtze
 Player type: Computer
-Player cards: 5C QH
-Player chips: 40
+Player cards: AS 3D
+Player chips: 91
+Player bet: 9
+Player equity: 0
+Pot: 18
+Current Bet: 9
+Action: R
+Additional Action Information: 4
+************************************************************************************************
+Active player ID: 5
+Player name: Yoni
+Player type: Computer
+Player cards: 5D 2H
+Player chips: 100
 Player bet: 0
 Player equity: 0
-Pot: 11
-Current Bet: 1
+Pot: 18
+Current Bet: 9
 Action: F
 ************************************************************************************************
-Active player ID: 234
-Player name: Elad
-Player type: Human
-Player cards: 6S JC
-Player chips: 49
-Player bet: 1
-Player equity: 22
-Pot: 12
-Current Bet: 1
-Action: C
-************************************************************************************************
-The step is not related to any player
-Cards: 5D,7H,JS,??,??
-Pot: 12
-Current Bet: 1
-Action: CARD
-************************************************************************************************
-Active player ID: 456
-Player name: Daniel
-Player type: Human
-Player cards: QD JD
-Player chips: 49
+Active player ID: 6
+Player name: Doron
+Player type: Computer
+Player cards: TH 4C
+Player chips: 100
 Player bet: 0
 Player equity: 0
-Pot: 12
-Current Bet: 1
+Pot: 18
+Current Bet: 9
+Action: F
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Computer
+Player cards: KH 6C
+Player chips: 87
+Player bet: 13
+Player equity: 0
+Pot: 27
+Current Bet: 13
+Action: R
+Additional Action Information: 4
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: 9C 8S
+Player chips: 95
+Player bet: 0
+Player equity: 0
+Pot: 27
+Current Bet: 13
+Action: F
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: AS 3D
+Player chips: 91
+Player bet: 0
+Player equity: 0
+Pot: 27
+Current Bet: 13
 Action: F
 ************************************************************************************************
 The step is not related to any player
-Cards: 5D,7H,JS,??,??
-Pot: 12
-Current Bet: 1
-Action: Elad (234) won with this hand: 6S JC.
-Prize: 12$
+Cards: ??,??,??,??,??
+Pot: 27
+Current Bet: 13
+Action: Mushon (1) won with this hand: KH 6C.
+Prize: 27$
 
 
