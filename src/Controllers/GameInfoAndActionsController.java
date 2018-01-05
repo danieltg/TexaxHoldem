@@ -13,8 +13,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -27,9 +25,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static javafx.beans.binding.Bindings.max;
 import static javafx.beans.binding.Bindings.not;
 
+@SuppressWarnings("deprecation")
 public class GameInfoAndActionsController implements Initializable{
 
     @FXML private Button quitGame;

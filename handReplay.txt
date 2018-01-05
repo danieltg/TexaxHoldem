@@ -1,252 +1,252 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Mushon, 1> : 3S 6D
-Player <Avrum, 2> : KD 3H
-Player <Nachtze, 3> : 6H TH
-Player <Avi, 4> : 4C 8D
-Player <Yoram, 5> : 3D QS
-Player <Assi, 6> : AC 7H
+Player <Mushon, 1> : 5S 2H
+Player <Nachtze, 3> : 2D QS
+Player <Avi, 4> : 9D 5C
+Player <Yoram, 5> : 9S TS
+Player <Assi, 6> : JC 4S
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 1
-Player name: Mushon
+Active player ID: 3
+Player name: Nachtze
 Player type: Computer
-Player cards: 3S 6D
-Player chips: 98
+Player cards: 2D QS
+Player chips: 96
 Player bet: 2
-Player equity: 5
+Player equity: 0
 Pot: 2
 Current Bet: 0
 Action: B
 Additional Action Information: 2
 ************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: KD 3H
-Player chips: 96
+Active player ID: 4
+Player name: Avi
+Player type: Computer
+Player cards: 9D 5C
+Player chips: 90
 Player bet: 4
-Player equity: 16
+Player equity: 0
 Pot: 6
 Current Bet: 0
 Action: R
 Additional Action Information: 4
 ************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: 6H TH
-Player chips: 99
-Player bet: 1
-Player equity: 22
-Pot: 7
-Current Bet: 1
-Action: R
-Additional Action Information: 1
-************************************************************************************************
-Active player ID: 4
-Player name: Avi
-Player type: Computer
-Player cards: 4C 8D
-Player chips: 100
-Player bet: 0
-Player equity: 0
-Pot: 7
-Current Bet: 1
-Action: F
-************************************************************************************************
 Active player ID: 5
 Player name: Yoram
 Player type: Human
-Player cards: 3D QS
-Player chips: 99
-Player bet: 1
-Player equity: 16
-Pot: 8
-Current Bet: 1
+Player cards: 9S TS
+Player chips: 94
+Player bet: 0
+Player equity: 0
+Pot: 6
+Current Bet: 0
 Action: C
 ************************************************************************************************
 Active player ID: 6
 Player name: Assi
 Player type: Computer
-Player cards: AC 7H
-Player chips: 93
-Player bet: 7
-Player equity: 35
-Pot: 15
-Current Bet: 7
+Player cards: JC 4S
+Player chips: 98
+Player bet: 2
+Player equity: 0
+Pot: 8
+Current Bet: 2
 Action: R
-Additional Action Information: 6
+Additional Action Information: 2
 ************************************************************************************************
 Active player ID: 1
 Player name: Mushon
 Player type: Computer
-Player cards: 3S 6D
-Player chips: 98
-Player bet: 0
+Player cards: 5S 2H
+Player chips: 96
+Player bet: 4
 Player equity: 0
-Pot: 15
-Current Bet: 7
-Action: F
+Pot: 12
+Current Bet: 4
+Action: R
+Additional Action Information: 2
 ************************************************************************************************
-Active player ID: 2
-Player name: Avrum
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: 2D QS
+Player chips: 94
+Player bet: 4
+Player equity: 0
+Pot: 14
+Current Bet: 4
+Action: C
+************************************************************************************************
+Active player ID: 4
+Player name: Avi
+Player type: Computer
+Player cards: 9D 5C
+Player chips: 90
+Player bet: 4
+Player equity: 0
+Pot: 14
+Current Bet: 4
+Action: C
+************************************************************************************************
+Active player ID: 5
+Player name: Yoram
 Player type: Human
-Player cards: KD 3H
-Player chips: 93
-Player bet: 7
-Player equity: 21
+Player cards: 9S TS
+Player chips: 90
+Player bet: 4
+Player equity: 0
 Pot: 18
-Current Bet: 7
+Current Bet: 4
 Action: C
+************************************************************************************************
+Active player ID: 6
+Player name: Assi
+Player type: Computer
+Player cards: JC 4S
+Player chips: 96
+Player bet: 4
+Player equity: 0
+Pot: 20
+Current Bet: 4
+Action: C
+************************************************************************************************
+The step is not related to any player
+Cards: 7H,QH,8C,??,??
+Pot: 20
+Current Bet: 4
+Action: CARD
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Computer
+Player cards: 5S 2H
+Player chips: 96
+Player bet: 0
+Player equity: 0
+Pot: 20
+Current Bet: 4
+Action: F
 ************************************************************************************************
 Active player ID: 3
 Player name: Nachtze
 Player type: Computer
-Player cards: 6H TH
-Player chips: 93
-Player bet: 7
-Player equity: 27
-Pot: 24
-Current Bet: 7
+Player cards: 2D QS
+Player chips: 86
+Player bet: 8
+Player equity: 0
+Pot: 28
+Current Bet: 8
+Action: B
+Additional Action Information: 8
+************************************************************************************************
+Active player ID: 4
+Player name: Avi
+Player type: Computer
+Player cards: 9D 5C
+Player chips: 86
+Player bet: 8
+Player equity: 0
+Pot: 32
+Current Bet: 8
 Action: C
 ************************************************************************************************
 Active player ID: 5
 Player name: Yoram
 Player type: Human
-Player cards: 3D QS
-Player chips: 93
-Player bet: 7
-Player equity: 17
-Pot: 30
-Current Bet: 7
+Player cards: 9S TS
+Player chips: 86
+Player bet: 8
+Player equity: 0
+Pot: 36
+Current Bet: 8
 Action: C
-************************************************************************************************
-The step is not related to any player
-Cards: 2D,9H,5H,??,??
-Pot: 30
-Current Bet: 7
-Action: CARD
 ************************************************************************************************
 Active player ID: 6
 Player name: Assi
 Player type: Computer
-Player cards: AC 7H
-Player chips: 93
-Player bet: 0
-Player equity: 35
-Pot: 30
-Current Bet: 7
-Action: K
+Player cards: JC 4S
+Player chips: 92
+Player bet: 8
+Player equity: 0
+Pot: 40
+Current Bet: 8
+Action: C
 ************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: KD 3H
-Player chips: 93
-Player bet: 0
-Player equity: 21
-Pot: 30
-Current Bet: 7
-Action: K
+The step is not related to any player
+Cards: 7H,QH,8C,5H,??
+Pot: 40
+Current Bet: 8
+Action: CARD
 ************************************************************************************************
 Active player ID: 3
 Player name: Nachtze
 Player type: Computer
-Player cards: 6H TH
-Player chips: 93
+Player cards: 2D QS
+Player chips: 86
 Player bet: 0
 Player equity: 0
-Pot: 30
-Current Bet: 7
+Pot: 40
+Current Bet: 8
+Action: K
+************************************************************************************************
+Active player ID: 4
+Player name: Avi
+Player type: Computer
+Player cards: 9D 5C
+Player chips: 86
+Player bet: 0
+Player equity: 0
+Pot: 40
+Current Bet: 8
 Action: F
 ************************************************************************************************
 Active player ID: 5
 Player name: Yoram
 Player type: Human
-Player cards: 3D QS
-Player chips: 93
+Player cards: 9S TS
+Player chips: 86
 Player bet: 0
-Player equity: 14
-Pot: 30
-Current Bet: 7
+Player equity: 0
+Pot: 40
+Current Bet: 8
 Action: K
-************************************************************************************************
-The step is not related to any player
-Cards: 2D,9H,5H,QC,??
-Pot: 30
-Current Bet: 7
-Action: CARD
 ************************************************************************************************
 Active player ID: 6
 Player name: Assi
 Player type: Computer
-Player cards: AC 7H
-Player chips: 93
+Player cards: JC 4S
+Player chips: 92
 Player bet: 0
 Player equity: 0
-Pot: 30
-Current Bet: 7
+Pot: 40
+Current Bet: 8
 Action: F
 ************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: KD 3H
-Player chips: 93
-Player bet: 0
-Player equity: 7
-Pot: 30
-Current Bet: 7
-Action: K
-************************************************************************************************
-Active player ID: 5
-Player name: Yoram
-Player type: Human
-Player cards: 3D QS
-Player chips: 93
-Player bet: 0
-Player equity: 93
-Pot: 30
-Current Bet: 7
-Action: K
-************************************************************************************************
 The step is not related to any player
-Cards: 2D,9H,5H,QC,TC
-Pot: 30
-Current Bet: 7
+Cards: 7H,QH,8C,5H,4D
+Pot: 40
+Current Bet: 8
 Action: CARD
 ************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: KD 3H
-Player chips: 93
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: 2D QS
+Player chips: 86
 Player bet: 0
-Player equity: 7
-Pot: 30
-Current Bet: 7
-Action: K
-************************************************************************************************
-Active player ID: 5
-Player name: Yoram
-Player type: Human
-Player cards: 3D QS
-Player chips: 93
-Player bet: 0
-Player equity: 93
-Pot: 30
-Current Bet: 7
-Action: K
+Player equity: 0
+Pot: 40
+Current Bet: 8
+Action: F
 ************************************************************************************************
 The step is not related to any player
-Cards: 2D,9H,5H,QC,TC
-Pot: 30
-Current Bet: 7
-Action: Yoram (5) won with this hand: Pair (Queens - T,9,5).
-Prize: 30$
+Cards: 7H,QH,8C,5H,4D
+Pot: 40
+Current Bet: 8
+Action: Yoram (5) won with this hand: 9S TS.
+Prize: 40$
 
 

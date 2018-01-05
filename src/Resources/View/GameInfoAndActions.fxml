@@ -173,21 +173,21 @@
                           <Pane prefHeight="38.0" prefWidth="39.0" visible="false" />
                           <ChoiceBox fx:id="dropDownPlayers" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
                       </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
-                     <children>
-                        <Pane prefHeight="38.0" prefWidth="18.0" visible="false" />
-                        <Button fx:id="quitGame" mnemonicParsing="false" text="Quit">
-                           <HBox.margin>
-                              <Insets bottom="5.0" top="5.0" />
-                           </HBox.margin></Button>
-                        <Pane prefHeight="38.0" prefWidth="39.0" visible="false" />
-                        <ChoiceBox fx:id="humanPlayersList" prefHeight="27.0" prefWidth="148.0">
-                           <HBox.margin>
-                              <Insets bottom="5.0" top="5.0" />
-                           </HBox.margin></ChoiceBox>
-                     </children></HBox>
+                      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                          <Pane prefHeight="38.0" prefWidth="18.0" visible="false"/>
+                          <Button fx:id="quitGame" mnemonicParsing="false" text="Quit">
+                              <HBox.margin>
+                                  <Insets bottom="5.0" top="5.0"/>
+                              </HBox.margin>
+                          </Button>
+                          <Pane prefHeight="38.0" prefWidth="39.0" visible="false"/>
+                          <ChoiceBox fx:id="humanPlayersList" prefHeight="27.0" prefWidth="148.0">
+                              <HBox.margin>
+                                  <Insets bottom="5.0" top="5.0"/>
+                              </HBox.margin>
+                          </ChoiceBox>
+                      </HBox>
                   </GridPane>
-                  <Label fx:id="replayIndex" />
               </AnchorPane>
           </TitledPane>
       </panes>
