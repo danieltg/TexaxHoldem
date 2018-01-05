@@ -93,4 +93,8 @@ public class BusinessLogic {
     public void hideGameTable() {
         controller.hideGameTable();
     }
+
+    public boolean isAnimationEnabled() {
+        return controller.isAnimationEnabled();
+    }
 }

@@ -5,16 +5,24 @@ import Engine.Players.PlayerType;
 import Engine.Players.PokerPlayer;
 import Engine.PokerHandStep;
 import Engine.Utils.EngineUtils;
+import javafx.animation.FadeTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.SequentialTransitionBuilder;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -83,6 +91,8 @@ public class GameInfoAndActionsController implements Initializable{
 
     private int selectedPlayer = -1;
     private int selectedPlayerForQuit= -1;
+    private boolean showCard1=true;
+    private boolean showCard2=true;
 
     public GameInfoAndActionsController()
     {
@@ -133,6 +143,31 @@ public class GameInfoAndActionsController implements Initializable{
         humanPlayersList.setDisable(true);
 
         firstCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
+        firstCardImage.setOnMouseClicked((EventHandler) event -> {
+            if (businessLogic.isAnimationEnabled()) {
+                if (showCard1) {
+                    fadeIn(0,firstCardImage);
+                    showCard1 = false;
+                } else {
+                    fadeOut(firstCardImage);
+                    showCard1 = true;
+                }
+            }
+        });
+
+        secondCardImage.setOnMouseClicked((EventHandler) event -> {
+            if (businessLogic.isAnimationEnabled()) {
+                if (showCard2) {
+                    fadeIn(1,secondCardImage);
+                    showCard2 = false;
+                } else {
+                    fadeOut(secondCardImage);
+                    showCard2 = true;
+                }
+            }
+        });
+
+
         secondCardImage.setImage(new Image(EngineUtils.BASE_PACKAGE+"back.png"));
         firstCardImage.setVisible(false);
         secondCardImage.setVisible(false);
@@ -283,6 +318,38 @@ public class GameInfoAndActionsController implements Initializable{
         additionsLabel.visibleProperty().bind(not(isFixed));
 
         maxPotLabel.textProperty().bind(maxPOT.asString());
+    }
+
+    private void fadeOut(ImageView img) {
+        Image image1 = new Image(EngineUtils.BASE_PACKAGE+"back.png");
+        SequentialTransition transitionForward = createTransition(img, image1);
+        transitionForward.play();
+    }
+
+    private void fadeIn(int index, ImageView img) {
+        Image image1 = new Image(EngineUtils.BASE_PACKAGE+currPlayer.getCardsAsStringArray()[index]+".png");
+        SequentialTransition transitionForward = createTransition(img, image1);
+        transitionForward.play();
+    }
+
+    SequentialTransition createTransition(final ImageView iv, final Image img){
+        FadeTransition fadeOutTransition
+                = new FadeTransition(Duration.seconds(1), iv);
+        fadeOutTransition.setFromValue(1.0);
+        fadeOutTransition.setToValue(0.0);
+        fadeOutTransition.setOnFinished(arg0 -> iv.setImage(img));
+
+        FadeTransition fadeInTransition
+                = new FadeTransition(Duration.seconds(1), iv);
+        fadeInTransition.setFromValue(0.0);
+        fadeInTransition.setToValue(1.0);
+        SequentialTransition sequentialTransition
+                = SequentialTransitionBuilder
+                .create()
+                .children(fadeOutTransition, fadeInTransition)
+                .build();
+
+        return sequentialTransition;
     }
 
     private void removePlayerFromGame(int selectedPlayerForQuit) {
