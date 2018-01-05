@@ -5,7 +5,7 @@
 
 <ScrollPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenController">
 
-<BorderPane style="-fx-background-color: white;">
+<BorderPane>
     <top>
     <fx:include fx:id="mainMenu" source="MainMenu.fxml" BorderPane.alignment="CENTER" />
     </top>
