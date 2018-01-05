@@ -21,12 +21,22 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
     private  PokerGameDescriptor pokerGameDescriptor;
     private  String filePath=null;
  private String failedMSG;
+    private boolean isValid=true;
 
     public void readFile(String filePath) throws FileNotFoundException, JAXBException, StructureException, BlindesException {
 
-
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         updateMessage("Loading");
-
+        this.updateProgress(20, 100);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         File file = new File(filePath);
         if (!EngineUtils.getFileExtension(file).equals("xml"))
             throw new FileNotFoundException("Invalid file extension");
@@ -35,12 +45,22 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         GameDescriptor gameDescriptor = (GameDescriptor) jaxbUnmarshaller.unmarshal(file);
-
+        this.updateProgress(50, 100);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         pokerGameDescriptor = new PokerGameDescriptor(gameDescriptor);
         validatePokerGameDescriptor(pokerGameDescriptor);
-
+        this.updateProgress(80, 100);
         updateMessage("Check file");
-
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.updateProgress(100, 100);
 
     }
 
@@ -100,12 +120,13 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
     protected Boolean call() throws Exception {
     try {
        readFile(filePath);
-        updateMessage("Finished!");
+        updateMessage("It's a valid game file!");
+        isValid=true;
     return true;
     }
     catch (Exception e){
-        updateMessage("Failed!");
-
+        updateMessage(e.getMessage());
+        isValid=false;
         failedMSG=e.getMessage();
      return  false;
     }
@@ -121,5 +142,10 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
 
     public PokerGameDescriptor getGameDescriptor() {
         return pokerGameDescriptor;
+    }
+
+    public boolean isValidFile()
+    {
+        return isValid;
     }
 }

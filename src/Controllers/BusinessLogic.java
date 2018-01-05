@@ -97,4 +97,8 @@ public class BusinessLogic {
     public boolean isAnimationEnabled() {
         return controller.isAnimationEnabled();
     }
+
+    public void clearOnlyGameTable() {
+        controller.clearGameTable();
+    }
 }
