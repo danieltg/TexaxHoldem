@@ -29,9 +29,8 @@ import java.util.ResourceBundle;
 public class MainMenuController implements Initializable{
 
 
+    @FXML private CheckBox showAnimationCheckBox;
     @FXML private Label xmlLoadingLabel;
-
-
     @FXML private CheckBox showEquityCheckBox;
 
     @FXML private ComboBox styleComboBox;
@@ -48,12 +47,14 @@ public class MainMenuController implements Initializable{
     private BusinessLogic businessLogic;
 
     private boolean showEquity;
+    private boolean showAnimation;
 
     public MainMenuController()
     {
         selectedFileProperty = new SimpleStringProperty();
         isFileSelected = new SimpleBooleanProperty(false);
         showEquity=false;
+        showAnimation=false;
     }
 
     @Override
@@ -67,6 +68,14 @@ public class MainMenuController implements Initializable{
             }
         });
 
+        showAnimationCheckBox.setSelected(false);
+        showAnimationCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                                Boolean old_val, Boolean new_val) {
+                showAnimation=new_val;
+            }
+        });
+
         fileNameLabel.setText("Not Loaded");
         startButton.setDisable(true);
         fileNameLabel.textProperty().bind(selectedFileProperty);
@@ -77,7 +86,6 @@ public class MainMenuController implements Initializable{
         List<String> list = new ArrayList<String>();
         ObservableList<String> observableList = FXCollections.observableList(list);
         observableList.addAll("Style1","Style2","Basic");
-        //noinspection unchecked
         styleComboBox.setItems(observableList);
     }
 
@@ -138,19 +146,12 @@ public void setSettings(ReadGameDescriptorFile readGameDescriptorFile,Boolean re
         }
 
 
-    public void stopClicked(ActionEvent actionEvent) {
-        startButton.setVisible(true);
-        //TODO:: finish game
-    }
-
-
     public void enableLoadXMLButton() {
         loadXmlButton.setDisable(false);
     }
 
     public void enableStartGameButton() {
         startButton.setVisible(true);
-        //startButton.setDisable(false);
     }
 
     public void styleChanged(ActionEvent actionEvent) {
@@ -168,4 +169,6 @@ public void setSettings(ReadGameDescriptorFile readGameDescriptorFile,Boolean re
 
 
     public boolean getEquity(){ return showEquity;}
+
+    public boolean getAnimation(){ return showAnimation;}
 }

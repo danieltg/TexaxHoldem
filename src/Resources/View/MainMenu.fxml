@@ -29,20 +29,12 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </HBox.margin>
         </ComboBox>
-        <Label prefHeight="37.0" prefWidth="107.0" text="Animation:">
-            <HBox.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </HBox.margin>
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-            </padding>
-        </Label>
-        <ComboBox fx:id="animationComboBox" layoutX="93.0" layoutY="20.0" prefWidth="150.0">
-            <HBox.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </HBox.margin>
-        </ComboBox>
       <CheckBox fx:id="showEquityCheckBox" mnemonicParsing="false" prefHeight="47.0" prefWidth="106.0" text="Equity">
+         <HBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </HBox.margin>
+      </CheckBox>
+      <CheckBox fx:id="showAnimationCheckBox" layoutX="276.0" layoutY="20.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="106.0" text="Animation">
          <HBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </HBox.margin>
@@ -81,15 +73,6 @@
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </Label>
-
-        <Button fx:id="stopButton" mnemonicParsing="false" onAction="#stopClicked" text="Stop">
-            <HBox.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </HBox.margin>
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-            </padding>
-        </Button>
       <Label fx:id="xmlLoadingLabel">
          <HBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

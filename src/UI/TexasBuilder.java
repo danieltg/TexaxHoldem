@@ -1,9 +1,7 @@
 package UI;
 
 import Controllers.BusinessLogic;
-import Controllers.MainMenuController;
 import Controllers.MainScreenController;
-import Controllers.PlayersTableController;
 import Engine.GameManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -49,7 +47,6 @@ public class TexasBuilder {
     {
         Scene scene = new Scene(i_root, 1384, 800);
 
-      //  scene.getStylesheets().add("/resources/Style/Default.css");
         primaryStage.setTitle("Texas Holdem");
         primaryStage.setScene(scene);
     }
