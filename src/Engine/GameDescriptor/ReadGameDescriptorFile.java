@@ -25,7 +25,7 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
     public void readFile(String filePath) throws FileNotFoundException, JAXBException, StructureException, BlindesException {
 
 
-        updateMessage("Loading started...");
+        updateMessage("Loading");
 
         File file = new File(filePath);
         if (!EngineUtils.getFileExtension(file).equals("xml"))
@@ -39,7 +39,7 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
         pokerGameDescriptor = new PokerGameDescriptor(gameDescriptor);
         validatePokerGameDescriptor(pokerGameDescriptor);
 
-        updateMessage("Check the file...");
+        updateMessage("Check file");
 
 
     }
@@ -100,11 +100,11 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
     protected Boolean call() throws Exception {
     try {
        readFile(filePath);
-        updateMessage("Finished Succesfully!");
+        updateMessage("Finished!");
     return true;
     }
     catch (Exception e){
-        updateMessage("Loading Failed!");
+        updateMessage("Failed!");
 
         failedMSG=e.getMessage();
      return  false;

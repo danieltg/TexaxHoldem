@@ -47,7 +47,7 @@ public class TexasBuilder {
 
     private void setPrimaryStage(Parent i_root)
     {
-        Scene scene = new Scene(i_root, 1100, 800);
+        Scene scene = new Scene(i_root, 1384, 800);
 
       //  scene.getStylesheets().add("/resources/Style/Default.css");
         primaryStage.setTitle("Texas Holdem");
