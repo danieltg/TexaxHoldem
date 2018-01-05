@@ -28,12 +28,12 @@ import java.util.ResourceBundle;
 @SuppressWarnings("ALL")
 public class MainMenuController implements Initializable{
 
-<<<<<<< HEAD
+
     @FXML private Label xmlLoadingLabel;
-=======
+
 
     @FXML private CheckBox showEquityCheckBox;
->>>>>>> 219728852b5e1e7d723f7440034cb3948e8fc959
+
     @FXML private ComboBox styleComboBox;
     @FXML private ComboBox animationComboBox;
     @FXML private Button loadXmlButton;
