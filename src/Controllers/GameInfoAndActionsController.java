@@ -27,6 +27,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static javafx.beans.binding.Bindings.max;
 import static javafx.beans.binding.Bindings.not;
 
 public class GameInfoAndActionsController implements Initializable{
@@ -452,6 +453,11 @@ public class GameInfoAndActionsController implements Initializable{
             raiseButton.setDisable(false);
             raiseSpinner.setDisable(false);
             maxBetMsgLabel.setVisible(true);
+            if (maxBet<1)
+            {
+                System.out.println("We have bug here");
+                maxBet=1;
+            }
             updateRaiseSpinner(1,maxBet);
             maxBetMsgLabel.setText("The max raise is: "+String.valueOf(maxBet));
         }
@@ -468,6 +474,11 @@ public class GameInfoAndActionsController implements Initializable{
             betButton.setDisable(false);
             betSpinner.setDisable(false);
             maxBetMsgLabel.setVisible(true);
+            if (maxBet<1)
+            {
+                System.out.println("We have bug here");
+                maxBet=1;
+            }
             updateBetSpinner(1,maxBet);
             maxBetMsgLabel.setText("The max bet is: "+String.valueOf(maxBet));
         }

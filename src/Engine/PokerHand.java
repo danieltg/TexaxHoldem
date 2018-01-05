@@ -534,7 +534,7 @@ public class PokerHand {
         currPlayer.collectBet();
         updateMaxBet();
 
-        if (equity)
+        if (equity && action.equals("F") )
             updatePlayersWithEquity();
 
         incCurrPlayer();
