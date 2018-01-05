@@ -3,7 +3,6 @@ package Controllers;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -148,8 +147,8 @@ public class MainMenuController implements Initializable{
         ProgressIndicator progressIndicator = new ProgressIndicator(0);
 
         Button startButton = new Button("Start");
-        Button cancelButton = new Button("OK");
-        cancelButton.setVisible(false);
+        Button okButton = new Button("OK");
+        okButton.setVisible(false);
 
             final Label statusLabel = new Label();
             statusLabel.setMinWidth(250);
@@ -178,7 +177,7 @@ public class MainMenuController implements Initializable{
 
                 readFile.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, //
                         t -> {
-                            cancelButton.setVisible(true);
+                            okButton.setVisible(true);
                         });
 
                 // Start the Task.
@@ -189,7 +188,7 @@ public class MainMenuController implements Initializable{
             Stage popupwindow=new Stage();
 
             // Cancel
-            cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+        okButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     res.set(readFile.isValidFile());
@@ -202,7 +201,7 @@ public class MainMenuController implements Initializable{
         root.setPadding(new Insets(10));
         root.setHgap(10);
 
-        root.getChildren().addAll(label, progressBar, progressIndicator, statusLabel, startButton, cancelButton);
+        root.getChildren().addAll(label, progressBar, progressIndicator, statusLabel, startButton, okButton);
 
         Scene scene = new Scene(root, 500, 120, Color.WHITE);
         popupwindow.setTitle("File validation");
