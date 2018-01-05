@@ -2,10 +2,10 @@
     -fx-background-image: url("1.jpg");
 }
 
+
 .scroll-pane .viewport {
     -fx-background-image: url("1.jpg");
 }
-
 .label {
     -fx-font-size: 16px;
     -fx-font-weight: bold;

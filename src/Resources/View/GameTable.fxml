@@ -10,10 +10,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Circle?>
 
-<Pane fx:id="gameTablePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameTableController">
-   <Circle fx:id="table" fill="#1f93ff" layoutX="292.0" layoutY="236.0" radius="185.0" stroke="BLACK" strokeType="INSIDE" />
+<Pane fx:id="gameTablePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameTableController">
+   <ImageView fitHeight="310.0" fitWidth="632.0" layoutX="-38.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../Images/cards/roundpokertable.png" />
+   </ImageView>
    <ImageView fx:id="tCard1" fitHeight="59.0" fitWidth="43.0" layoutX="173.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../Images/cards/back.png" />
    </ImageView>
@@ -105,7 +106,7 @@
          </HBox>
       </GridPane>
    </Pane>
-   <Pane fx:id="seat5_data" layoutX="9.0" layoutY="272.0" prefHeight="153.0" prefWidth="159.0" style="-fx-border-color: red;">
+   <Pane fx:id="seat5_data" layoutX="8.0" layoutY="306.0" prefHeight="153.0" prefWidth="159.0" style="-fx-border-color: red;">
       <effect>
          <Blend />
       </effect>
@@ -143,7 +144,7 @@
          </HBox>
       </GridPane>
    </Pane>
-   <Pane fx:id="seat4_data" layoutX="217.0" layoutY="334.0" prefHeight="153.0" prefWidth="149.0" style="-fx-border-color: red;">
+   <Pane fx:id="seat4_data" layoutX="217.0" layoutY="382.0" prefHeight="153.0" prefWidth="149.0" style="-fx-border-color: red;">
       <effect>
          <Blend />
       </effect>
@@ -222,7 +223,7 @@
          </HBox>
       </GridPane>
    </Pane>
-   <Pane fx:id="seat3_data" layoutX="425.0" layoutY="257.0" prefHeight="153.0" prefWidth="149.0" style="-fx-border-color: red;">
+   <Pane fx:id="seat3_data" layoutX="442.0" layoutY="300.0" prefHeight="153.0" prefWidth="149.0" style="-fx-border-color: red;">
       <effect>
          <Blend />
       </effect>
@@ -262,7 +263,7 @@
    </Pane>
    <Label layoutX="178.0" layoutY="303.0" text="Pot:" />
    <Label fx:id="potLabel" layoutX="221.0" layoutY="303.0" prefHeight="27.0" prefWidth="91.0" />
-   <Label fx:id="replayStep" layoutX="9.0" layoutY="425.0" prefHeight="72.0" prefWidth="208.0" />
+   <Label fx:id="replayStep" layoutX="387.0" layoutY="453.0" prefHeight="72.0" prefWidth="208.0" />
    <Label layoutX="176.0" layoutY="273.0" text="Curr Player:" />
    <Label fx:id="currPlayerLabel" layoutX="273.0" layoutY="273.0" prefHeight="27.0" prefWidth="91.0" />
    <Label fx:id="equity5" layoutX="13.0" layoutY="425.0" prefHeight="17.0" prefWidth="149.0" />

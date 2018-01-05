@@ -4,20 +4,18 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PlayersTableController">
-    <TableView fx:id="playersTableView" prefHeight="320.0" prefWidth="1097.0">
+<ScrollPane prefHeight="322.0" prefWidth="1477.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PlayersTableController">
+    <TableView fx:id="playersTableView" prefHeight="320.0" prefWidth="1473.0">
       <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="177.0" resizable="false" text="Name"/>
-          <TableColumn fx:id="idColumn" maxWidth="145.0" minWidth="1.0" prefWidth="50.0" resizable="false" text="ID"/>
-          <TableColumn fx:id="typeColumn" prefWidth="206.0" resizable="false" text="Type"/>
-          <TableColumn fx:id="buysColumn" prefWidth="225.0" resizable="false" text="Buys"/>
-          <TableColumn fx:id="handsWinsColumn" prefWidth="226.0" resizable="false" text="Hands wins"/>
-          <TableColumn fx:id="winnigPriceColumn" minWidth="0.0" prefWidth="250.0" resizable="false"
-                       text="Winning price"/>
+          <TableColumn fx:id="nameColumn" prefWidth="177.0" resizable="false" text="Name" />
+          <TableColumn fx:id="idColumn" maxWidth="186.00006103515625" minWidth="1.0" prefWidth="186.00006103515625" resizable="false" text="ID" />
+          <TableColumn fx:id="typeColumn" prefWidth="229.99996948242188" resizable="false" text="Type" />
+          <TableColumn fx:id="buysColumn" prefWidth="161.0" resizable="false" text="Buys" />
+          <TableColumn fx:id="handsWinsColumn" prefWidth="372.0" resizable="false" text="Hands wins" />
+          <TableColumn fx:id="winnigPriceColumn" minWidth="0.0" prefWidth="342.0" resizable="false" text="Winning price" />
       </columns>
         <columnResizePolicy>
-          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
         </columnResizePolicy>
     </TableView>
 </ScrollPane>
