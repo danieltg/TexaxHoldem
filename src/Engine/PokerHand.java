@@ -524,7 +524,7 @@ public class PokerHand {
     }
 
 
-    public void bettingRoundForAPlayer() {
+    public void bettingRoundForAPlayer(boolean equity) {
         PokerPlayer currPlayer = getNextToPlay();
         String action = currPlayer.getPlayerSelection();
         int additionalActionInfo = currPlayer.getAdditionalActionInfo();
@@ -533,7 +533,9 @@ public class PokerHand {
         addToPot(currPlayer.getBet());
         currPlayer.collectBet();
         updateMaxBet();
-        //updatePlayersWithEquity();
+
+        if (equity)
+            updatePlayersWithEquity();
 
         incCurrPlayer();
         afterPlayerAction();
@@ -807,5 +809,12 @@ public class PokerHand {
 
         return options;
 
+    }
+
+    public void resetPlayersFold() {
+        for (PokerPlayer p: players)
+        {
+            p.setFolded(false);
+        }
     }
 }

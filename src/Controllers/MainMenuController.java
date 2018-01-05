@@ -4,12 +4,15 @@ import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GameManager;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -25,13 +28,17 @@ import java.util.ResourceBundle;
 @SuppressWarnings("ALL")
 public class MainMenuController implements Initializable{
 
+<<<<<<< HEAD
     @FXML private Label xmlLoadingLabel;
+=======
+
+    @FXML private CheckBox showEquityCheckBox;
+>>>>>>> 219728852b5e1e7d723f7440034cb3948e8fc959
     @FXML private ComboBox styleComboBox;
     @FXML private ComboBox animationComboBox;
     @FXML private Button loadXmlButton;
     @FXML private Button startButton;
     @FXML private Label fileNameLabel;
-    @FXML private Button stopButton;
 
 
     private SimpleBooleanProperty isFileSelected;
@@ -40,17 +47,28 @@ public class MainMenuController implements Initializable{
     private GameManager gameManager;
     private BusinessLogic businessLogic;
 
+    private boolean showEquity;
+
     public MainMenuController()
     {
         selectedFileProperty = new SimpleStringProperty();
         isFileSelected = new SimpleBooleanProperty(false);
+        showEquity=false;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        showEquityCheckBox.setSelected(false);
+        showEquityCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                                Boolean old_val, Boolean new_val) {
+                showEquity=new_val;
+            }
+        });
+
         fileNameLabel.setText("Not Loaded");
         startButton.setDisable(true);
-        stopButton.setDisable(true);
         fileNameLabel.textProperty().bind(selectedFileProperty);
         startButton.disableProperty().bind(isFileSelected.not());
 
@@ -113,9 +131,9 @@ public void setSettings(ReadGameDescriptorFile readGameDescriptorFile,Boolean re
 
     public void startGameButtonAction(ActionEvent actionEvent) {
 
-            stopButton.setDisable(false);
             loadXmlButton.setDisable(true);
-            startButton.setVisible(false);
+            showEquityCheckBox.setDisable(true);
+            isFileSelected.set(false);
             businessLogic.startGame();
         }
 
@@ -147,4 +165,7 @@ public void setSettings(ReadGameDescriptorFile readGameDescriptorFile,Boolean re
         else
             businessLogic.basicStyle();
     }
+
+
+    public boolean getEquity(){ return showEquity;}
 }

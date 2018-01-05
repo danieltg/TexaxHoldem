@@ -93,10 +93,12 @@ public class MainScreenController implements Initializable {
 
     public void RunOneHand() {
 
-        clearAllCardsOnTable();
         gameManager.startNewHand();
-        currHand = gameManager.getCurrHand();
         gameManager.resetPlayerState();
+        clearAllCardsOnTable();
+        businessLogic.clearGameTable();
+
+        currHand = gameManager.getCurrHand();
         updateTableCards();
 
         gameManager.clearHandReplay();
@@ -108,7 +110,10 @@ public class MainScreenController implements Initializable {
         gameManager.clearValuesFromCurrHand();
 
         currHand.betSmall();
-        //currHand.updatePlayersWithEquity();
+
+        if (mainMenuController.getEquity())
+            currHand.updatePlayersWithEquity();
+
         gameManager.addStepToHandReplay();
         gameManager.clearValuesFromCurrHand();
 
@@ -116,7 +121,10 @@ public class MainScreenController implements Initializable {
         updateGUIPotAndPlayerBetAndChips();
 
         currHand.betBig();
-        //currHand.updatePlayersWithEquity();
+
+        if (mainMenuController.getEquity())
+            currHand.updatePlayersWithEquity();
+
         gameManager.addStepToHandReplay();
         gameManager.clearValuesFromCurrHand();
 
@@ -187,6 +195,7 @@ public class MainScreenController implements Initializable {
             {
                 gameInfoAndActionsController.enableReplayButtons();
                 gameInfoAndActionsController.enableBuyButtons();
+                gameInfoAndActionsController.enableQuitButtons();
                 gameInfoAndActionsController.enableRunNextHandButton();
 
                 String message=currHand.getWinnersToDisplay();
@@ -199,6 +208,12 @@ public class MainScreenController implements Initializable {
                 updateHandReplayWithTheWinners(message);
                 updateHandCount();
                 gameManager.saveHandReplayToFile("handReplay.txt");
+
+                alert.setHeaderText("Hand finished");
+                alert.setContentText("We are going to clear the game table... You can use the Replay feature to see the previous hand");
+                alert.showAndWait();
+                gameTableController.hideGameTablePane();
+
                 break;
             }
         }
@@ -242,7 +257,7 @@ public class MainScreenController implements Initializable {
             currPlayer.setAdditionalActionInfo(randomNum);
             System.out.println("Computer player ("+currPlayer.getName()+
                     ") is now playing and he wants to: "+whatToDo +" ("+randomNum+")");
-            currHand.bettingRoundForAPlayer();
+            currHand.bettingRoundForAPlayer(mainMenuController.getEquity());
             gameManager.addStepToHandReplay();
             updateGUIPotAndPlayerBetAndChips();
             playBettingRounds();
@@ -253,7 +268,7 @@ public class MainScreenController implements Initializable {
             System.out.println("Human player");
             if (!Objects.equals(currPlayer.getPlayerSelection(), "NOT SELECTED"))
             {
-                currHand.bettingRoundForAPlayer();
+                currHand.bettingRoundForAPlayer((mainMenuController.getEquity()));
                 gameManager.addStepToHandReplay();
                 updateGUIPotAndPlayerBetAndChips();
                 playBettingRounds();
@@ -362,5 +377,14 @@ public class MainScreenController implements Initializable {
     public void removeStyle()
     {
         primaryStage.getScene().getStylesheets().clear();
+    }
+
+    public void clearGameTable() {
+        gameTableController.clearPlayersCardsOnTable();
+        gameTableController.clearAllPlayersFromScreen();
+    }
+
+    public void hideGameTable() {
+        gameTableController.hideGameTablePane();
     }
 }
