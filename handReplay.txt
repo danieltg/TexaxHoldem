@@ -1,9 +1,9 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Mushon, 1> : TD 5C
-Player <Nachtze, 3> : 2S 5H
-Player <Daniel, 4> : TS KS
+Player <Mushon, 1> : AS AD
+Player <Nachtze, 3> : 2D JD
+Player <Daniel, 4> : TC 7D
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
@@ -11,8 +11,8 @@ Action: PLAYER_CARDS
 Active player ID: 1
 Player name: Mushon
 Player type: Computer
-Player cards: TD 5C
-Player chips: 91
+Player cards: AS AD
+Player chips: 76
 Player bet: 2
 Player equity: 0
 Pot: 2
@@ -23,8 +23,8 @@ Additional Action Information: 2
 Active player ID: 3
 Player name: Nachtze
 Player type: Computer
-Player cards: 2S 5H
-Player chips: 88
+Player cards: 2D JD
+Player chips: 90
 Player bet: 4
 Player equity: 0
 Pot: 6
@@ -35,41 +35,117 @@ Additional Action Information: 4
 Active player ID: 4
 Player name: Daniel
 Player type: Human
-Player cards: TS KS
-Player chips: 85
-Player bet: 0
+Player cards: TC 7D
+Player chips: 70
+Player bet: 1
 Player equity: 0
-Pot: 6
-Current Bet: 0
-Action: C
+Pot: 7
+Current Bet: 1
+Action: R
+Additional Action Information: 1
 ************************************************************************************************
 Active player ID: 1
 Player name: Mushon
 Player type: Computer
-Player cards: TD 5C
-Player chips: 91
+Player cards: AS AD
+Player chips: 73
+Player bet: 5
+Player equity: 0
+Pot: 10
+Current Bet: 5
+Action: R
+Additional Action Information: 4
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: 2D JD
+Player chips: 85
+Player bet: 9
+Player equity: 0
+Pot: 15
+Current Bet: 9
+Action: R
+Additional Action Information: 4
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: TC 7D
+Player chips: 61
+Player bet: 10
+Player equity: 0
+Pot: 24
+Current Bet: 10
+Action: R
+Additional Action Information: 1
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Computer
+Player cards: AS AD
+Player chips: 68
+Player bet: 10
+Player equity: 0
+Pot: 29
+Current Bet: 10
+Action: C
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: 2D JD
+Player chips: 84
+Player bet: 10
+Player equity: 0
+Pot: 30
+Current Bet: 10
+Action: C
+************************************************************************************************
+The step is not related to any player
+Cards: TD,6D,2C,??,??
+Pot: 30
+Current Bet: 10
+Action: CARD
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: TC 7D
+Player chips: 61
 Player bet: 0
 Player equity: 0
-Pot: 6
-Current Bet: 0
+Pot: 30
+Current Bet: 10
+Action: K
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Computer
+Player cards: AS AD
+Player chips: 68
+Player bet: 0
+Player equity: 0
+Pot: 30
+Current Bet: 10
 Action: F
 ************************************************************************************************
 Active player ID: 3
 Player name: Nachtze
 Player type: Computer
-Player cards: 2S 5H
-Player chips: 88
+Player cards: 2D JD
+Player chips: 84
 Player bet: 0
 Player equity: 0
-Pot: 6
-Current Bet: 0
+Pot: 30
+Current Bet: 10
 Action: F
 ************************************************************************************************
 The step is not related to any player
-Cards: ??,??,??,??,??
-Pot: 6
-Current Bet: 0
-Action: Daniel (4) won with this hand: TS KS.
-Prize: 6$
+Cards: TD,6D,2C,??,??
+Pot: 30
+Current Bet: 10
+Action: Daniel (4) won with this hand: TC 7D.
+Prize: 30$
 
 

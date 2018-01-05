@@ -31,10 +31,9 @@ public class BusinessLogic {
         controller.setGameTable();
     }
 
-    public void startGame() {
-
+    public void startHand() {
+        controller.startNewHand();
         controller.updateGameDetails();
-
         controller.RunOneHand();
     }
 
@@ -58,6 +57,7 @@ public class BusinessLogic {
     }
 
     public void runNextHand() {
+        controller.startNewHand();
         controller.RunOneHand();
     }
 
@@ -100,5 +100,9 @@ public class BusinessLogic {
 
     public void clearOnlyGameTable() {
         controller.clearGameTable();
+    }
+
+    public void closeGameInfoAndActions() {
+        controller.closeGameInfoAndActions();
     }
 }

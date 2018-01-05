@@ -91,9 +91,13 @@ public class MainScreenController implements Initializable {
         gameTableController.changeTableColor(value);
     }
 
-    public void RunOneHand() {
 
+    public void startNewHand()
+    {
         gameManager.startNewHand();
+    }
+
+    public void RunOneHand() {
         gameManager.resetPlayerState();
         clearAllCardsOnTable();
         businessLogic.clearGameTable();
@@ -387,5 +391,9 @@ public class MainScreenController implements Initializable {
 
     public boolean isAnimationEnabled() {
         return mainMenuController.getAnimation();
+    }
+
+    public void closeGameInfoAndActions() {
+        gameInfoAndActionsController.closeAllScrollPanes();
     }
 }

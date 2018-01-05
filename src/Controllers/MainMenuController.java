@@ -97,6 +97,7 @@ public class MainMenuController implements Initializable{
         selectedFileProperty.set("");
         isFileSelected.set(false);
         businessLogic.clearOnlyGameTable();
+        businessLogic.closeGameInfoAndActions();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select XML file");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML files", "*.xml"));
@@ -211,32 +212,19 @@ public class MainMenuController implements Initializable{
         return res.get();
     }
 
-    public void setSettings(ReadGameDescriptorFile readGameDescriptorFile,Boolean result)
-{
-    if(result) {
-        gameManager.setGameDescriptor(readGameDescriptorFile.getGameDescriptor());
-        gameManager.setTable();
-        businessLogic.updateUI();
-    }
-
-}
-
     public  void setPrimaryStage (Stage s) { primaryStage=s; }
 
     public void setGameManager(GameManager g) { gameManager=g; }
 
     public void setBusinessLogic(BusinessLogic b){businessLogic=b;}
 
-
-
-    public void startGameButtonAction(ActionEvent actionEvent) {
-
-            loadXmlButton.setDisable(true);
-            showEquityCheckBox.setDisable(true);
-            isFileSelected.set(false);
-            businessLogic.startGame();
-        }
-
+    public void startGameButtonAction(ActionEvent actionEvent)
+    {
+        loadXmlButton.setDisable(true);
+        showEquityCheckBox.setDisable(true);
+        isFileSelected.set(false);
+        businessLogic.startHand();
+    }
 
     public void enableLoadXMLButton() {
         loadXmlButton.setDisable(false);

@@ -560,7 +560,7 @@ public class GameInfoAndActionsController implements Initializable{
     public void runNextHandClicked() {
         businessLogic.clearAllCardsOnTable();
         //businessLogic.clearGameTable();
-        businessLogic.runNextHand();
+        businessLogic.startHand();
     }
 
     public void disableHumanButtons() {
@@ -591,5 +591,19 @@ public class GameInfoAndActionsController implements Initializable{
 
     public void raiseClicked() {
         maxBetMsgLabel.setVisible(false);
+    }
+
+    public void closeAllScrollPanes() {
+
+        gameSettings.setExpanded(false);
+        gameDetails.setExpanded(false);
+        humanTurn.setExpanded(false);
+        handFinishedActions.setExpanded(false);
+
+        gameSettings.setCollapsible(false);
+        gameDetails.setCollapsible(false);
+        humanTurn.setCollapsible(false);
+        handFinishedActions.setCollapsible(false);
+
     }
 }
