@@ -1,98 +1,182 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Or, 123> : 4H 8C
-Player <Elad, 234> : 6S 7H
-Player <Daniel, 456> : AH KH
+Player <Mushon, 1> : AC KD
+Player <Avrum, 2> : 2H TC
+Player <Nachtze, 3> : TS TH
+Player <Avi, 4> : 6C 7H
+Player <Yoram, 5> : TD 8C
+Player <Assi, 6> : 7D AD
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 456
-Player name: Daniel
-Player type: Human
-Player cards: AH KH
-Player chips: 45
-Player bet: 5
+Active player ID: 4
+Player name: Avi
+Player type: Computer
+Player cards: 6C 7H
+Player chips: 98
+Player bet: 2
 Player equity: 0
-Pot: 5
+Pot: 2
 Current Bet: 0
 Action: B
-Additional Action Information: 5
+Additional Action Information: 2
 ************************************************************************************************
-Active player ID: 123
-Player name: Or
-Player type: Computer
-Player cards: 4H 8C
-Player chips: 40
-Player bet: 10
+Active player ID: 5
+Player name: Yoram
+Player type: Human
+Player cards: TD 8C
+Player chips: 96
+Player bet: 4
 Player equity: 0
-Pot: 15
+Pot: 6
 Current Bet: 0
 Action: R
-Additional Action Information: 10
+Additional Action Information: 4
 ************************************************************************************************
-Active player ID: 234
-Player name: Elad
+Active player ID: 6
+Player name: Assi
+Player type: Computer
+Player cards: 7D AD
+Player chips: 98
+Player bet: 2
+Player equity: 0
+Pot: 8
+Current Bet: 2
+Action: R
+Additional Action Information: 2
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Computer
+Player cards: AC KD
+Player chips: 94
+Player bet: 6
+Player equity: 0
+Pot: 14
+Current Bet: 6
+Action: R
+Additional Action Information: 4
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
 Player type: Human
-Player cards: 6S 7H
-Player chips: 50
+Player cards: 2H TC
+Player chips: 100
 Player bet: 0
 Player equity: 0
-Pot: 15
-Current Bet: 0
-Action: C
-************************************************************************************************
-Active player ID: 456
-Player name: Daniel
-Player type: Human
-Player cards: AH KH
-Player chips: 45
-Player bet: 0
-Player equity: 0
-Pot: 15
-Current Bet: 0
+Pot: 14
+Current Bet: 6
 Action: F
 ************************************************************************************************
-Active player ID: 123
-Player name: Or
+Active player ID: 3
+Player name: Nachtze
 Player type: Computer
-Player cards: 4H 8C
-Player chips: 50
+Player cards: TS TH
+Player chips: 87
+Player bet: 13
+Player equity: 0
+Pot: 27
+Current Bet: 13
+Action: R
+Additional Action Information: 7
+************************************************************************************************
+Active player ID: 4
+Player name: Avi
+Player type: Computer
+Player cards: 6C 7H
+Player chips: 98
 Player bet: 0
 Player equity: 0
-Pot: 5
-Current Bet: 0
+Pot: 27
+Current Bet: 13
+Action: F
+************************************************************************************************
+Active player ID: 5
+Player name: Yoram
+Player type: Human
+Player cards: TD 8C
+Player chips: 96
+Player bet: 0
+Player equity: 0
+Pot: 27
+Current Bet: 13
+Action: F
+************************************************************************************************
+Active player ID: 6
+Player name: Assi
+Player type: Computer
+Player cards: 7D AD
+Player chips: 87
+Player bet: 13
+Player equity: 0
+Pot: 38
+Current Bet: 13
 Action: C
 ************************************************************************************************
-Active player ID: 234
-Player name: Elad
-Player type: Human
-Player cards: 6S 7H
-Player chips: 49
-Player bet: 1
-Player equity: 0
-Pot: 6
-Current Bet: 1
-Action: R
-Additional Action Information: 1
-************************************************************************************************
-Active player ID: 123
-Player name: Or
+Active player ID: 1
+Player name: Mushon
 Player type: Computer
-Player cards: 4H 8C
-Player chips: 50
+Player cards: AC KD
+Player chips: 94
 Player bet: 0
 Player equity: 0
-Pot: 6
-Current Bet: 1
+Pot: 38
+Current Bet: 13
 Action: F
 ************************************************************************************************
 The step is not related to any player
-Cards: ??,??,??,??,??
-Pot: 6
-Current Bet: 1
-Action: Elad (234) won with this hand: 6S 7H.
-Prize: 6$
+Cards: 6D,7C,8D,??,??
+Pot: 38
+Current Bet: 13
+Action: CARD
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: TS TH
+Player chips: 71
+Player bet: 16
+Player equity: 0
+Pot: 54
+Current Bet: 16
+Action: B
+Additional Action Information: 16
+************************************************************************************************
+Active player ID: 6
+Player name: Assi
+Player type: Computer
+Player cards: 7D AD
+Player chips: 84
+Player bet: 16
+Player equity: 0
+Pot: 57
+Current Bet: 16
+Action: C
+************************************************************************************************
+The step is not related to any player
+Cards: 6D,7C,8D,KC,??
+Pot: 57
+Current Bet: 16
+Action: CARD
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: TS TH
+Player chips: 71
+Player bet: 0
+Player equity: 0
+Pot: 57
+Current Bet: 16
+Action: F
+************************************************************************************************
+The step is not related to any player
+Cards: 6D,7C,8D,KC,??
+Pot: 57
+Current Bet: 16
+Action: Assi (6) won with this hand: 7D AD.
+Prize: 57$
 
 

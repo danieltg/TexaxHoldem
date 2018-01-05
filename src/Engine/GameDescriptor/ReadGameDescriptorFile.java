@@ -10,15 +10,22 @@ import javax.xml.bind.Unmarshaller;
 import Engine.Players.PokerPlayer;
 import Engine.Utils.EngineUtils;
 import Jaxb.GameDescriptor;
+import javafx.concurrent.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.stream.Collectors;
 
-public class ReadGameDescriptorFile {
+public class ReadGameDescriptorFile extends Task<Boolean>{
+
+    private  PokerGameDescriptor pokerGameDescriptor;
+    private  String filePath=null;
+ private String failedMSG;
+
+    public void readFile(String filePath) throws FileNotFoundException, JAXBException, StructureException, BlindesException {
 
 
-    public static PokerGameDescriptor readFile(String filePath) throws FileNotFoundException, JAXBException, StructureException, BlindesException {
+        updateMessage("Loading started...");
 
         File file = new File(filePath);
         if (!EngineUtils.getFileExtension(file).equals("xml"))
@@ -29,15 +36,16 @@ public class ReadGameDescriptorFile {
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         GameDescriptor gameDescriptor = (GameDescriptor) jaxbUnmarshaller.unmarshal(file);
 
-        PokerGameDescriptor pokerGameDescriptor = new PokerGameDescriptor(gameDescriptor);
+        pokerGameDescriptor = new PokerGameDescriptor(gameDescriptor);
         validatePokerGameDescriptor(pokerGameDescriptor);
 
-        return pokerGameDescriptor;
+        updateMessage("Check the file...");
+
 
     }
 
 
-    private static void validatePokerGameDescriptor(PokerGameDescriptor game) throws StructureException, BlindesException {
+    private void validatePokerGameDescriptor(PokerGameDescriptor game) throws StructureException, BlindesException {
 
         PokerStructure s=game.getStructure();
         PokerBlindes b=s.getBlindes();
@@ -65,21 +73,53 @@ public class ReadGameDescriptorFile {
         if (s.getBuy()<0)
             throw new StructureException(StructureException.NEGATIVE_BUY);
 
-        if (b.getSmall()<0 )
+        if (b.getSmall()<0 ) {
             throw new BlindesException(BlindesException.NEGATIVE_SMALL);
+        }
+        if (b.getBig()<0) {
 
-        if (b.getBig()<0)
             throw new BlindesException(BlindesException.NEGATIVE_BIG);
+        }
+        if(b.getAdditions()<0) {
 
-        if(b.getAdditions()<0)
             throw new BlindesException(BlindesException.NEGATIVE_ADDITIONS);
+        }
+        if(b.getMaxTotalRounds()<0) {
 
-        if(b.getMaxTotalRounds()<0)
             throw new BlindesException(BlindesException.NEGATIVE_MAX_TOTAL_ROUNDS);
+        }
 
-        if(b.getSmall()>=b.getBig())
+        if(b.getSmall()>=b.getBig()) {
+
             throw new BlindesException(BlindesException.SMALL_BIGGER_THEN_SMALL);
+        }
 
     }
 
+    @Override
+    protected Boolean call() throws Exception {
+    try {
+       readFile(filePath);
+        updateMessage("Finished Succesfully!");
+    return true;
+    }
+    catch (Exception e){
+        updateMessage("Loading Failed!");
+
+        failedMSG=e.getMessage();
+     return  false;
+    }
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public PokerGameDescriptor getGameDescriptor() {
+        return pokerGameDescriptor;
+    }
 }

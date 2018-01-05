@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -24,13 +25,14 @@ import java.util.ResourceBundle;
 @SuppressWarnings("ALL")
 public class MainMenuController implements Initializable{
 
-
+    @FXML private Label xmlLoadingLabel;
     @FXML private ComboBox styleComboBox;
     @FXML private ComboBox animationComboBox;
     @FXML private Button loadXmlButton;
     @FXML private Button startButton;
     @FXML private Label fileNameLabel;
     @FXML private Button stopButton;
+
 
     private SimpleBooleanProperty isFileSelected;
     private SimpleStringProperty selectedFileProperty;
@@ -53,6 +55,7 @@ public class MainMenuController implements Initializable{
         startButton.disableProperty().bind(isFileSelected.not());
 
 
+
         List<String> list = new ArrayList<String>();
         ObservableList<String> observableList = FXCollections.observableList(list);
         observableList.addAll("Style1","Style2","Basic");
@@ -71,20 +74,34 @@ public class MainMenuController implements Initializable{
         }
 
         String absolutePath = selectedFile.getName();
+
         selectedFileProperty.set(absolutePath);
         isFileSelected.set(true);
 
         try {
-            gameManager.setGameDescriptor(ReadGameDescriptorFile.readFile(selectedFile.getAbsolutePath()));
-            gameManager.setTable();
-            businessLogic.updateUI();
+            ReadGameDescriptorFile readGameDescriptorFile=new ReadGameDescriptorFile();
+            readGameDescriptorFile.setFilePath(absolutePath);
+            xmlLoadingLabel.textProperty().bind(readGameDescriptorFile.messageProperty());
+            readGameDescriptorFile.valueProperty().addListener((observable, oldValue, newValue) -> setSettings(readGameDescriptorFile,newValue));
+            new Thread(readGameDescriptorFile).start();
+
+
+
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
 
     }
 
+public void setSettings(ReadGameDescriptorFile readGameDescriptorFile,Boolean result)
+{
+    if(result) {
+        gameManager.setGameDescriptor(readGameDescriptorFile.getGameDescriptor());
+        gameManager.setTable();
+        businessLogic.updateUI();
+    }
 
+}
 
     public  void setPrimaryStage (Stage s) { primaryStage=s; }
 

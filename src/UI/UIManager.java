@@ -42,7 +42,7 @@ public class UIManager {
                 System.out.println("Which configuration game file (.xml) would you like to load? Please provide full path including file extension");
                 System.out.flush();
                 String filename = scanner.nextLine();
-                gameManager.setGameDescriptor(ReadGameDescriptorFile.readFile(filename));
+                //gameManager.setGameDescriptor(ReadGameDescriptorFile.readFile(filename));
                 gameManager.setTable();
                 System.out.println("Configuration file was loaded successfully...");
                 gameManager.printGameState();
