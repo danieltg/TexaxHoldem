@@ -125,10 +125,6 @@ public class MainMenuController implements Initializable{
                 businessLogic.updateUI();
             }
 
-            else
-            {
-                //file is not valid
-            }
             //ReadGameDescriptorFile readGameDescriptorFile=new ReadGameDescriptorFile();
             //readGameDescriptorFile.setFilePath(absolutePath);
             //xmlLoadingLabel.textProperty().bind(readGameDescriptorFile.messageProperty());
@@ -170,11 +166,7 @@ public class MainMenuController implements Initializable{
 
                 // Bind progress property
                 progressBar.progressProperty().bind(readFile.progressProperty());
-
-                // Hủy bỏ kết nối thuộc tính progress
                 progressIndicator.progressProperty().unbind();
-
-                // Bind progress property.
                 progressIndicator.progressProperty().bind(readFile.progressProperty());
 
                 // Unbind text property for Label.
@@ -206,14 +198,13 @@ public class MainMenuController implements Initializable{
                 }
             });
 
-            FlowPane root = new FlowPane();
-            root.setPadding(new Insets(10));
-            root.setHgap(10);
+        FlowPane root = new FlowPane();
+        root.setPadding(new Insets(10));
+        root.setHgap(10);
 
-            root.getChildren().addAll(label, progressBar, progressIndicator, //
-                    statusLabel, startButton, cancelButton);
+        root.getChildren().addAll(label, progressBar, progressIndicator, statusLabel, startButton, cancelButton);
 
-            Scene scene = new Scene(root, 500, 120, Color.WHITE);
+        Scene scene = new Scene(root, 500, 120, Color.WHITE);
         popupwindow.setTitle("File validation");
         popupwindow.setScene(scene);
         popupwindow.showAndWait();
