@@ -157,6 +157,7 @@ public class MainMenuController implements Initializable{
             // Start Button.
             startButton.setOnAction(event -> {
                 startButton.setDisable(true);
+                startButton.setVisible(false);
                 progressBar.setProgress(0);
                 progressIndicator.setProgress(0);
 

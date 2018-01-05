@@ -20,7 +20,6 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
 
     private  PokerGameDescriptor pokerGameDescriptor;
     private  String filePath=null;
- private String failedMSG;
     private boolean isValid=true;
 
     public void readFile(String filePath) throws FileNotFoundException, JAXBException, StructureException, BlindesException {
@@ -33,7 +32,7 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
         updateMessage("Loading");
         this.updateProgress(20, 100);
         try {
-            Thread.sleep(500);
+            Thread.sleep(700);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -118,24 +117,19 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
 
     @Override
     protected Boolean call() throws Exception {
-    try {
-       readFile(filePath);
-        updateMessage("It's a valid game file!");
-        isValid=true;
-    return true;
+        try {
+            readFile(filePath);
+            updateMessage("Configuration file was loaded successfully");
+            isValid=true;
+            return true;
+        }
+        catch (Exception e)
+        {
+            updateMessage(e.getMessage());
+            isValid=false;
+            return false;
+        }
     }
-    catch (Exception e){
-        updateMessage(e.getMessage());
-        isValid=false;
-        failedMSG=e.getMessage();
-     return  false;
-    }
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }

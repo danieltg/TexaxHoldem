@@ -760,6 +760,7 @@ public class GameTableController implements Initializable {
 
     public void clearAllPlayersFromScreen() {
         clearTable();
+        replayStep.setText("");
     }
 
 

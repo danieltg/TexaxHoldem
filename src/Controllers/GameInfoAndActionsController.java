@@ -293,6 +293,7 @@ public class GameInfoAndActionsController implements Initializable{
             prevButton.setDisable(true);
             nextButton.setDisable(true);
             replayButton.setDisable(false);
+
             runNextHandButton.setDisable(gameManager.getHandNumber()>=gameManager.getHandsCount());
 
             stopReplay.setDisable(true);
