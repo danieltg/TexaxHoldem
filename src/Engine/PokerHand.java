@@ -817,4 +817,12 @@ public class PokerHand {
             p.setFolded(false);
         }
     }
+
+    public void resetPlayersStates() {
+        for(PokerPlayer p:players)
+        {
+            p.setState(PlayerState.NONE);
+            p.setStyle("-fx-background-color: #CCAA99");
+        }
+    }
 }

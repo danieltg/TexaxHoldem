@@ -35,6 +35,7 @@ public class BusinessLogic {
         controller.startNewHand();
         controller.updateGameDetails();
         controller.RunOneHand();
+
     }
 
     public void changeColor(Color value) {

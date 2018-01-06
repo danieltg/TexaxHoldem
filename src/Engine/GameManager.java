@@ -237,6 +237,9 @@ public class GameManager implements Serializable {
 
     public void resetPlayerState()
     {
+        if(getHandNumber()>1){
+        currHand.resetPlayersStates();
+        }
         currHand.resetPlayersBets();
         currHand.resetPlayersFold();
         currHand.setLastRaise(null);

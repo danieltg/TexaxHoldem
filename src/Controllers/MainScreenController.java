@@ -2,6 +2,7 @@ package Controllers;
 
 import Engine.GameManager;
 import Engine.HandState;
+import Engine.Players.PlayerState;
 import Engine.Players.PokerPlayer;
 import Engine.PokerHand;
 import javafx.collections.FXCollections;
@@ -98,7 +99,20 @@ public class MainScreenController implements Initializable {
     }
 
     public void RunOneHand() {
+        int nextDeallerIndex = 0;
+        if(gameManager.getHandNumber()>1) {
+
+            int i = 0;
+            for (PokerPlayer p : gameManager.getPlayers()) {
+                if (p.getState() == PlayerState.SMALL)
+                    nextDeallerIndex=i;
+                    i++;
+            }
+        }
         gameManager.resetPlayerState();
+        if(gameManager.getHandNumber()>1) {
+            gameManager.setRoles(nextDeallerIndex);
+        }
         clearAllCardsOnTable();
         businessLogic.clearGameTable();
 
@@ -154,8 +168,10 @@ public class MainScreenController implements Initializable {
             case bettingAfterRiver:
             {
                 bettingRound();
-                break;
-            }
+
+
+            break;
+        }
 
             case TheFlop: {
                 currHand.dealingFlopCards();
