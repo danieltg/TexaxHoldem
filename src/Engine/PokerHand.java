@@ -34,6 +34,7 @@ public class PokerHand {
     private PokerPlayer nextToPlay = null;
     private String lastAction;
     private String lastActionBeforeFold;
+    private int numberOfWinners;
 
     private int lastActionInfo;
     private int lastPlayerToPlay;
@@ -53,6 +54,7 @@ public class PokerHand {
         lastActionBeforeFold="N";
         lastActionInfo = 0;
         lastPlayerToPlay = -999;
+        numberOfWinners=0;
 
         numberOfPlayers = playersInHand.size();
         players = playersInHand;
@@ -76,6 +78,8 @@ public class PokerHand {
         nextToPlay.clearSelection();
     }
 
+
+    public int getNumberOfWinners(){return numberOfWinners;}
 
     public void setHandState(HandState newState) {
         state = newState;
@@ -774,7 +778,9 @@ public class PokerHand {
             int index = whoIsInTheGame();
             String cards = players.get(index).getHoleCards();
             players.get(index).isAWinner();
+            players.get(index).addChips(getPot());
             message.append(players.get(index).getName()).append(" (").append(players.get(index).getId()).append(")").append(" won with this hand: ").append(cards).append(".\n").append("Prize: ").append(getPot()).append("$\n\n");
+            numberOfWinners=1;
         }
 
         else
@@ -788,8 +794,12 @@ public class PokerHand {
             for (Winner w: winners)
             {
                 w.getPlayer().isAWinner();
-                message.append(w.getPlayer().getName()).append(" (").append(w.getPlayer().getId()).append(")").append(" won with this hand: ").append(w.getHandRank()).append(".\n").append("Prize: ").append(getPot() / winners.size()).append("$\n\n");
+                int chipsToAdd=getPot()/winners.size();
+                w.getPlayer().addChips(chipsToAdd);
+                message.append(w.getPlayer().getName()).append(" (").append(w.getPlayer().getId()).append(")").append(" won with this hand: ").append(w.getHandRank()).append(".\n").append("Prize: ").append(chipsToAdd).append("$\n\n");
              }
+
+            numberOfWinners=winners.size();
         }
 
         if (message.toString().equals(""))
@@ -880,5 +890,25 @@ public class PokerHand {
             p.setState(PlayerState.NONE);
             p.setStyle("-fx-background-color: #CCAA99");
         }
+    }
+
+    public int getWinnerID() {
+
+        if (playersLeft() == 1)
+            return players.get(whoIsInTheGame()).getId();
+
+        try {
+
+            List<Winner> winners = evaluateRound();
+            for (PokerPlayer p:players)
+            {
+                if (winners.get(0).getPlayer()==p)
+                    return p.getId();
+            }
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+
+        return 0;
     }
 }

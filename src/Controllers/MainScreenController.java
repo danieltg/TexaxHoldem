@@ -225,15 +225,21 @@ public class MainScreenController implements Initializable {
                 updateHandReplayWithTheWinners(message);
                 updateHandCount();
                 gameManager.saveHandReplayToFile("handReplay.txt");
+                gameManager.setMoneyFromLastHand(currHand.getPot()%currHand.getNumberOfWinners());
 
                 alert.setHeaderText("Hand finished");
                 alert.setContentText("We are going to clear the game table... You can use the Replay feature to see the previous hand");
                 alert.showAndWait();
                 gameTableController.hideGameTablePane();
                 updatePlayersTable();
+                updatePlayersTableWithTheWinner(currHand.getWinnerID());
                 break;
             }
         }
+    }
+
+    private void updatePlayersTableWithTheWinner(int ID) {
+        playersTableController.updateTableWithWinner(ID);
     }
 
     private void afterBettingActions()

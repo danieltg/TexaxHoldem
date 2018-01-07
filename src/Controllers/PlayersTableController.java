@@ -4,6 +4,7 @@ import Engine.Players.PokerPlayer;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,13 +24,14 @@ public class PlayersTableController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        playersTableView.setStyle("-fx-selection-bar: green; -fx-selection-bar-non-focused: salmon;");
+
         nameColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("name"));
         idColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("id"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("type"));
         buysColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("numbersOfBuy"));
         handsWinsColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("handsWon"));
         winnigPriceColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("chips"));
-
     }
 
 
@@ -41,4 +43,17 @@ public class PlayersTableController implements Initializable {
         playersTableView.getItems().addAll(pokerPlayers);
     }
 
+    public void updateTableWithWinner(int ID) {
+
+        playersTableView.getSelectionModel().setSelectionMode(
+                SelectionMode.MULTIPLE
+        );
+
+        for ( int i = 0; i<playersTableView.getItems().size(); i++) {
+            if(playersTableView.getItems().get(i).getId()==ID)
+            {
+                playersTableView.getSelectionModel().select(i);
+            }
+        }
+    }
 }
