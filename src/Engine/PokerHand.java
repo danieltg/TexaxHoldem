@@ -773,6 +773,7 @@ public class PokerHand {
         if (playersLeft() == 1) {
             int index = whoIsInTheGame();
             String cards = players.get(index).getHoleCards();
+            players.get(index).isAWinner();
             message.append(players.get(index).getName()).append(" (").append(players.get(index).getId()).append(")").append(" won with this hand: ").append(cards).append(".\n").append("Prize: ").append(getPot()).append("$\n\n");
         }
 
@@ -786,6 +787,7 @@ public class PokerHand {
 
             for (Winner w: winners)
             {
+                w.getPlayer().isAWinner();
                 message.append(w.getPlayer().getName()).append(" (").append(w.getPlayer().getId()).append(")").append(" won with this hand: ").append(w.getHandRank()).append(".\n").append("Prize: ").append(getPot() / winners.size()).append("$\n\n");
              }
         }

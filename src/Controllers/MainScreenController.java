@@ -230,7 +230,7 @@ public class MainScreenController implements Initializable {
                 alert.setContentText("We are going to clear the game table... You can use the Replay feature to see the previous hand");
                 alert.showAndWait();
                 gameTableController.hideGameTablePane();
-
+                updatePlayersTable();
                 break;
             }
         }

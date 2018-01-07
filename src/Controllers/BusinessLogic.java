@@ -46,7 +46,8 @@ public class BusinessLogic {
     }
 
     public void updateGUIwithStep(int step) {
-        controller.updatePlayersTableFromStep(step);
+        // We don't want to update the table during the Replay
+        // controller.updatePlayersTableFromStep(step);
         controller.updateTableCardsFromStep(step);
         controller.updatePlayersOnTable(step);
         controller.updatePotFromStep(step);
