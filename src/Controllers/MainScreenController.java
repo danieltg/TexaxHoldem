@@ -109,13 +109,14 @@ public class MainScreenController implements Initializable {
                     i++;
             }
         }
+        //reset players
         gameManager.resetPlayerState();
         if(gameManager.getHandNumber()>1) {
             gameManager.setRoles(nextDeallerIndex);
         }
         clearAllCardsOnTable();
         businessLogic.clearGameTable();
-
+//get the hand
         currHand = gameManager.getCurrHand();
         updateTableCards();
 
@@ -266,8 +267,6 @@ public class MainScreenController implements Initializable {
         List<String> options= currHand.getPossibleOptions();
 
         if (currPlayer.getType() == Computer) {
-
-
             String whatToDo=currPlayer.getSelection(options);
             currPlayer.setAction(whatToDo);
             int randomNum =  (new Random().nextInt((currHand.getMaxBet())) )+ 1;
@@ -278,7 +277,6 @@ public class MainScreenController implements Initializable {
             gameManager.addStepToHandReplay();
             updateGUIPotAndPlayerBetAndChips();
             playBettingRounds();
-
         }
         else
         {

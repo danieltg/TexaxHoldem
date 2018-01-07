@@ -32,8 +32,11 @@ public class BusinessLogic {
     }
 
     public void startHand() {
+        //init hand
         controller.startNewHand();
+        //update UI fields
         controller.updateGameDetails();
+        //Runfirsthand
         controller.RunOneHand();
 
     }

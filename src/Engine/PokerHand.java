@@ -282,6 +282,8 @@ public class PokerHand {
         lastAction = "R";
         lastActionInfo = blinde.getBig();
         lastPlayerToPlay = players.get(b).getId();
+        setCurrentBet(blinde.getBig());
+
     }
 
     private void getStateIndex() {
