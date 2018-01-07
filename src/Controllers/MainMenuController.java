@@ -125,14 +125,6 @@ public class MainMenuController implements Initializable{
                 businessLogic.updateUI();
             }
 
-            //ReadGameDescriptorFile readGameDescriptorFile=new ReadGameDescriptorFile();
-            //readGameDescriptorFile.setFilePath(absolutePath);
-            //xmlLoadingLabel.textProperty().bind(readGameDescriptorFile.messageProperty());
-            //readGameDescriptorFile.valueProperty().addListener((observable, oldValue, newValue) -> setSettings(readGameDescriptorFile,newValue));
-            //new Thread(readGameDescriptorFile).start();
-
-
-
         } catch (Exception e) {
 
         }

@@ -321,5 +321,14 @@ public class GameManager implements Serializable {
         }
         return counter;
     }
+
+    public boolean doesPlayersHaveMoney() {
+        for (PokerPlayer p: players)
+        {
+            if (p.getChips()<getBig())
+                return false;
+        }
+        return true;
+    }
 }
 

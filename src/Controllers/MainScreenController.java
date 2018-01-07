@@ -209,10 +209,10 @@ public class MainScreenController implements Initializable {
 
             case END:
             {
-                gameInfoAndActionsController.enableReplayButtons();
                 gameInfoAndActionsController.enableBuyButtons();
                 gameInfoAndActionsController.enableQuitButtons();
                 gameInfoAndActionsController.enableRunNextHandButton();
+                gameInfoAndActionsController.enableReplayButtons();
 
                 String message=currHand.getWinnersToDisplay();
 
@@ -403,6 +403,7 @@ public class MainScreenController implements Initializable {
     public void clearGameTable() {
         gameTableController.clearPlayersCardsOnTable();
         gameTableController.clearAllPlayersFromScreen();
+        gameTableController.clearTableCards();
     }
 
     public void hideGameTable() {

@@ -29,92 +29,52 @@ public class GameTableController implements Initializable {
     @FXML private Label equity6;
     @FXML private Label equity1;
 
-    @FXML
-    private Label currPlayerLabel;
-    @FXML
-    private Label replayStep;
-    @FXML
-    private Circle table;
-    @FXML
-    private Label potLabel;
-    @FXML
-    private Pane seat1_data;
-    @FXML
-    private Pane seat2_data;
-    @FXML
-    private Pane seat3_data;
-    @FXML
-    private Pane seat4_data;
-    @FXML
-    private Pane seat5_data;
-    @FXML
-    private Pane seat6_data;
+    @FXML private Label currPlayerLabel;
+    @FXML private Label replayStep;
+    @FXML private Circle table;
+    @FXML private Label potLabel;
+    @FXML private Pane seat1_data;
+    @FXML private Pane seat2_data;
+    @FXML private Pane seat3_data;
+    @FXML private Pane seat4_data;
+    @FXML private Pane seat5_data;
+    @FXML private Pane seat6_data;
 
-    @FXML
-    private ImageView tCard1;
-    @FXML
-    private ImageView tCard2;
-    @FXML
-    private ImageView tCard3;
-    @FXML
-    private ImageView tCard4;
-    @FXML
-    private ImageView tCard5;
+    @FXML private ImageView tCard1;
+    @FXML private ImageView tCard2;
+    @FXML private ImageView tCard3;
+    @FXML private ImageView tCard4;
+    @FXML private ImageView tCard5;
 
-    @FXML
-    private Label namePlayer1;
-    @FXML
-    private Label chipsPlayer1;
-    @FXML
-    private Label betPlayer1;
-    @FXML
-    private Label rolePlayer1;
+    @FXML private Label namePlayer1;
+    @FXML private Label chipsPlayer1;
+    @FXML private Label betPlayer1;
+    @FXML private Label rolePlayer1;
 
-    @FXML
-    private Label namePlayer2;
-    @FXML
-    private Label chipsPlayer2;
-    @FXML
-    private Label betPlayer2;
-    @FXML
-    private Label rolePlayer2;
+    @FXML private Label namePlayer2;
+    @FXML private Label chipsPlayer2;
+    @FXML private Label betPlayer2;
+    @FXML private Label rolePlayer2;
 
-    @FXML
-    private Label namePlayer3;
-    @FXML
-    private Label chipsPlayer3;
-    @FXML
-    private Label betPlayer3;
-    @FXML
-    private Label rolePlayer3;
+    @FXML private Label namePlayer3;
+    @FXML private Label chipsPlayer3;
+    @FXML private Label betPlayer3;
+    @FXML private Label rolePlayer3;
 
-    @FXML
-    private Label namePlayer4;
-    @FXML
-    private Label chipsPlayer4;
-    @FXML
-    private Label betPlayer4;
-    @FXML
-    private Label rolePlayer4;
+    @FXML private Label namePlayer4;
+    @FXML private Label chipsPlayer4;
+    @FXML private Label betPlayer4;
+    @FXML private Label rolePlayer4;
 
-    @FXML
-    private Label namePlayer5;
-    @FXML
-    private Label chipsPlayer5;
-    @FXML
-    private Label betPlayer5;
-    @FXML
-    private Label rolePlayer5;
+    @FXML private Label namePlayer5;
+    @FXML private Label chipsPlayer5;
+    @FXML private Label betPlayer5;
+    @FXML private Label rolePlayer5;
 
-    @FXML
-    private Label namePlayer6;
-    @FXML
-    private Label chipsPlayer6;
-    @FXML
-    private Label betPlayer6;
-    @FXML
-    private Label rolePlayer6;
-
+    @FXML private Label namePlayer6;
+    @FXML private Label chipsPlayer6;
+    @FXML private Label betPlayer6;
+    @FXML private Label rolePlayer6;
 
     private SimpleStringProperty _namePlayer1;
     private SimpleStringProperty _namePlayer2;
@@ -761,6 +721,8 @@ public class GameTableController implements Initializable {
     public void clearAllPlayersFromScreen() {
         clearTable();
         replayStep.setText("");
+        currPlayerLabel.setText("");
+        _pot.set(0);
     }
 
 

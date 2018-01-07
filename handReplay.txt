@@ -1,60 +1,76 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Ortt, 111> : JC 3H
-Player <Elad, 234> : QH 5D
-Player <Daniel, 456> : 9S 6H
+Player <Mushon, 1> : 3H 9H
+Player <Avrum, 2> : 6D JD
+Player <Nachtze, 3> : 8S QC
+Player <Daniel, 4> : 9C 5D
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 456
+Active player ID: 4
 Player name: Daniel
 Player type: Human
-Player cards: 9S 6H
-Player chips: 2
-Player bet: 5
+Player cards: 9C 5D
+Player chips: 83
+Player bet: 2
 Player equity: 0
-Pot: 5
+Pot: 2
 Current Bet: 0
 Action: B
-Additional Action Information: 5
+Additional Action Information: 2
 ************************************************************************************************
-Active player ID: 111
-Player name: Ortt
-Player type: Computer
-Player cards: JC 3H
-Player chips: 0
-Player bet: 10
+Active player ID: 1
+Player name: Mushon
+Player type: Human
+Player cards: 3H 9H
+Player chips: 81
+Player bet: 4
 Player equity: 0
-Pot: 15
-Current Bet: 10
+Pot: 6
+Current Bet: 4
 Action: R
-Additional Action Information: 10
+Additional Action Information: 4
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Human
+Player cards: 3H 9H
+Player chips: 81
+Player bet: 0
+Player equity: 0
+Pot: 6
+Current Bet: 4
+Action: F
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: 6D JD
+Player chips: 85
+Player bet: 0
+Player equity: 0
+Pot: 6
+Current Bet: 4
+Action: F
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Human
+Player cards: 8S QC
+Player chips: 85
+Player bet: 0
+Player equity: 0
+Pot: 6
+Current Bet: 4
+Action: F
 ************************************************************************************************
 The step is not related to any player
-Cards: 5S,KS,8C,??,??
-Pot: 15
-Current Bet: 10
-Action: CARD
-************************************************************************************************
-The step is not related to any player
-Cards: 5S,KS,8C,KD,??
-Pot: 15
-Current Bet: 10
-Action: CARD
-************************************************************************************************
-The step is not related to any player
-Cards: 5S,KS,8C,KD,7D
-Pot: 15
-Current Bet: 10
-Action: CARD
-************************************************************************************************
-The step is not related to any player
-Cards: 5S,KS,8C,KD,7D
-Pot: 15
-Current Bet: 10
-Action: Daniel (456) won with this hand: Straight (9,8,7,6,5).
-Prize: 15$
+Cards: ??,??,??,??,??
+Pot: 6
+Current Bet: 4
+Action: Daniel (4) won with this hand: 9C 5D.
+Prize: 6$
 
 

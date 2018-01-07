@@ -491,8 +491,9 @@ public class GameInfoAndActionsController implements Initializable{
     {
         handFinishedActions.setCollapsible(true);
         handFinishedActions.setExpanded(true);
+        humanTurn.setExpanded(false);
+        humanTurn.setCollapsible(false);
         replayButton.setDisable(false);
-
     }
 
     public void startReplay()
@@ -549,16 +550,37 @@ public class GameInfoAndActionsController implements Initializable{
         quitGame.setDisable(false);
         humanPlayersList.setDisable(false);
     }
+
     public void enableBuyButtons() {
         buyButton.setDisable(false);
         dropDownPlayers.setDisable(false);
     }
 
 
+    //Run new hand
     public void runNextHandClicked() {
-        businessLogic.clearAllCardsOnTable();
-        //businessLogic.clearGameTable();
-        businessLogic.startHand();
+        if (canWeStartAnewHand()) {
+            handFinishedActions.setCollapsible(false);
+            handFinishedActions.setExpanded(false);
+
+            businessLogic.clearAllCardsOnTable();
+            businessLogic.startHand();
+        }
+        else
+        {
+            //We can't start a new Hand and we provide a message to the user
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Oops...");
+            alert.setContentText("We're sorry but at least one of the players does not have enough money to start the game.\n"
+                        + "We need " + gameManager.getBig() + "$ for Big and " + gameManager.getSmall() + "$ for Small\n"
+                        +"You can either add them more money (Buy option) or remove them from the game (Quit option)");
+            alert.showAndWait();
+        }
+    }
+
+    private boolean canWeStartAnewHand() {
+        //We check if all players have enough money to start the game
+        return gameManager.doesPlayersHaveMoney();
     }
 
     public void disableHumanButtons() {
