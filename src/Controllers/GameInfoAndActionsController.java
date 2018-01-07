@@ -454,7 +454,7 @@ public class GameInfoAndActionsController implements Initializable{
             maxBetMsgLabel.setVisible(true);
             if (maxBet<1)
             {
-                System.out.println("We have bug here");
+                System.out.println("We have bug here, max ber is <1 (Raise)");
                 maxBet=1;
             }
             updateRaiseSpinner(1,maxBet);
@@ -475,7 +475,7 @@ public class GameInfoAndActionsController implements Initializable{
             maxBetMsgLabel.setVisible(true);
             if (maxBet<1)
             {
-                System.out.println("We have bug here");
+                System.out.println("We have bug here, max bet <1 (Bet)");
                 maxBet=1;
             }
             updateBetSpinner(1,maxBet);

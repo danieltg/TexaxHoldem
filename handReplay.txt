@@ -1,21 +1,19 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Mushon, 1> : 6H 4S
-Player <Avrum, 2> : KD JD
-Player <Nachtze, 3> : AH JC
-Player <Avi, 4> : 4C 6C
-Player <Yoram, 5> : TD 3H
-Player <Assi, 6> : KH 5C
+Player <Mushon, 1> : KC 2C
+Player <Avrum, 2> : TD 6S
+Player <Nachtze, 3> : AS KS
+Player <Daniel, 4> : QD 5H
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: AH JC
-Player chips: 91
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: QD 5H
+Player chips: 98
 Player bet: 2
 Player equity: 0
 Pot: 2
@@ -23,265 +21,235 @@ Current Bet: 0
 Action: B
 Additional Action Information: 2
 ************************************************************************************************
-Active player ID: 4
-Player name: Avi
-Player type: Computer
-Player cards: 4C 6C
-Player chips: 89
-Player bet: 4
-Player equity: 0
-Pot: 6
-Current Bet: 0
-Action: R
-Additional Action Information: 4
-************************************************************************************************
-Active player ID: 5
-Player name: Yoram
-Player type: Human
-Player cards: TD 3H
-Player chips: 93
-Player bet: 0
-Player equity: 0
-Pot: 6
-Current Bet: 0
-Action: C
-************************************************************************************************
-Active player ID: 6
-Player name: Assi
-Player type: Computer
-Player cards: KH 5C
-Player chips: 89
-Player bet: 4
-Player equity: 0
-Pot: 10
-Current Bet: 4
-Action: R
-Additional Action Information: 4
-************************************************************************************************
 Active player ID: 1
 Player name: Mushon
 Player type: Computer
-Player cards: 6H 4S
-Player chips: 93
-Player bet: 0
+Player cards: KC 2C
+Player chips: 96
+Player bet: 4
 Player equity: 0
-Pot: 10
+Pot: 6
 Current Bet: 4
-Action: F
+Action: R
+Additional Action Information: 4
 ************************************************************************************************
 Active player ID: 2
 Player name: Avrum
 Player type: Human
-Player cards: KD JD
-Player chips: 89
-Player bet: 4
-Player equity: 0
-Pot: 14
-Current Bet: 4
-Action: C
-************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: AH JC
-Player chips: 86
+Player cards: TD 6S
+Player chips: 93
 Player bet: 7
 Player equity: 0
-Pot: 19
+Pot: 13
 Current Bet: 7
 Action: R
 Additional Action Information: 3
 ************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: AS KS
+Player chips: 93
+Player bet: 7
+Player equity: 0
+Pot: 20
+Current Bet: 7
+Action: C
+************************************************************************************************
 Active player ID: 4
-Player name: Avi
-Player type: Computer
-Player cards: 4C 6C
-Player chips: 86
-Player bet: 7
-Player equity: 0
-Pot: 22
-Current Bet: 7
-Action: C
-************************************************************************************************
-Active player ID: 5
-Player name: Yoram
+Player name: Daniel
 Player type: Human
-Player cards: TD 3H
-Player chips: 86
-Player bet: 7
+Player cards: QD 5H
+Player chips: 88
+Player bet: 12
 Player equity: 0
-Pot: 29
-Current Bet: 7
-Action: C
-************************************************************************************************
-Active player ID: 6
-Player name: Assi
-Player type: Computer
-Player cards: KH 5C
-Player chips: 71
-Player bet: 22
-Player equity: 0
-Pot: 47
-Current Bet: 22
+Pot: 30
+Current Bet: 12
 Action: R
-Additional Action Information: 15
+Additional Action Information: 5
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Computer
+Player cards: KC 2C
+Player chips: 96
+Player bet: 0
+Player equity: 0
+Pot: 30
+Current Bet: 12
+Action: F
 ************************************************************************************************
 Active player ID: 2
 Player name: Avrum
 Player type: Human
-Player cards: KD JD
-Player chips: 71
-Player bet: 22
+Player cards: TD 6S
+Player chips: 87
+Player bet: 13
 Player equity: 0
-Pot: 65
-Current Bet: 22
-Action: C
+Pot: 36
+Current Bet: 13
+Action: R
+Additional Action Information: 1
 ************************************************************************************************
 Active player ID: 3
 Player name: Nachtze
 Player type: Computer
-Player cards: AH JC
-Player chips: 86
+Player cards: AS KS
+Player chips: 84
+Player bet: 16
+Player equity: 0
+Pot: 45
+Current Bet: 16
+Action: R
+Additional Action Information: 3
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: QD 5H
+Player chips: 83
+Player bet: 17
+Player equity: 0
+Pot: 50
+Current Bet: 17
+Action: R
+Additional Action Information: 1
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: TD 6S
+Player chips: 82
+Player bet: 18
+Player equity: 0
+Pot: 55
+Current Bet: 18
+Action: R
+Additional Action Information: 1
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: AS KS
+Player chips: 64
+Player bet: 36
+Player equity: 0
+Pot: 75
+Current Bet: 36
+Action: R
+Additional Action Information: 18
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: QD 5H
+Player chips: 64
+Player bet: 36
+Player equity: 0
+Pot: 94
+Current Bet: 36
+Action: C
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: TD 6S
+Player chips: 64
+Player bet: 36
+Player equity: 0
+Pot: 112
+Current Bet: 36
+Action: C
+************************************************************************************************
+The step is not related to any player
+Cards: KH,8H,7D,??,??
+Pot: 112
+Current Bet: 36
+Action: CARD
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Computer
+Player cards: AS KS
+Player chips: 64
 Player bet: 0
 Player equity: 0
-Pot: 65
-Current Bet: 22
+Pot: 112
+Current Bet: 36
 Action: F
 ************************************************************************************************
 Active player ID: 4
-Player name: Avi
-Player type: Computer
-Player cards: 4C 6C
-Player chips: 86
+Player name: Daniel
+Player type: Human
+Player cards: QD 5H
+Player chips: 64
 Player bet: 0
 Player equity: 0
-Pot: 65
-Current Bet: 22
+Pot: 112
+Current Bet: 36
+Action: K
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: TD 6S
+Player chips: 64
+Player bet: 0
+Player equity: 0
+Pot: 112
+Current Bet: 36
+Action: K
+************************************************************************************************
+The step is not related to any player
+Cards: KH,8H,7D,9C,??
+Pot: 112
+Current Bet: 36
+Action: CARD
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: QD 5H
+Player chips: 64
+Player bet: 0
+Player equity: 0
+Pot: 112
+Current Bet: 36
+Action: K
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: TD 6S
+Player chips: 64
+Player bet: 0
+Player equity: 0
+Pot: 112
+Current Bet: 36
+Action: K
+************************************************************************************************
+The step is not related to any player
+Cards: KH,8H,7D,9C,JS
+Pot: 112
+Current Bet: 36
+Action: CARD
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: QD 5H
+Player chips: 64
+Player bet: 0
+Player equity: 0
+Pot: 112
+Current Bet: 36
 Action: F
 ************************************************************************************************
-Active player ID: 5
-Player name: Yoram
-Player type: Human
-Player cards: TD 3H
-Player chips: 71
-Player bet: 22
-Player equity: 0
-Pot: 80
-Current Bet: 22
-Action: C
-************************************************************************************************
 The step is not related to any player
-Cards: JS,AD,AS,??,??
-Pot: 80
-Current Bet: 22
-Action: CARD
-************************************************************************************************
-Active player ID: 6
-Player name: Assi
-Player type: Computer
-Player cards: KH 5C
-Player chips: 54
-Player bet: 17
-Player equity: 0
-Pot: 97
-Current Bet: 17
-Action: B
-Additional Action Information: 17
-************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: KD JD
-Player chips: 76
-Player bet: 17
-Player equity: 0
-Pot: 92
-Current Bet: 17
-Action: C
-************************************************************************************************
-Active player ID: 5
-Player name: Yoram
-Player type: Human
-Player cards: TD 3H
-Player chips: 76
-Player bet: 17
-Player equity: 0
-Pot: 87
-Current Bet: 17
-Action: C
-************************************************************************************************
-The step is not related to any player
-Cards: JS,AD,AS,JH,??
-Pot: 87
-Current Bet: 17
-Action: CARD
-************************************************************************************************
-Active player ID: 6
-Player name: Assi
-Player type: Computer
-Player cards: KH 5C
-Player chips: 54
-Player bet: 0
-Player equity: 0
-Pot: 87
-Current Bet: 17
-Action: F
-************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: KD JD
-Player chips: 76
-Player bet: 0
-Player equity: 0
-Pot: 87
-Current Bet: 17
-Action: K
-************************************************************************************************
-Active player ID: 5
-Player name: Yoram
-Player type: Human
-Player cards: TD 3H
-Player chips: 76
-Player bet: 0
-Player equity: 0
-Pot: 87
-Current Bet: 17
-Action: K
-************************************************************************************************
-The step is not related to any player
-Cards: JS,AD,AS,JH,2H
-Pot: 87
-Current Bet: 17
-Action: CARD
-************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: KD JD
-Player chips: 76
-Player bet: 0
-Player equity: 0
-Pot: 87
-Current Bet: 17
-Action: K
-************************************************************************************************
-Active player ID: 5
-Player name: Yoram
-Player type: Human
-Player cards: TD 3H
-Player chips: 76
-Player bet: 0
-Player equity: 0
-Pot: 87
-Current Bet: 17
-Action: K
-************************************************************************************************
-The step is not related to any player
-Cards: JS,AD,AS,JH,2H
-Pot: 87
-Current Bet: 17
-Action: Avrum (2) won with this hand: Full house (Jacks full of aces).
-Prize: 87$
+Cards: KH,8H,7D,9C,JS
+Pot: 112
+Current Bet: 36
+Action: Avrum (2) won with this hand: TD 6S.
+Prize: 112$
 
 

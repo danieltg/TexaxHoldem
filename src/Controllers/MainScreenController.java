@@ -181,8 +181,10 @@ public class MainScreenController implements Initializable {
                 gameManager.addStepToHandReplay();
                 gameManager.clearValuesFromCurrHand();
 
+                currHand.resetPlayersBets();
                 currHand.setHandState(HandState.bettingAfterFlop);
                 playBettingRounds();
+
                 break;
             }
             case TheTurn: {
@@ -192,6 +194,7 @@ public class MainScreenController implements Initializable {
                 gameManager.addStepToHandReplay();
                 gameManager.clearValuesFromCurrHand();
 
+                currHand.resetPlayersBets();
                 currHand.setHandState(HandState.bettingAfterTurn);
                 playBettingRounds();
                 break;
@@ -204,7 +207,9 @@ public class MainScreenController implements Initializable {
                 gameManager.addStepToHandReplay();
                 gameManager.clearValuesFromCurrHand();
 
+                currHand.resetPlayersBets();
                 currHand.setHandState(HandState.bettingAfterRiver);
+
                 playBettingRounds();
                 break;
             }

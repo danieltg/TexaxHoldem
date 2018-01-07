@@ -169,9 +169,12 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
 
     public void collectBet()
     {
-        if ((chips-bet)<0)
-            System.out.println("We have bug!!!");
-        chips=chips-bet;
+        if ((chips-bet)<0) {
+            System.out.println("We have bug!!! Bet is bigger than chips");
+            chips=0;
+        }
+        else
+            chips=chips-bet;
     }
 
     public int getBet() {
