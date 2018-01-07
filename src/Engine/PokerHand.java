@@ -450,12 +450,16 @@ public class PokerHand {
             {
                 if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
                 {
-                    System.out.println("We have only one player in the game...");
+                    System.out.println("Game over- we have only one player in the game");
                     state=END;
                 }
 
-                else if (nextToPlay==lastRaise || getMaxBet()==0) {
-                    System.out.println("We finished the first betting round");
+                else if (nextToPlay==lastRaise || getMaxBet()==0)
+                {
+                    if (getMaxBet()==0)
+                        System.out.println("Max bet is 0, we are going to open the Flop");
+                    else
+                        System.out.println("We finished the first betting round");
                     state=TheFlop;
                 }
                 break;
@@ -466,13 +470,17 @@ public class PokerHand {
 
                 if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
                 {
-                    System.out.println("We have only one player in the game...");
+                    System.out.println("Game over- we have only one player in the game");
                     state=END;
                 }
 
                 else if (nextToPlay==lastRaise || getMaxBet()==0)
                 {
-                    System.out.println("We finished the second betting round");
+                    if (getMaxBet()==0)
+                        System.out.println("Max bet is 0, we are going to open the Turn");
+                    else
+                        System.out.println("We finished the second betting round");
+
                     state=TheTurn;
                  }
 
@@ -482,12 +490,17 @@ public class PokerHand {
             {
                 if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
                 {
-                    System.out.println("We have only one player in the game...");
+                    System.out.println("Game over- we have only one player in the game");
                     state=END;
                 }
 
-                else if (nextToPlay==lastRaise || getMaxBet()==0) {
-                    System.out.println("We finished the third betting round");
+                else if (nextToPlay==lastRaise || getMaxBet()==0)
+                {
+                    if (getMaxBet()==0)
+                        System.out.println("Max bet is 0, we are going to open the River");
+                    else
+                        System.out.println("We finished the third betting round");
+
                     state=TheRiver;
                 }
                 break;
@@ -497,11 +510,16 @@ public class PokerHand {
             {
                 if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
                 {
-                    System.out.println("We have only one player in the game...");
+                    System.out.println("Game over - we have only one player in the game");
                     state=END;
                 }
-                else if (nextToPlay==lastRaise || getMaxBet()==0) {
-                    System.out.println("We finished the game!!!");
+                else if (nextToPlay==lastRaise || getMaxBet()==0)
+                {
+                    if (getMaxBet()==0)
+                        System.out.println("Max bet is 0, we are going to finish the game");
+                    else
+                        System.out.println("We finished the game.");
+
                     state=END;
                 }
                 break;
@@ -531,6 +549,7 @@ public class PokerHand {
         String action = currPlayer.getPlayerSelection();
         int additionalActionInfo = currPlayer.getAdditionalActionInfo();
 
+        printInfoToConsole(currPlayer,action,additionalActionInfo);
         handlePlayerAction(action, additionalActionInfo);
         addToPot(currPlayer.getBet());
         currPlayer.collectBet();
@@ -541,6 +560,18 @@ public class PokerHand {
 
         incCurrPlayer();
         afterPlayerAction();
+    }
+
+    private void printInfoToConsole(PokerPlayer currPlayer, String action, int additionalActionInfo) {
+        String message= currPlayer.getType() +" player ("+currPlayer.getName()+
+                ") is now playing and he wants to: "+action;
+
+        if (action.equals("R") || action.equals("B"))
+        {
+            message = message + " (" + additionalActionInfo + ")";
+        }
+
+        System.out.println(message);
     }
 
 

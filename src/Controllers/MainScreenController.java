@@ -40,7 +40,7 @@ public class MainScreenController implements Initializable {
 
     private BusinessLogic businessLogic;
     private PokerHand currHand;
-
+    private boolean isFirstTime=true;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -99,7 +99,10 @@ public class MainScreenController implements Initializable {
     }
 
     public void RunOneHand() {
+
         int nextDeallerIndex = 0;
+        isFirstTime=true;
+
         if(gameManager.getHandNumber()>1) {
 
             int i = 0;
@@ -116,7 +119,7 @@ public class MainScreenController implements Initializable {
         }
         clearAllCardsOnTable();
         businessLogic.clearGameTable();
-//get the hand
+        //get the hand
         currHand = gameManager.getCurrHand();
         updateTableCards();
 
@@ -154,8 +157,6 @@ public class MainScreenController implements Initializable {
     }
 
 
-
-
     private void playBettingRounds()
     {
         HandState state= currHand.getHandState();
@@ -168,48 +169,38 @@ public class MainScreenController implements Initializable {
             case bettingAfterTurn:
             case bettingAfterRiver:
             {
-                bettingRound();
+                if (currHand.getMaxBet()==0) {
+                    currHand.afterPlayerAction();
+                    playBettingRounds();
+                }
 
+                else
+                    bettingRound();
 
-            break;
-        }
+                break;
+            }
 
             case TheFlop: {
                 currHand.dealingFlopCards();
-                updateTableCards();
+                afterBettingActions();
 
-                gameManager.addStepToHandReplay();
-                gameManager.clearValuesFromCurrHand();
-
-                currHand.resetPlayersBets();
                 currHand.setHandState(HandState.bettingAfterFlop);
                 playBettingRounds();
-
                 break;
             }
             case TheTurn: {
                 currHand.dealingTurnCard();
-                updateTableCards();
+                afterBettingActions();
 
-                gameManager.addStepToHandReplay();
-                gameManager.clearValuesFromCurrHand();
-
-                currHand.resetPlayersBets();
                 currHand.setHandState(HandState.bettingAfterTurn);
                 playBettingRounds();
                 break;
             }
-            case TheRiver:
-            {
+            case TheRiver: {
                 currHand.dealingRiverCard();
-                updateTableCards();
+                afterBettingActions();
 
-                gameManager.addStepToHandReplay();
-                gameManager.clearValuesFromCurrHand();
-
-                currHand.resetPlayersBets();
                 currHand.setHandState(HandState.bettingAfterRiver);
-
                 playBettingRounds();
                 break;
             }
@@ -242,6 +233,16 @@ public class MainScreenController implements Initializable {
         }
     }
 
+    private void afterBettingActions()
+    {
+        currHand.resetPlayersBets();
+        notifyUserOnZeroBet();
+        updateGUIPotAndPlayerBetAndChips();
+        updateTableCards();
+
+        gameManager.addStepToHandReplay();
+        gameManager.clearValuesFromCurrHand();
+    }
     private void updateHandCount() {
 
         gameInfoAndActionsController.updateHandsCount();
@@ -276,8 +277,6 @@ public class MainScreenController implements Initializable {
             currPlayer.setAction(whatToDo);
             int randomNum =  (new Random().nextInt((currHand.getMaxBet())) )+ 1;
             currPlayer.setAdditionalActionInfo(randomNum);
-            System.out.println("Computer player ("+currPlayer.getName()+
-                    ") is now playing and he wants to: "+whatToDo +" ("+randomNum+")");
             currHand.bettingRoundForAPlayer(mainMenuController.getEquity());
             gameManager.addStepToHandReplay();
             updateGUIPotAndPlayerBetAndChips();
@@ -285,7 +284,6 @@ public class MainScreenController implements Initializable {
         }
         else
         {
-            System.out.println("Human player");
             if (!Objects.equals(currPlayer.getPlayerSelection(), "NOT SELECTED"))
             {
                 currHand.bettingRoundForAPlayer((mainMenuController.getEquity()));
@@ -414,5 +412,18 @@ public class MainScreenController implements Initializable {
 
     public void closeGameInfoAndActions() {
         gameInfoAndActionsController.closeAllScrollPanes();
+    }
+
+
+    public void notifyUserOnZeroBet()
+    {
+        if (currHand.getMaxBet()==0 && isFirstTime==true)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Max bet is zero");
+            alert.setContentText("The max bet is zero. We are going to deal the community cards");
+            alert.showAndWait();
+            isFirstTime=false;
+        }
     }
 }

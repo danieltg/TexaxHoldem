@@ -183,7 +183,6 @@ public class GameInfoAndActionsController implements Initializable{
         raiseButton.setDisable(true);
         raiseButton.setOnAction(event -> {
             int raiseTo= Integer.parseInt(raiseSpinner.getEditor().getText());
-            System.out.println("Raise to: "+raiseTo);
             businessLogic.updateUserSelection("R",raiseTo);
         });
 
@@ -223,7 +222,6 @@ public class GameInfoAndActionsController implements Initializable{
         betButton.setDisable(true);
         betButton.setOnAction(event -> {
             int betTo= Integer.parseInt(betSpinner.getEditor().getText());
-            System.out.println("Bet to: "+betTo);
             businessLogic.updateUserSelection("B",betTo);
         });
 
