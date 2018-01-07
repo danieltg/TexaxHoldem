@@ -59,6 +59,10 @@ public class PokerHand {
         blinde = gameBlinde;
         updateStateIndex();
         updateMaxBet();
+        setNextToPlayForTheFirstTime();
+    }
+
+    public void setNextToPlayForTheFirstTime() {
         int i=0;
 
         for (PokerPlayer p : players)

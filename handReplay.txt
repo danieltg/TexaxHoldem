@@ -1,10 +1,10 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Mushon, 1> : 3H 9H
-Player <Avrum, 2> : 6D JD
-Player <Nachtze, 3> : 8S QC
-Player <Daniel, 4> : 9C 5D
+Player <Mushon, 1> : 7D QC
+Player <Avrum, 2> : AS JC
+Player <Nachtze, 3> : 8H 6H
+Player <Daniel, 4> : 5H 2D
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
@@ -12,8 +12,8 @@ Action: PLAYER_CARDS
 Active player ID: 4
 Player name: Daniel
 Player type: Human
-Player cards: 9C 5D
-Player chips: 83
+Player cards: 5H 2D
+Player chips: 86
 Player bet: 2
 Player equity: 0
 Pot: 2
@@ -24,8 +24,8 @@ Additional Action Information: 2
 Active player ID: 1
 Player name: Mushon
 Player type: Human
-Player cards: 3H 9H
-Player chips: 81
+Player cards: 7D QC
+Player chips: 84
 Player bet: 4
 Player equity: 0
 Pot: 6
@@ -33,44 +33,295 @@ Current Bet: 4
 Action: R
 Additional Action Information: 4
 ************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Human
-Player cards: 3H 9H
-Player chips: 81
-Player bet: 0
-Player equity: 0
-Pot: 6
-Current Bet: 4
-Action: F
-************************************************************************************************
 Active player ID: 2
 Player name: Avrum
 Player type: Human
-Player cards: 6D JD
-Player chips: 85
-Player bet: 0
+Player cards: AS JC
+Player chips: 84
+Player bet: 4
 Player equity: 0
-Pot: 6
+Pot: 10
 Current Bet: 4
-Action: F
+Action: C
 ************************************************************************************************
 Active player ID: 3
 Player name: Nachtze
 Player type: Human
-Player cards: 8S QC
-Player chips: 85
-Player bet: 0
+Player cards: 8H 6H
+Player chips: 84
+Player bet: 4
 Player equity: 0
-Pot: 6
+Pot: 14
 Current Bet: 4
-Action: F
+Action: C
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: 5H 2D
+Player chips: 84
+Player bet: 4
+Player equity: 0
+Pot: 16
+Current Bet: 4
+Action: C
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Human
+Player cards: 7D QC
+Player chips: 84
+Player bet: 4
+Player equity: 0
+Pot: 16
+Current Bet: 4
+Action: C
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: AS JC
+Player chips: 84
+Player bet: 4
+Player equity: 0
+Pot: 16
+Current Bet: 4
+Action: C
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Human
+Player cards: 8H 6H
+Player chips: 84
+Player bet: 4
+Player equity: 0
+Pot: 16
+Current Bet: 4
+Action: C
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: 5H 2D
+Player chips: 84
+Player bet: 4
+Player equity: 0
+Pot: 16
+Current Bet: 4
+Action: C
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Human
+Player cards: 7D QC
+Player chips: 84
+Player bet: 4
+Player equity: 0
+Pot: 16
+Current Bet: 4
+Action: C
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: AS JC
+Player chips: 83
+Player bet: 5
+Player equity: 0
+Pot: 17
+Current Bet: 5
+Action: R
+Additional Action Information: 1
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Human
+Player cards: 8H 6H
+Player chips: 83
+Player bet: 5
+Player equity: 0
+Pot: 18
+Current Bet: 5
+Action: C
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: 5H 2D
+Player chips: 83
+Player bet: 5
+Player equity: 0
+Pot: 19
+Current Bet: 5
+Action: C
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Human
+Player cards: 7D QC
+Player chips: 83
+Player bet: 5
+Player equity: 0
+Pot: 20
+Current Bet: 5
+Action: C
 ************************************************************************************************
 The step is not related to any player
-Cards: ??,??,??,??,??
-Pot: 6
-Current Bet: 4
-Action: Daniel (4) won with this hand: 9C 5D.
-Prize: 6$
+Cards: 5S,TH,6D,??,??
+Pot: 20
+Current Bet: 5
+Action: CARD
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: 5H 2D
+Player chips: 83
+Player bet: 0
+Player equity: 0
+Pot: 20
+Current Bet: 5
+Action: K
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Human
+Player cards: 7D QC
+Player chips: 83
+Player bet: 0
+Player equity: 0
+Pot: 20
+Current Bet: 5
+Action: K
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: AS JC
+Player chips: 83
+Player bet: 0
+Player equity: 0
+Pot: 20
+Current Bet: 5
+Action: K
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Human
+Player cards: 8H 6H
+Player chips: 83
+Player bet: 0
+Player equity: 0
+Pot: 20
+Current Bet: 5
+Action: K
+************************************************************************************************
+The step is not related to any player
+Cards: 5S,TH,6D,4H,??
+Pot: 20
+Current Bet: 5
+Action: CARD
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: 5H 2D
+Player chips: 83
+Player bet: 0
+Player equity: 0
+Pot: 20
+Current Bet: 5
+Action: K
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Human
+Player cards: 7D QC
+Player chips: 83
+Player bet: 0
+Player equity: 0
+Pot: 20
+Current Bet: 5
+Action: K
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: AS JC
+Player chips: 83
+Player bet: 0
+Player equity: 0
+Pot: 20
+Current Bet: 5
+Action: K
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Human
+Player cards: 8H 6H
+Player chips: 83
+Player bet: 0
+Player equity: 0
+Pot: 20
+Current Bet: 5
+Action: K
+************************************************************************************************
+The step is not related to any player
+Cards: 5S,TH,6D,4H,TD
+Pot: 20
+Current Bet: 5
+Action: CARD
+************************************************************************************************
+Active player ID: 4
+Player name: Daniel
+Player type: Human
+Player cards: 5H 2D
+Player chips: 82
+Player bet: 1
+Player equity: 0
+Pot: 21
+Current Bet: 1
+Action: B
+Additional Action Information: 1
+************************************************************************************************
+Active player ID: 1
+Player name: Mushon
+Player type: Human
+Player cards: 7D QC
+Player chips: 82
+Player bet: 1
+Player equity: 0
+Pot: 22
+Current Bet: 1
+Action: C
+************************************************************************************************
+Active player ID: 2
+Player name: Avrum
+Player type: Human
+Player cards: AS JC
+Player chips: 82
+Player bet: 1
+Player equity: 0
+Pot: 23
+Current Bet: 1
+Action: C
+************************************************************************************************
+Active player ID: 3
+Player name: Nachtze
+Player type: Human
+Player cards: 8H 6H
+Player chips: 82
+Player bet: 1
+Player equity: 0
+Pot: 24
+Current Bet: 1
+Action: C
+************************************************************************************************
+The step is not related to any player
+Cards: 5S,TH,6D,4H,TD
+Pot: 24
+Current Bet: 1
+Action: Nachtze (3) won with this hand: Two pairs (Tens and sixes - 8).
+Prize: 24$
 
 

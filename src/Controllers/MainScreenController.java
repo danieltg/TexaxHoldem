@@ -149,6 +149,7 @@ public class MainScreenController implements Initializable {
         gameManager.addStepToHandReplay();
         gameManager.clearValuesFromCurrHand();
 
+        currHand.setNextToPlayForTheFirstTime();
         updatePlayersTable();
         updateGUIPotAndPlayerBetAndChips();
 
@@ -307,17 +308,6 @@ public class MainScreenController implements Initializable {
         gameTableController.updatePot(gameManager.getCurrHand().getPot());
 
         gameTableController.updatePlayersBetAndChips(gameManager.getCurrHand().getPlayers());
-    }
-
-    private void updateFirstLastRaiseAndCurrBet()
-    {
-        if (currHand.getRound()==0) {
-            currHand.setLastRaise(currHand.getPlayers().get((2 + currHand.getDealer()) %currHand.getNumberOfPlayers()));
-            currHand.setCurrentBet(currHand.getBlinde().getBig());
-        }
-        else {
-            currHand.setCurrentBet(0);
-        }
     }
 
     private void enableHumanTurnButtons(PokerPlayer currPlayer, List<String> options, int maxBet) {
