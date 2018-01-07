@@ -57,10 +57,12 @@ public class PokerHand {
         numberOfPlayers = playersInHand.size();
         players = playersInHand;
         blinde = gameBlinde;
-        getStateIndex();
+        updateStateIndex();
         updateMaxBet();
-        int i = 0;
-        for (PokerPlayer p : players) {
+        int i=0;
+
+        for (PokerPlayer p : players)
+        {
             i++;
             if (p.getState() == PlayerState.BIG) {
                 nextToPlay = players.get(i % this.getNumberOfPlayers());
@@ -286,7 +288,7 @@ public class PokerHand {
 
     }
 
-    private void getStateIndex() {
+    public void updateStateIndex() {
         for (int i = 0; i < numberOfPlayers; i++) {
             if (players.get(i).getState() == PlayerState.DEALER)
                 dealer = i;
@@ -416,11 +418,26 @@ public class PokerHand {
         return nextToPlay;
     }
 
-    public void changeNextToPlay() {
-        for (PokerPlayer p : players)
-            if (p.getState() == PlayerState.SMALL) {
-                nextToPlay = p;
+    public void updateNextToPlay() {
+
+        lastPlayerToPlay=-999;
+        lastRaise=null;
+
+        for (int i=0; i<numberOfPlayers; i++)
+        {
+            if (players.get(i).getState()==PlayerState.DEALER)
+            {
+                for (int k=1; k<=numberOfPlayers; k++)
+                {
+                    if (!players.get((i + k) % numberOfPlayers).isFolded())
+                    {
+                        nextToPlay = players.get((i + k)% this.numberOfPlayers);
+                        nextToPlay.clearSelection();
+                        return;
+                    }
+                }
             }
+        }
     }
 
 

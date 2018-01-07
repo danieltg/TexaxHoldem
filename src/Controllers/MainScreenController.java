@@ -104,21 +104,22 @@ public class MainScreenController implements Initializable {
         isFirstTime=true;
 
         if(gameManager.getHandNumber()>1) {
-
             int i = 0;
             for (PokerPlayer p : gameManager.getPlayers()) {
                 if (p.getState() == PlayerState.SMALL)
                     nextDeallerIndex=i;
-                    i++;
+                i++;
             }
-        }
-        //reset players
-        gameManager.resetPlayerState();
-        if(gameManager.getHandNumber()>1) {
+
+            //reset players-- will not reset the State if it's the first round
+            gameManager.resetPlayerState();
+
             gameManager.setRoles(nextDeallerIndex);
         }
+
         clearAllCardsOnTable();
         businessLogic.clearGameTable();
+
         //get the hand
         currHand = gameManager.getCurrHand();
         updateTableCards();
@@ -134,6 +135,7 @@ public class MainScreenController implements Initializable {
         gameManager.addStepToHandReplay();
         gameManager.clearValuesFromCurrHand();
 
+        currHand.updateStateIndex();
         currHand.betSmall();
 
         gameManager.addStepToHandReplay();
@@ -242,6 +244,7 @@ public class MainScreenController implements Initializable {
 
         gameManager.addStepToHandReplay();
         gameManager.clearValuesFromCurrHand();
+        currHand.updateNextToPlay();
     }
     private void updateHandCount() {
 
