@@ -58,5 +58,9 @@ public class PlayersTableController implements Initializable {
                 playersTableView.getSelectionModel().select(i);
             }
         }
+
+        chipsColumn.setSortType(TableColumn.SortType.DESCENDING);
+        playersTableView.getSortOrder().add(chipsColumn);
+
     }
 }

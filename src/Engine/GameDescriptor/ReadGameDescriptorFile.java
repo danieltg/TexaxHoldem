@@ -113,6 +113,27 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
             throw new BlindesException(BlindesException.SMALL_BIGGER_THEN_SMALL);
         }
 
+        if (s.getBuy()<b.getBig()){
+            throw new BlindesException(BlindesException.BUY_SMALLER_THEN_SMALL);
+        }
+
+        if (s.getBlindes().isFixed()==false)
+        {
+            int totalRounds=s.getHandsCount()/numberOfPlayers;
+            int totalRAdd=totalRounds*b.getAdditions();
+            int maxTotalRA=b.getMaxTotalRounds()*b.getAdditions();
+            int maxBig=getMin(totalRAdd,maxTotalRA)+b.getBig();
+
+            if (maxBig>(s.getBuy()/2))
+                throw new BlindesException(BlindesException.MAX_BIG_BIGGER_THEN_BUY);
+
+        }
+
+    }
+
+    private int getMin(int a, int b)
+    {
+        return (a<=b? a:b);
     }
 
     @Override

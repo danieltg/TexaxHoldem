@@ -39,6 +39,8 @@ public class PokerHand {
     private int lastActionInfo;
     private int lastPlayerToPlay;
     private HandState state;
+    private int big;
+    private int small;
 
     public PokerHand(PokerBlindes gameBlinde, List<PokerPlayer> playersInHand) {
         pot = 0;
@@ -59,6 +61,9 @@ public class PokerHand {
         numberOfPlayers = playersInHand.size();
         players = playersInHand;
         blinde = gameBlinde;
+        big=gameBlinde.getBig();
+        small=gameBlinde.getSmall();
+
         updateStateIndex();
         updateMaxBet();
         setNextToPlayForTheFirstTime();
@@ -275,24 +280,24 @@ public class PokerHand {
 
     public void betSmall() {
 
-        players.get(s).setBet(blinde.getSmall());
-        pot = pot + blinde.getSmall();
+        players.get(s).setBet(getSmall());
+        pot = pot + getSmall();
         players.get(s).collectBet();
 
         lastAction = "B";
-        lastActionInfo = blinde.getSmall();
+        lastActionInfo = getSmall();
         lastPlayerToPlay = players.get(s).getId();
     }
 
     public void betBig() {
-        players.get(b).setBet(blinde.getBig());
-        pot = pot + blinde.getBig();
+        players.get(b).setBet(getBig());
+        pot = pot + getBig();
         players.get(b).collectBet();
 
         lastAction = "R";
-        lastActionInfo = blinde.getBig();
+        lastActionInfo = getBig();
         lastPlayerToPlay = players.get(b).getId();
-        setCurrentBet(blinde.getBig());
+        setCurrentBet(getBig());
 
     }
 
@@ -913,4 +918,16 @@ public class PokerHand {
 
         return 0;
     }
+
+    public int getBig(){return big;}
+    public int getSmall(){return small;}
+
+    public void setBig(int newBig) {
+        big=newBig;
+    }
+
+    public void setSmall(int newSmall) {
+        small=newSmall;
+    }
+
 }

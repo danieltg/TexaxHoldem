@@ -15,7 +15,7 @@ public class BusinessLogic {
         controller.updatePlayersTable();
     }
 
-    private void updateGameSettings()
+    public void updateGameSettings()
     {
         controller.setGameSettings();
     }

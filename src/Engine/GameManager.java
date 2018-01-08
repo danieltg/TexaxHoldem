@@ -27,8 +27,10 @@ public class GameManager implements Serializable {
     private Date startTime;
     private PokerHand currHand;
     private List<PokerHandStep> handReplay=new ArrayList<>();
-
+    private int totalRounds;
     private int moneyFromLastHand;
+    private int big;
+    private int small;
 
     public static int handNumber;
 
@@ -37,6 +39,13 @@ public class GameManager implements Serializable {
         moneyFromLastHand=0;
         numberOfPlayers=0;
     }
+
+    public void setTotalRounds (int val)
+    {
+        totalRounds=val;
+    }
+
+    public int getTotalRounds(){return totalRounds;}
 
     public int getHandNumber() {
         return handNumber;
@@ -56,6 +65,9 @@ public class GameManager implements Serializable {
         this.gameDescriptor = gameDescriptor;
         this.numberOfPlayers=this.gameDescriptor.getNumberOfPlayers();
         this.stateOfGame=CurrGameState.Initialized;
+
+        small=gameDescriptor.getStructure().getBlindes().getSmall();
+        big=gameDescriptor.getStructure().getBlindes().getBig();
     }
 
     public CurrGameState GetStateOfGame()
@@ -161,8 +173,8 @@ public class GameManager implements Serializable {
 
         setRoles(randomNumber);
     }
-    public int getBig(){ return gameDescriptor.getStructure().getBlindes().getBig();}
-    public int getSmall(){ return gameDescriptor.getStructure().getBlindes().getSmall();}
+    public int getBig(){ return big;}
+    public int getSmall(){ return small;}
 
     public int getBuy(){ return gameDescriptor.getStructure().getBuy();}
     public int getHandsCount() {return gameDescriptor.getStructure().getHandsCount();}
@@ -217,6 +229,7 @@ public class GameManager implements Serializable {
         currHand= new PokerHand(blindes,getPlayers());
         currHand.addToPot(getMoneyFromLastHand());
         currHand.setHandState(HandState.GameInit);
+        setTotalRounds(getHandsCount()/numberOfPlayers);
         return currHand;
     }
 
@@ -329,6 +342,11 @@ public class GameManager implements Serializable {
                 return false;
         }
         return true;
+    }
+
+    public void updateBigAndSmall() {
+        big=big+gameDescriptor.getStructure().getBlindes().getAdditions();
+        small=small+gameDescriptor.getStructure().getBlindes().getAdditions();
     }
 }
 

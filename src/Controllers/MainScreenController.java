@@ -117,11 +117,20 @@ public class MainScreenController implements Initializable {
             gameManager.setRoles(nextDeallerIndex);
         }
 
+        if (gameManager.getIsFixed()==false &&
+                ((gameManager.getHandNumber()%(gameManager.getNumberOfPlayers()+1))==0))
+        {
+            gameManager.updateBigAndSmall();
+            businessLogic.updateGameSettings();
+        }
+
         clearAllCardsOnTable();
         businessLogic.clearGameTable();
 
         //get the hand
         currHand = gameManager.getCurrHand();
+        currHand.setSmall(gameManager.getSmall());
+        currHand.setBig(gameManager.getBig());
         updateTableCards();
 
         gameManager.clearHandReplay();
