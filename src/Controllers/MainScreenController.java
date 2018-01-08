@@ -267,7 +267,7 @@ public class MainScreenController implements Initializable {
             alert.showAndWait();
             mainMenuController.enableLoadXMLButton();
             mainMenuController.enableRestartButton();
-            mainMenuController.enableStartGameButton();
+
         }
 
     }

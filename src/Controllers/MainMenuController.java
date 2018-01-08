@@ -258,8 +258,7 @@ public class MainMenuController implements Initializable{
 
             if (validateFile(readGameDescriptorFile))
             {
-                //file is valid
-                selectedFileProperty.set(currReadGameDescriptorFile.getPath());
+                //file is valid;
                 isFileSelected.set(true);
 
                 gameManager.setGameDescriptor(readGameDescriptorFile.getGameDescriptor());
