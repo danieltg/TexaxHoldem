@@ -223,7 +223,7 @@ public class MainScreenController implements Initializable {
                 alert.showAndWait();
 
                 updateHandReplayWithTheWinners(message);
-                updateHandCount();
+
                 gameManager.saveHandReplayToFile("handReplay.txt");
                 gameManager.setMoneyFromLastHand(currHand.getPot()%currHand.getNumberOfWinners());
 
@@ -233,6 +233,7 @@ public class MainScreenController implements Initializable {
                 gameTableController.hideGameTablePane();
                 updatePlayersTable();
                 updatePlayersTableWithTheWinner(currHand.getWinnerID());
+                updateHandCount();
                 break;
             }
         }
@@ -260,7 +261,12 @@ public class MainScreenController implements Initializable {
         //We need to start a new game
         if (gameManager.getHandNumber()>=gameManager.getHandsCount())
         {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Game is Over");
+            alert.setContentText("Start new game for playing");
+            alert.showAndWait();
             mainMenuController.enableLoadXMLButton();
+            mainMenuController.enableRestartButton();
             mainMenuController.enableStartGameButton();
         }
 

@@ -142,4 +142,8 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
     {
         return isValid;
     }
+
+    public String getPath() {
+        return filePath;
+    }
 }

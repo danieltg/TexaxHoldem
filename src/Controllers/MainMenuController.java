@@ -38,6 +38,7 @@ public class MainMenuController implements Initializable{
     @FXML private ComboBox styleComboBox;
     @FXML private ComboBox animationComboBox;
     @FXML private Button loadXmlButton;
+    @FXML private Button restartButton;
     @FXML private Button startButton;
     @FXML private Label fileNameLabel;
 
@@ -51,6 +52,7 @@ public class MainMenuController implements Initializable{
     private boolean showEquity;
     private boolean showAnimation;
 
+    ReadGameDescriptorFile currReadGameDescriptorFile;
     public MainMenuController()
     {
         selectedFileProperty = new SimpleStringProperty();
@@ -61,7 +63,7 @@ public class MainMenuController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        restartButton.setDisable(true);
         showEquityCheckBox.setSelected(false);
         showEquityCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
             public void changed(ObservableValue<? extends Boolean> ov,
@@ -94,6 +96,7 @@ public class MainMenuController implements Initializable{
     @FXML
     public void openFileButtonAction() {
 
+
         selectedFileProperty.set("");
         isFileSelected.set(false);
         businessLogic.clearOnlyGameTable();
@@ -112,6 +115,7 @@ public class MainMenuController implements Initializable{
         try {
 
             ReadGameDescriptorFile readGameDescriptorFile=new ReadGameDescriptorFile();
+            currReadGameDescriptorFile=readGameDescriptorFile;
             readGameDescriptorFile.setFilePath(absolutePath);
 
             if (validateFile(readGameDescriptorFile))
@@ -221,9 +225,12 @@ public class MainMenuController implements Initializable{
     public void enableLoadXMLButton() {
         loadXmlButton.setDisable(false);
     }
-
+    public void enableRestartButton() {
+        restartButton.setDisable(false);
+    }
     public void enableStartGameButton() {
-        startButton.setVisible(true);
+        startButton.setDisable(false);
+
     }
 
     public void styleChanged(ActionEvent actionEvent) {
@@ -239,8 +246,29 @@ public class MainMenuController implements Initializable{
             businessLogic.basicStyle();
     }
 
-
     public boolean getEquity(){ return showEquity;}
 
     public boolean getAnimation(){ return showAnimation;}
+
+    public void restartclicked(ActionEvent actionEvent) {
+        try {
+
+            ReadGameDescriptorFile readGameDescriptorFile=new ReadGameDescriptorFile();
+            readGameDescriptorFile.setFilePath(currReadGameDescriptorFile.getPath());
+
+            if (validateFile(readGameDescriptorFile))
+            {
+                //file is valid
+                selectedFileProperty.set(currReadGameDescriptorFile.getPath());
+                isFileSelected.set(true);
+
+                gameManager.setGameDescriptor(readGameDescriptorFile.getGameDescriptor());
+                gameManager.setTable();
+                businessLogic.updateUI();
+            }
+
+        } catch (Exception e) {
+
+        }
+    }
 }
