@@ -30,6 +30,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     private String action;
     private int actionInfo;
     private int equity;
+    private int winnigPrice;
 
     PokerPlayer(int playerID){
 
@@ -40,6 +41,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
         isMyTurn=false;
         numbersOfBuy=0;
         handsWon=0;
+        winnigPrice=0;
         state=PlayerState.NONE;
         id=playerID;
 
@@ -64,6 +66,16 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
         holeCards= new Card[2];
         for (int i=0; i<2; i++)
             holeCards[i]=new Card();
+    }
+
+    public int getWinnigPrice()
+    {
+        return winnigPrice;
+    }
+
+    public void setWinnigPrice(int price)
+    {
+        winnigPrice=winnigPrice+price;
     }
 
     public void setInitialAmount(int initialAmount) {

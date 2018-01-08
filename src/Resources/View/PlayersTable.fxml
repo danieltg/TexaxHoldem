@@ -10,9 +10,10 @@
           <TableColumn fx:id="nameColumn" prefWidth="177.0" resizable="false" text="Name" />
           <TableColumn fx:id="idColumn" maxWidth="186.00006103515625" minWidth="1.0" prefWidth="186.00006103515625" resizable="false" text="ID" />
           <TableColumn fx:id="typeColumn" prefWidth="229.99996948242188" resizable="false" text="Type" />
-          <TableColumn fx:id="buysColumn" prefWidth="161.0" resizable="false" text="Buys" />
-          <TableColumn fx:id="handsWinsColumn" prefWidth="372.0" resizable="false" text="Hands wins" />
-          <TableColumn fx:id="winnigPriceColumn" minWidth="0.0" prefWidth="342.0" resizable="false" text="Winning price" />
+          <TableColumn fx:id="chipsColumn" prefWidth="505.0" text="Chips" />
+          <TableColumn fx:id="buysColumn" prefWidth="132.0" resizable="false" text="Buys" />
+          <TableColumn fx:id="handsWinsColumn" prefWidth="219.0" resizable="false" text="Hands wins" />
+          <TableColumn fx:id="winnigPriceColumn" minWidth="0.0" prefWidth="249.0" resizable="false" text="Winning price" />
       </columns>
         <columnResizePolicy>
           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

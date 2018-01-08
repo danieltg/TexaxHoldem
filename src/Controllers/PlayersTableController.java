@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 public class PlayersTableController implements Initializable {
 
+    @FXML private TableColumn chipsColumn;
     @FXML private TableView<PokerPlayer> playersTableView;
     @FXML private TableColumn nameColumn;
     @FXML private TableColumn idColumn;
@@ -31,7 +32,9 @@ public class PlayersTableController implements Initializable {
         typeColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("type"));
         buysColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("numbersOfBuy"));
         handsWinsColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("handsWon"));
-        winnigPriceColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("chips"));
+        chipsColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("chips"));
+        winnigPriceColumn.setCellValueFactory(new PropertyValueFactory<PokerPlayer, String>("winnigPrice"));
+
     }
 
 
