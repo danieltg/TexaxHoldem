@@ -298,6 +298,7 @@ public class PokerHand {
         lastActionInfo = getBig();
         lastPlayerToPlay = players.get(b).getId();
         setCurrentBet(getBig());
+        setLastRaise(players.get(b));
 
     }
 
@@ -877,6 +878,7 @@ public class PokerHand {
                 {
                     options.add("B");
                 }
+                options.add("R");
             }
         }
 
