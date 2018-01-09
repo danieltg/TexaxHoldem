@@ -269,5 +269,6 @@ public class MainMenuController implements Initializable{
         } catch (Exception e) {
 
         }
+        restartButton.setDisable(true);
     }
 }
