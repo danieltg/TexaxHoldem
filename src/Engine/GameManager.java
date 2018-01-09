@@ -5,7 +5,6 @@ import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.PokerBlindes;
 import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.Players.*;
-import UI.Boards.GameStateBoard;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -108,14 +107,6 @@ public class GameManager implements Serializable {
     }
 
 
-    public void printGameState()
-    {
-        System.out.println("================================================");
-        System.out.println("|      Game State                              |");
-        System.out.println("================================================");
-        GameStateBoard.printGameState(players);
-    }
-
     public void setRoles(int index) {
 
         int d=index%numberOfPlayers;
@@ -155,8 +146,6 @@ public class GameManager implements Serializable {
         System.out.println("Time: "+ minutes+ ":"+ seconds);
         System.out.println("Hands: "+handNumber+ "/"+this.getGameDescriptor().getStructure().getHandsCount());
         System.out.println("Max pot: "+maxPot);
-        printGameState();
-
     }
 
     public int getMaxPot() {return maxPot;}
