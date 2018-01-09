@@ -1,241 +1,76 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Mushon, 1> : AD JD
-Player <Avrum, 2> : QD 9C
-Player <Nachtze, 3> : 4C KH
-Player <Daniel, 4> : 2D TC
+Player <Or, 123> : 8S JS
+Player <Elad, 234> : QH TC
+Player <Daniel, 456> : 7D QS
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
+Active player ID: 123
+Player name: Or
 Player type: Computer
-Player cards: 4C KH
-Player chips: 34
-Player bet: 2
+Player cards: 8S JS
+Player chips: 50
+Player bet: 5
 Player equity: 0
-Pot: 2
+Pot: 5
 Current Bet: 0
 Action: B
-Additional Action Information: 2
+Additional Action Information: 5
 ************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 2D TC
-Player chips: 277
-Player bet: 4
+Active player ID: 234
+Player name: Elad
+Player type: Human
+Player cards: QH TC
+Player chips: 35
+Player bet: 10
 Player equity: 0
-Pot: 6
-Current Bet: 4
+Pot: 15
+Current Bet: 10
 Action: R
-Additional Action Information: 4
+Additional Action Information: 10
 ************************************************************************************************
-Active player ID: 1
-Player name: Mushon
-Player type: Computer
-Player cards: AD JD
-Player chips: 87
+Active player ID: 456
+Player name: Daniel
+Player type: Human
+Player cards: 7D QS
+Player chips: 50
 Player bet: 0
 Player equity: 0
-Pot: 6
-Current Bet: 4
+Pot: 15
+Current Bet: 10
 Action: F
 ************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: QD 9C
-Player chips: 32
-Player bet: 4
-Player equity: 0
-Pot: 10
-Current Bet: 4
-Action: C
-************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
+Active player ID: 123
+Player name: Or
 Player type: Computer
-Player cards: 4C KH
-Player chips: 30
-Player bet: 6
+Player cards: 8S JS
+Player chips: 31
+Player bet: 24
 Player equity: 0
-Pot: 14
-Current Bet: 6
+Pot: 34
+Current Bet: 24
 Action: R
-Additional Action Information: 2
+Additional Action Information: 14
 ************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 2D TC
-Player chips: 275
-Player bet: 6
-Player equity: 0
-Pot: 16
-Current Bet: 6
-Action: C
-************************************************************************************************
-Active player ID: 2
-Player name: Avrum
+Active player ID: 234
+Player name: Elad
 Player type: Human
-Player cards: QD 9C
-Player chips: 30
-Player bet: 6
-Player equity: 0
-Pot: 18
-Current Bet: 6
-Action: C
-************************************************************************************************
-The step is not related to any player
-Cards: 5S,AS,7C,??,??
-Pot: 18
-Current Bet: 6
-Action: CARD
-************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: 4C KH
-Player chips: 30
+Player cards: QH TC
+Player chips: 35
 Player bet: 0
 Player equity: 0
-Pot: 18
-Current Bet: 6
-Action: K
-************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 2D TC
-Player chips: 268
-Player bet: 7
-Player equity: 0
-Pot: 25
-Current Bet: 7
-Action: R
-Additional Action Information: 1
-************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: QD 9C
-Player chips: 23
-Player bet: 7
-Player equity: 0
-Pot: 32
-Current Bet: 7
-Action: C
-************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: 4C KH
-Player chips: 23
-Player bet: 7
-Player equity: 0
-Pot: 39
-Current Bet: 7
-Action: C
-************************************************************************************************
-The step is not related to any player
-Cards: 5S,AS,7C,QS,??
-Pot: 39
-Current Bet: 7
-Action: CARD
-************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: 4C KH
-Player chips: 23
-Player bet: 0
-Player equity: 0
-Pot: 39
-Current Bet: 7
-Action: K
-************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 2D TC
-Player chips: 268
-Player bet: 0
-Player equity: 0
-Pot: 39
-Current Bet: 7
-Action: K
-************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: QD 9C
-Player chips: 15
-Player bet: 8
-Player equity: 0
-Pot: 47
-Current Bet: 8
-Action: R
-Additional Action Information: 1
-************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: 4C KH
-Player chips: 15
-Player bet: 8
-Player equity: 0
-Pot: 55
-Current Bet: 8
-Action: C
-************************************************************************************************
-Active player ID: 4
-Player name: Daniel
-Player type: Computer
-Player cards: 2D TC
-Player chips: 268
-Player bet: 0
-Player equity: 0
-Pot: 55
-Current Bet: 8
+Pot: 34
+Current Bet: 24
 Action: F
 ************************************************************************************************
 The step is not related to any player
-Cards: 5S,AS,7C,QS,8S
-Pot: 55
-Current Bet: 8
-Action: CARD
-************************************************************************************************
-Active player ID: 3
-Player name: Nachtze
-Player type: Computer
-Player cards: 4C KH
-Player chips: 4
-Player bet: 11
-Player equity: 0
-Pot: 66
-Current Bet: 11
-Action: B
-Additional Action Information: 11
-************************************************************************************************
-Active player ID: 2
-Player name: Avrum
-Player type: Human
-Player cards: QD 9C
-Player chips: 4
-Player bet: 11
-Player equity: 0
-Pot: 77
-Current Bet: 11
-Action: C
-************************************************************************************************
-The step is not related to any player
-Cards: 5S,AS,7C,QS,8S
-Pot: 77
-Current Bet: 11
-Action: Avrum (2) won with this hand: Pair (Queens - A,9,8).
-Prize: 77$
+Cards: ??,??,??,??,??
+Pot: 34
+Current Bet: 24
+Action: Or (123) won with this hand: 8S JS.
+Prize: 34$
 
 

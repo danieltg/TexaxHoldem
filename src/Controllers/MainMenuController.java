@@ -96,7 +96,7 @@ public class MainMenuController implements Initializable{
     @FXML
     public void openFileButtonAction() {
 
-
+restartButton.setDisable(true);
         selectedFileProperty.set("");
         isFileSelected.set(false);
         businessLogic.clearOnlyGameTable();

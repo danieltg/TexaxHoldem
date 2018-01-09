@@ -874,11 +874,11 @@ public class PokerHand {
             {
                 options.add("F");
                 options.add("K");
-                if (pot==0)
+                if (currentBet==0)
                 {
                     options.add("B");
                 }
-                options.add("R");
+
             }
         }
 
