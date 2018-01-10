@@ -129,14 +129,12 @@ public class GameInfoAndActionsController implements Initializable{
 
         maxBetMsgLabel.setVisible(false);
         dropDownPlayers.getSelectionModel().selectedIndexProperty().addListener((ChangeListener) (observable, oldValue, newValue) -> {
-            System.out.println("New Selected Option: " +newValue.toString());
             selectedPlayer= Integer.parseInt(newValue.toString());
         });
         dropDownPlayers.setDisable(true);
 
 
         humanPlayersList.getSelectionModel().selectedIndexProperty().addListener((ChangeListener) (observable, oldValue, newValue) -> {
-            System.out.println("New Selected Option: " +newValue.toString());
             selectedPlayerForQuit= Integer.parseInt(newValue.toString());
         });
         humanPlayersList.setDisable(true);
@@ -452,7 +450,7 @@ public class GameInfoAndActionsController implements Initializable{
             maxBetMsgLabel.setVisible(true);
             if (maxBet<1)
             {
-                System.out.println("We have bug here, max ber is <1 (Raise)");
+                //System.out.println("We have bug here, max ber is <1 (Raise)");
                 maxBet=1;
             }
             updateRaiseSpinner(1,maxBet);
@@ -473,7 +471,7 @@ public class GameInfoAndActionsController implements Initializable{
             maxBetMsgLabel.setVisible(true);
             if (maxBet<1)
             {
-                System.out.println("We have bug here, max bet <1 (Bet)");
+                //System.out.println("We have bug here, max bet <1 (Bet)");
                 maxBet=1;
             }
             updateBetSpinner(1,maxBet);

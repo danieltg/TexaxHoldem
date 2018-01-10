@@ -810,10 +810,6 @@ public class PokerHand {
             numberOfWinners=winners.size();
         }
 
-        if (message.toString().equals(""))
-        {
-            System.out.println("We have bug here.. need to understand why");
-        }
         return message.toString();
     }
 

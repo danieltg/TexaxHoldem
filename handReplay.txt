@@ -1,18 +1,18 @@
 ************************************************************************************************
 The step is not related to any player
 Players cards:
-Player <Or, 123> : 8S JS
-Player <Elad, 234> : QH TC
-Player <Daniel, 456> : 7D QS
+Player <Ortt, 111> : AS AC
+Player <Elad, 234> : TS QC
+Player <Daniel, 456> : 8D KC
 Pot: 0
 Current Bet: 0
 Action: PLAYER_CARDS
 ************************************************************************************************
-Active player ID: 123
-Player name: Or
+Active player ID: 111
+Player name: Ortt
 Player type: Computer
-Player cards: 8S JS
-Player chips: 50
+Player cards: AS AC
+Player chips: 145
 Player bet: 5
 Player equity: 0
 Pot: 5
@@ -23,8 +23,8 @@ Additional Action Information: 5
 Active player ID: 234
 Player name: Elad
 Player type: Human
-Player cards: QH TC
-Player chips: 35
+Player cards: TS QC
+Player chips: 140
 Player bet: 10
 Player equity: 0
 Pot: 15
@@ -35,42 +35,42 @@ Additional Action Information: 10
 Active player ID: 456
 Player name: Daniel
 Player type: Human
-Player cards: 7D QS
-Player chips: 50
+Player cards: 8D KC
+Player chips: 150
 Player bet: 0
 Player equity: 0
 Pot: 15
 Current Bet: 10
 Action: F
 ************************************************************************************************
-Active player ID: 123
-Player name: Or
+Active player ID: 111
+Player name: Ortt
 Player type: Computer
-Player cards: 8S JS
-Player chips: 31
-Player bet: 24
+Player cards: AS AC
+Player chips: 135
+Player bet: 15
 Player equity: 0
-Pot: 34
-Current Bet: 24
+Pot: 25
+Current Bet: 15
 Action: R
-Additional Action Information: 14
+Additional Action Information: 5
 ************************************************************************************************
 Active player ID: 234
 Player name: Elad
 Player type: Human
-Player cards: QH TC
-Player chips: 35
+Player cards: TS QC
+Player chips: 140
 Player bet: 0
 Player equity: 0
-Pot: 34
-Current Bet: 24
+Pot: 25
+Current Bet: 15
 Action: F
 ************************************************************************************************
 The step is not related to any player
 Cards: ??,??,??,??,??
-Pot: 34
-Current Bet: 24
-Action: Or (123) won with this hand: 8S JS.
-Prize: 34$
+Pot: 25
+Current Bet: 15
+Action: Ortt (111) won with this hand: AS AC.
+Prize: 25$
 
 
