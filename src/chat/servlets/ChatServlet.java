@@ -1,19 +1,19 @@
 package chat.servlets;
 
-import chat.constants.Constants;
-import chat.utils.SessionUtils;
-import chat.utils.ServletUtils;
-import com.google.gson.Gson;
 import Engine.chat.ChatManager;
 import Engine.chat.SingleChatEntry;
+import chat.constants.Constants;
+import chat.utils.ServletUtils;
+import chat.utils.SessionUtils;
+import com.google.gson.Gson;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 public class ChatServlet extends HttpServlet {
 
